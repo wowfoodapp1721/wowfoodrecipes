@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saved Recipes - Annapurna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400..700&amp;family=Work+Sans:wght@400..600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#867468",
+                        "secondary": "#436370",
+                        "on-secondary-fixed": "#001f29",
+                        "background": "#f9f9f9",
+                        "secondary-fixed": "#c6e8f8",
+                        "surface-container-low": "#f3f3f3",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#496977",
+                        "on-surface-variant": "#534439",
+                        "primary-fixed-dim": "#ffb780",
+                        "surface-container": "#eeeeee",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container-high": "#e8e8e8",
+                        "tertiary-fixed": "#ffdad8",
+                        "surface-tint": "#8e4e14",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "surface-dim": "#dadada",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#a7373b",
+                        "secondary-container": "#c6e8f8",
+                        "on-tertiary-container": "#861f25",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#f4a261",
+                        "tertiary-container": "#ff9896",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#d8c2b5",
+                        "secondary-fixed-dim": "#abcbdb",
+                        "on-tertiary-fixed": "#410007",
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "primary-fixed": "#ffdcc4",
+                        "on-primary-container": "#6f3800",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-fixed-variant": "#2b4b58",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#6f3800",
+                        "inverse-primary": "#ffb780",
+                        "inverse-surface": "#2f3131",
+                        "on-tertiary-fixed-variant": "#861f25",
+                        "primary": "#8e4e14",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#2f1400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "xs": "8px",
+                        "edge-margin": "20px",
+                        "gutter": "16px",
+                        "md": "24px",
+                        "base": "4px",
+                        "sm": "16px",
+                        "lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Newsreader"],
+                        "headline-md": ["Newsreader"],
+                        "label-md": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "label-sm": ["Work Sans"],
+                        "headline-lg-mobile": ["Newsreader"],
+                        "headline-lg": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #FAFAFA;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background bg-background min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar (Web) -->
+<header class="hidden md:flex sticky top-0 w-full bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm items-center justify-between px-edge-margin h-16 w-full z-50">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:scale-95 transition-transform duration-200 text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed-dim">Annapurna</h1>
+</div>
+<nav class="flex gap-6 items-center">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">home</span>
+                Home
+            </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">search</span>
+                Search
+            </a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed-dim flex items-center gap-2 relative before:content-[''] before:absolute before:-bottom-2 before:w-full before:h-1 before:bg-primary dark:before:bg-primary-fixed-dim before:rounded-t-full" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+                Saved
+            </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">person</span>
+                Profile
+            </a>
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:scale-95 transition-transform duration-200 text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</nav>
+</header>
+<!-- TopAppBar (Mobile Anchor) -->
+<header class="md:hidden sticky top-0 w-full bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm flex items-center justify-between px-edge-margin h-16 w-full z-50">
+<h1 class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed-dim">Annapurna</h1>
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:scale-95 transition-transform duration-200 text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</header>
+<main class="px-edge-margin pt-lg max-w-7xl mx-auto">
+<section class="mb-xl">
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-sm">Your Collection</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">A curated archive of your favorite recipes, organized for your next culinary adventure.</p>
+</section>
+<!-- My Collections (Bento Grid) -->
+<section class="mb-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">My Collections</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Collection 1 -->
+<div class="relative rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(38,70,83,0.06)] bg-surface hover:shadow-lg transition-shadow duration-300 group cursor-pointer aspect-video md:aspect-square md:col-span-2">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out" data-alt="A beautifully set wooden dining table laden with a lavish Sunday brunch spread, featuring golden waffles, fresh berries, smoked salmon bagels, and steaming cups of coffee. Natural morning sunlight streams through a nearby window, creating soft, inviting shadows. The scene is shot from a high angle, emphasizing the rich textures and vibrant colors of the food. The overall aesthetic is warm, rustic, and highly appetizing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtMm5VLmh3hurSrslfCFJpjZWlbD1XBlAdzS6p2jXWR6RNqiXvqFiJycwEUCesIOvuhJYDPttvbPeWmn94c-ZdkF_-09Wkmw_vnOikDk5r8_2zirfE7M6u7u9Xr7YG_b7k1oETWqMT_S0hoix23AncOZ38rX28A8XadxZmGXLmvkLFU25sxd9u5secFZNIkS756lV2cDg3K7b-at6OMmuK6a3PZUHpXXj0KdBqPvPWwmBMJ7o4whOu1A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-sm md:p-md w-full">
+<h4 class="font-headline-md text-headline-md text-white mb-1">Sunday Brunch</h4>
+<p class="font-body-md text-body-md text-white/80">12 Recipes</p>
+</div>
+</div>
+<!-- Collection 2 -->
+<div class="relative rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(38,70,83,0.06)] bg-surface hover:shadow-lg transition-shadow duration-300 group cursor-pointer aspect-video md:aspect-square">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out" data-alt="A vibrant salad bowl filled with mixed greens, roasted sweet potatoes, quinoa, and sliced avocado, drizzled with a light vinaigrette. The bowl sits on a clean, light marble countertop. The lighting is bright and even, highlighting the fresh, crisp ingredients and the healthy, wholesome nature of the meal. The style is modern, minimalist, and focuses on the vivid colors of the vegetables." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnbzqIqz4q4bqotrLtA-K67z8HmmOZV7NeYqS47gwmT5PbaqDoNp4H2-TMC8SVxG1clG0OABEYn3XJDkBj1a0jAXj1to14lg1jisJ-Yg36U5u-qu3qDlX5bKKCwLEE8uGmltdqe1A98vQVVA8wf-5B8YVM_gQsprTm2kGjKLVXVSNvZqrh4e4tPWnBdc-H_6UV-9r55tWTtrj2fMJj4uvs_UXd87E3nsI7Re4P5ABn7S1HbyebdTNs0w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-sm md:p-md w-full">
+<h4 class="font-headline-md text-headline-md text-white mb-1">Healthy Dinners</h4>
+<p class="font-body-md text-body-md text-white/80">24 Recipes</p>
+</div>
+</div>
+</div>
+</section>
+<!-- All Saved Recipes Grid -->
+<section class="mb-xl pb-xl">
+<div class="flex justify-between items-end mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">All Saved Recipes</h3>
+<button class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors flex items-center gap-1">
+                    Sort <span class="material-symbols-outlined text-[18px]">sort</span>
+</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-gutter">
+<!-- Recipe Card 1 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(38,70,83,0.06)] hover:shadow-[0px_8px_24px_rgba(38,70,83,0.1)] transition-all duration-300 group flex flex-col h-full cursor-pointer relative">
+<div class="absolute top-3 right-3 z-10 bg-surface/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<div class="aspect-[4/3] w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up, mouth-watering shot of a perfectly seared ribeye steak resting on a wooden cutting board. Juices glisten on the beautifully caramelized crust. A sprig of fresh rosemary and a pat of melting garlic herb butter sit on top. The background is a soft, dark blur, drawing all attention to the rich, savory textures of the meat. High-end culinary photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd1sHr6iZG1bqQNppgdDuFjUHqzdb2c14T9JJ_LcKmDwlUAs6GhU-CTNoInkWCP-phlxf3q3uHhj49NNY2iV1qXUCQaQHi9y3lM_7rw4iHudGIRumqt_sNG9zl2h75O_7tJol6V1chFM6XmKeqnoN5Ij94fyYgIAAwPpnGjd562BmAXoUvFlWgjNxH6oXN7RkwZa9V6LV5lGUN9QApWsW1yO_0bJodV6dq_xbCSWCHrGJo_2FCI6Xnfg"/>
+</div>
+<div class="p-sm flex-grow flex flex-col justify-between">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-2 leading-tight">Garlic Butter Ribeye Steak</h4>
+</div>
+<div class="flex items-center gap-2 mt-sm flex-wrap">
+<span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 25m
+                            </span>
+<span class="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span> High Protein
+                            </span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(38,70,83,0.06)] hover:shadow-[0px_8px_24px_rgba(38,70,83,0.1)] transition-all duration-300 group flex flex-col h-full cursor-pointer relative">
+<div class="absolute top-3 right-3 z-10 bg-surface/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<div class="aspect-[4/3] w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A comforting, rustic bowl of creamy mushroom risotto, elegantly presented in a wide, shallow ceramic dish. The risotto is speckled with fresh parsley and generous shavings of parmesan cheese. Soft, diffused, warm lighting highlights the creamy texture and earthy tones of the mushrooms. The setting is cozy, reminiscent of a traditional Italian kitchen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUUMtK6MPsr66BAxB343YjhOpsS3HrxcuI7rAeyDYJXcDLZBiv9GkkFOalk6NwQPUu3JeFdfJaGPT8RepyWJ-7ex1KeAtF2lUakg5WduN_W9uKdfIcRxc93_4e6y4PwgKLbko3TvP8iGPNAdg3BZHo8SFzyom1BiEVDglrUseisxyjzEMgv2EyXtsHKvCjpBxtj9Hjkqq1Y9095Gv_71yTCaRvMczS8Qk0xTtxRLqSj5O4pZM3elBRBQ"/>
+</div>
+<div class="p-sm flex-grow flex flex-col justify-between">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-2 leading-tight">Creamy Wild Mushroom Risotto</h4>
+</div>
+<div class="flex items-center gap-2 mt-sm flex-wrap">
+<span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 45m
+                            </span>
+<span class="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">eco</span> Vegetarian
+                            </span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(38,70,83,0.06)] hover:shadow-[0px_8px_24px_rgba(38,70,83,0.1)] transition-all duration-300 group flex flex-col h-full cursor-pointer relative">
+<div class="absolute top-3 right-3 z-10 bg-surface/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<div class="aspect-[4/3] w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant, fresh Caprese salad arranged beautifully on a minimalist white plate. Alternating slices of bright red heirloom tomatoes and soft, snowy-white fresh mozzarella are generously drizzled with dark, syrupy balsamic glaze and olive oil, scattered with vibrant green basil leaves. The bright, high-key lighting creates a fresh, summery, and appetizing Mediterranean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG7Gr48b1_BogxwIe8dFUgF2ft_5O0BV6_M1EwDrZPTNJoW_obX98NWe4XtqLT9A7aj9BAZaDiMV02dtNZmWD_BHlSNWOTpMSknEA9uolPgTctI6yANBaCgmF1IH6rWDgNSryiT3PSvj5r2mbQH-3KRE7aOeI498s17aGgdkkxPmfO06wQ6xZEx9_Q2t40c2D1cSNp5Uo7b9yhU4CV-l1bLTZ62uXQP0S4v_vmWgMcFYlfuEnr2ELQbA"/>
+</div>
+<div class="p-sm flex-grow flex flex-col justify-between">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-2 leading-tight">Heirloom Tomato Caprese</h4>
+</div>
+<div class="flex items-center gap-2 mt-sm flex-wrap">
+<span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 10m
+                            </span>
+<span class="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">grass</span> Gluten-Free
+                            </span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 4 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(38,70,83,0.06)] hover:shadow-[0px_8px_24px_rgba(38,70,83,0.1)] transition-all duration-300 group flex flex-col h-full cursor-pointer relative">
+<div class="absolute top-3 right-3 z-10 bg-surface/90 backdrop-blur-sm p-1.5 rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<div class="aspect-[4/3] w-full overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A freshly baked, rustic sourdough artisan bread loaf with a perfectly scored, crusty exterior, resting on a wire cooling rack over a linen cloth. A gentle dusting of flour coats the crust. Warm, golden hour natural light hits the bread, emphasizing its artisanal quality and hearty texture. The mood is homey, comforting, and authentic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEdj9-2gZdAxeNbFo-EVBj23w7vPgSwHrTzwcj6DChRWR-zdMqnRKfxvXsZfHUQre4TImwk-fHiwiIRlcy7LbRHu95NKFM9JEmIISEfTyYnu1pI30BuELIoqYQomJvmOJjLIsmGinX07mkgnhhgXKWbavNez6hO1NTxwCsH04Q-gR_fcN-sP6Zvbd5u32ji4xPZ3W9uO5F4nPIue__slSZkp_Tm_rFAaZGLNww02wxklzV1dWyw5XnUw"/>
+</div>
+<div class="p-sm flex-grow flex flex-col justify-between">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-2 leading-tight">Artisan Sourdough Loaf</h4>
+</div>
+<div class="flex items-center gap-2 mt-sm flex-wrap">
+<span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 24h
+                            </span>
+<span class="inline-flex items-center gap-1 bg-secondary/10 text-secondary px-2 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">bakery_dining</span> Baking
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-4 pb-safe bg-surface/90 dark:bg-surface-dim/90 backdrop-blur-lg border-t border-outline-variant/30 dark:border-outline/20 shadow-[0px_-4px_20px_rgba(38,70,83,0.06)] z-50">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16 relative before:content-[''] before:absolute before:top-0 before:w-8 before:h-1 before:bg-primary dark:before:bg-primary-fixed-dim before:rounded-full pt-2" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="font-label-sm text-label-sm">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>wow - UI/UX Micro-Interactions &amp; Motion Blueprint</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script>tailwind.config = {theme: {extend: {colors: {brand: {red: "#FF3B30", glow: "rgba(255, 59, 48, 0.45)", soft: "rgba(255, 59, 48, 0.12)"}, charcoal: {base: "#1C1C1E", border: "#2C2C2E", subtle: "#3A3A3C", dark: "#121214"}, "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {sans: ["Plus Jakarta Sans", "sans-serif"], mono: ["JetBrains Mono", "monospace"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .grid-spec-pattern {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glow-red {
+      box-shadow: 0 0 24px rgba(255, 59, 48, 0.45), 0 0 6px rgba(255, 59, 48, 0.6);
+    }
+    .glow-dot {
+      box-shadow: 0 0 14px #FF3B30, 0 0 4px #FF3B30;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white p-4 md:p-8 grid-spec-pattern selection:bg-brand-red selection:text-white">
+<!-- Main Blueprint Container -->
+<div class="max-w-5xl mx-auto flex flex-col gap-8 pb-12">
+<!-- Header / Technical Title Block -->
+<header class="border border-charcoal-border bg-charcoal-dark/80 backdrop-blur rounded-2xl p-6 relative overflow-hidden">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-red/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-brand-red/20 text-brand-red border border-brand-red/30">SPEC-MOTION-04B</span>
+<span class="text-xs font-mono text-neutral-400">FPS: 60 | ENGINE: SPRING DYNAMICS</span>
+</div>
+<h1 class="text-2xl md:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+<span class="italic font-serif text-brand-red font-black">wow</span>
+<span>Micro-Interactions &amp; Physics Storyboard</span>
+</h1>
+<p class="text-neutral-400 text-sm mt-1 max-w-2xl">
+            Technical blueprint defining state transitions, spring physics vectors, touch ripple dissipations, and liquid momentum vectors across core mobile navigation zones.
+          </p>
+</div>
+<div class="flex items-center gap-3 border border-charcoal-border bg-charcoal-base px-4 py-2.5 rounded-xl font-mono text-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-brand-red animate-pulse glow-dot"></div>
+<div>
+<div class="text-white font-semibold">BRAND ACCENT</div>
+<div class="text-neutral-400">#FF3B30 (Pure Red)</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SECTION 1: THE DIET STRIP SPRING ACCENT ANIMATION -->
+<section class="border border-charcoal-border bg-charcoal-dark/90 rounded-2xl p-6 relative overflow-hidden flex flex-col gap-6">
+<!-- Section Header -->
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-charcoal-border/70 pb-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-charcoal-base border border-charcoal-subtle flex items-center justify-center font-mono font-bold text-brand-red text-sm">
+            01
+          </div>
+<div>
+<h2 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+              THE DIET STRIP SPRING ACCENT ANIMATION
+              <span class="text-xs font-mono font-normal px-2 py-0.5 rounded bg-white/5 text-neutral-400">Spring Constant k: 220 | Damping ζ: 0.72</span>
+</h2>
+<p class="text-xs text-neutral-400">A three-frame chronological sequence capturing a user's tap event on the "HEALTHY" category filter pill.</p>
+</div>
+</div>
+<div class="font-mono text-xs text-neutral-500 flex items-center gap-4">
+<span>t₀ = 0ms</span>
+<span>→</span>
+<span>t₁ = 85ms</span>
+<span>→</span>
+<span>t₂ = 240ms</span>
+</div>
+</div>
+<!-- 3-Frame Visual Demonstrator Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
+<!-- Connective Guidance Vector Arrows (Desktop Overlay) -->
+<div class="hidden md:flex absolute top-1/2 left-[32%] -translate-y-1/2 -translate-x-1/2 z-20 items-center justify-center">
+<div class="bg-black/90 border border-charcoal-subtle px-2 py-1 rounded-full text-[10px] font-mono text-brand-red flex items-center gap-1 shadow-lg">
+<span>TAP</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</div>
+</div>
+<div class="hidden md:flex absolute top-1/2 left-[65.5%] -translate-y-1/2 -translate-x-1/2 z-20 items-center justify-center">
+<div class="bg-black/90 border border-charcoal-subtle px-2 py-1 rounded-full text-[10px] font-mono text-brand-red flex items-center gap-1 shadow-lg">
+<span>SETTLE</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</div>
+</div>
+<!-- Frame A: Idle State -->
+<div class="border border-charcoal-border bg-charcoal-base/60 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs font-bold text-neutral-300">FRAME A</span>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-400">IDLE STATE (t = 0ms)</span>
+</div>
+<!-- Component Canvas Viewport -->
+<div class="h-44 bg-black rounded-lg border border-charcoal-border/70 flex flex-col items-center justify-center relative p-4">
+<!-- Simulated Scroll Ribbon Context -->
+<div class="flex items-center gap-2.5 opacity-60 pointer-events-none mb-3">
+<span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-brand-red text-white">ALL</span>
+<span class="px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-400 border border-charcoal-subtle">DINNER</span>
+</div>
+<!-- Focus Target Pill: Healthy -->
+<div class="relative py-2 px-6 rounded-full border border-neutral-700/80 bg-charcoal-base/50 text-neutral-400 text-xs font-semibold tracking-wider flex items-center gap-1.5 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-neutral-600"></span>
+<span>HEALTHY</span>
+</div>
+<div class="text-[11px] font-mono text-neutral-500 mt-4">Static outline • Scale: 1.00x</div>
+</div>
+<!-- Technical Notes -->
+<div class="mt-4 pt-3 border-t border-charcoal-border text-xs text-neutral-400 space-y-1">
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Border:</span>
+<span class="text-neutral-300">1px solid rgba(255,255,255,0.12)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Background:</span>
+<span class="text-neutral-300">#1C1C1E (Neutral Dark)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Typography:</span>
+<span class="text-neutral-400">#8E8E93 (Muted Gray)</span>
+</div>
+</div>
+</div>
+<!-- Frame B: Tap Interaction -->
+<div class="border border-brand-red/40 bg-charcoal-base/80 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden ring-1 ring-brand-red/30">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs font-bold text-brand-red">FRAME B</span>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-brand-red/15 text-brand-red font-semibold">TAP MOMENTUM (t = 85ms)</span>
+</div>
+<!-- Component Canvas Viewport -->
+<div class="h-44 bg-black rounded-lg border border-brand-red/30 flex flex-col items-center justify-center relative p-4 overflow-hidden">
+<!-- Simulated Ripple & Blur Trails -->
+<div class="absolute w-32 h-16 rounded-full bg-brand-red/25 blur-xl pointer-events-none animate-pulse"></div>
+<!-- Dynamic Scale Pill (+5% expansion & outward color bleed) -->
+<div class="relative py-2.5 px-6 rounded-full text-white text-xs font-bold tracking-wider flex items-center gap-1.5 transform scale-105 transition-all shadow-[0_0_20px_rgba(255,59,48,0.5)] border border-brand-red/80" style="background: radial-gradient(circle at center, #FF3B30 35%, #8B1A14 80%, #1C1C1E 100%);">
+<!-- Expanding Translucent Touch Ripple -->
+<span class="absolute inset-0 rounded-full border-2 border-white/60 scale-110 opacity-70"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+<span class="text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">HEALTHY</span>
+</div>
+<!-- Interaction Motion Blur Vectors -->
+<div class="flex items-center gap-6 mt-4 font-mono text-[10px] text-brand-red">
+<span class="flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">keyboard_arrow_left</span>
+<span>k-force</span>
+</span>
+<span class="px-1.5 py-0.5 rounded bg-brand-red/20 font-bold">Scale: 1.05x</span>
+<span class="flex items-center gap-0.5">
+<span>bleed</span>
+<span class="material-symbols-outlined text-xs">keyboard_arrow_right</span>
+</span>
+</div>
+</div>
+<!-- Technical Notes -->
+<div class="mt-4 pt-3 border-t border-charcoal-border text-xs text-neutral-400 space-y-1">
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Transform:</span>
+<span class="text-brand-red font-semibold">scale(1.05) [Elastic Peak]</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Radial Infill:</span>
+<span class="text-neutral-300">0% → 100% #FF3B30 Bleed</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Ripple Layer:</span>
+<span class="text-neutral-300">Alpha 0.60 | Velocity 1.8px/ms</span>
+</div>
+</div>
+</div>
+<!-- Frame C: Settled State -->
+<div class="border border-charcoal-border bg-charcoal-base/60 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs font-bold text-neutral-300">FRAME C</span>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-400">SETTLED REST (t = 240ms)</span>
+</div>
+<!-- Component Canvas Viewport -->
+<div class="h-44 bg-black rounded-lg border border-charcoal-border/70 flex flex-col items-center justify-center relative p-4">
+<!-- Settled Pill: Solid Brand Red -->
+<div class="relative py-2 px-6 rounded-full bg-brand-red text-white text-xs font-bold tracking-wider flex items-center gap-2 shadow-[0_0_16px_rgba(255,59,48,0.55)] border border-brand-red">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+<span class="text-white">HEALTHY</span>
+</div>
+<div class="text-[11px] font-mono text-neutral-400 mt-4 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+<span>Settled in solid glow • Scale: 1.00x</span>
+</div>
+</div>
+<!-- Technical Notes -->
+<div class="mt-4 pt-3 border-t border-charcoal-border text-xs text-neutral-400 space-y-1">
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Target Fill:</span>
+<span class="text-white font-semibold">#FF3B30 (Solid Fill)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Typography:</span>
+<span class="text-white font-bold">#FFFFFF (Crisp White)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Elevation:</span>
+<span class="text-brand-red">Drop Shadow 16px Amber-Red</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: THE LIQUID SLIDE BOTTOM NAVIGATION DOT -->
+<section class="border border-charcoal-border bg-charcoal-dark/90 rounded-2xl p-6 relative overflow-hidden flex flex-col gap-6">
+<!-- Section Header -->
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-charcoal-border/70 pb-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-charcoal-base border border-charcoal-subtle flex items-center justify-center font-mono font-bold text-brand-red text-sm">
+            02
+          </div>
+<div>
+<h2 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+              THE LIQUID SLIDE BOTTOM NAVIGATION DOT
+              <span class="text-xs font-mono font-normal px-2 py-0.5 rounded bg-white/5 text-neutral-400">Bezier: cubic-bezier(0.34, 1.56, 0.64, 1)</span>
+</h2>
+<p class="text-xs text-neutral-400">Sequential kinematics tracing the indicator dot's horizontal tear-drop stretch, velocity blur, and icon pop transition.</p>
+</div>
+</div>
+<div class="font-mono text-xs text-neutral-500 flex items-center gap-4">
+<span>State: Home</span>
+<span>→</span>
+<span>Liquid Stretch (dx/dt)</span>
+<span>→</span>
+<span>Snap to Explore</span>
+</div>
+</div>
+<!-- 3-Frame Visual Demonstrator Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
+<!-- Fluid Vector Connector 1 -->
+<div class="hidden md:flex absolute top-1/2 left-[32%] -translate-y-1/2 -translate-x-1/2 z-20 items-center justify-center">
+<div class="bg-black/90 border border-charcoal-subtle px-2 py-1 rounded-full text-[10px] font-mono text-brand-red flex items-center gap-1 shadow-lg">
+<span>TAP EXPLORE</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</div>
+</div>
+<!-- Fluid Vector Connector 2 -->
+<div class="hidden md:flex absolute top-1/2 left-[65.5%] -translate-y-1/2 -translate-x-1/2 z-20 items-center justify-center">
+<div class="bg-black/90 border border-charcoal-subtle px-2 py-1 rounded-full text-[10px] font-mono text-brand-red flex items-center gap-1 shadow-lg">
+<span>SNAP &amp; POP</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</div>
+</div>
+<!-- Frame A: Rest State Under Home -->
+<div class="border border-charcoal-border bg-charcoal-base/60 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs font-bold text-neutral-300">FRAME A</span>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-400">REST AT HOME (x = 0)</span>
+</div>
+<!-- Bottom Bar Viewport Frame -->
+<div class="h-44 bg-black rounded-lg border border-charcoal-border/70 flex flex-col items-center justify-center relative px-6">
+<div class="w-full bg-charcoal-base/80 border border-charcoal-border py-3 px-6 rounded-2xl flex items-center justify-around relative">
+<!-- Home Tab (Active) -->
+<div class="flex flex-col items-center gap-1 relative">
+<span class="material-symbols-outlined text-brand-red text-xl">home</span>
+<span class="text-[10px] font-bold text-brand-red">Home</span>
+<!-- Circular Indicator Dot -->
+<div class="w-1.5 h-1.5 rounded-full bg-brand-red glow-dot absolute -bottom-2"></div>
+</div>
+<!-- Explore Tab (Inactive) -->
+<div class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined text-xl">explore</span>
+<span class="text-[10px] font-medium">Explore</span>
+</div>
+<!-- Saved Tab (Inactive) -->
+<div class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+<span class="text-[10px] font-medium">Saved</span>
+</div>
+</div>
+<div class="text-[11px] font-mono text-neutral-500 mt-4">Static 6px circle • Perfect alignment</div>
+</div>
+<!-- Technical Notes -->
+<div class="mt-4 pt-3 border-t border-charcoal-border text-xs text-neutral-400 space-y-1">
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Active Element:</span>
+<span class="text-brand-red font-semibold">Home (Target 01)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Dot Geometry:</span>
+<span class="text-neutral-300">6px × 6px Sphere</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Luminance:</span>
+<span class="text-neutral-300">RGBA(255, 59, 48, 1.0)</span>
+</div>
+</div>
+</div>
+<!-- Frame B: Liquid Slide Momentum -->
+<div class="border border-brand-red/40 bg-charcoal-base/80 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden ring-1 ring-brand-red/30">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs font-bold text-brand-red">FRAME B</span>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-brand-red/15 text-brand-red font-semibold">LIQUID SLIDE (Δx = +48px)</span>
+</div>
+<!-- Bottom Bar Viewport Frame -->
+<div class="h-44 bg-black rounded-lg border border-brand-red/30 flex flex-col items-center justify-center relative px-6 overflow-hidden">
+<div class="w-full bg-charcoal-base/80 border border-charcoal-border py-3 px-6 rounded-2xl flex items-center justify-around relative">
+<!-- Home Tab (Transitioning Out) -->
+<div class="flex flex-col items-center gap-1 text-neutral-400 transition-colors">
+<span class="material-symbols-outlined text-xl">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</div>
+<!-- Explore Tab (Transitioning In) -->
+<div class="flex flex-col items-center gap-1 text-neutral-200">
+<span class="material-symbols-outlined text-xl text-brand-red/80">explore</span>
+<span class="text-[10px] font-semibold text-brand-red/80">Explore</span>
+</div>
+<!-- Saved Tab (Inactive) -->
+<div class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+<span class="text-[10px] font-medium">Saved</span>
+</div>
+<!-- Liquid Motion Blur Trail & Tear-Drop Dot -->
+<div class="absolute -bottom-1.5 left-[24%] w-[78px] h-2 pointer-events-none flex items-center">
+<!-- Motion Blur Streak -->
+<div class="w-full h-1 bg-gradient-to-r from-brand-red/20 via-brand-red to-brand-red/80 rounded-full blur-[1px]"></div>
+<!-- Elongated Tear-Drop Pill -->
+<div class="w-6 h-2 rounded-full bg-brand-red absolute right-0 glow-dot shadow-[0_0_12px_#FF3B30]"></div>
+</div>
+</div>
+<div class="text-[11px] font-mono text-brand-red mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_flat</span>
+<span>Elongated Liquid Tear-Drop (Aspect: 3.2:1)</span>
+</div>
+</div>
+<!-- Technical Notes -->
+<div class="mt-4 pt-3 border-t border-charcoal-border text-xs text-neutral-400 space-y-1">
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Morph Ratio:</span>
+<span class="text-brand-red font-semibold">Width: 20px | Height: 5px</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Motion Blur:</span>
+<span class="text-neutral-300">Directional 0° Trail (64px)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Interpolation:</span>
+<span class="text-neutral-300">Fluid Spring Viscosity</span>
+</div>
+</div>
+</div>
+<!-- Frame C: Snap to Explore & Icon Pop -->
+<div class="border border-charcoal-border bg-charcoal-base/60 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs font-bold text-neutral-300">FRAME C</span>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-400">SNAP &amp; 1.1x ICON POP</span>
+</div>
+<!-- Bottom Bar Viewport Frame -->
+<div class="h-44 bg-black rounded-lg border border-charcoal-border/70 flex flex-col items-center justify-center relative px-6">
+<div class="w-full bg-charcoal-base/80 border border-charcoal-border py-3 px-6 rounded-2xl flex items-center justify-around relative">
+<!-- Home Tab (Muted) -->
+<div class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined text-xl">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</div>
+<!-- Explore Tab (Active & Popped) -->
+<div class="flex flex-col items-center gap-1 relative transform scale-110 transition-transform">
+<span class="material-symbols-outlined text-brand-red text-2xl drop-shadow-[0_0_8px_rgba(255,59,48,0.7)] animate-bounce" style="animation-iteration-count: 1; animation-duration: 0.4s;">explore</span>
+<span class="text-[10px] font-bold text-brand-red">Explore</span>
+<!-- Snapped Circular Indicator Dot -->
+<div class="w-1.5 h-1.5 rounded-full bg-brand-red glow-dot absolute -bottom-2"></div>
+</div>
+<!-- Saved Tab (Inactive) -->
+<div class="flex flex-col items-center gap-1 text-neutral-500">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+<span class="text-[10px] font-medium">Saved</span>
+</div>
+</div>
+<div class="text-[11px] font-mono text-neutral-400 mt-4 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+<span>1.1x Scale Pop Triggered • Dot Snapped</span>
+</div>
+</div>
+<!-- Technical Notes -->
+<div class="mt-4 pt-3 border-t border-charcoal-border text-xs text-neutral-400 space-y-1">
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Icon Keyframe:</span>
+<span class="text-white font-bold">scale(1.10) → scale(1.00)</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Final Dot Geometry:</span>
+<span class="text-white">6px Circle Snapped</span>
+</div>
+<div class="flex justify-between font-mono text-[11px]">
+<span class="text-neutral-500">Haptic Feedback:</span>
+<span class="text-brand-red">Selection Click (Light Impact)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Implementation Guide Footer -->
+<footer class="border border-charcoal-border bg-charcoal-dark/70 rounded-xl p-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+<div class="flex flex-col gap-1">
+<div class="text-neutral-400 uppercase tracking-wider text-[10px]">Timing Specifications</div>
+<div class="text-neutral-200">Tap Expansion: 80ms - 100ms</div>
+<div class="text-neutral-200">Fluid Glide Duration: 180ms - 220ms</div>
+<div class="text-neutral-200">Settle Rebound: 120ms</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="text-neutral-400 uppercase tracking-wider text-[10px]">Physics Equations</div>
+<div class="text-neutral-200">F = -k · x - c · v</div>
+<div class="text-neutral-200">Stiffness: 240 N/m</div>
+<div class="text-neutral-200">Damping: 18 N·s/m</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="text-neutral-400 uppercase tracking-wider text-[10px]">CSS Class Tokens</div>
+<div class="text-brand-red">bg-brand-red glow-dot</div>
+<div class="text-neutral-200">scale-105 active:scale-95</div>
+<div class="text-neutral-200">transition-all duration-200</div>
+</div>
+</footer>
+</div>
+</body></html>

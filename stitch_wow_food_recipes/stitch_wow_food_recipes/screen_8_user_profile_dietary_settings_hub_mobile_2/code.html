@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Screen - 8 - User Profile &amp; Dietary Settings Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script>tailwind.config = {theme: {extend: {fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, colors: {brand: {orange: "#FF6D00", accent: "#FF9900", gold: "#F59E0B", dark: "#121212", card: "#161616", border: "rgba(255, 255, 255, 0.08)"}, "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .glow-orange {
+      box-shadow: 0 0 16px rgba(255, 109, 0, 0.28);
+    }
+    .glow-pill {
+      box-shadow: 0 0 12px rgba(255, 109, 0, 0.22);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-white antialiased min-h-screen">
+<!-- Mobile Container: exactly 390x884 standard viewport -->
+<main class="bg-black relative flex flex-col overflow-hidden border-white/5 shadow-2xl w-full min-h-screen">
+<!-- Top System Bar Emulation -->
+<header class="w-full pt-3 px-6 pb-2 flex justify-between items-center z-30 shrink-0 select-none bg-black/80 backdrop-blur-md">
+<span class="text-xs font-semibold tracking-tight text-white/90">9:41</span>
+<div class="flex items-center space-x-1.5 text-white/80">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[17px]">battery_full</span>
+</div>
+</header>
+<!-- App Header & User Profile Info Section -->
+<section class="px-5 pt-2 pb-4 shrink-0 border-b border-white/5 bg-black/90">
+<div class="flex items-center justify-between">
+<!-- Profile Avatar & Greeting -->
+<div class="flex items-center space-x-3.5">
+<div class="relative">
+<div class="w-14 h-14 rounded-full p-[2px] bg-gradient-to-tr from-brand-orange via-amber-500 to-amber-200" style="background: linear-gradient(to right top, rgb(255, 59, 48), rgb(255, 107, 100), rgb(255, 180, 171));">
+<img id="global-current-user-avatar" alt="Chef Sarah" class="w-full h-full object-cover rounded-full bg-neutral-900 cursor-pointer" src="https://lh3.googleusercontent.com/aida/AEtjO1UKk6JtH4oRDXvVx7Eyw9ww6SDOfM4ld-GX2TDB8_3T1hbxORbXocJkAjZCjfEZbvJZo1_OvToE1oUDz4CHCux23YZ-Ydb7wDocetX1ppJLZVVyZt2Hm_JApySxgUhM-pVtsiQLhDXIY4WwgWAqWrhdISLZmZJw37h2Fr-pF6l63muOuK8ESMk-yriJwabUEwmmtyUjvBpuv1Q5OUnjBIXPS2ze7YDbf8fuuco2ai8nS111f3qvrQkBF-t_" data-bind="currentUser.profilePictureUrl" data-sync-targets="SCR-02A:header-avatar,SCR-12A:profile-avatar,SCR-06A:header-avatar,SCR-02B:top-icon" data-state-synced="true" data-action="update-profile-photo">
+</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-black flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex flex-col">
+<h1 class="font-serif text-[21px] font-semibold tracking-wide text-white leading-tight">
+              Namaste, Chef&nbsp; Sarah</h1>
+<div class="mt-1 flex items-center space-x-2">
+<span class="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-[#FF6D00]/15 border border-[#FF6D00]/50 text-[#FF6D00] text-[11px] font-medium tracking-wide glow-pill" style="background-color: rgba(255, 59, 48, 0.15); border-color: rgba(255, 59, 48, 0.5); color: rgb(255, 59, 48); box-shadow: rgba(255, 59, 48, 0.22) 0px 0px 12px;">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span class="">Premium</span>
+</span>
+<span class="text-white/40 text-[11px] font-normal">Executive Member</span>
+</div>
+</div>
+</div>
+<!-- Top Right Settings / Edit Profile Button -->
+<button aria-label="Settings" class="w-9 h-9 rounded-full bg-[#161616] border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[19px]">tune</span>
+</button>
+</div>
+<!-- Quick Metrics Ribbon -->
+<div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-white/5">
+<div class="bg-[#121212] rounded-xl px-2.5 py-2 border border-white/5 flex flex-col items-center justify-center text-center">
+<span class="text-white/40 text-[10px] font-medium uppercase tracking-wider">Saved Recipes</span>
+<span class="text-[#FF9900] font-serif text-lg font-bold mt-0.5" style="color: rgb(255, 59, 48);">24</span>
+</div>
+<div class="bg-[#121212] rounded-xl px-2.5 py-2 border border-white/5 flex flex-col items-center justify-center text-center">
+<span class="text-white/40 text-[10px] font-medium uppercase tracking-wider">Taste Match</span>
+<span class="text-emerald-400 font-serif text-lg font-bold mt-0.5">98%</span>
+</div>
+<div class="bg-[#121212] rounded-xl px-2.5 py-2 border border-white/5 flex flex-col items-center justify-center text-center">
+<span class="text-white/40 text-[10px] font-medium uppercase tracking-wider">Streak</span>
+<span class="text-amber-400 font-serif text-lg font-bold mt-0.5">14d 🔥</span>
+</div>
+</div>
+</section>
+<!-- Middle Viewport: Scrollable Configuration Stream -->
+<div class="flex-1 overflow-y-auto hide-scrollbar px-5 py-4 space-y-6 pb-28">
+<!-- Section: Dietary Preferences -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[#FF6D00] text-[18px]" style="color: rgb(255, 59, 48);">restaurant</span>
+<h2 class="text-[12px] font-bold tracking-widest text-white uppercase font-sans">
+              DIETARY PREFERENCES
+            </h2>
+</div>
+<span class="text-[11px] text-white/40 font-medium">2 Active</span>
+</div>
+<p class="text-[12px] text-white/50 mb-3.5 leading-relaxed">
+          Recipes across discovery and AI pantry matching will automatically prioritize your taste matrix.
+        </p>
+<!-- Dietary Preference Tiles Grid -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Vegan Tile (Active) -->
+<button class="relative flex items-center justify-between p-3.5 rounded-2xl bg-[#121212] border-2 transition-transform active:scale-[0.98] text-left group" style="border-color: rgb(255, 59, 48); box-shadow: rgba(255, 59, 48, 0.25) 0px 0px 14px;"><div class="flex items-center space-x-2.5"><span class="material-symbols-outlined text-[20px]" style="color: rgb(255, 59, 48);">eco</span><div><span class="block text-sm font-semibold text-white group-hover:text-white/90">Vegan</span><span class="block text-[10px] text-white/40">100% Plant-based</span></div></div><div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background-color: #FF3B30;"><span class="material-symbols-outlined text-black text-[15px] font-bold">check</span></div></button>
+<!-- High-Protein Tile (Active) -->
+<button class="relative flex items-center justify-between p-3.5 rounded-2xl bg-[#121212] border-2 transition-transform active:scale-[0.98] text-left group" style="border-color: rgb(255, 59, 48); box-shadow: rgba(255, 59, 48, 0.25) 0px 0px 14px;"><div class="flex items-center space-x-2.5"><span class="material-symbols-outlined text-[20px]" style="color: rgb(255, 59, 48);">fitness_center</span><div><span class="block text-sm font-semibold text-white group-hover:text-white/90">High-Protein</span><span class="block text-[10px] text-white/40">&gt;25g per serving</span></div></div><div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background-color: #FF3B30;"><span class="material-symbols-outlined text-black text-[15px] font-bold">check</span></div></button>
+<!-- Keto Tile (Inactive) -->
+<button class="relative flex items-center justify-between p-3.5 rounded-2xl bg-[#121212]/80 border border-white/10 hover:border-white/20 transition-all active:scale-[0.98] text-left group">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-white/40 text-[20px] group-hover:text-white/60">egg_alt</span>
+<div>
+<span class="block text-sm font-medium text-white/70 group-hover:text-white">Keto</span>
+<span class="block text-[10px] text-white/35">Under 15g carbs</span>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0"></div>
+</button>
+<!-- Low-Carb Tile (Inactive) -->
+<button class="relative flex items-center justify-between p-3.5 rounded-2xl bg-[#121212]/80 border border-white/10 hover:border-white/20 transition-all active:scale-[0.98] text-left group">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-white/40 text-[20px] group-hover:text-white/60">grain</span>
+<div>
+<span class="block text-sm font-medium text-white/70 group-hover:text-white">Low-Carb</span>
+<span class="block text-[10px] text-white/35">Gluten-free grains</span>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0"></div>
+</button>
+<!-- Gluten-Free Tile (Inactive) -->
+<button class="relative flex items-center justify-between p-3.5 rounded-2xl bg-[#121212]/80 border border-white/10 hover:border-white/20 transition-all active:scale-[0.98] text-left group">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-white/40 text-[20px] group-hover:text-white/60">do_not_disturb_on</span>
+<div>
+<span class="block text-sm font-medium text-white/70 group-hover:text-white">Gluten-Free</span>
+<span class="block text-[10px] text-white/35">Celiac compliant</span>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0"></div>
+</button>
+<!-- Pure Vegetarian (Jain) Tile (Inactive) -->
+<button class="relative flex items-center justify-between p-3.5 rounded-2xl bg-[#121212]/80 border border-white/10 hover:border-white/20 transition-all active:scale-[0.98] text-left group">
+<div class="flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-white/40 text-[20px] group-hover:text-white/60">spa</span>
+<div>
+<span class="block text-sm font-medium text-white/70 group-hover:text-white">Sattvic / Jain</span>
+<span class="block text-[10px] text-white/35">No onion, no garlic</span>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0"></div>
+</button>
+</div>
+</section>
+<!-- Section: Allergies -->
+<section class="mb-6"><div class="bg-[#121212] rounded-2xl p-4 border border-white/10"><div class="flex items-center justify-between mb-4"><div class="flex items-center space-x-2"><span class="material-symbols-outlined text-amber-400 text-[18px]">military_tech</span><h2 class="text-[12px] font-bold tracking-widest text-white uppercase font-sans">MASTERED DISHES</h2></div><span class="px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-wide">2/4 UNLOCKED</span></div><div class="grid grid-cols-2 gap-3.5"><div class="flex flex-col items-center text-center p-3 rounded-xl bg-black/40 border border-white/5"><div class="w-14 h-14 rounded-full bg-[#1A1A1C] border border-amber-400/80 flex items-center justify-center relative mb-2.5" style="filter: drop-shadow(0 0 16px rgba(255, 184, 0, 0.4)); box-shadow: 0 0 20px rgba(255, 184, 0, 0.25);"><span class="material-symbols-outlined text-[26px] text-amber-400">local_fire_department</span></div><span class="text-[12px] font-semibold text-white leading-tight">Honey Sesame Chicken</span><span class="text-[10px] text-amber-400/80 mt-0.5 font-medium">Mastered • Level 5</span></div><div class="flex flex-col items-center text-center p-3 rounded-xl bg-black/40 border border-white/5"><div class="w-14 h-14 rounded-full bg-[#1A1A1C] border border-amber-400/80 flex items-center justify-center relative mb-2.5" style="filter: drop-shadow(0 0 16px rgba(255, 184, 0, 0.4)); box-shadow: 0 0 20px rgba(255, 184, 0, 0.25);"><span class="material-symbols-outlined text-[26px] text-amber-400">workspace_premium</span></div><span class="text-[12px] font-semibold text-white leading-tight">Carbonara Champion</span><span class="text-[10px] text-amber-400/80 mt-0.5 font-medium">Mastered • Level 5</span></div><div class="flex flex-col items-center text-center p-3 rounded-xl bg-black/40 border border-white/5 opacity-30"><div class="w-14 h-14 rounded-full bg-[#151517] border border-white/20 flex items-center justify-center relative mb-2.5"><span class="material-symbols-outlined text-[24px] text-white/40">lock</span></div><span class="text-[12px] font-medium text-white/70 leading-tight">Woodfired Pizza</span><span class="text-[10px] text-white/40 mt-0.5">Locked • Cook 3x</span></div><div class="flex flex-col items-center text-center p-3 rounded-xl bg-black/40 border border-white/5 opacity-30"><div class="w-14 h-14 rounded-full bg-[#151517] border border-white/20 flex items-center justify-center relative mb-2.5"><span class="material-symbols-outlined text-[24px] text-white/40">lock</span></div><span class="text-[12px] font-medium text-white/70 leading-tight">Tikka Masala</span><span class="text-[10px] text-white/40 mt-0.5">Locked • Cook 3x</span></div></div></div></section><section>
+<div class="flex items-center justify-between mb-3"><div class="flex items-center space-x-2"><span class="material-symbols-outlined text-[18px]" style="color: rgb(255, 59, 48);">warning</span><h2 class="text-[12px] font-bold tracking-widest text-white uppercase font-sans">ALLERGIES</h2></div><span class="text-[11px] font-medium tracking-wide" style="color: rgb(255, 59, 48);">Instant Exclusion</span></div>
+<p class="text-[12px] text-white/50 mb-3.5 leading-relaxed">
+          Selected allergens are strictly filtered out from recipes, pantry scans, and substitution guides.
+        </p>
+<!-- Allergies Modern Toggle Rows -->
+<div class="bg-[#121212] rounded-2xl border border-white/10 divide-y divide-white/5 overflow-hidden">
+<!-- Nuts Toggle Row (Active) -->
+<div class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] transition-colors"><div class="flex items-center space-x-3"><div class="w-8 h-8 rounded-xl border flex items-center justify-center" style="background-color: rgba(255, 59, 48, 0.12); border-color: rgba(255, 59, 48, 0.3); color: #FF3B30;"><span class="material-symbols-outlined text-[19px]">nutrition</span></div><div><span class="block text-[14px] font-semibold text-white">Nuts</span><span class="block text-[11px] text-white/40">Tree nuts, peanuts, cashews &amp; almonds</span></div></div><button aria-label="Toggle Nuts exclusion" class="relative w-12 h-6 rounded-full p-0.5 transition-colors focus:outline-none" style="background-color: rgb(255, 59, 48); box-shadow: rgba(255, 59, 48, 0.25) 0px 0px 12px;"><div class="w-5 h-5 bg-black rounded-full shadow-md transform translate-x-6 transition-transform flex items-center justify-center"><span class="material-symbols-outlined text-[12px] font-bold" style="color: rgb(255, 59, 48);">check</span></div></button></div>
+<!-- Dairy Toggle Row (Active) -->
+<div class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] transition-colors"><div class="flex items-center space-x-3"><div class="w-8 h-8 rounded-xl border flex items-center justify-center" style="background-color: rgba(255, 59, 48, 0.12); border-color: rgba(255, 59, 48, 0.3); color: #FF3B30;"><span class="material-symbols-outlined text-[19px]">water_bottle</span></div><div><span class="block text-[14px] font-semibold text-white">Dairy</span><span class="block text-[11px] text-white/40">Lactose, butter, milk solids &amp; paneer</span></div></div><button aria-label="Toggle Dairy exclusion" class="relative w-12 h-6 rounded-full p-0.5 transition-colors focus:outline-none" style="background-color: rgb(255, 59, 48); box-shadow: rgba(255, 59, 48, 0.25) 0px 0px 12px;"><div class="w-5 h-5 bg-black rounded-full shadow-md transform translate-x-6 transition-transform flex items-center justify-center"><span class="material-symbols-outlined text-[12px] font-bold" style="color: rgb(255, 59, 48);">check</span></div></button></div>
+<!-- Shellfish / Seafood Toggle Row (Inactive) -->
+<div class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/40">
+<span class="material-symbols-outlined text-[19px]">set_meal</span>
+</div>
+<div>
+<span class="block text-[14px] font-medium text-white/70">Shellfish &amp; Crustaceans</span>
+<span class="block text-[11px] text-white/35">Shrimp, prawns, crab &amp; oyster sauces</span>
+</div>
+</div>
+<!-- Custom Modern Toggle Switch (OFF) -->
+<button aria-label="Toggle Shellfish exclusion" class="relative w-12 h-6 bg-[#262626] rounded-full p-0.5 transition-colors focus:outline-none">
+<div class="w-5 h-5 bg-white/60 rounded-full shadow-md transform translate-x-0 transition-transform"></div>
+</button>
+</div>
+<!-- Soy Toggle Row (Inactive) -->
+<div class="p-3.5 flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-white/40">
+<span class="material-symbols-outlined text-[19px]">spa</span>
+</div>
+<div>
+<span class="block text-[14px] font-medium text-white/70">Soy Products</span>
+<span class="block text-[11px] text-white/35">Soy sauce, tofu, edamame &amp; miso</span>
+</div>
+</div>
+<!-- Custom Modern Toggle Switch (OFF) -->
+<button aria-label="Toggle Soy exclusion" class="relative w-12 h-6 bg-[#262626] rounded-full p-0.5 transition-colors focus:outline-none">
+<div class="w-5 h-5 bg-white/60 rounded-full shadow-md transform translate-x-0 transition-transform"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- Section: Smart Kitchen Engine Settings -->
+<section><div class="flex items-center space-x-2 mb-3"><span class="material-symbols-outlined text-[18px]" style="color: rgb(255, 59, 48);">psychology</span><h2 class="text-[12px] font-bold tracking-widest text-white uppercase font-sans">AI CULINARY ENGINE</h2></div><div class="bg-[#121212] rounded-2xl p-4 border border-white/10 space-y-3.5"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="text-sm font-semibold text-white">Nocturnal Spice Dial</span><span class="text-[11px] text-white/40">Match chili heat to time of day</span></div><span class="px-2.5 py-1 rounded-lg text-xs font-semibold border" style="background-color: rgba(255, 59, 48, 0.15); color: rgb(255, 59, 48); border-color: rgba(255, 59, 48, 0.4); box-shadow: rgba(255, 59, 48, 0.2) 0px 0px 10px;">Fiery 🔥</span></div><div class="flex items-center justify-between pt-2 border-t border-white/5"><div class="flex flex-col"><span class="text-sm font-semibold text-white">Smart Grocery Auto-Export</span><span class="text-[11px] text-white/40">Sync missing ingredients to Blinkit &amp; Zepto</span></div><span class="material-symbols-outlined text-emerald-400 text-xl">check_circle</span></div></div></section>
+<!-- Save & Apply Changes Action Pill -->
+<button class="w-full py-3.5 px-4 rounded-xl text-black font-semibold text-sm flex items-center justify-center space-x-2 active:scale-[0.98] transition-all" style="background-color: rgb(255, 59, 48); box-shadow: rgba(255, 59, 48, 0.4) 0px 4px 24px;"><span class="material-symbols-outlined text-lg font-bold">check</span><span class="">Save Dietary Blueprint</span></button>
+<!-- Subtle app version signature -->
+<div class="text-center pt-1 pb-2">
+<p class="text-[10px] text-white/20 tracking-wider uppercase font-medium">Annapurna Luxury Gastronomy • v2.4.1</p>
+</div>
+</div>
+<!-- Global Persistent Mobile Bottom Navigation Bar -->
+<nav class="absolute bottom-0 left-0 w-full h-[76px] bg-[#0A0A0A]/95 backdrop-blur-xl border-t border-white/10 px-4 pb-2 z-40 flex items-center justify-around"><button class="flex flex-col items-center justify-center space-y-1 text-[#8E8E93] hover:text-white/90 active:scale-95 transition-all duration-200 w-14 cursor-pointer focus:outline-none"><span class="material-symbols-outlined text-[23px]">home</span><span class="text-[10px] font-medium tracking-tight">Home</span></button><button class="flex flex-col items-center justify-center space-y-1 text-[#8E8E93] hover:text-white/90 active:scale-95 transition-all duration-200 w-14 cursor-pointer focus:outline-none"><span class="material-symbols-outlined text-[23px]">calendar_month</span><span class="text-[10px] font-medium tracking-tight">Planner</span></button><button class="flex flex-col items-center justify-center space-y-1 text-[#8E8E93] hover:text-white/90 active:scale-95 transition-all duration-200 w-14 cursor-pointer focus:outline-none"><span class="material-symbols-outlined text-[23px]">bookmark</span><span class="text-[10px] font-medium tracking-tight">Saved</span></button><button class="flex flex-col items-center justify-center space-y-1 text-[#8E8E93] hover:text-white/90 active:scale-95 transition-all duration-200 w-14 cursor-pointer focus:outline-none group" id="nav-lists-btn" onclick="document.body.style.transition='opacity 200ms ease'; document.body.style.opacity='0'; setTimeout(function(){ window.location.hash='#screen-7b'; document.body.style.opacity='1'; }, 200);"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">shopping_cart</span><span class="text-[10px] font-medium tracking-tight">Lists</span></button><button class="flex flex-col items-center justify-center space-y-1 w-14 relative group cursor-pointer active:scale-95 transition-all duration-200 focus:outline-none" style="color: rgb(255, 59, 48);"><div class="relative"><span class="material-symbols-outlined text-[24px] font-semibold" style="filter: drop-shadow(rgba(255, 59, 48, 0.7) 0px 0px 10px);">person</span><span class="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full ring-2 ring-black" style="background-color: #FF3B30;"></span></div><span class="text-[10px] font-bold tracking-tight" style="color: rgb(255, 59, 48); filter: drop-shadow(rgba(255, 59, 48, 0.5) 0px 0px 8px);">Profile</span><span class="w-1 h-1 rounded-full mt-0.5" style="background-color: #FF3B30;"></span></button></nav>
+</main>
+
+
+</body></html>

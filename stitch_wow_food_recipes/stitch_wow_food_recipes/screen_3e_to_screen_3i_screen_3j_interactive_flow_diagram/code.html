@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screen 3E to Screen 3I & 3J - Interactive Flow Diagram</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+    .font-serif-title {
+      font-family: 'EB Garamond', serif;
+    }
+    .font-mono-spec {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Subtle dot grid matrix canvas background */
+    .bg-dot-matrix {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    /* Pulsing & glowing effects */
+    .glow-blue {
+      filter: drop-shadow(0px 0px 8px rgba(59, 130, 246, 0.7));
+    }
+    .glow-red {
+      filter: drop-shadow(0px 0px 8px rgba(239, 68, 68, 0.7));
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-black bg-dot-matrix min-h-screen text-white antialiased p-6 lg:p-12 overflow-x-auto selection:bg-blue-600/30">
+
+  <div class="max-w-[1640px] mx-auto min-w-[1360px] relative">
+    
+    <!-- Top Flow Specification Header -->
+    <header class="mb-10 pb-6 border-b border-white/10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono-spec text-xs tracking-wider uppercase">
+            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+            Prototype Flow Specification
+          </span>
+          <span class="text-white/40 font-mono-spec text-xs">// ROUTE MATRIX: 03E ➔ 03I & 03J</span>
+          <span class="px-2.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono-spec text-xs">VERIFIED PROTOCOL</span>
+        </div>
+        <h1 class="text-3xl lg:text-4xl font-bold tracking-tight text-white font-sans">
+          Bottom Sheet Modal Action Routing &amp; Dismissal Hierarchy
+        </h1>
+        <p class="text-white/60 text-sm mt-1 max-w-3xl">
+          Architectural blueprint demonstrating dual primary modal routes triggered from the Universal Bottom Sheet (Screen 3E) to Edit Recipe (Screen 3I) and Print Options (Screen 3J), including reverse back-stack cancellation.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-4 bg-[#141416] border border-white/10 p-3.5 rounded-2xl">
+        <div class="flex items-center gap-2.5 pr-4 border-r border-white/10">
+          <div class="w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></div>
+          <div class="text-xs">
+            <div class="text-white/50 font-mono-spec uppercase text-[10px]">Primary Forward</div>
+            <div class="text-white font-semibold">Slide Up (300ms)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <div class="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]"></div>
+          <div class="text-xs">
+            <div class="text-white/50 font-mono-spec uppercase text-[10px]">Reverse Dismissal</div>
+            <div class="text-white font-semibold">Slide Down (200ms)</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Visual Grid: 1 Source Screen (Left) + Center Vector Stage + 2 Target Screens (Right) -->
+    <div class="relative grid grid-cols-12 gap-8 items-start min-h-[1050px]">
+
+      <!-- SVG Overlay Connecting Wire Layer -->
+      <svg class="absolute inset-0 w-full h-full pointer-events-none z-20" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Blue Arrowhead Marker for Edit -->
+          <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#3B82F6" />
+          </marker>
+          <!-- Blue Arrowhead Marker for Print -->
+          <marker id="arrow-blue-print" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#3B82F6" />
+          </marker>
+          <!-- Red Arrowhead Marker for Dismissals -->
+          <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#EF4444" />
+          </marker>
+          <filter id="glow-blue-filter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <filter id="glow-red-filter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        <!-- ROUTE 1 (Edit Recipe Forward - Blue): From Screen 3E "Edit recipe" row to Screen 3I -->
+        <!-- Source approx coords: Screen 3E col-span-4 right side (x: ~420, y: 728) -->
+        <!-- Target Screen 3I left side (x: ~1040, y: 220) -->
+        <path d="M 430 725 C 620 725, 740 220, 1040 220" 
+              fill="none" 
+              stroke="#3B82F6" 
+              stroke-width="3.5" 
+              stroke-linecap="round"
+              stroke-dasharray="6 4"
+              class="glow-blue" 
+              marker-end="url(#arrow-blue)"/>
+
+        <!-- ROUTE 2 (Print Recipe Forward - Blue): From Screen 3E "Print recipe" row to Screen 3J -->
+        <!-- Source approx coords: Screen 3E col-span-4 right side (x: ~430, y: 775) -->
+        <!-- Target Screen 3J left side (x: ~1040, y: 840) -->
+        <path d="M 430 775 C 640 775, 780 840, 1040 840" 
+              fill="none" 
+              stroke="#3B82F6" 
+              stroke-width="3.5" 
+              stroke-linecap="round"
+              stroke-dasharray="6 4"
+              class="glow-blue" 
+              marker-end="url(#arrow-blue-print)"/>
+
+        <!-- ROUTE 3 (Screen 3I Cancel Dismissal - Red): From Screen 3I Close 'X' (x: 1065, y: 75) back down to Screen 3E baseline -->
+        <path d="M 1060 80 C 760 30, 560 520, 430 630" 
+              fill="none" 
+              stroke="#EF4444" 
+              stroke-width="2.5" 
+              stroke-linecap="round"
+              stroke-dasharray="5 5"
+              class="glow-red" 
+              marker-end="url(#arrow-red)"/>
+
+        <!-- ROUTE 4 (Screen 3J Cancel Dismissal - Red): From Screen 3J backdrop/dismissal back to Screen 3E baseline -->
+        <path d="M 1040 680 C 820 640, 680 650, 430 650" 
+              fill="none" 
+              stroke="#EF4444" 
+              stroke-width="2" 
+              stroke-linecap="round"
+              stroke-dasharray="5 5"
+              class="glow-red" 
+              marker-end="url(#arrow-red)"/>
+      </svg>
+
+      <!-- LEFT COLUMN: SCREEN 3E - UNIVERSAL MODAL BOTTOM SHEET OVERLAY (Source Anchor) -->
+      <div class="col-span-4 flex flex-col items-center">
+        <!-- Label Chip -->
+        <div class="w-full flex items-center justify-between px-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded bg-white/10 text-white font-mono-spec text-xs font-semibold">SCREEN 3E</span>
+            <span class="text-white/60 text-xs font-medium">Modal Bottom Sheet Overlay</span>
+          </div>
+          <span class="text-xs font-mono-spec text-emerald-400 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> SOURCE STATE
+          </span>
+        </div>
+
+        <!-- Phone Mockup Container (Screen 3E) -->
+        <div class="w-[380px] h-[844px] rounded-[48px] bg-black border-[7px] border-[#262629] shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden relative flex flex-col justify-between select-none">
+          
+          <!-- Background Recipe (Dimmed under overlay) -->
+          <div class="absolute inset-0 z-0 opacity-20 filter blur-[1px]">
+            <img src="https://lh3.googleusercontent.com/aida/AEtjO1WCmy_gwguUOh4d8PmdioCm4X1F5QCUk34eHxlBDTZclV7ncx9YvdSOCShpEYcP3IKH8OOIMxxjaUGXpWMNjCSF9dT4C0Qzmaeanjc2e3L8ECoYJ18JMjMcBv2Vman9y3Byb5LLIP25D6vnu8nOfR4NSdF4Zg1hASOjf_gk2CdwPSRnUepClVxEJf_MfbPM45b1j3UoyRvrL-xPgP5BJ5lbu1KIzFuPc8gcL6WmBq_1DHfDonW-OMgb2wz0" alt="Honey Sesame Chicken" class="w-full h-72 object-cover" />
+            <div class="p-5 space-y-4">
+              <div class="h-6 w-48 bg-white/30 rounded"></div>
+              <div class="h-4 w-32 bg-white/20 rounded"></div>
+              <div class="h-20 w-full bg-white/10 rounded-2xl"></div>
+            </div>
+          </div>
+          <!-- Dark scrim -->
+          <div class="absolute inset-0 bg-black/75 z-0"></div>
+
+          <!-- Phone Status Bar -->
+          <div class="relative z-10 px-7 pt-3.5 flex justify-between items-center text-white/90 text-xs font-semibold">
+            <span>9:41</span>
+            <div class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+              <span class="material-symbols-outlined text-[14px]">wifi</span>
+              <span class="material-symbols-outlined text-[14px]">battery_full</span>
+            </div>
+          </div>
+
+          <!-- Upper Scrim spacer -->
+          <div class="relative z-10 flex-1 flex flex-col justify-center items-center text-center px-6">
+            <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 mb-2">
+              <span class="material-symbols-outlined text-lg">touch_app</span>
+            </div>
+            <p class="text-xs text-white/40 font-mono-spec">Active Tap on Dish Kebab Menu (⋮)<br/>Triggers Universal Bottom Sheet</p>
+          </div>
+
+          <!-- Active Modal Bottom Sheet Container -->
+          <div class="relative z-10 bg-[#141416] border-t border-white/15 rounded-t-[32px] p-5 pb-6 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
+            <!-- Sheet Drag Handle -->
+            <div class="w-10 h-1 bg-white/25 rounded-full mx-auto mb-4"></div>
+
+            <div class="space-y-1">
+              <!-- Item 1: Save recipe -->
+              <div class="flex items-center justify-between p-3.5 rounded-xl hover:bg-white/5 transition-colors text-white/80">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-xl text-white/70">bookmark</span>
+                  <span class="text-sm font-medium text-white">Save recipe</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-white/30">chevron_right</span>
+              </div>
+
+              <!-- Item 2: Edit recipe (HIGHLIGHTED ACTIVE ANCHOR) -->
+              <div id="source-edit" class="relative flex items-center justify-between p-3.5 rounded-xl bg-blue-600/15 border border-blue-500/60 shadow-[0_0_15px_rgba(59,130,246,0.35)] text-white">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-xl text-blue-400">edit</span>
+                  <span class="text-sm font-semibold text-white">Edit recipe</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-blue-500 text-black text-[10px] font-mono-spec font-bold uppercase tracking-wider">TAP 01</span>
+                  <span class="material-symbols-outlined text-lg text-blue-400">chevron_right</span>
+                </div>
+                <!-- Origin Pulse Pin -->
+                <div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-500 border-2 border-black shadow-[0_0_10px_#3b82f6]"></div>
+              </div>
+
+              <!-- Item 3: Print recipe (HIGHLIGHTED ACTIVE ANCHOR) -->
+              <div id="source-print" class="relative flex items-center justify-between p-3.5 rounded-xl bg-blue-600/15 border border-blue-500/60 shadow-[0_0_15px_rgba(59,130,246,0.35)] text-white">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-xl text-blue-400">print</span>
+                  <span class="text-sm font-semibold text-white">Print recipe</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-blue-500 text-black text-[10px] font-mono-spec font-bold uppercase tracking-wider">TAP 02</span>
+                  <span class="material-symbols-outlined text-lg text-blue-400">chevron_right</span>
+                </div>
+                <!-- Origin Pulse Pin -->
+                <div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-500 border-2 border-black shadow-[0_0_10px_#3b82f6]"></div>
+              </div>
+
+              <!-- Item 4: Leave feedback -->
+              <div class="flex items-center justify-between p-3.5 rounded-xl hover:bg-white/5 transition-colors text-white/80">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-xl text-white/70">chat_bubble</span>
+                  <span class="text-sm font-medium text-white">Leave feedback</span>
+                </div>
+                <span class="material-symbols-outlined text-lg text-white/30">chevron_right</span>
+              </div>
+            </div>
+
+            <!-- Home indicator bar -->
+            <div class="w-32 h-1 bg-white/20 rounded-full mx-auto mt-5"></div>
+          </div>
+        </div>
+
+        <div class="w-[380px] mt-4 p-3 bg-[#111113] border border-white/10 rounded-xl text-xs text-white/60 flex items-start gap-2.5">
+          <span class="material-symbols-outlined text-blue-400 text-sm mt-0.5">info</span>
+          <span>Modal container retains current route stack without destroying background recipe instance. Actions broadcast parameterized navigation events.</span>
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: INTERACTIVE SPECS & TRANSITION CALLOUTS -->
+      <div class="col-span-4 flex flex-col justify-around h-[844px] py-12 relative pointer-events-none">
+        
+        <!-- Callout 1: Edit Recipe Navigation (Blue Badge) -->
+        <div class="pointer-events-auto bg-[#0e1726]/90 border border-blue-500/50 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] max-w-[340px] mx-auto transform -translate-y-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="flex items-center gap-1.5 text-blue-400 font-mono-spec text-[11px] font-bold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+              Route 01: On Tap Edit
+            </span>
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono-spec text-[10px]">300ms</span>
+          </div>
+          <div class="text-xs font-semibold text-white mb-1.5 flex items-center gap-1">
+            <span>On Tap</span>
+            <span class="text-blue-400">➔</span>
+            <span>Navigate To</span>
+            <span class="text-blue-400">➔</span>
+            <span class="text-blue-300">Slide Up (Screen 3I)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[10px] font-mono-spec text-white/60 bg-black/40 p-2 rounded-lg border border-white/5">
+            <div>• Easing: ease-out</div>
+            <div>• Pass: recipe_id</div>
+            <div>• Backstack: Preserved</div>
+            <div>• Type: Full Screen</div>
+          </div>
+        </div>
+
+        <!-- Callout Red: Reverse Dismissal (Red Badge) -->
+        <div class="pointer-events-auto bg-[#230f14]/90 border border-red-500/50 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] max-w-[340px] mx-auto">
+          <div class="flex items-center justify-between mb-2">
+            <span class="flex items-center gap-1.5 text-red-400 font-mono-spec text-[11px] font-bold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+              System Dismissal Flow
+            </span>
+            <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-mono-spec text-[10px]">200ms</span>
+          </div>
+          <div class="text-xs font-semibold text-white mb-1 flex items-center gap-1">
+            <span>On Close ('X') / Cancel</span>
+            <span class="text-red-400">➔</span>
+            <span class="text-red-300">Dismiss Overlay</span>
+          </div>
+          <p class="text-[10px] font-mono-spec text-white/60">
+            Pops navigation controller, drops modal overlay, and returns user directly to Screen 3E/3A state with zero state mutation.
+          </p>
+        </div>
+
+        <!-- Callout 2: Print Preview Navigation (Blue Badge) -->
+        <div class="pointer-events-auto bg-[#0e1726]/90 border border-blue-500/50 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] max-w-[340px] mx-auto transform translate-y-6">
+          <div class="flex items-center justify-between mb-2">
+            <span class="flex items-center gap-1.5 text-blue-400 font-mono-spec text-[11px] font-bold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+              Route 02: On Tap Print
+            </span>
+            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono-spec text-[10px]">250ms</span>
+          </div>
+          <div class="text-xs font-semibold text-white mb-1.5 flex items-center gap-1">
+            <span>On Tap</span>
+            <span class="text-blue-400">➔</span>
+            <span>Open Drawer</span>
+            <span class="text-blue-400">➔</span>
+            <span class="text-blue-300">Slide Up (Screen 3J)</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[10px] font-mono-spec text-white/60 bg-black/40 p-2 rounded-lg border border-white/5">
+            <div>• Layer: Bottom Drawer</div>
+            <div>• Scrim: 60% Black</div>
+            <div>• Target: A4 Standard</div>
+            <div>• Context: Honey Sesame</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: TARGET SCREENS (SCREEN 3I TOP RIGHT + SCREEN 3J BOTTOM RIGHT) -->
+      <div class="col-span-4 flex flex-col gap-10 items-center">
+        
+        <!-- TARGET 1: SCREEN 3I - EDIT RECIPE (TOP RIGHT) -->
+        <div class="w-full flex flex-col items-center">
+          <div class="w-full flex items-center justify-between px-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-blue-500/20 border border-blue-500/40 text-blue-300 font-mono-spec text-xs font-bold">SCREEN 3I</span>
+              <span class="text-white/80 text-xs font-semibold">Edit Recipe View</span>
+            </div>
+            <span class="text-[11px] font-mono-spec text-blue-400">TARGET 01 // FORM STACK</span>
+          </div>
+
+          <!-- Screen 3I Scaled Phone Shell -->
+          <div class="w-[360px] h-[440px] rounded-[36px] bg-black border-[5px] border-[#2c2c30] shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden relative flex flex-col justify-between select-none">
+            <!-- Header Bar -->
+            <div class="px-5 pt-3.5 pb-2.5 flex items-center justify-between border-b border-white/10 bg-black/90">
+              <div class="flex items-center gap-3">
+                <!-- Close Button (Dismissal Origin) -->
+                <div class="w-7 h-7 rounded-full bg-red-500/20 border border-red-500/60 flex items-center justify-center text-red-400 shadow-[0_0_8px_#ef4444]">
+                  <span class="material-symbols-outlined text-sm font-bold">close</span>
+                </div>
+                <span class="text-sm font-bold text-white tracking-tight">Edit Recipe</span>
+              </div>
+              <span class="text-xs font-bold text-[#FF3B30] tracking-wide hover:underline">Save</span>
+            </div>
+
+            <!-- Scrollable Content Frame -->
+            <div class="px-4 py-2 space-y-2.5 overflow-hidden flex-1">
+              <!-- Active Recipe Card -->
+              <div class="flex items-center gap-3 p-2.5 bg-[#1C1C1E] border border-white/10 rounded-xl">
+                <img src="https://lh3.googleusercontent.com/aida/AEtjO1WCmy_gwguUOh4d8PmdioCm4X1F5QCUk34eHxlBDTZclV7ncx9YvdSOCShpEYcP3IKH8OOIMxxjaUGXpWMNjCSF9dT4C0Qzmaeanjc2e3L8ECoYJ18JMjMcBv2Vman9y3Byb5LLIP25D6vnu8nOfR4NSdF4Zg1hASOjf_gk2CdwPSRnUepClVxEJf_MfbPM45b1j3UoyRvrL-xPgP5BJ5lbu1KIzFuPc8gcL6WmBq_1DHfDonW-OMgb2wz0" alt="Active Recipe" class="w-12 h-12 rounded-lg object-cover" />
+                <div class="flex-1 min-w-0">
+                  <div class="text-[9px] uppercase tracking-wider text-white/50 font-mono-spec">Active Recipe</div>
+                  <div class="text-xs font-bold text-white truncate">Honey Sesame Chicken</div>
+                </div>
+                <span class="material-symbols-outlined text-sm text-white/50">edit</span>
+              </div>
+
+              <!-- Input Fields Compact -->
+              <div class="space-y-1.5 text-xs">
+                <div>
+                  <label class="text-[10px] text-white/70 block mb-0.5 font-medium">Recipe Name</label>
+                  <div class="bg-[#1C1C1E] border border-white/10 rounded-lg px-3 py-1.5 text-white font-medium text-xs flex justify-between items-center">
+                    <span>Honey Sesame Chicken</span>
+                    <span class="material-symbols-outlined text-xs text-white/40">edit_note</span>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-[10px] text-white/70 block mb-0.5 font-medium">Prep Time</label>
+                    <div class="bg-[#1C1C1E] border border-white/10 rounded-lg px-3 py-1.5 text-white text-xs flex justify-between items-center">
+                      <span>10 min</span>
+                      <span class="material-symbols-outlined text-xs text-white/40">schedule</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="text-[10px] text-white/70 block mb-0.5 font-medium">Cook Time</label>
+                    <div class="bg-[#1C1C1E] border border-white/10 rounded-lg px-3 py-1.5 text-white text-xs flex justify-between items-center">
+                      <span>20 min</span>
+                      <span class="material-symbols-outlined text-xs text-white/40">timer</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="text-[10px] text-white/70 block mb-0.5 font-medium">Servings</label>
+                  <div class="bg-[#1C1C1E] border border-white/10 rounded-lg px-3 py-1.5 text-white text-xs flex justify-between items-center">
+                    <span>4</span>
+                    <span class="material-symbols-outlined text-xs text-white/40">group</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Delete CTA & Home Bar -->
+            <div class="p-3 border-t border-white/10 bg-black">
+              <div class="w-full py-2 rounded-xl border border-white/15 bg-[#1C1C1E] text-white/90 text-xs font-semibold flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-sm text-white/60">delete</span>
+                <span>Delete Recipe</span>
+              </div>
+              <div class="w-24 h-1 bg-white/20 rounded-full mx-auto mt-2.5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TARGET 2: SCREEN 3J - PRINT PREVIEW (BOTTOM RIGHT) -->
+        <div class="w-full flex flex-col items-center">
+          <div class="w-full flex items-center justify-between px-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-blue-500/20 border border-blue-500/40 text-blue-300 font-mono-spec text-xs font-bold">SCREEN 3J</span>
+              <span class="text-white/80 text-xs font-semibold">Print Preview Drawer</span>
+            </div>
+            <span class="text-[11px] font-mono-spec text-blue-400">TARGET 02 // MODAL SHEET</span>
+          </div>
+
+          <!-- Screen 3J Scaled Phone Shell -->
+          <div class="w-[360px] h-[480px] rounded-[36px] bg-black border-[5px] border-[#2c2c30] shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden relative flex flex-col justify-between select-none">
+            
+            <!-- Dimmed Background Layer -->
+            <div class="absolute inset-0 z-0 opacity-15">
+              <img src="https://lh3.googleusercontent.com/aida/AEtjO1WCmy_gwguUOh4d8PmdioCm4X1F5QCUk34eHxlBDTZclV7ncx9YvdSOCShpEYcP3IKH8OOIMxxjaUGXpWMNjCSF9dT4C0Qzmaeanjc2e3L8ECoYJ18JMjMcBv2Vman9y3Byb5LLIP25D6vnu8nOfR4NSdF4Zg1hASOjf_gk2CdwPSRnUepClVxEJf_MfbPM45b1j3UoyRvrL-xPgP5BJ5lbu1KIzFuPc8gcL6WmBq_1DHfDonW-OMgb2wz0" alt="Recipe background" class="w-full h-40 object-cover" />
+            </div>
+            <div class="absolute inset-0 bg-black/80 z-0"></div>
+
+            <!-- Fake Dismiss Backdrop / Scrim Touch Zone -->
+            <div class="relative z-10 pt-3 px-4 flex justify-between items-center text-white/40 text-[10px]">
+              <span>Tap backdrop to dismiss</span>
+              <span class="material-symbols-outlined text-sm">expand_more</span>
+            </div>
+
+            <!-- Modal Print Drawer Component -->
+            <div class="relative z-10 bg-[#1C1C1E] border-t border-white/15 rounded-t-[28px] p-4 shadow-2xl flex flex-col justify-between flex-1 mt-6">
+              <!-- Drag pill -->
+              <div class="w-8 h-1 bg-white/30 rounded-full mx-auto mb-2.5"></div>
+
+              <!-- Header -->
+              <div class="flex items-center justify-between pb-2 border-b border-white/10">
+                <span class="text-xs font-bold text-white">Print Options</span>
+                <span class="text-xs font-bold text-[#FF3B30] hover:underline cursor-pointer">Print</span>
+              </div>
+
+              <!-- Option Rows -->
+              <div class="py-2 space-y-1.5 text-xs text-white">
+                <div class="flex justify-between items-center py-1 border-b border-white/5">
+                  <span class="text-white/80 font-medium">Printer</span>
+                  <span class="text-white/50 text-[11px] flex items-center">Select Printer <span class="material-symbols-outlined text-xs">chevron_right</span></span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-white/5">
+                  <span class="text-white/80 font-medium">Copies</span>
+                  <div class="flex items-center gap-2 bg-black/60 px-2.5 py-0.5 rounded-full border border-white/10 text-xs font-mono-spec">
+                    <span class="text-[#FF3B30] font-bold cursor-pointer">-</span>
+                    <span>1</span>
+                    <span class="text-[#FF3B30] font-bold cursor-pointer">+</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center py-1">
+                  <span class="text-white/80 font-medium">Paper Size</span>
+                  <span class="text-white/50 text-[11px] flex items-center">A4 (Standard) <span class="material-symbols-outlined text-xs">chevron_right</span></span>
+                </div>
+              </div>
+
+              <!-- Document Preview Box -->
+              <div class="bg-white rounded-xl p-2.5 shadow-md flex items-center gap-3 text-black">
+                <img src="https://lh3.googleusercontent.com/aida/AEtjO1WCmy_gwguUOh4d8PmdioCm4X1F5QCUk34eHxlBDTZclV7ncx9YvdSOCShpEYcP3IKH8OOIMxxjaUGXpWMNjCSF9dT4C0Qzmaeanjc2e3L8ECoYJ18JMjMcBv2Vman9y3Byb5LLIP25D6vnu8nOfR4NSdF4Zg1hASOjf_gk2CdwPSRnUepClVxEJf_MfbPM45b1j3UoyRvrL-xPgP5BJ5lbu1KIzFuPc8gcL6WmBq_1DHfDonW-OMgb2wz0" alt="Print Doc" class="w-12 h-12 rounded object-cover border border-black/10" />
+                <div class="flex-1 min-w-0 text-[10px] leading-tight">
+                  <div class="font-bold uppercase tracking-wider text-[8px] text-orange-600">WOW FOOD RECIPES • VAULT</div>
+                  <div class="font-bold text-xs truncate">Honey Sesame Chicken</div>
+                  <div class="text-gray-600 text-[9px] mt-0.5">Prep: 10m • Cook: 20m • Serves: 4</div>
+                </div>
+                <div class="text-right font-mono-spec text-[9px] text-gray-500">Page 1/1</div>
+              </div>
+
+              <!-- Home bar -->
+              <div class="w-24 h-1 bg-white/20 rounded-full mx-auto mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Developer Technical Blueprint & Handoff Specifications -->
+    <footer class="mt-12 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 font-mono-spec text-xs">
+      
+      <!-- Tech Card 1: Trigger & Lifecycle -->
+      <div class="p-4 rounded-2xl bg-[#141416] border border-white/10">
+        <div class="flex items-center gap-2 text-blue-400 font-bold mb-2">
+          <span class="material-symbols-outlined text-sm">alt_route</span>
+          <span>TRIGGER &amp; EVENT LIFECYCLE</span>
+        </div>
+        <p class="text-white/70 leading-relaxed text-[11px]">
+          Tapping row item <code class="text-blue-300">"Edit recipe"</code> fires route <code class="text-blue-300">Navigator.pushNamed('/recipe/edit', recipe_id)</code> with slide-up 300ms transition. Tapping <code class="text-blue-300">"Print recipe"</code> mounts the modal bottom sheet controller with 60% alpha scrim.
+        </p>
+      </div>
+
+      <!-- Tech Card 2: Backstack & Dismissal Rules -->
+      <div class="p-4 rounded-2xl bg-[#141416] border border-white/10">
+        <div class="flex items-center gap-2 text-red-400 font-bold mb-2">
+          <span class="material-symbols-outlined text-sm">undo</span>
+          <span>BACKSTACK &amp; DISMISSAL RULES</span>
+        </div>
+        <p class="text-white/70 leading-relaxed text-[11px]">
+          Clicking top-left close ('X') icon on Screen 3I or tapping the dimmed scrim on Screen 3J invokes <code class="text-red-300">Navigator.pop()</code>, smoothly dropping back to the preserved Screen 3E baseline without state reconstruction.
+        </p>
+      </div>
+
+      <!-- Tech Card 3: Data Binding & Sync Contract -->
+      <div class="p-4 rounded-2xl bg-[#141416] border border-white/10">
+        <div class="flex items-center gap-2 text-emerald-400 font-bold mb-2">
+          <span class="material-symbols-outlined text-sm">sync_saved_locally</span>
+          <span>DATA BINDING &amp; SYNC CONTRACT</span>
+        </div>
+        <p class="text-white/70 leading-relaxed text-[11px]">
+          Screen 3I saves propagate updates to state store (<code class="text-emerald-300">dispatch(updateRecipe(id, payload))</code>) which synchronously re-renders ingredient amounts and nutritional metrics across Screen 3A, 3B, and 3C.
+        </p>
+      </div>
+
+    </footer>
+
+  </div>
+
+</body>
+</html>

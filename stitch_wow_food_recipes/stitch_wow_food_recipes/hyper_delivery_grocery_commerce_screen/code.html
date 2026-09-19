@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annapurna - Hyper-Delivery Logistics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"tertiary-fixed-dim": "#ffb4ac", "on-primary-container": "#653a00", "on-secondary-fixed": "#002107", background: "#131313", tertiary: "#ffbcb5", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "tertiary-container": "#ff9389", "surface-container-lowest": "#0e0e0e", error: "#ffb4ab", "on-error-container": "#ffdad6", "inverse-primary": "#8a5100", "surface-bright": "#393939", "on-tertiary-fixed-variant": "#93000d", "on-primary-fixed-variant": "#693c00", "on-tertiary-fixed": "#410002", "inverse-surface": "#e2e2e2", "secondary-container": "#00fe66", "tertiary-fixed": "#ffdad6", "primary-fixed": "#ffdcbd", "on-secondary-fixed-variant": "#00531b", "on-primary-fixed": "#2c1600", "surface-tint": "#ffb86f", "surface-container-low": "#1b1b1b", "inverse-on-surface": "#303030", "secondary-fixed": "#6bff83", "on-error": "#690005", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", "error-container": "#93000a", "on-surface-variant": "#dbc2ad", secondary: "#ebffe6", "surface-container": "#1f1f1f", "primary-container": "#ff9900", primary: "#ffc082", surface: "#131313", "outline-variant": "#554434", "on-primary": "#4a2800", "on-tertiary": "#690006", "surface-dim": "#131313", "on-tertiary-container": "#8d000c", "surface-container-highest": "#353535", "on-surface": "#e2e2e2", "on-background": "#e2e2e2", "surface-container-high": "#2a2a2a", outline: "#a38d7a", "on-secondary": "#003911"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", "stack-lg": "24px", "stack-md": "12px", "stack-sm": "4px", gutter: "16px", "container-margin": "24px"}, fontFamily: {"label-caps": ["Hanken Grotesk"], "body-sm": ["Hanken Grotesk"], "headline-lg": ["EB Garamond"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg-mobile": ["EB Garamond"], "title-md": ["Hanken Grotesk"]}, fontSize: {"label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}]}}}};</script>
+<style>
+        body {
+            background-color: #000000;
+        }
+        .glass-panel {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-amber-border {
+            border: 1px solid #ff9900;
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.3);
+        }
+        .neon-emerald-text {
+            color: #00fe66;
+            text-shadow: 0 0 8px rgba(0, 254, 102, 0.4);
+        }
+        .pulse-orange-border {
+            border: 1px solid #ff9900;
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 153, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
+        }
+        .bg-zepto { background-color: #ff0055; }
+        .bg-blinkit { background-color: #f8cb46; }
+        .bg-swiggy { background-color: #fc8019; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen flex flex-col relative pb-[90px] pt-[72px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-black/60 backdrop-blur-lg border-b border-white/10 flex justify-between items-center px-container-margin py-base z-50">
+<div class="flex items-center gap-4 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/30 relative">
+<img class="w-full h-full object-cover" data-alt="A hyper-realistic close-up of a glowing digital avatar with vibrant amber and emerald neon accents set against a pure obsidian background. The lighting highlights sharp, cinematic features in a futuristic culinary context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU97LK-CcyJqgn1wirgMXzf47iva-j_k0lGCvRs6klHmj7jiQP3CrpRnXXrcxPVWRL7K2pOfxYOSFoCblGBj-RVtC8kbVTpRateK0o2lnMtCoJxtlAFeYBk_SRcIEXXGXflhETcch01JKhAVu5BkOPYwdwZB5vEXYDWhOvvcfdkVujkJsXX-qWE1MLkK-J7UTqmUQOkct92C2RlU-G_uXhL3YoKUsztOu8iQNWZPf4IveMFrdCUglzqw"/>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile lowercase text-on-surface">annapurna</span>
+</div>
+<div class="hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary-container text-2xl">notifications</span>
+</div>
+</header>
+<!-- Header / Title -->
+<div class="px-container-margin pt-stack-lg pb-stack-md">
+<h1 class="font-display-lg text-display-lg text-on-surface uppercase tracking-widest drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] text-center">
+            INSTANT LOGISTICS MATRIX
+        </h1>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-container-margin flex flex-col gap-stack-lg max-w-[1280px] mx-auto w-full">
+<!-- Ingredients Section -->
+<section class="glass-panel rounded-[24px] neon-amber-border p-6 flex flex-col gap-stack-md">
+<h2 class="font-title-md text-title-md neon-emerald-text uppercase tracking-widest text-center mb-2">
+                • Ingredients for Premium Shahi Paneer •
+            </h2>
+<div class="grid gap-stack-md">
+<!-- Item 1 -->
+<div class="flex justify-between items-center bg-white/5 rounded-xl p-4 border border-white/5">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A cinematic macro shot of fresh, premium cubes of paneer resting on a dark slate board. Soft, directional light highlights the creamy texture against a deep absolute black background with faint amber neon reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAl0XrIFYneqftYHLOjBwDEqIzlzIP3AUNQduqazFEG8E5sAf5fTp5ZAYZVZEOQENOw7e8wYuRGRAo8xee3YdRNZ-rFiSIZctMG4mFi7JHQMnOkdRSC6UnHkdNTgl_qiMl4QmXa1f5Jbnd-HbYq-XejHFj_5UZjbjeDxbF3W-QnVIabzZRDdbidn2MgmTQ4eV0crha0WwvF8cFaOng_rIDZCDUQOpK8w2WnSB5GyMAg2jz2omSEYDOeA"/>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Premium Malai Paneer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">250g • Daily Fresh</p>
+</div>
+</div>
+<div class="flex items-center bg-black/40 rounded-full border border-white/20 p-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-8 text-center font-label-caps text-label-caps text-on-surface">1</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-primary-container transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex justify-between items-center bg-white/5 rounded-xl p-4 border border-white/5">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A moody, high-contrast close-up of premium whole cashews scattered gracefully on a matte black surface. dramatic rim lighting catches the curves of the nuts, evoking a sense of late-night luxury and pure culinary quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1pEvyDen_tRqLcTNINE7R-Qvxbd7qmVCSTDVcGEClukt7rvTmJrbn39LNnzueFP9_HRcwFbJrj1SvDB4ypbCuTVNf3P2EM9CUbRIoW-A9QGJk9sIxfwq7ahq7lOOP6ww40xH6C3dPx0O3t0tO5T1FnWqZOcXIF12ouRT3oqBiZ1ZP_dVqedMyuvumpmJQzj6Z0-wtaYCJN9DX9QdjIiSMFFem8UrG__WSCGQogiKYHXXhgaz5zmS5zw"/>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Whole Cashews (Kaju)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">100g • W320 Grade</p>
+</div>
+</div>
+<div class="flex items-center bg-black/40 rounded-full border border-white/20 p-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-sm">remove</span></button>
+<span class="w-8 text-center font-label-caps text-label-caps text-on-surface">1</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-primary-container transition-colors"><span class="material-symbols-outlined text-sm">add</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Hyper-Delivery Core Card -->
+<section class="glass-panel rounded-[24px] pulse-orange-border p-6 flex flex-col gap-stack-lg relative overflow-hidden">
+<!-- Background Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-[radial-gradient(ellipse_at_center,_rgba(255,153,0,0.1)_0%,_transparent_70%)] pointer-events-none"></div>
+<div class="flex justify-between items-center relative z-10">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary-container font-bold">LOGISTICS ROUTING</h2>
+<span class="material-symbols-outlined text-primary-container animate-pulse">speed</span>
+</div>
+<!-- Shader Animation Container -->
+<div class="w-full h-12 relative rounded-lg overflow-hidden border border-white/10 z-10 bg-black/40">
+</div>
+<!-- Route Modules -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md relative z-10">
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center gap-2 border-white/20 hover:border-white/40 transition-colors cursor-pointer">
+<div class="w-3 h-3 rounded-full bg-zepto mb-1"></div>
+<span class="font-label-caps text-label-caps text-on-surface uppercase text-center">Route via ZEPTO</span>
+<span class="font-title-md text-title-md text-on-surface-variant">8 min</span>
+</div>
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center gap-2 border-primary-container bg-primary-container/10 cursor-pointer">
+<div class="w-3 h-3 rounded-full bg-blinkit mb-1 shadow-[0_0_8px_#f8cb46]"></div>
+<span class="font-label-caps text-label-caps text-primary-container uppercase text-center">Route via BLINKIT</span>
+<span class="font-title-md text-title-md text-primary-container font-bold">6 min</span>
+</div>
+<div class="glass-panel rounded-xl p-4 flex flex-col items-center gap-2 border-white/20 hover:border-white/40 transition-colors cursor-pointer">
+<div class="w-3 h-3 rounded-full bg-swiggy mb-1"></div>
+<span class="font-label-caps text-label-caps text-on-surface uppercase text-center">Route via SWIGGY</span>
+<span class="font-title-md text-title-md text-on-surface-variant">11 min</span>
+</div>
+</div>
+</section>
+<!-- Action Button -->
+<div class="pt-4 pb-stack-lg">
+<button class="w-full bg-primary-container text-black font-label-caps text-label-caps py-4 rounded-xl uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all duration-200 shadow-[0_0_20px_rgba(255,153,0,0.4)] border border-[#ff9900] flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                LAUNCH 10-MINUTE INSTAMART DELIVERY
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-black/60 backdrop-blur-lg border-t border-white/10 rounded-t-xl md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl mb-1">home</span>
+<span class="font-label-caps text-[10px] uppercase">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl mb-1">search</span>
+<span class="font-label-caps text-[10px] uppercase">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl mb-1">favorite</span>
+<span class="font-label-caps text-[10px] uppercase">Favorites</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary-container drop-shadow-[0_0_8px_rgba(255,153,0,0.6)] active:scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-label-caps text-[10px] uppercase">My Kitchen</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl mb-1">person</span>
+<span class="font-label-caps text-[10px] uppercase">Profile</span>
+</div>
+</nav>
+</body></html>

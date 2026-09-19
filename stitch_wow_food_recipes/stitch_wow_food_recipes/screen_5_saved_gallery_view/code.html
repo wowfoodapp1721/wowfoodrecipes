@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Screen - 5 - Saved Gallery View</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script>tailwind.config = {theme: {extend: {colors: {brand: {orange: "#FF6D00", amber: "#FF9900", gold: "#FFA000"}, surface: "#131313", "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Inter\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .text-glow {
+      text-shadow: 0 0 12px rgba(255, 109, 0, 0.45);
+    }
+    .chip-glow {
+      box-shadow: 0 0 16px rgba(255, 109, 0, 0.35);
+    }
+    .bottom-nav-blur {
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen flex flex-col justify-between max-w-md mx-auto relative overflow-x-hidden border-x border-zinc-900/50">
+<!-- Top Status Bar & Header Container -->
+<header class="sticky top-0 z-40 bg-black/95 backdrop-blur-md pt-3 pb-2 px-5 border-b border-zinc-900/60">
+<!-- Smartphone Top Status Bar Mockup -->
+<div class="flex items-center justify-between text-xs text-zinc-400 font-medium mb-3 px-1">
+<span>9:41</span>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[15px] leading-none">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px] leading-none">wifi</span>
+<span class="material-symbols-outlined text-[17px] leading-none">battery_full</span>
+</div>
+</div>
+<!-- Header Title & Action Icons -->
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<h1 class="text-xl font-bold tracking-wider text-white uppercase font-sans">
+          Saved Recipes
+        </h1>
+<span class="text-xs bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded-full font-medium">18</span>
+</div>
+<div class="flex items-center space-x-3 text-white">
+<button aria-label="Search" class="w-9 h-9 rounded-full bg-zinc-900/80 hover:bg-zinc-800 flex items-center justify-center transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button aria-label="Filter" class="w-9 h-9 rounded-full bg-zinc-900/80 hover:bg-zinc-800 flex items-center justify-center transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Category Filter Chips -->
+<div class="flex items-center space-x-2.5 overflow-x-auto no-scrollbar py-1">
+<!-- Active Chip: All -->
+<button class="px-5 py-2 rounded-full bg-[#FF6D00] text-white font-semibold text-xs whitespace-nowrap chip-glow transition-transform active:scale-95">
+        All
+      </button>
+<!-- Inactive Chips -->
+<button class="px-4 py-2 rounded-full bg-[#1C1C1E] text-zinc-300 hover:text-white hover:bg-zinc-800 font-medium text-xs whitespace-nowrap transition-colors active:scale-95 border border-white/5">
+        High-Protein
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#1C1C1E] text-zinc-300 hover:text-white hover:bg-zinc-800 font-medium text-xs whitespace-nowrap transition-colors active:scale-95 border border-white/5">
+        Quick Prep
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#1C1C1E] text-zinc-300 hover:text-white hover:bg-zinc-800 font-medium text-xs whitespace-nowrap transition-colors active:scale-95 border border-white/5">
+        Desserts
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#1C1C1E] text-zinc-300 hover:text-white hover:bg-zinc-800 font-medium text-xs whitespace-nowrap transition-colors active:scale-95 border border-white/5">
+        Low-Carb
+      </button>
+</div>
+</header>
+<!-- Main Viewport: Dual-Column Recipe Gallery Grid -->
+<main class="flex-1 px-4 pt-4 pb-28">
+<div class="grid grid-cols-2 gap-3.5">
+<!-- Card 1: Artisanal Pizza -->
+<div class="bg-[#121212] rounded-2xl overflow-hidden border border-zinc-800/80 flex flex-col group hover:border-zinc-700 transition-all duration-300 shadow-lg">
+<div class="relative w-full aspect-square overflow-hidden bg-zinc-950 flex items-center justify-center">
+<img alt="Artisanal Pizza" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1Ugor7Waa5EhsprwG9b57zye1qT_MdtFm8MzAjdUKSg_fokgBrFmlrcmRtO_EMeZDBYE5z6XL3ZkIN3NFUk9oiSqa5jaUZdMM7a1la4YrPnk-HOwNv4JXD5qTy81hHWKJt3D7sUxVCI1Qh3CX8-6zUZgWd6SqLYbMRB4WDki7pedVg7hxI_DjZqU97XyHt6JVMAiqwDQzOaZV1dHhTWMK82po-0RO6sSDWePwfCdFqMQ1K7endR7Ic8nWCE"/>
+<!-- Heart Button Overlay -->
+<button class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px] text-[#FF6D00] fill-current" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-2 left-2">
+<span class="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+              VEG
+            </span>
+</div>
+</div>
+<div class="p-3 flex-1 flex flex-col justify-between">
+<div>
+<h2 class="text-sm font-semibold text-white tracking-wide truncate group-hover:text-amber-400 transition-colors">
+              Artisanal Pizza
+            </h2>
+<p class="text-[11px] text-zinc-400 font-serif italic line-clamp-1 mt-0.5">
+              Woodfired Neapolitan crust
+            </p>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2 border-t border-zinc-800/60 text-[11px] text-zinc-400">
+<span class="flex items-center gap-1 font-medium">
+<span>⏱️</span>
+<span>25 Mins</span>
+</span>
+<span class="text-[10px] text-amber-500 font-semibold flex items-center">
+              ★ 4.9
+            </span>
+</div>
+</div>
+</div>
+<!-- Card 2: Honey Sesame Chicken -->
+<div class="bg-[#121212] rounded-2xl overflow-hidden border border-zinc-800/80 flex flex-col group hover:border-zinc-700 transition-all duration-300 shadow-lg">
+<div class="relative w-full aspect-square overflow-hidden bg-zinc-950 flex items-center justify-center">
+<img alt="Honey Sesame Chicken" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1W8Hy-e4FbK_ikCA4tfAh8zDdUee3Y4dFMuh0Gatc-IotDo2wuCUtzwZIFtY2qdLWQHeIp19iR1XEj1BkX-ZF5VZWOlg14c-JFztpmkPFn2fXULYuy1BQA1yNomfN5cTdvi9X7hKlDisUffZbl6R0Rakr3gDfo0kLLXsCfAlMpyehZJhuYEVhJI_82uFcT8s7fkCHwzp8fb2TwkzNpUyFeUQHI1BAjrnRDTmr1s_kWAwk8pKsMFXYH4tGzd"/>
+<!-- Heart Button Overlay -->
+<button class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px] text-[#FF6D00] fill-current" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-2 left-2">
+<span class="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-semibold text-orange-400 border border-orange-500/20">
+              CHEF PICK
+            </span>
+</div>
+</div>
+<div class="p-3 flex-1 flex flex-col justify-between">
+<div>
+<h2 class="text-sm font-semibold text-white tracking-wide truncate group-hover:text-amber-400 transition-colors">
+              Honey Sesame Chicken
+            </h2>
+<p class="text-[11px] text-zinc-400 font-serif italic line-clamp-1 mt-0.5">
+              Sweet amber glossy glaze
+            </p>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2 border-t border-zinc-800/60 text-[11px] text-zinc-400">
+<span class="flex items-center gap-1 font-medium">
+<span>⏱️</span>
+<span>20 Mins</span>
+</span>
+<span class="text-[10px] text-amber-500 font-semibold flex items-center">
+              ★ 4.9
+            </span>
+</div>
+</div>
+</div>
+<!-- Card 3: Healthy Greens -->
+<div class="bg-[#121212] rounded-2xl overflow-hidden border border-zinc-800/80 flex flex-col group hover:border-zinc-700 transition-all duration-300 shadow-lg">
+<div class="relative w-full aspect-square overflow-hidden bg-zinc-950 flex items-center justify-center">
+<img alt="Healthy Greens" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1Uoivs4QxgxN45iu-xxvv6wTtn6VBBIJXXXRyCeBUd47QS1KUtFbKAP8yDXFmV-LqQYWydjtXE9KFDy8mY9U46MPBvIj62gbT0si7Lf61CjA3lSEx8f0qizHNBpee7o6Pl8yzAXXp58rFJ6vQJDtGs6GsDmQ1u9cOlpDq6fCULtlmfq9k3LwnhivNcOuZEtw4L2emCWgooYR8L7acGlAwzrtqU0dEp0CiSHhjr7pzsqq52RrrVJXOKo3bRz"/>
+<!-- Heart Button Overlay -->
+<button class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px] text-[#FF6D00] fill-current" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-2 left-2">
+<span class="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+              VEG
+            </span>
+</div>
+</div>
+<div class="p-3 flex-1 flex flex-col justify-between">
+<div>
+<h2 class="text-sm font-semibold text-white tracking-wide truncate group-hover:text-amber-400 transition-colors">
+              Healthy Greens
+            </h2>
+<p class="text-[11px] text-zinc-400 font-serif italic line-clamp-1 mt-0.5">
+              Fresh avocado &amp; spinach bowl
+            </p>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2 border-t border-zinc-800/60 text-[11px] text-zinc-400">
+<span class="flex items-center gap-1 font-medium">
+<span>⏱️</span>
+<span>15 Mins</span>
+</span>
+<span class="text-[10px] text-amber-500 font-semibold flex items-center">
+              ★ 4.8
+            </span>
+</div>
+</div>
+</div>
+<!-- Card 4: Dal Makhani Velvet -->
+<div class="bg-[#121212] rounded-2xl overflow-hidden border border-zinc-800/80 flex flex-col group hover:border-zinc-700 transition-all duration-300 shadow-lg">
+<div class="relative w-full aspect-square overflow-hidden bg-zinc-950 flex items-center justify-center">
+<img alt="Dal Makhani Velvet" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out" src="https://lh3.googleusercontent.com/aida/AEtjO1WRIIENNN0TmGj3WabOkWAalWgz3vbVA9OGa4JIwRz6HebVpOBrxLOLVlVZMNW8qfkooSOr_gpassKp4D_pq8o08v7Q3KxPgX6JC2Dizg24yXJy49XICccTZ3L1SdgLlQu3E-jeATqXtsqby7VdhUzMxMmXzLvRwYfqeS5Rds4BLU1J0z8EfvWm3a6ZVU82o6IoN-GJwUqcbBgj7EHtILuXGHGNri6isA2SGrOygy26nEl6QiardGoJYOxU"/>
+<!-- Heart Button Overlay -->
+<button class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-md active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[16px] text-[#FF6D00] fill-current" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-2 left-2">
+<span class="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+              VEG
+            </span>
+</div>
+</div>
+<div class="p-3 flex-1 flex flex-col justify-between">
+<div>
+<h2 class="text-sm font-semibold text-white tracking-wide truncate group-hover:text-amber-400 transition-colors">
+              Dal Makhani
+            </h2>
+<p class="text-[11px] text-zinc-400 font-serif italic line-clamp-1 mt-0.5">
+              Slow-simmered black lentils
+            </p>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2 border-t border-zinc-800/60 text-[11px] text-zinc-400">
+<span class="flex items-center gap-1 font-medium">
+<span>⏱️</span>
+<span>45 Mins</span>
+</span>
+<span class="text-[10px] text-amber-500 font-semibold flex items-center">
+              ★ 4.9
+            </span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Global Mobile Bottom Navigation Bar (Persistent Dock) -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bottom-nav-blur border-t border-zinc-800/80 z-50 px-6 py-2 pb-5">
+<div class="flex items-center justify-between">
+<!-- Home Tab (Muted Gray) -->
+<button class="flex flex-col items-center justify-center text-zinc-500 hover:text-zinc-300 transition-colors group">
+<span class="material-symbols-outlined text-[23px] group-active:scale-90 transition-transform">home</span>
+<span class="text-[10px] font-medium mt-0.5 tracking-wide">Home</span>
+</button>
+<!-- Planner Tab (Muted Gray) -->
+<button class="flex flex-col items-center justify-center text-zinc-500 hover:text-zinc-300 transition-colors group">
+<span class="material-symbols-outlined text-[23px] group-active:scale-90 transition-transform">calendar_month</span>
+<span class="text-[10px] font-medium mt-0.5 tracking-wide">Planner</span>
+</button>
+<!-- Bookmark / Saved Tab (Active Vibrant Brand Orange) -->
+<button class="flex flex-col items-center justify-center text-[#FF6D00] relative group">
+<div class="relative">
+<span class="material-symbols-outlined text-[24px] fill-current drop-shadow-[0_0_8px_rgba(255,109,0,0.6)]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</div>
+<span class="text-[10px] font-bold mt-0.5 tracking-wide text-glow">Saved</span>
+<!-- Active glow underline indicator -->
+<div class="w-3 h-0.5 bg-[#FF6D00] rounded-full mt-0.5"></div>
+</button>
+<!-- List / Grocery Tab (Muted Gray) -->
+<button class="flex flex-col items-center justify-center text-zinc-500 hover:text-zinc-300 transition-colors group">
+<span class="material-symbols-outlined text-[23px] group-active:scale-90 transition-transform">shopping_cart</span>
+<span class="text-[10px] font-medium mt-0.5 tracking-wide">Lists</span>
+</button>
+</div>
+</nav>
+</body></html>

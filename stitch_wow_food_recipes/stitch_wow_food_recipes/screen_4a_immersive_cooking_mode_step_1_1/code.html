@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Immersive Cooking Mode - Wow Food Recipes</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-styles">
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-neutral-950 p-0 m-0">
+<!-- BEGIN: MobileDeviceFrame -->
+<!-- Simulating iOS Mobile Viewport: 393px x 852px -->
+<div class="relative w-[393px] h-[852px] bg-black text-white flex flex-col justify-between overflow-hidden shadow-2xl border border-neutral-800 rounded-none sm:rounded-[40px]">
+<!-- BEGIN: MainHeader -->
+<header class="w-full pt-12 pb-3 px-4 flex flex-col bg-black z-10 flex-shrink-0" data-purpose="top-navigation">
+<div class="flex items-center justify-between w-full mb-3">
+<!-- Close Button -->
+<button aria-label="Close cooking mode" class="w-8 h-8 flex items-center justify-center rounded-full bg-neutral-900 text-white hover:bg-neutral-800 transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Pill Badge Recipe Title -->
+<div class="px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/60 text-[11px] font-medium tracking-wider text-neutral-300 uppercase">
+          HONEY SESAME CHICKEN
+        </div>
+<!-- Step Indicator Label -->
+<div class="text-xs font-medium text-neutral-400">
+          STEP 1/4
+        </div>
+</div>
+<!-- Progress Bar (25% filled) -->
+<div class="w-full h-1 bg-neutral-800 rounded-full overflow-hidden">
+<div class="h-full bg-[#FF3B30] w-1/4 rounded-full"></div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto no-scrollbar px-4 py-2 flex flex-col space-y-4" data-purpose="step-content">
+<!-- Metadata Row: Step Badge, Time, and Save Icon -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<!-- Step 1 Red Badge -->
+<span class="px-2.5 py-1 bg-[#FF3B30] text-white text-xs font-bold rounded-md">
+            STEP 1
+          </span>
+<!-- Time Indicator -->
+<div class="flex items-center space-x-1 text-neutral-400 text-xs">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">10 mins</span>
+</div>
+</div>
+<!-- Favorite / Save Icon -->
+<button aria-label="Save step" class="text-neutral-400 hover:text-[#FF3B30] transition">
+<svg class="w-5 h-5 text-[#FF3B30]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="flex items-center space-x-1.5 px-2.5 py-1 border border-[#FF3B30] rounded-md text-xs font-bold text-[#FF3B30] bg-black"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">VOICE</span></div></div>
+<!-- Heading -->
+<h1 class="text-xl font-bold text-white tracking-tight">
+        1. Prep &amp; Coat the Chicken
+      </h1>
+<!-- Description Paragraph with CRITICAL highlight formatting -->
+<p class="text-sm text-neutral-300 leading-[1.5]">
+        Cut <span class="text-[#FF3B30] font-bold">4 boneless skinless chicken breasts</span> into 1-inch bite-sized cubes. Season generously with salt and pepper, then toss the chicken cubes thoroughly in a bowl with <span class="text-[#FF3B30] font-bold">cornstarch</span> until every piece is tightly and evenly coated.
+      </p>
+<!-- Step Image Component -->
+<!-- This container holds the recipe step visual reference -->
+<div class="w-full h-[210px] rounded-[12px] overflow-hidden bg-neutral-900 flex-shrink-0" data-purpose="step-image-container">
+<img alt="Dicing and seasoning chicken" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOL89qig7rQRsqqatwDXW9cAQt_wnIQffDHiZ6zfsdq1qoEOdmDBe9M4gb74-V15aPzAtjKSpLA9izUgYrHlgJNm1mWh2VUCYSHv-XeEubJ05vM89YGvJI5axy4pMv2BzM4eDyJm-flHxcUN9-NLy2OhxZ0Ir6co1KEra5seg-MbmKqSgHhcugN_40JRb5igXVlXhENMxqTwrAiyYHrBwElxuRla2qGBT7f96zB3I4G7EjvCClb9N34N_ANaIrR2DZk_o">
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: FooterInteractionBar -->
+<footer class="w-full p-4 pb-8 bg-black flex items-center justify-between space-x-3 flex-shrink-0 z-10" data-purpose="footer-action-bar">
+<!-- Previous Button -->
+<button class="flex-1 py-3.5 px-4 rounded-xl bg-neutral-900 text-neutral-400 font-medium text-sm hover:bg-neutral-800 transition text-center" disabled="">
+        Previous
+      </button>
+<!-- Next Action Button -->
+<button class="flex-1 py-3.5 px-4 rounded-xl bg-[#FF3B30] text-white font-semibold text-sm hover:bg-red-700 transition text-center shadow-lg shadow-red-900/20">
+        Next &gt;
+      </button>
+</footer>
+<!-- END: FooterInteractionBar -->
+</div>
+<!-- END: MobileDeviceFrame -->
+
+
+</body></html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Culinary App Onboarding</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>tailwind.config = {theme: {extend: {fontFamily: {sans: ["-apple-system", "BlinkMacSystemFont", "\"SF Pro Display\"", "\"SF Pro Text\"", "Roboto", "Helvetica", "Arial", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "headline-lg": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, colors: {brand: {orange: "#F15412", coral: "#FF5722"}, "surface-container-lowest": "#0e0e0e", "on-secondary-fixed": "#002107", background: "#131313", "primary-container": "#ff9900", primary: "#ffc082", "on-surface-variant": "#dbc2ad", "inverse-on-surface": "#303030", "surface-tint": "#ffb86f", "primary-fixed-dim": "#ffb86f", secondary: "#ebffe6", "error-container": "#93000a", "on-surface": "#e2e2e2", "on-tertiary": "#690006", "on-background": "#e2e2e2", "on-primary-fixed": "#2c1600", error: "#ffb4ab", "primary-fixed": "#ffdcbd", "surface-bright": "#393939", "on-primary-container": "#653a00", "secondary-fixed": "#6bff83", "inverse-primary": "#8a5100", surface: "#131313", "inverse-surface": "#e2e2e2", "tertiary-fixed": "#ffdad6", "on-primary": "#4a2800", "surface-container-high": "#2a2a2a", "on-secondary-container": "#007128", "surface-dim": "#131313", "surface-container-highest": "#353535", "on-primary-fixed-variant": "#693c00", "on-tertiary-fixed-variant": "#93000d", tertiary: "#ffbcb5", "surface-container": "#1f1f1f", outline: "#a38d7a", "on-error-container": "#ffdad6", "on-secondary-fixed-variant": "#00531b", "on-tertiary-container": "#8d000c", "secondary-fixed-dim": "#00e55b", "on-secondary": "#003911", "tertiary-fixed-dim": "#ffb4ac", "on-tertiary-fixed": "#410002", "surface-variant": "#353535", "surface-container-low": "#1b1b1b", "on-error": "#690005", "outline-variant": "#554434", "secondary-container": "#00fe66", "tertiary-container": "#ff9389"}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "container-margin": "24px", base: "8px", "stack-lg": "24px", "stack-sm": "4px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<!-- Typography & Layout Styles -->
+<style data-purpose="custom-styling">
+    /* Custom gradient overlay to blend image into deep pitch black */
+    .hero-mask {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.05) 30%,
+        rgba(0, 0, 0, 0.5) 55%,
+        rgba(0, 0, 0, 0.95) 75%,
+        #000000 92%,
+        #000000 100%
+      );
+    }
+    
+    /* Inline badge styling for micro meal previews */
+    .badge-ring {
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25), 0 6px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Subtle glow on button */
+    .btn-glow {
+      box-shadow: 0 8px 24px -4px rgba(241, 84, 18, 0.45);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-white font-sans antialiased min-h-screen flex items-center justify-center p-0 m-0 select-none">
+<!-- BEGIN: MobileDeviceFrame -->
+<main class="relative w-full max-w-[390px] h-[844px] max-h-screen bg-black overflow-hidden flex flex-col justify-between shadow-2xl">
+<!-- BEGIN: BackgroundHeroSection -->
+<div class="absolute inset-0 z-0 pointer-events-none" data-purpose="background-visual">
+<!-- High heat wok stir-fry background -->
+<img alt="Sizzling wok with vibrant vegetables and flying spices" class="w-full h-[62%] object-cover object-center transform scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ5VUCV7gyqtakJfwcGHtx4JMCXk8fQMcOIV8JSjZPYGXBNx-l9vh68EUkGSyLQpWTvVWsqRSbcLBkzvinfUQS9ek8P3y5Mq80Ck9-DiulQ8u1iQF2cAXIo_-8d6wuR2KqXVwD71KUb4wZFRaifLz5Wd1eM2f-B_3JYTW7Z9_UWUy5Q-aVKZ84OYrPBXjm6T_PQ7n4XpHa37ObJm-qJA__M3gtKNqWlj1qtWFssS5lHxFPgN8RMNqHBg"/>
+<!-- Bottom gradient fade into solid black -->
+<div class="absolute inset-0 hero-mask"></div>
+</div>
+<!-- END: BackgroundHeroSection -->
+<!-- BEGIN: TopStatusBar -->
+<header class="relative z-20 pt-3 px-7 flex justify-between items-center text-white" data-purpose="ios-status-bar">
+<!-- Time -->
+<span class="text-[15px] font-semibold tracking-tight">9:41</span>
+<!-- iOS Status Icons -->
+<div class="flex items-center space-x-1.5 opacity-95">
+<!-- Cellular Signal Icon -->
+<svg aria-label="Cellular signal" class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M2 17h2.5v3H2v-3zm5-4h2.5v7H7v-7zm5-4h2.5v11H12V9zm5-4h2.5v15H17V5z"></path>
+</svg>
+<!-- Wifi Icon -->
+<svg aria-label="Wi-Fi" class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98A17.93 17.93 0 0012 4zm0 3.5c3.55 0 6.8 1.41 9.17 3.73L12 18.52 2.83 11.23C5.2 8.91 8.45 7.5 12 7.5z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="flex items-center">
+<div class="w-5 h-2.5 border border-white rounded-[4px] p-0.5 flex items-center">
+<div class="h-full w-full bg-white rounded-sm"></div>
+</div>
+<div class="w-[1.5px] h-1 bg-white rounded-r-sm -ml-[0.5px]"></div>
+</div>
+</div>
+</header><div class="absolute top-[54px] left-0 right-0 z-20 flex justify-center items-center select-none pointer-events-none"><div class="flex flex-col items-center justify-center"><img alt="Logo mark" class="w-8 h-8 object-contain mb-3" src="https://lh3.googleusercontent.com/aida/AEtjO1Um8ELT2vNjisTQ4lhkpCFRXktXB5RAT0OaW0ynQ4YAC93mvoQI77YYFBzDbbFWQA6we-slzjpxmczpFN_TPAxsri-9FS2MYsoLuEipb1QT8EtDjLOtqp7n1r8n4U6BqNun7epiISj6jEmI_i0aOB9Ace3urUvwY-kev4e_FxAY3yWQxhnGDtasE4zXU1fsgMJQ4-AQkxzx4R4RElDWrQ0UaxenwjBUPexBctJuiYbwzj49ZIPH2Yx5hAYq"/><h1 class="text-[30px] font-black lowercase tracking-tight leading-none" style="font-family: 'EB Garamond', Georgia, serif;"><span class="" style="color: #FF4500;">anna</span><span class="" style="color: #FFFFFF;">purna</span></h1></div></div>
+<!-- END: TopStatusBar -->
+<!-- BEGIN: ContentArea -->
+<div class="relative z-10 px-7 pb-10 flex flex-col justify-end flex-1" data-purpose="onboarding-copy-action"><!-- Typography & Headline with Inset Meal Avatars -->
+<div class="mb-6 space-y-1.5">
+<!-- Headline Line 1: "Let's cook" + Wok badge -->
+<div class="flex items-center gap-3">
+<h1 class="text-[38px] leading-[48px] font-extrabold text-white tracking-tight">
+      Let’s cook
+    </h1>
+<!-- Circular Dish Badge 1: Chef with wok / noodles -->
+<div class="relative w-14 h-14 rounded-full overflow-hidden badge-ring shrink-0 bg-neutral-800">
+<img alt="Chef tossing savory noodles in wok" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCakjG9xxOOHDzLZMsj_5dOokSYsc_hCnphPqEhr5gL-RW14iev7pczxohZI-IalRbfSwc2YzPb-ilG68UImgtFZ4_gIjSD_iaQ-Crc_IM0J1lwxYHOZ1Yuj5fBXHVBCJ0i83br07E3K2wU3Hg7Ur2cRutY_sO5Q24YLsXCSrEJiVGZgu1uG8uIqaHGA_tVSUSpppY35ZFQ1d5gXE9CjBuuvDVn0QMEq_aqsfJ7XykFl2e7uPNp381l9g"/>
+</div>
+</div>
+<!-- Headline Line 2: Salad badge + "something" -->
+<div class="flex items-center gap-3">
+<!-- Circular Dish Badge 2: Fresh vibrant salad bowl -->
+<div class="relative w-[52px] h-[52px] rounded-full overflow-hidden badge-ring shrink-0 bg-neutral-800">
+<img alt="Healthy salad bowl with salmon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANMW1nuq8ebztceivm2sRbA2vO-Y0vnP7penI1xpivOvhpDcGok8a9J4aJublVSA6zXCr-gNyiwXWEWbV8btgw2JO5vi7qpcTUQVLnaLcf7F3mde5gkppHe-VP89Z1mHehZ3BsiwU-6MVi4p0RaxJ9yMnq3IgwY4D16tPJ72XV3p4BHIx-oEXnu8c3hQvQx0Wf_Oa2_FwSihDfjjeyL75s01LDw-ygKH0zMp3I5VYDEqPoqYGo3fu4eg"/>
+</div>
+<h2 class="text-[38px] leading-[48px] font-extrabold text-white tracking-tight">
+      something
+    </h2>
+</div>
+<!-- Headline Line 3: "amazing!" -->
+<div>
+<h2 class="text-[38px] leading-[48px] font-extrabold text-white tracking-tight">
+      amazing!
+    </h2>
+</div>
+<!-- Subtitle Description in #8A8A8F -->
+<p class="pt-2 text-[15.5px] leading-relaxed text-[#8A8A8F] max-w-[280px] font-normal">
+    Cook fresh meals every day and enjoy healthy, delicious living
+  </p>
+</div>
+<!-- BEGIN: CallToAction -->
+<div class="pt-4" data-purpose="interactive-action-container">
+<!-- Accent Trigger Button (CTA): Rich energetic orange-red #FF4500, h-[64px], rounded-full -->
+<button aria-label="Start cooking now" class="group w-full h-[64px] bg-[#FF4500] rounded-full p-1.5 flex items-center justify-between transition-all duration-300 active:scale-[0.98] shadow-lg shadow-[#FF4500]/30 focus:outline-none" type="button">
+<!-- Left Label: 18px crisp bold white sans-serif -->
+<span class="pl-8 text-[18px] font-bold text-white tracking-normal group-hover:translate-x-1 transition-transform">
+      Let's Cooking
+    </span>
+<!-- Right Circular White Slot Plate -->
+<div class="w-[52px] h-[52px] rounded-full bg-white flex items-center justify-center shadow-md transition-transform group-hover:scale-105 shrink-0">
+<!-- Orange steaming bowl with chopsticks icon -->
+<svg class="w-6 h-6 text-[#FF4500]" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.5 3c-.4 0-.8.3-.8.7 0 .8.5 1.5.5 2.1 0 .6-.4 1.2-.4 1.7 0 .4.4.8.8.8s.8-.3.8-.7c0-.8-.5-1.5-.5-2.1 0-.6.4-1.2.4-1.7 0-.5-.4-.9-.8-.9zm4 0c-.4 0-.8.3-.8.7 0 .8.5 1.5.5 2.1 0 .6-.4 1.2-.4 1.7 0 .4.4.8.8.8s.8-.3.8-.7c0-.8-.5-1.5-.5-2.1 0-.6.4-1.2.4-1.7 0-.5-.4-.9-.8-.9z" opacity="0.8"></path>
+<path d="M18.8 4.2a.75.75 0 00-1-.4l-6.3 3.1 1.2.8 5.7-2.8a.75.75 0 00.4-.7z"></path>
+<path d="M4 11.5c0 4.14 3.36 7.5 7.5 7.5s7.5-3.36 7.5-7.5H4zm4 8.5h7a1 1 0 010 2H8a1 1 0 010-2z"></path>
+</svg>
+</div>
+</button>
+</div>
+<!-- END: CallToAction -->
+<!-- iOS Home Indicator -->
+<div aria-hidden="true" class="w-full flex justify-center pt-6 pb-0">
+<div class="w-32 h-1 bg-white/20 rounded-full"></div>
+</div></div>
+<!-- END: ContentArea -->
+</main>
+<!-- END: MobileDeviceFrame -->
+</body></html>

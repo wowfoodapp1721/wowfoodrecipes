@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="wow Food Recipes — Immersive Dynamic Cooking Mode with Scale-on-Demand Step Engine, Premium Preview Gate & Ultra-Premium Checkout." />
+  <title>wow | Immersive Cook Mode</title>
+
+  <!-- Google Fonts: EB Garamond (Brand Serif) + Plus Jakarta Sans / Work Sans (UI body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Central Dynamic Recipe Router -->
+  <script src="recipe-controller.js"></script>
+  <!-- Global Viewport Controller Stylesheet -->
+  <link rel="stylesheet" href="assets/viewport-controller.css" />
+
+  <style>
+    /* ─── CSS Reset & AMOLED Global Tokens ───────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black:          #0B0F14;
+      --surface-base:   #0A0A0C;
+      --surface-card:   #161618;
+      --surface-charcoal: #1C1C1E;
+      --surface-secondary: #2C2C2E;
+      --surface-input:  #121214;
+
+      --crimson:        #3DF2E0;
+      --crimson-hover:  #20C5B5;
+      --crimson-glow:   rgba(61, 242, 224, 0.35);
+      --crimson-dim:    rgba(61, 242, 224, 0.15);
+      --crimson-border: rgba(61, 242, 224, 0.35);
+
+      --neon-cyan:      #3DF2E0;
+      --neon-cyan-hover:#20C5B5;
+      --neon-cyan-glow: rgba(61, 242, 224, 0.35);
+      --neon-cyan-dim:  rgba(61, 242, 224, 0.15);
+      --neon-cyan-border: rgba(61, 242, 224, 0.35);
+
+      --emerald:        #00E676;
+      --emerald-glow:   rgba(0, 230, 118, 0.4);
+
+      --gold:           #FFD700;
+      --gold-glow:      rgba(255, 215, 0, 0.5);
+      --amber:          #3DF2E0;
+      --mango:          #20C5B5;
+
+      --text-white:     #FFFFFF;
+      --text-main:      #E5E5EA;
+      --text-muted:     #8E8E93;
+      --text-dim:       #636366;
+
+      --border-soft:    rgba(255, 255, 255, 0.08);
+      --border-subtle:  rgba(255, 255, 255, 0.15);
+
+      --font-serif:     'EB Garamond', Georgia, serif;
+      --font-sans:      'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--black);
+      color: var(--text-white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    /* ─── 393px × 852px Mobile Frame ───────────────────────────────────── */
+    #viewport {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      background-color: var(--black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 44px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 32px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ─── TOP UTILITY HEADER ───────────────────────────────────────────── */
+    .cook-top-bar {
+      width: 100%;
+      padding: 16px 18px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(11, 15, 20, 0.94);
+      backdrop-filter: blur(14px);
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .top-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .btn-icon-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-icon-circle:hover {
+      color: white;
+      border-color: rgba(61, 242, 224, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.20);
+    }
+
+    .recipe-name-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: #141416;
+      border: 1px solid var(--border-soft);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .recipe-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--crimson);
+      box-shadow: 0 0 8px var(--crimson);
+      flex-shrink: 0;
+    }
+
+    .step-counter-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* Dynamic Gradient Progress Track */
+    .progress-track-wrapper {
+      width: 100%;
+      height: 5px;
+      border-radius: 4px;
+      background: #242428;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #3DF2E0, #20C5B5);
+      border-radius: 4px;
+      box-shadow: 0 0 12px var(--crimson-glow);
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 25%;
+    }
+
+    /* ─── SCROLLABLE STEP CONTENT BODY ─────────────────────────────────── */
+    .step-content-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    /* Step Meta Ribbon (Badge, Time, Voice Pill) */
+    .step-meta-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .step-badge {
+      background: #3DF2E0;
+      color: #0B0F14;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--crimson-glow);
+    }
+
+    .step-time-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Voice Assistant HUD Pill */
+    .voice-hud-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 14px;
+      background: #141416;
+      border: 1px solid var(--crimson-border);
+      color: var(--crimson);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .voice-hud-badge:hover {
+      background: var(--crimson-dim);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.20);
+    }
+
+    .voice-equalizer-bars {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .eq-bar {
+      width: 2px;
+      background: var(--crimson);
+      border-radius: 1px;
+      animation: eqWave 1.2s ease-in-out infinite alternate;
+    }
+
+    .eq-bar:nth-child(1) { height: 6px; animation-delay: 0s; }
+    .eq-bar:nth-child(2) { height: 12px; animation-delay: 0.2s; }
+    .eq-bar:nth-child(3) { height: 8px; animation-delay: 0.4s; }
+
+    @keyframes eqWave {
+      0% { transform: scaleY(0.4); opacity: 0.5; }
+      100% { transform: scaleY(1.15); opacity: 1; filter: drop-shadow(0 0 3px var(--crimson)); }
+    }
+
+    /* Step Heading & Copy */
+    .step-title-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-white);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    .step-description-text {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #D1D1D6;
+    }
+
+    .step-description-text strong {
+      color: var(--crimson);
+      font-weight: 700;
+    }
+
+    /* Culinary Media Photo Container */
+    .step-media-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #18181A;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      flex-shrink: 0;
+    }
+
+    .step-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .step-media-container:hover .step-photo-img {
+      transform: scale(1.03);
+    }
+
+    /* Live Timer Countdown Widget Card */
+    .timer-widget-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .timer-left-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timer-clock-icon {
+      font-size: 24px;
+      color: #3DF2E0;
+    }
+
+    .timer-display-digits {
+      font-size: 18px;
+      font-weight: 800;
+      font-family: monospace;
+      color: white;
+      letter-spacing: 0.04em;
+    }
+
+    .timer-sub-text {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .timer-ctrl-btn {
+      padding: 6px 14px;
+      border-radius: 12px;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-subtle);
+      color: white;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .timer-ctrl-btn:hover {
+      background: #3DF2E0;
+      border-color: #3DF2E0;
+      color: #0B0F14;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.20);
+    }
+
+    /* Voice Prompt Suggestions Carousel */
+    .voice-tips-banner {
+      background: rgba(61, 242, 224, 0.08);
+      border: 1px solid var(--crimson-border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      transition: all 0.3s ease;
+    }
+
+    .voice-tips-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(61, 242, 224, 0.15);
+    }
+
+    .voice-tip-text {
+      color: #E5E5EA;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ─── FIXED FOOTER NAVIGATION CONTROLS ─────────────────────────────── */
+    .cook-footer-bar {
+      width: 100%;
+      padding: 14px 18px 28px;
+      background: rgba(11, 15, 20, 0.95);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .btn-cook-nav {
+      flex: 1;
+      height: 50px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-family: var(--font-sans);
+    }
+
+    .btn-cook-prev {
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      color: var(--text-white);
+    }
+
+    .btn-cook-prev:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .btn-cook-prev:not(:disabled):hover {
+      background: #28282B;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.20);
+    }
+
+    .btn-cook-next {
+      background: #3DF2E0;
+      color: #0B0F14;
+      box-shadow: 0 4px 20px var(--crimson-glow);
+    }
+
+    .btn-cook-next:hover {
+      background: var(--crimson-hover);
+      color: #0B0F14;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.35);
+    }
+
+    .btn-cook-next:active, .btn-cook-prev:active {
+      transform: scale(0.98);
+    }
+
+    .cook-mode-paywall-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 15, 20, 0.78);
+      opacity: 0;
+      transform: translateY(30px);
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cook-mode-paywall-overlay.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(61, 242, 224, 0.4), 0 4px 15px rgba(0,0,0,0.4);
+      }
+      50% {
+        box-shadow: 0 0 35px rgba(61, 242, 224, 0.75), 0 6px 20px rgba(32, 197, 181, 0.45);
+      }
+    }
+
+    /* ─── SCREEN 4D: CELEBRATION MODAL OVERLAY ─────────────────────────── */
+    #celebration-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+      background: rgba(11, 15, 20, 0.92);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    #celebration-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Golden Halo Ambient Glow */
+    .celebration-halo {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.35) 0%, rgba(61, 242, 224, 0.2) 60%, transparent 80%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    /* 3D Gold Chef Trophy Badge */
+    .celebration-trophy-badge {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #FFE082, #FFB300, #E65100);
+      padding: 2px;
+      box-shadow: 0 0 40px var(--gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transform: scale(0.6);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #celebration-overlay.active .celebration-trophy-badge {
+      transform: scale(1);
+    }
+
+    .trophy-inner-box {
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      background: #141416;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+
+    .trophy-icon {
+      font-size: 54px;
+      filter: drop-shadow(0 2px 14px rgba(255, 215, 0, 0.8));
+    }
+
+    .celebration-sub-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3DF2E0;
+      margin-bottom: 6px;
+    }
+
+    .celebration-headline {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: white;
+      text-shadow: 0 2px 16px rgba(255, 255, 255, 0.3);
+      margin-bottom: 8px;
+    }
+
+    .xp-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #E5E5EA;
+      margin-bottom: 24px;
+    }
+
+    .xp-value-text {
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .celebration-actions-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-share-cook {
+      width: 100%;
+      height: 48px;
+      border-radius: 16px;
+      background: #3DF2E0;
+      color: #0B0F14;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px var(--crimson-glow);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-share-cook:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.35);
+    }
+
+    .btn-return-home {
+      width: 100%;
+      height: 46px;
+      border-radius: 16px;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      color: white;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-return-home:hover {
+      background: #28282B;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.20);
+    }
+
+    /* ─── TOAST NOTIFICATION ───────────────────────────────────────────── */
+    .cook-toast {
+      position: absolute;
+      top: 64px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(11, 15, 20, 0.95);
+      backdrop-filter: blur(14px);
+      border: 1px solid #3DF2E0;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 12px var(--crimson-glow);
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cook-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .cook-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+
+<body data-viewport-mode="immersive" class="viewport-immersive">
+
+  <div id="viewport" role="main" aria-label="Immersive Multi-Step Cooking Guide">
+
+    <!-- ─── FLOATING TOAST ─────────────────────────────────────────────── -->
+    <div class="cook-toast" id="cook-toast">
+      <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]" id="toast-icon">mic</span>
+      <span id="toast-msg">Voice Assistant Active</span>
+    </div>
+
+    <!-- ─── TOP UTILITY HEADER (SCR-04A..4D) ───────────────────────────── -->
+    <header class="cook-top-bar">
+      <div class="top-action-row">
+        <!-- Close Button (Routes to Recipe Detail or Dashboard) -->
+        <a href="recipe-detail.html" class="btn-icon-circle" id="btn-close-cook" aria-label="Exit Cook Mode">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </a>
+
+        <!-- Recipe Pill -->
+        <div class="recipe-name-pill" id="recipe-pill-title">
+          <span class="recipe-pill-dot"></span>
+          <span id="label-recipe-title">HONEY SESAME CHICKEN</span>
+        </div>
+
+        <!-- Step Indicator Text -->
+        <span class="step-counter-tag" id="step-counter-display">STEP 1/4</span>
+      </div>
+
+      <!-- Dynamic Animated Progress Bar -->
+      <div class="progress-track-wrapper" aria-label="Cooking step progress">
+        <div class="progress-fill-bar" id="step-progress-fill" style="width: 25%;"></div>
+      </div>
+    </header>
+
+    <!-- ─── CENTRAL STEP CONTENT BODY ──────────────────────────────────── -->
+    <main class="step-content-body no-scrollbar" id="main-step-container">
+
+      <!-- Step Meta Ribbon -->
+      <div class="step-meta-ribbon">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="step-badge" id="step-badge-label">STEP 1</span>
+          <div class="step-time-box">
+            <span class="material-symbols-outlined text-[16px]">schedule</span>
+            <span id="step-time-label">10 mins</span>
+          </div>
+        </div>
+
+        <!-- Hands-Free Voice Assistant HUD Button -->
+        <button class="voice-hud-badge" id="btn-toggle-voice" type="button" aria-label="Toggle Hands-Free Voice Assistant">
+          <span class="material-symbols-outlined text-[16px]">mic</span>
+          <div class="voice-equalizer-bars">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </div>
+          <span id="voice-status-text">VOICE</span>
+        </button>
+      </div>
+
+      <!-- Step Title Heading -->
+      <h1 class="step-title-text" id="step-headline-text">
+        1. Prep &amp; Ingredient Mise en Place
+      </h1>
+
+      <!-- Step Instruction Paragraph with Red Highlights -->
+      <p class="step-description-text" id="step-instruction-text">
+        Cook spaghetti in boiling salted water until al dente. Whisk egg yolks and Pecorino Romano cheese in a separate bowl with black pepper.
+      </p>
+
+      <!-- Culinary Step Photography -->
+      <div class="step-media-container" id="step-media-frame">
+        <img src="https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=800&q=80" alt="Recipe Step Visual" class="step-photo-img" id="step-media-photo" onerror="this.src='https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=800';" />
+      </div>
+
+      <!-- Live Interactive Step Timer Widget -->
+      <div class="timer-widget-card" id="timer-widget-box">
+        <div class="timer-left-meta">
+          <span class="material-symbols-outlined timer-clock-icon">timer</span>
+          <div>
+            <div class="timer-display-digits" id="timer-digits">10:00</div>
+            <div class="timer-sub-text" id="timer-sub-label">Prep &amp; Marinate Timer</div>
+          </div>
+        </div>
+        <button class="timer-ctrl-btn" id="btn-timer-toggle" type="button">
+          <span class="material-symbols-outlined text-[16px]" id="timer-btn-icon">play_arrow</span>
+          <span id="timer-btn-text">Start Timer</span>
+        </button>
+      </div>
+
+      <!-- Hands-free Voice Command Tip Banner -->
+      <div class="voice-tips-banner">
+        <div class="voice-tip-text">
+          <span class="material-symbols-outlined text-[#3DF2E0] text-[16px]">record_voice_over</span>
+          <span>Say <strong>"Next Step"</strong> or <strong>"Start Timer"</strong> hands-free</span>
+        </div>
+        <a href="calibration.html" style="color:var(--text-muted); text-decoration:none; font-size:10px; font-weight:700;" title="Acoustic Settings">Calibrate &gt;</a>
+      </div>
+
+    </main>
+
+    <!-- ─── FIXED FOOTER NAVIGATION CONTROLS ───────────────────────────── -->
+    <footer class="cook-footer-bar">
+      <!-- Previous Step Button -->
+      <button class="btn-cook-nav btn-cook-prev" id="btn-prev-step" type="button" disabled>
+        <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+        <span>Previous</span>
+      </button>
+
+      <!-- Next Step / Finish Button -->
+      <button class="btn-cook-nav btn-cook-next" id="btn-next-step" type="button">
+        <span id="btn-next-label">Next Step</span>
+        <span class="material-symbols-outlined text-[18px]" id="btn-next-icon">arrow_forward</span>
+      </button>
+    </footer>
+
+    <!-- ─── PREMIUM GLASSMORPHIC & TIME-BASED PREVIEW GATE OVERLAY ───────── -->
+    <div id="cook-mode-paywall-overlay" class="cook-mode-paywall-overlay" aria-hidden="true">
+      <!-- Radiant Cyan Ambient Glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full pointer-events-none z-0" style="background: radial-gradient(circle, rgba(61, 242, 224, 0.35) 0%, rgba(32, 197, 181, 0.18) 50%, transparent 75%); filter: blur(35px);"></div>
+
+      <!-- Floating Glass Panel Card -->
+      <div class="relative z-10 w-full max-w-[340px] rounded-3xl p-5 border border-white/10 text-center flex flex-col items-center space-y-3" style="background: rgba(11, 15, 20, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 30px rgba(61, 242, 224, 0.25);">
+        
+        <!-- Glowing Crown Icon -->
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-[#3DF2E0]/40 shadow-[0_0_24px_rgba(61,242,224,0.35)]" style="background: linear-gradient(135deg, rgba(61,242,224,0.2) 0%, rgba(32,197,181,0.15) 100%);">
+          <span class="material-symbols-outlined text-[#3DF2E0] text-[28px]" style="filter: drop-shadow(0 0 10px rgba(61,242,224,0.7));">workspace_premium</span>
+        </div>
+
+        <!-- Header & Subheader -->
+        <div class="flex flex-col space-y-1 pt-0.5">
+          <div class="inline-flex items-center justify-center space-x-1 px-2.5 py-0.5 rounded-full bg-[#3DF2E0]/10 border border-[#3DF2E0]/30 mx-auto">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]"></span>
+            <span class="text-[8px] font-black text-[#3DF2E0] tracking-widest uppercase">Masterclass Pro Pass</span>
+          </div>
+          <h3 class="text-base font-black text-white tracking-tight leading-tight">Unlock Premium Masterclasses</h3>
+          <p class="text-[11px] text-neutral-300 leading-relaxed max-w-[270px] pt-0.5">
+            Gain instant access to all remaining cooking steps, hands-free Voice Activation, and automated multi-step smart kitchen timers.
+          </p>
+        </div>
+
+        <!-- Passes / Tiers Selection -->
+        <div class="w-full flex flex-col space-y-2 text-left pt-1">
+          <label class="paywall-plan-card w-full bg-white/[0.03] border border-white/10 rounded-xl p-2.5 flex items-center justify-between cursor-pointer transition-all hover:border-white/20">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                <div class="w-full h-full rounded-full bg-transparent"></div>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[11px] font-black text-neutral-300">Monthly Pass</span>
+                <span class="text-[8.5px] text-neutral-400">Cancel anytime</span>
+              </div>
+            </div>
+            <span class="text-xs font-black text-white">₹129</span>
+          </label>
+
+          <label class="paywall-plan-card w-full bg-[#3DF2E0]/10 border-2 border-[#3DF2E0] rounded-xl p-2.5 flex items-center justify-between cursor-pointer relative shadow-[0_0_16px_rgba(61,242,224,0.25)]">
+            <span class="absolute -top-2 right-4 text-[7.5px] font-black text-[#0B0F14] bg-gradient-to-r from-[#3DF2E0] to-[#20C5B5] rounded-full px-2 py-0.2 tracking-wider uppercase shadow-sm">Best Value</span>
+            <div class="flex items-center space-x-2.5">
+              <div class="w-3.5 h-3.5 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5">
+                <div class="w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]"></div>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-[11px] font-black text-white">Premium Pro Annual</span>
+                <span class="text-[8.5px] text-neutral-300">Full Masterclasses &amp; Audio</span>
+              </div>
+            </div>
+            <span class="text-xs font-black text-white">₹699</span>
+          </label>
+        </div>
+
+        <!-- Pulsing Cyan CTA Button -->
+        <div class="w-full pt-1.5 flex flex-col space-y-1.5">
+          <button type="button" id="btn-unlock-cook-mode" class="w-full rounded-xl py-3 text-xs font-black tracking-widest text-[#0B0F14] uppercase cursor-pointer active:scale-97 transition-all flex items-center justify-center space-x-1.5" style="background: linear-gradient(135deg, #3DF2E0 0%, #20C5B5 100%); box-shadow: 0 0 25px rgba(61, 242, 224, 0.45); animation: pulseGlow 2s infinite ease-in-out;">
+            <span>UNLOCK FULL RECIPE 🔒</span>
+          </button>
+          <button type="button" id="btn-dismiss-cook-paywall" class="text-[10px] font-bold text-neutral-400 hover:text-white bg-transparent border-0 cursor-pointer pt-0.5">
+            Stay on Free Step 1
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 2026 ULTRA-PREMIUM GLASSMORPHISM & NEO-GLOW PAYMENT GATEWAY POPUP ─── -->
+    <div id="payment-gateway-modal" class="fixed inset-0 overflow-y-auto hidden flex flex-col p-5 space-y-4 rounded-[44px] max-w-[393px] mx-auto border border-white/10 select-none transform translate-y-full opacity-0 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]" style="z-index: 99999 !important; background: #0B0F14 !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(61, 242, 224, 0.15) !important;">
+      
+      <!-- Atmospheric Ambient Glow Orbs -->
+      <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-40 pointer-events-none z-0 opacity-25" style="background: radial-gradient(circle, #3DF2E0 0%, #20C5B5 40%, transparent 75%) !important; filter: blur(45px) !important;"></div>
+      <div class="absolute bottom-10 right-0 w-44 h-44 pointer-events-none z-0 opacity-15" style="background: radial-gradient(circle, #00E676 0%, transparent 70%) !important; filter: blur(40px) !important;"></div>
+
+      <!-- MAIN PAYMENT OPTIONS VIEW -->
+      <div id="neo-payment-options-view" class="w-full flex flex-col space-y-4 z-10 relative flex-1">
+        
+        <!-- Header Row with Minimalist Close Button -->
+        <div class="w-full flex items-center justify-between pt-3 pb-1 shrink-0">
+          <div class="flex flex-col">
+            <div class="flex items-center space-x-1.5 mb-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#3DF2E0] shadow-[0_0_8px_#3DF2E0] animate-pulse"></span>
+              <span class="text-[9px] font-black text-[#3DF2E0] tracking-widest uppercase">Secure Gateway 2026</span>
+            </div>
+            <h4 class="text-base font-black text-white tracking-tight uppercase">Select Payment Mode</h4>
+          </div>
+          <button type="button" id="btn-cancel-payment" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-400 hover:text-white flex items-center justify-center text-xs font-bold cursor-pointer active:scale-90 transition-all">✕</button>
+        </div>
+
+        <!-- Dynamic Invoice Summary Glass Card -->
+        <div class="w-full rounded-2xl p-3.5 flex items-center justify-between z-10 relative border border-white/10" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center border border-[#3DF2E0]/30 shadow-[0_0_12px_rgba(61,242,224,0.2)]" style="background: rgba(61, 242, 224, 0.1);">
+              <span class="material-symbols-outlined text-[#3DF2E0] text-[20px]">workspace_premium</span>
+            </div>
+            <div class="flex flex-col">
+              <span id="payment-summary-plan" class="text-xs font-black text-white">Premium Pro Annual</span>
+              <span class="text-[9px] text-neutral-400 mt-0.5">500+ Chef Masterclasses & Full Step Audio</span>
+            </div>
+          </div>
+          <div class="flex flex-col text-right">
+            <span class="text-[8px] font-black text-[#3DF2E0] uppercase tracking-widest">Total Payable</span>
+            <span id="payment-summary-price" class="text-base font-black text-white mt-0.5">₹699</span>
+          </div>
+        </div>
+
+        <!-- SCROLLABLE PAYMENT MODES CONTAINER -->
+        <div class="flex flex-col space-y-3.5 z-10 relative flex-1 overflow-y-auto no-scrollbar pr-0.5 pb-2">
+          
+          <!-- ─── GROUP 1: POPULAR INDIAN UPI (2x2 Grid) ─── -->
+          <div class="flex flex-col space-y-1.5">
+            <div class="flex items-center justify-between px-1">
+              <span class="text-[9px] font-black text-neutral-400 tracking-wider uppercase">1. Popular Indian UPI</span>
+              <span class="text-[8px] font-mono text-[#00E676] bg-[#00E676]/10 px-1.5 py-0.5 rounded border border-[#00E676]/20">Zero Convenience Fee</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <!-- GPay -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border-2 border-[#3DF2E0] bg-[#3DF2E0]/10 cursor-pointer transition-all duration-200 shadow-[0_0_16px_rgba(61,242,224,0.25)] group" data-method="gpay">
+                <input type="radio" name="active_gateway" value="gpay" checked class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center font-bold text-[11px] text-white">
+                    <span class="text-[#4285F4]">G</span><span class="text-[#EA4335]">P</span><span class="text-[#FBBC05]">a</span><span class="text-[#34A853]">y</span>
+                  </div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-white">Google Pay</span>
+                  <span class="text-[8px] text-neutral-400">Instant UPI App</span>
+                </div>
+              </label>
+
+              <!-- PhonePe -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group" data-method="phonepe">
+                <input type="radio" name="active_gateway" value="phonepe" class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#5f259f]/40 border border-[#5f259f]/60 flex items-center justify-center font-bold text-[10px] text-[#A259FF]">Pe</div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-transparent"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-neutral-300">PhonePe</span>
+                  <span class="text-[8px] text-neutral-500">UPI &amp; Wallet</span>
+                </div>
+              </label>
+
+              <!-- Paytm -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group" data-method="paytm">
+                <input type="radio" name="active_gateway" value="paytm" class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#002e6e]/40 border border-[#00b9f5]/50 flex items-center justify-center font-bold text-[9px] text-[#00b9f5]">Paytm</div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-transparent"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-neutral-300">Paytm</span>
+                  <span class="text-[8px] text-neutral-500">UPI &amp; Postpaid</span>
+                </div>
+              </label>
+
+              <!-- Amazon Pay -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group" data-method="amazonpay">
+                <input type="radio" name="active_gateway" value="amazonpay" class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#ff9900]/20 border border-[#ff9900]/40 flex items-center justify-center font-bold text-[10px] text-[#FF9900]">pay</div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-transparent"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-neutral-300">Amazon Pay</span>
+                  <span class="text-[8px] text-neutral-500">UPI &amp; Balance</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- ─── GROUP 2: CARDS & NETBANKING ─── -->
+          <div class="flex flex-col space-y-1.5">
+            <span class="text-[9px] font-black text-neutral-400 tracking-wider uppercase px-1">2. Cards &amp; Netbanking</span>
+            
+            <!-- Cards Option -->
+            <label class="neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200" data-method="cards">
+              <input type="radio" name="active_gateway" value="cards" class="hidden" />
+              <div class="flex items-center space-x-3">
+                <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                  <div class="w-full h-full rounded-full bg-transparent"></div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-black text-neutral-300">Credit / Debit Cards</span>
+                    <span class="text-[8px] font-mono text-neutral-400 bg-white/5 px-1.5 py-0.2 rounded">Visa • MC • RuPay</span>
+                  </div>
+                  <span class="text-[8px] text-neutral-500 mt-0.5">Domestic &amp; International Cards Supported</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-neutral-400 text-[18px]">credit_card</span>
+            </label>
+
+            <!-- Netbanking Option -->
+            <label class="neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200" data-method="netbanking">
+              <input type="radio" name="active_gateway" value="netbanking" class="hidden" />
+              <div class="flex items-center space-x-3">
+                <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                  <div class="w-full h-full rounded-full bg-transparent"></div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-black text-neutral-300">Netbanking &amp; Portals</span>
+                    <span class="text-[8px] font-mono text-neutral-400 bg-white/5 px-1.5 py-0.2 rounded">50+ Banks</span>
+                  </div>
+                  <span class="text-[8px] text-neutral-500 mt-0.5">HDFC, ICICI, SBI, Axis, Kotak &amp; more</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-neutral-400 text-[18px]">account_balance</span>
+            </label>
+          </div>
+
+          <!-- ─── GROUP 3: SECURE GATEWAYS ─── -->
+          <div class="flex flex-col space-y-1.5">
+            <span class="text-[9px] font-black text-neutral-400 tracking-wider uppercase px-1">3. Express Gateways</span>
+
+            <!-- Razorpay Option -->
+            <label class="neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200" data-method="razorpay">
+              <input type="radio" name="active_gateway" value="razorpay" class="hidden" />
+              <div class="flex items-center space-x-3">
+                <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                  <div class="w-full h-full rounded-full bg-transparent"></div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-black text-neutral-300">Razorpay Express Checkout</span>
+                    <span class="text-[8px] font-mono text-[#00E676] bg-[#00E676]/10 px-1.5 py-0.2 rounded border border-[#00E676]/20">1-Click</span>
+                  </div>
+                  <span class="text-[8px] text-neutral-500 mt-0.5">Biometric &amp; Saved Payment Fast Route</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-[#00E676] text-[18px]">verified_user</span>
+            </label>
+          </div>
+
+        </div>
+
+        <!-- STICKY ACTION BUTTON CONTAINER -->
+        <div class="w-full flex flex-col space-y-2 z-10 relative pt-2 shrink-0 pb-1 px-1">
+          <button type="button" id="btn-process-final-payment" class="w-full rounded-xl py-4 text-xs font-black tracking-widest text-[#0B0F14] uppercase cursor-pointer active:scale-97 transition-all flex items-center justify-center space-x-2" style="background: linear-gradient(135deg, #3DF2E0 0%, #20C5B5 100%); box-shadow: 0 0 25px rgba(61, 242, 224, 0.45), 0 4px 15px rgba(0,0,0,0.4);">
+            <span id="btn-pay-text" class="text-[#0B0F14]">PROCEED TO SECURE PAYMENT 🔒</span>
+          </button>
+          <span class="text-[8px] font-mono text-center text-neutral-400 tracking-wider block">🔒 256-Bit SSL Encrypted Secure Checkout</span>
+        </div>
+
+      </div>
+
+      <!-- ─── DYNAMIC EMERALD-GREEN SUCCESS VIEW ─── -->
+      <div id="neo-payment-success-view" class="w-full flex-1 hidden flex-col items-center justify-center py-6 px-4 space-y-6 z-10 relative text-center animate-fade-in">
+        
+        <!-- Radiant Neon-Green Halo Backdrop -->
+        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full pointer-events-none z-0" style="background: radial-gradient(circle, rgba(0, 255, 136, 0.35) 0%, rgba(0, 230, 118, 0.1) 40%, transparent 70%); filter: blur(28px);"></div>
+
+        <!-- Glowing Emerald Checkmark Badge -->
+        <div class="relative z-10 w-20 h-20 rounded-full flex items-center justify-center border-2 border-[#00FF88] shadow-[0_0_35px_rgba(0,255,136,0.6)]" style="background: rgba(0, 255, 136, 0.12);">
+          <span class="material-symbols-outlined text-[42px] text-[#00FF88] font-bold">check_circle</span>
+        </div>
+
+        <!-- Success Message Header -->
+        <div class="flex flex-col space-y-2 z-10 relative">
+          <div class="inline-flex items-center justify-center space-x-1.5 px-3 py-1 rounded-full bg-[#00FF88]/10 border border-[#00FF88]/30 mx-auto">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FF88] shadow-[0_0_6px_#00FF88]"></span>
+            <span class="text-[9px] font-black text-[#00FF88] tracking-widest uppercase">Transaction Approved</span>
+          </div>
+          <h3 class="text-2xl font-black text-white tracking-tight" style="color: #00FF88; text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);">Payment Successful!</h3>
+          <p class="text-xs text-neutral-300 max-w-[280px] mx-auto leading-relaxed">Welcome to Premium Pro Masterclasses! Your premium chef privileges have been successfully unlocked.</p>
+        </div>
+
+        <!-- Digital Receipt Mini Card -->
+        <div class="w-full rounded-2xl p-4 border border-white/10 flex flex-col space-y-2.5 z-10 relative" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);">
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-neutral-400 font-mono uppercase">Plan Activated:</span>
+            <span id="success-receipt-plan" class="text-white font-black">Premium Pro Annual VIP</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-neutral-400 font-mono uppercase">Amount Paid:</span>
+            <span id="success-receipt-amount" class="text-[#00FF88] font-black font-mono">₹699.00 (Incl. Taxes)</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-white/5">
+            <span class="text-neutral-500 font-mono uppercase">Reference:</span>
+            <span id="success-receipt-ref" class="text-neutral-300 font-mono text-[9px]">TXN-WOW-8842-PRO</span>
+          </div>
+        </div>
+
+        <!-- Action Button: Start Cooking -->
+        <div class="w-full pt-2 z-10 relative">
+          <button type="button" id="btn-start-cooking-success" class="w-full rounded-xl py-4 text-xs font-black tracking-widest text-black uppercase cursor-pointer active:scale-97 transition-all flex items-center justify-center space-x-2" style="background: linear-gradient(135deg, #00FF88 0%, #00E676 100%); box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);">
+            <span>START COOKING 🍳</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ─── CELEBRATION MODAL OVERLAY (SCR-04D) ────────────────────────── -->
+    <div id="celebration-overlay" aria-hidden="true">
+      <div class="celebration-halo"></div>
+
+      <!-- Golden Chef Medal Trophy Badge -->
+      <div class="celebration-trophy-badge" id="celebration-badge-node">
+        <div class="trophy-inner-box">
+          <span class="material-symbols-outlined trophy-icon">workspace_premium</span>
+        </div>
+      </div>
+
+      <div class="celebration-sub-tag">RECIPE MASTERED</div>
+      <h2 class="celebration-headline">Chef Level Up!</h2>
+
+      <!-- XP Reward Pill -->
+      <div class="xp-pill-badge">
+        <span class="xp-value-text">+150 Culinary XP</span>
+        <span>•</span>
+        <span id="celebration-recipe-tag">Recipe Mastered</span>
+      </div>
+
+      <!-- Direct Actions -->
+      <div class="celebration-actions-group">
+        <a href="social-feed.html?post=sesame-chicken" class="btn-share-cook" id="btn-share-celebration">
+          <span class="material-symbols-outlined text-[18px]">share</span>
+          <span>Share Cook to Community</span>
+        </a>
+        <a href="dashboard.html" class="btn-return-home" id="btn-return-dashboard">
+          <span>Return to Dashboard</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /#viewport -->
+
+  <!-- ─── Interactive Multi-Step & Voice Engine Script ──────────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ─── 1. DYNAMIC RECIPE DATASET (SCALE-ON-DEMAND) ───────────────────
+      var recipeDatabase = {
+        "sesame-chicken": {
+          id: "sesame-chicken",
+          title: "HONEY SESAME CHICKEN",
+          xpText: "Honey Sesame Mastered",
+          steps: [
+            {
+              stepNumber: 1,
+              headline: "1. Prep & Coat the Chicken",
+              durationText: "10 mins",
+              timerSeconds: 600,
+              timerLabel: "Prep & Coat Timer",
+              description: "Cut <strong>4 boneless skinless chicken breasts</strong> into 1-inch bite-sized cubes. Season generously with salt and pepper, then toss thoroughly in a bowl with <strong>cornstarch</strong> until every piece is tightly and evenly coated.",
+              image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAOL89qig7rQRsqqatwDXW9cAQt_wnIQffDHiZ6zfsdq1qoEOdmDBe9M4gb74-V15aPzAtjKSpLA9izUgYrHlgJNm1mWh2VUCYSHv-XeEubJ05vM89YGvJI5axy4pMv2BzM4eDyJm-flHxcUN9-NLy2OhxZ0Ir6co1KEra5seg-MbmKqSgHhcugN_40JRb5igXVlXhENMxqTwrAiyYHrBwElxuRla2qGBT7f96zB3I4G7EjvCClb9N34N_ANaIrR2DZk_o"
+            },
+            {
+              stepNumber: 2,
+              headline: "2. Pan-Fry to Golden Crisp",
+              durationText: "10 mins",
+              timerSeconds: 600,
+              timerLabel: "Crisp Pan-Fry Timer",
+              description: "Heat <strong>2 tablespoons of vegetable oil</strong> in a large skillet or wok over medium-high heat. Add the coated chicken pieces in a single layer and fry for <strong>8 to 10 minutes</strong>, turning occasionally, until the chicken crust turns crisp and beautifully golden brown.",
+              image: "https://lh3.googleusercontent.com/aida/AEtjO1U_66ddaq2QHIkeukf_VSdW2vAGPUEcqkkdfq4aqw7HMVybY1MuYdE_2Qve1qkB_ISate7nVbJBXqVbM8hF9Bh_CeSGdfa6t0ss4MOzCHUpJIXpwN_Oa8ll6LiUPJFZe3LlDRP0hAzYBs9GHnvq5mCCzCLeU7WXvjtQYFEXheq0Qwaa7u-UJrvUNLhY0Q0vuBTN-dhpdExPefJUa1kTdmiGK4WafeyBWyRzk5V1m4xTW0jJVdRAhwwKKZnR"
+            },
+            {
+              stepNumber: 3,
+              headline: "3. Whisk & Add the Glaze",
+              durationText: "2 mins",
+              timerSeconds: 120,
+              timerLabel: "Glaze Reduction Timer",
+              description: "In a separate small bowl, whisk together <strong>1/3 cup honey</strong>, <strong>1/4 cup soy sauce</strong>, <strong>2 tablespoons ketchup</strong>, and <strong>1 tablespoon sesame oil</strong>. Pour this sweet and savory sauce mixture directly into the skillet over the hot chicken.",
+              image: "https://lh3.googleusercontent.com/aida/AEtjO1U6PG2f9VYXXbqq8wrh_kDUlF_gJi6Xe0ryZVt_HUPGsHuOFV-k4hhXDHDtpmrJLSE0nEHJpkwom7r3-I7x-Lfqp2g1W--jGhdTeMTQ_BsXNvSICc77s91FovyKMRQ0C6KW9T4jTfrSQyKI_TXZ6gO0b5X6bMtWGStczmjeudQSrPkhXmzcsTyuxiwLpJTdQId43oh2EtiiT6L-qV5v4uulRGVpH5K0Bhj1Wpe6Hu-KGVBeDIB2ooMbdza-"
+            },
+            {
+              stepNumber: 4,
+              headline: "4. Toss, Garnish & Serve",
+              durationText: "3 mins",
+              timerSeconds: 180,
+              timerLabel: "Final Toss & Glaze",
+              description: "Toss everything continuously for <strong>2 to 3 minutes</strong> over the heat until the glaze thickens perfectly and completely coats the chicken cubes. Garnish with a generous sprinkle of <strong>toasted sesame seeds</strong> and <strong>chopped green scallions</strong>. Serve hot and enjoy!",
+              image: "https://lh3.googleusercontent.com/aida/AEtjO1VCOi3NOyZnEh2O1K6hoapGZYDRhRuhTUWBRu5QVwwepkc1krG9SjPNyiCnZTNH6ihLcRxsvboFvDNUCcbm1svIVJxaqH2zQcPZ_xHgvDuNwrPUbUKneuV8qk9F1n6fiU-jn4qaMBgNZmznFixSX9m2HVGhkOTXvaW2ndmGKOyokV2uTcMdqldijkpvPxHrLWAkdgtKq4kcWkkMGcFzqNWHqaisgkNQdBhUc8VeYqnlmPziWfURJrf9xcg"
+            }
+          ]
+        },
+        "carbonara": {
+          id: "carbonara",
+          title: "SPAGHETTI CARBONARA",
+          xpText: "Carbonara Mastered",
+          steps: [
+            {
+              stepNumber: 1,
+              headline: "1. Prep & Ingredient Mise en Place",
+              durationText: "9 mins",
+              timerSeconds: 540,
+              timerLabel: "Boil Pasta & Prep",
+              description: "Cook spaghetti in boiling salted water until al dente. Whisk egg yolks and Pecorino Romano cheese in a separate bowl with black pepper.",
+              image: "https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              stepNumber: 2,
+              headline: "2. Aromatics & Skillet Sauté",
+              durationText: "8 mins",
+              timerSeconds: 480,
+              timerLabel: "Render Guanciale",
+              description: "Crisp the diced guanciale (or pancetta) in a skillet over medium heat until the fat renders out and the meat becomes beautifully golden brown.",
+              image: "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+              stepNumber: 3,
+              headline: "3. Emulsify Sauce",
+              durationText: "3 mins",
+              timerSeconds: 180,
+              timerLabel: "Emulsify Sauce",
+              description: "Drain pasta, reserving a cup of cooking water. Toss hot pasta into the skillet fat off the heat. Pour the egg mix in and stir rapidly to create a rich, creamy sauce.",
+              image: "assets/images/pasta-emulsify.jpg"
+            },
+            {
+              stepNumber: 4,
+              headline: "4. Garnish & Serve",
+              durationText: "2 mins",
+              timerSeconds: 120,
+              timerLabel: "Garnish & Serve",
+              description: "Plate the creamy pasta immediately. Top with an extra dusting of grated Pecorino Romano cheese and freshly cracked black pepper. Serve hot!",
+              image: "assets/carbonara.png"
+            }
+          ]
+        },
+        "butter-chicken": {
+          id: "butter-chicken",
+          title: "CLASSIC BUTTER CHICKEN",
+          xpText: "Butter Chicken Mastered",
+          steps: [
+            {
+              stepNumber: 1,
+              headline: "1. Marinate Chicken Tandoori-Style",
+              durationText: "15 mins",
+              timerSeconds: 900,
+              timerLabel: "Tandoori Marination Timer",
+              description: "Marinate <strong>500g chicken thighs</strong> with Greek yogurt, Kashmiri red chili powder, ginger-garlic paste, garam masala, and lemon juice. Rest for minimum 15 minutes.",
+              image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800"
+            },
+            {
+              stepNumber: 2,
+              headline: "2. Char Chicken in Skillet",
+              durationText: "8 mins",
+              timerSeconds: 480,
+              timerLabel: "High-Heat Char Timer",
+              description: "Sear marinated chicken pieces in a smoking hot pan with ghee until charred spots develop on all sides. Set aside.",
+              image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800"
+            },
+            {
+              stepNumber: 3,
+              headline: "3. Simmer Tomato Makhani Gravy",
+              durationText: "12 mins",
+              timerSeconds: 720,
+              timerLabel: "Tomato Base Simmer",
+              description: "Simmer pureed ripe tomatoes, cashews, cardamom, and cinnamon in butter until reduced and fragrant.",
+              image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800"
+            },
+            {
+              stepNumber: 4,
+              headline: "4. Strain & Silk the Sauce",
+              durationText: "4 mins",
+              timerSeconds: 240,
+              timerLabel: "Silky Strain Filter",
+              description: "Blend the simmered sauce until silky smooth and pass through a fine sieve back into the hot pot.",
+              image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800"
+            },
+            {
+              stepNumber: 5,
+              headline: "5. Fold in Butter, Cream & Kasuri Methi",
+              durationText: "5 mins",
+              timerSeconds: 300,
+              timerLabel: "Velvet Finish Timer",
+              description: "Add <strong>50g unsalted butter</strong>, <strong>1/2 cup heavy cream</strong>, roasted crushed <strong>kasuri methi</strong>, and a pinch of sugar. Simmer charred chicken in the sauce for 5 mins.",
+              image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800"
+            },
+            {
+              stepNumber: 6,
+              headline: "6. Garnish & Serve with Butter Naan",
+              durationText: "2 mins",
+              timerSeconds: 120,
+              timerLabel: "Plate & Garnish",
+              description: "Drizzle with a swirl of fresh cream and fresh coriander leaves. Serve smoking hot with charred garlic naan!",
+              image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800"
+            }
+          ]
+        }
+      };
+
+      // Query Param Parser & Active Recipe Resolution
+      var params = new URLSearchParams(window.location.search);
+      var recipeKey = params.get('id') || params.get('name') || params.get('recipe') || params.get('slug') || '52772';
+      
+      var activeRecipe = recipeDatabase[recipeKey];
+      if (!activeRecipe && typeof window.resolveRecipe === 'function') {
+        var resolved = window.resolveRecipe(recipeKey);
+        if (resolved && Array.isArray(resolved.steps)) {
+          activeRecipe = resolved;
+        } else if (resolved && Array.isArray(resolved.instructions)) {
+          activeRecipe = {
+            id: resolved.id || recipeKey,
+            title: (resolved.strMeal || resolved.title || 'GOURMET RECIPE').toUpperCase(),
+            xpText: (resolved.strMeal || resolved.title || 'Recipe') + ' Mastered',
+            steps: resolved.instructions.map(function(s, idx) {
+              return {
+                stepNumber: s.stepNum || (idx + 1),
+                headline: s.title || s.headline || ('Step ' + (idx + 1)),
+                durationText: s.timer ? (parseInt(s.timer, 10) + ' mins') : (s.durationText || '5 mins'),
+                timerSeconds: s.timerSeconds || (s.timer ? (parseInt(s.timer.split(':')[0], 10) * 60 + parseInt(s.timer.split(':')[1] || 0, 10)) : 300),
+                timerLabel: s.timerLabel || s.title || 'Step Timer',
+                description: s.instruction || s.description || '',
+                image: s.img || s.image || resolved.strMealThumb || resolved.imageUrl || 'assets/sesame-chicken.png'
+              };
+            })
+          };
+        }
+      }
+      if (!activeRecipe) activeRecipe = recipeDatabase['sesame-chicken'] || recipeDatabase['carbonara'];
+      
+      var recipeSteps = activeRecipe.steps || [];
+      var currentStepIndex = 0; // 0-indexed (0 = Step 1)
+
+      // DOM Elements
+      var progressFillEl = document.getElementById('step-progress-fill');
+      var stepCounterEl = document.getElementById('step-counter-display');
+      var stepBadgeLabelEl = document.getElementById('step-badge-label');
+      var stepTimeLabelEl = document.getElementById('step-time-label');
+      var stepHeadlineEl = document.getElementById('step-headline-text');
+      var stepInstructionEl = document.getElementById('step-instruction-text');
+      var stepPhotoEl = document.getElementById('step-media-photo');
+      var labelRecipeTitleEl = document.getElementById('label-recipe-title');
+      var celebrationRecipeTagEl = document.getElementById('celebration-recipe-tag');
+      var btnPrev = document.getElementById('btn-prev-step');
+      var btnNext = document.getElementById('btn-next-step');
+      var btnNextLabel = document.getElementById('btn-next-label');
+      var btnNextIcon = document.getElementById('btn-next-icon');
+      var celebrationOverlay = document.getElementById('celebration-overlay');
+
+      // Paywall & Payment Modal Elements
+      var paywallOverlay = document.getElementById('cook-mode-paywall-overlay');
+      var btnUnlockCookMode = document.getElementById('btn-unlock-cook-mode');
+      var btnDismissCookPaywall = document.getElementById('btn-dismiss-cook-paywall');
+      var paymentGatewayModal = document.getElementById('payment-gateway-modal');
+      var neoOptionsView = document.getElementById('neo-payment-options-view');
+      var neoSuccessView = document.getElementById('neo-payment-success-view');
+      var btnCancelPayment = document.getElementById('btn-cancel-payment');
+      var btnProcessFinalPayment = document.getElementById('btn-process-final-payment');
+      var btnStartCookingSuccess = document.getElementById('btn-start-cooking-success');
+
+      // Set Recipe Title in header
+      if (labelRecipeTitleEl) labelRecipeTitleEl.textContent = activeRecipe.title;
+      if (celebrationRecipeTagEl) celebrationRecipeTagEl.textContent = activeRecipe.xpText;
+
+      // Toast System
+      var toastEl = document.getElementById('cook-toast');
+      var toastMsg = document.getElementById('toast-msg');
+      var toastTimer = null;
+
+      function showToast(msg, icon) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMsg.textContent = msg;
+        if (icon) document.getElementById('toast-icon').textContent = icon;
+        toastEl.classList.add('show');
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('show');
+        }, 2500);
+      }
+
+      // Premium State Checker
+      function isPremiumUser() {
+        return localStorage.getItem('wow_is_premium') === 'true' || window.wowIsPremium === true;
+      }
+
+      // Step Renderer (Scale-on-Demand)
+      function renderStep(index) {
+        if (index < 0) index = 0;
+        if (index >= recipeSteps.length) index = recipeSteps.length - 1;
+        currentStepIndex = index;
+
+        var data = recipeSteps[index];
+
+        // Update Header & Progress dynamically
+        var pct = ((index + 1) / recipeSteps.length) * 100;
+        progressFillEl.style.width = pct + '%';
+        stepCounterEl.textContent = 'STEP ' + (index + 1) + '/' + recipeSteps.length;
+        stepBadgeLabelEl.textContent = 'STEP ' + (index + 1);
+        stepTimeLabelEl.textContent = data.durationText;
+
+        // Update Texts & Media
+        stepHeadlineEl.innerHTML = data.headline;
+        stepInstructionEl.innerHTML = data.description;
+        stepPhotoEl.src = data.image;
+
+        // Update Prev / Next Buttons
+        btnPrev.disabled = (index === 0);
+
+        if (index === recipeSteps.length - 1) {
+          btnNextLabel.textContent = 'Wow Cooking Done';
+          btnNextIcon.textContent = 'check';
+          btnNext.classList.add('btn-finish');
+        } else {
+          btnNextLabel.textContent = 'Next Step';
+          btnNextIcon.textContent = 'arrow_forward';
+          btnNext.classList.remove('btn-finish');
+        }
+
+        // Reset Timer for this step
+        resetTimer(data.timerSeconds, data.timerLabel);
+      }
+
+      // ─── TIMER ENGINE ──────────────────────────────────────────────────
+      var timerDigitsEl = document.getElementById('timer-digits');
+      var timerSubLabelEl = document.getElementById('timer-sub-label');
+      var btnTimerToggle = document.getElementById('btn-timer-toggle');
+      var timerBtnIcon = document.getElementById('timer-btn-icon');
+      var timerBtnText = document.getElementById('timer-btn-text');
+
+      var timerInterval = null;
+      var remainingSeconds = 600;
+      var isTimerRunning = false;
+
+      function formatTime(sec) {
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      function resetTimer(totalSec, label) {
+        if (timerInterval) clearInterval(timerInterval);
+        isTimerRunning = false;
+        remainingSeconds = totalSec;
+        timerDigitsEl.textContent = formatTime(remainingSeconds);
+        timerSubLabelEl.textContent = label;
+        timerBtnIcon.textContent = 'play_arrow';
+        timerBtnText.textContent = 'Start Timer';
+        timerDigitsEl.style.color = 'white';
+      }
+
+      function toggleTimer() {
+        if (isTimerRunning) {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          timerBtnIcon.textContent = 'play_arrow';
+          timerBtnText.textContent = 'Resume';
+          showToast('Timer paused', 'pause');
+        } else {
+          isTimerRunning = true;
+          timerBtnIcon.textContent = 'pause';
+          timerBtnText.textContent = 'Pause';
+          showToast('Timer started: ' + formatTime(remainingSeconds), 'timer');
+
+          timerInterval = setInterval(function () {
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+              clearInterval(timerInterval);
+              isTimerRunning = false;
+              remainingSeconds = 0;
+              timerDigitsEl.textContent = '00:00';
+              timerDigitsEl.style.color = 'var(--emerald)';
+              timerBtnIcon.textContent = 'replay';
+              timerBtnText.textContent = 'Reset';
+              showToast('Cooking Step Timer Done! ✓', 'notifications_active');
+              if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            } else {
+              timerDigitsEl.textContent = formatTime(remainingSeconds);
+            }
+          }, 1000);
+        }
+      }
+
+      btnTimerToggle.addEventListener('click', toggleTimer);
+
+      // ─── 2. PREMIUM PREVIEW GATE INTERCEPTOR ────────────────────────────
+      function triggerPaywallShield() {
+        if (paywallOverlay) {
+          paywallOverlay.classList.add('active');
+          paywallOverlay.setAttribute('aria-hidden', 'false');
+          showToast('Step 1 Complete • Unlock Pro for Full Masterclass', 'lock');
+          if (navigator.vibrate) navigator.vibrate([50, 80]);
+        }
+      }
+
+      function closePaywallShield() {
+        if (paywallOverlay) {
+          paywallOverlay.classList.remove('active');
+          paywallOverlay.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      if (btnDismissCookPaywall) {
+        btnDismissCookPaywall.addEventListener('click', closePaywallShield);
+      }
+
+      // ─── 3. 2026 ULTRA-PREMIUM PAYMENT MODAL WORKFLOW ───────────────────
+      function openPaymentModal() {
+        if (!paymentGatewayModal) return;
+
+        // Reset views
+        if (neoOptionsView) neoOptionsView.classList.remove('hidden');
+        if (neoSuccessView) {
+          neoSuccessView.classList.add('hidden');
+          neoSuccessView.classList.remove('flex');
+        }
+
+        // Hide shield & slide up checkout modal
+        closePaywallShield();
+        paymentGatewayModal.classList.remove('hidden');
+        requestAnimationFrame(function () {
+          paymentGatewayModal.style.transform = 'translateY(0)';
+          paymentGatewayModal.style.opacity = '1';
+        });
+      }
+
+      function closePaymentModal() {
+        if (!paymentGatewayModal) return;
+        paymentGatewayModal.style.transform = 'translateY(100%)';
+        paymentGatewayModal.style.opacity = '0';
+        setTimeout(function () {
+          paymentGatewayModal.classList.add('hidden');
+        }, 300);
+      }
+
+      if (btnUnlockCookMode) {
+        btnUnlockCookMode.addEventListener('click', openPaymentModal);
+      }
+
+      if (btnCancelPayment) {
+        btnCancelPayment.addEventListener('click', function () {
+          closePaymentModal();
+          triggerPaywallShield();
+        });
+      }
+
+      // Gateway Selection Handler
+      var neoGatewayCards = document.querySelectorAll('.neo-gateway-card');
+      neoGatewayCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          var radio = card.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+
+          neoGatewayCards.forEach(function (c) {
+            c.className = "neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group";
+            if (c.dataset.method === 'cards' || c.dataset.method === 'netbanking' || c.dataset.method === 'razorpay') {
+              c.className = "neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200";
+            }
+            var dot = c.querySelector('.radio-indicator');
+            if (dot) {
+              dot.className = "radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5";
+              var inner = dot.querySelector('div');
+              if (inner) inner.className = "w-full h-full rounded-full bg-transparent";
+            }
+            var title = c.querySelector('.text-xs');
+            if (title) {
+              title.className = "text-xs font-black text-neutral-300";
+            }
+          });
+
+          // Selected active state
+          if (card.dataset.method === 'cards' || card.dataset.method === 'netbanking' || card.dataset.method === 'razorpay') {
+            card.className = "neo-gateway-card w-full p-3 rounded-xl border-2 border-[#3DF2E0] bg-[#3DF2E0]/10 flex items-center justify-between cursor-pointer transition-all duration-200 shadow-[0_0_16px_rgba(61,242,224,0.25)]";
+          } else {
+            card.className = "neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border-2 border-[#3DF2E0] bg-[#3DF2E0]/10 cursor-pointer transition-all duration-200 shadow-[0_0_16px_rgba(61,242,224,0.25)] group";
+          }
+
+          var activeDot = card.querySelector('.radio-indicator');
+          if (activeDot) {
+            activeDot.className = "radio-indicator w-3.5 h-3.5 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5";
+            var inner2 = activeDot.querySelector('div');
+            if (inner2) inner2.className = "w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]";
+          }
+          var activeTitle = card.querySelector('.text-xs');
+          if (activeTitle) {
+            activeTitle.className = "text-xs font-black text-white";
+          }
+        });
+      });
+
+      // ─── 4. 1.2-SECOND SECURE BANKING SIMULATION & EMERALD SUCCESS VIEW ───
+      if (btnProcessFinalPayment && paymentGatewayModal) {
+        btnProcessFinalPayment.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // Loading ring inside button
+          btnProcessFinalPayment.disabled = true;
+          btnProcessFinalPayment.style.opacity = "0.9";
+          btnProcessFinalPayment.innerHTML = '<div class="inline-block w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div><span>VERIFYING SECURE PAYMENT...</span>';
+
+          // 1.2-second live bank verification simulation
+          setTimeout(function () {
+            if (neoOptionsView) neoOptionsView.classList.add('hidden');
+            if (neoSuccessView) {
+              neoSuccessView.classList.remove('hidden');
+              neoSuccessView.classList.add('flex');
+            }
+
+            // Generate unique reference
+            var refEl = document.getElementById('success-receipt-ref');
+            if (refEl) {
+              refEl.innerText = 'TXN-WOW-' + Math.floor(100000 + Math.random() * 900000) + '-PRO';
+            }
+
+            // Reset button
+            btnProcessFinalPayment.disabled = false;
+            btnProcessFinalPayment.style.opacity = "1";
+            btnProcessFinalPayment.innerHTML = '<span id="btn-pay-text">PROCEED TO SECURE PAYMENT 🔒</span>';
+
+            // Mark user premium permanently
+            localStorage.setItem('wow_is_premium', 'true');
+            window.wowIsPremium = true;
+            if (navigator.vibrate) navigator.vibrate([60, 100, 60]);
+          }, 1200);
+        });
+      }
+
+      // "START COOKING 🍳" Action Handler
+      if (btnStartCookingSuccess && paymentGatewayModal) {
+        btnStartCookingSuccess.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // Dismiss modal & paywall overlay
+          closePaymentModal();
+          closePaywallShield();
+
+          showToast('🌟 Premium Unlocked! Advancing to Step 2', 'workspace_premium');
+
+          // Smoothly advance to Step 2
+          setTimeout(function () {
+            renderStep(1);
+          }, 350);
+        });
+      }
+
+      // ─── STEP NAVIGATION WITH PAYWALL INTERCEPTION ──────────────────────
+      btnPrev.addEventListener('click', function (e) {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        if (currentStepIndex > 0) {
+          renderStep(currentStepIndex - 1);
+        }
+      });
+
+      // Explicit routing check on Next Step to lock down and trigger Upgrade Sheet on Step 1
+      btnNext.addEventListener('click', function (e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        // Intercept tap on Step 1 (Screen 4A) to block direct advancement to Step 2
+        if (currentStepIndex === 0) {
+          if (!isPremiumUser()) {
+            // Completely intercept the tap event and trigger the Unlock Premium Masterclasses upgrade sheet
+            triggerPaywallShield();
+            return false;
+          }
+        }
+
+        if (currentStepIndex < recipeSteps.length - 1) {
+          renderStep(currentStepIndex + 1);
+        } else {
+          // Launch Completion Celebration Flow (SCR-04D)
+          launchCelebrationOverlay();
+        }
+      });
+
+      // Interactive Plan Selection on Paywall Sheet
+      var paywallPlanCards = document.querySelectorAll('.paywall-plan-card');
+      paywallPlanCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          paywallPlanCards.forEach(function (c) {
+            c.className = "paywall-plan-card w-full bg-white/[0.03] border border-white/10 rounded-xl p-2.5 flex items-center justify-between cursor-pointer transition-all hover:border-white/20";
+            var dot = c.querySelector('.w-3\\.5');
+            if (dot) {
+              dot.className = "w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5";
+              var inner = dot.querySelector('div');
+              if (inner) inner.className = "w-full h-full rounded-full bg-transparent";
+            }
+            var title = c.querySelector('.text-\\[11px\\]');
+            if (title) title.className = "text-[11px] font-black text-neutral-300";
+          });
+
+          card.className = "paywall-plan-card w-full bg-[#3DF2E0]/10 border-2 border-[#3DF2E0] rounded-xl p-2.5 flex items-center justify-between cursor-pointer relative shadow-[0_0_16px_rgba(61,242,224,0.25)]";
+          var activeDot = card.querySelector('.w-3\\.5');
+          if (activeDot) {
+            activeDot.className = "w-3.5 h-3.5 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5";
+            var inner2 = activeDot.querySelector('div');
+            if (inner2) inner2.className = "w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]";
+          }
+          var activeTitle = card.querySelector('.text-\\[11px\\]');
+          if (activeTitle) activeTitle.className = "text-[11px] font-black text-white";
+        });
+      });
+
+      // ─── CELEBRATION MODAL OVERLAY ──────────────────────────────────────
+      function launchCelebrationOverlay() {
+        celebrationOverlay.classList.add('active');
+        celebrationOverlay.setAttribute('aria-hidden', 'false');
+        showToast('Culinary XP Earned: +150 XP!', 'military_tech');
+        if (navigator.vibrate) navigator.vibrate([50, 100, 50, 100]);
+      }
+
+      // ─── HANDS-FREE VOICE ASSISTANT ENGINE ──────────────────────────────
+      var btnToggleVoice = document.getElementById('btn-toggle-voice');
+      var voiceStatusText = document.getElementById('voice-status-text');
+      var isVoiceActive = false;
+      var recognition = null;
+
+      // Check SpeechRecognition support
+      var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      function initSpeechRecognition() {
+        if (!SpeechRecognition) return null;
+        try {
+          var rec = new SpeechRecognition();
+          rec.continuous = true;
+          rec.interimResults = false;
+          rec.lang = 'en-US';
+
+          rec.onresult = function (event) {
+            var last = event.results.length - 1;
+            var command = event.results[last][0].transcript.trim().toLowerCase();
+            console.log('[Voice Command Received]:', command);
+
+            if (command.includes('next') || command.includes('forward')) {
+              showToast('Voice: Next Step', 'record_voice_over');
+              if (currentStepIndex === 0 && !isPremiumUser()) {
+                triggerPaywallShield();
+                return;
+              }
+              if (currentStepIndex < recipeSteps.length - 1) {
+                renderStep(currentStepIndex + 1);
+              } else {
+                launchCelebrationOverlay();
+              }
+            } else if (command.includes('previous') || command.includes('back')) {
+              showToast('Voice: Previous Step', 'record_voice_over');
+              if (currentStepIndex > 0) {
+                renderStep(currentStepIndex - 1);
+              }
+            } else if (command.includes('timer') || command.includes('start')) {
+              toggleTimer();
+            } else if (command.includes('pause') || command.includes('stop')) {
+              if (isTimerRunning) toggleTimer();
+            } else if (command.includes('repeat') || command.includes('read')) {
+              readCurrentStepAloud();
+            } else if (command.includes('done') || command.includes('finish')) {
+              launchCelebrationOverlay();
+            }
+          };
+
+          rec.onerror = function (e) {
+            console.warn('[Speech Recognition Warning]:', e.error);
+          };
+
+          rec.onend = function () {
+            if (isVoiceActive) {
+              try { rec.start(); } catch (err) {}
+            }
+          };
+
+          return rec;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      recognition = initSpeechRecognition();
+
+      function readCurrentStepAloud() {
+        if ('speechSynthesis' in window) {
+          var text = recipeSteps[currentStepIndex].headline + '. ' + stepInstructionEl.textContent;
+          var utterance = new SpeechSynthesisUtterance(text);
+          utterance.rate = 1.0;
+          window.speechSynthesis.speak(utterance);
+          showToast('Reading step aloud...', 'volume_up');
+        }
+      }
+
+      btnToggleVoice.addEventListener('click', function () {
+        isVoiceActive = !isVoiceActive;
+        if (isVoiceActive) {
+          btnToggleVoice.style.borderColor = 'var(--emerald)';
+          btnToggleVoice.style.color = 'var(--emerald)';
+          voiceStatusText.textContent = 'LISTENING';
+          showToast('Voice Engine: Listening for commands...', 'mic');
+          if (recognition) {
+            try { recognition.start(); } catch (e) {}
+          }
+        } else {
+          btnToggleVoice.style.borderColor = '';
+          btnToggleVoice.style.color = '';
+          voiceStatusText.textContent = 'VOICE';
+          showToast('Voice Engine paused', 'mic_off');
+          if (recognition) {
+            try { recognition.stop(); } catch (e) {}
+          }
+        }
+      });
+
+      // ─── INITIAL STEP RESOLUTION ────────────────────────────────────────
+      var startStep = parseInt(params.get('step'), 10);
+      if (!isNaN(startStep) && startStep >= 1 && startStep <= recipeSteps.length) {
+        if (startStep > 1 && !isPremiumUser()) {
+          renderStep(0);
+          triggerPaywallShield();
+        } else {
+          renderStep(startStep - 1);
+        }
+      } else {
+        renderStep(0);
+      }
+
+      if (params.get('voice') === 'calibrated' || params.get('voice') === 'active') {
+        setTimeout(function () {
+          btnToggleVoice.click();
+        }, 400);
+      }
+
+      // Async Live TheMealDB API Hydration Hook
+      if (typeof window.fetchTheMealDBRecipe === 'function') {
+        window.fetchTheMealDBRecipe(recipeKey).then(function(liveRecipe) {
+          if (liveRecipe && Array.isArray(liveRecipe.steps) && liveRecipe.steps.length > 0) {
+            activeRecipe = liveRecipe;
+            recipeSteps = liveRecipe.steps;
+            if (labelRecipeTitleEl) labelRecipeTitleEl.textContent = (liveRecipe.strMeal || liveRecipe.title).toUpperCase();
+            if (celebrationRecipeTagEl) celebrationRecipeTagEl.textContent = (liveRecipe.strMeal || liveRecipe.title) + ' Mastered';
+            renderStep(currentStepIndex);
+          }
+        }).catch(function(e) {
+          console.warn('[cooking-guide] Live recipe async note:', e);
+        });
+      }
+
+      // Expose globally for testing/automation
+      window.renderDynamicCookingStep = renderStep;
+      window.triggerPaywallShield = triggerPaywallShield;
+      window.openCookingPaymentModal = openPaymentModal;
+
+    })();
+  </script>
+
+  <!-- Central Dynamic Recipe Router -->
+  <script src="recipe-controller.js"></script>
+  <!-- Global Application State Engine -->
+  <script src="app.js"></script>
+
+  <!-- Global Viewport Controller Module -->
+  <script src="assets/viewport-controller.js"></script>
+
+</body>
+</html>

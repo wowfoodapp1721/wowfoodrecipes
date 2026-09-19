@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="wow Food Recipes — Screen 5 Premium Pro Auth Gate. Secure your gastronomic journey." />
+  <title>wow | Premium Pro Auth Gate</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts: EB Garamond + Plus Jakarta Sans + Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Global Viewport Controller Stylesheet -->
+  <link rel="stylesheet" href="assets/viewport-controller.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#FF9900',
+              amber: '#FFB86F',
+              primaryFixed: '#FFDCBD',
+              darkBg: '#0A0A0A',
+              cardGlass: 'rgba(19, 19, 19, 0.75)',
+              borderGlass: 'rgba(255, 153, 0, 0.35)',
+              neonGlow: 'rgba(255, 153, 0, 0.4)',
+              greenPulse: '#00FE66',
+            }
+          },
+          fontFamily: {
+            serif: ['"EB Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ─── Base & Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: #000000;
+      color: #E2E2E2;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Mobile Viewport Frame ────────────────────────────────────────── */
+    #viewport {
+      position: relative;
+      width: 100%;
+      max-width: 393px;
+      height: 852px;
+      max-height: 852px;
+      background: radial-gradient(circle at 50% 15%, #180d04 0%, #080502 50%, #000000 100%);
+      box-shadow: 0 0 0 1px rgba(255, 153, 0, 0.15), 0 32px 80px rgba(0, 0, 0, 0.95);
+      border-radius: 44px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 0 18px 22px 18px;
+    }
+
+    /* Ambient Glow Orb */
+    .glow-orb {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255, 153, 0, 0.25) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .glass-panel-neon {
+      background: rgba(18, 18, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 153, 0, 0.45);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 153, 0, 0.15);
+    }
+
+    .glass-input,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+      caret-color: #FF9900 !important;
+      background-color: rgba(0, 0, 0, 0.65) !important;
+      font-weight: 500;
+      pointer-events: auto !important;
+      user-select: text !important;
+      -webkit-user-select: text !important;
+      cursor: text;
+    }
+
+    .glass-input {
+      border: 1px solid rgba(255, 153, 0, 0.35) !important;
+      transition: all 0.25s ease;
+    }
+
+    .glass-input:focus,
+    .glass-input:focus-within,
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    input[type="tel"]:focus {
+      border-color: #FF9900 !important;
+      box-shadow: 0 0 16px rgba(255, 153, 0, 0.4) !important;
+      outline: none !important;
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+    }
+
+    /* High contrast input placeholder styling */
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.45) !important;
+      opacity: 1 !important;
+    }
+
+    /* WebKit autofill styling overrides */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: #FFFFFF !important;
+      -webkit-box-shadow: 0 0 0px 1000px #121214 inset !important;
+      box-shadow: 0 0 0px 1000px #121214 inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+      caret-color: #FF9900 !important;
+    }
+
+    .btn-neon-primary {
+      background: linear-gradient(135deg, #FF9900 0%, #FFB86F 100%);
+      box-shadow: 0 0 25px rgba(255, 153, 0, 0.45);
+      color: #000000;
+      font-weight: 800;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-neon-primary:hover {
+      box-shadow: 0 0 35px rgba(255, 153, 0, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .btn-neon-primary:active {
+      transform: scale(0.98);
+    }
+
+    .pulse-ring {
+      animation: pulse-ring 2s infinite ease-out;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.5); }
+      70% { box-shadow: 0 0 0 16px rgba(255, 153, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
+    }
+
+    .otp-input {
+      transition: all 0.2s ease;
+      color: #FF9900 !important;
+      -webkit-text-fill-color: #FF9900 !important;
+    }
+
+    .otp-input:focus {
+      border-color: #FF9900 !important;
+      box-shadow: 0 0 14px rgba(255, 153, 0, 0.5) !important;
+      outline: none !important;
+      transform: scale(1.05);
+    }
+
+    /* Toast Overlay */
+    .toast-overlay {
+      position: absolute;
+      top: 24px;
+      left: 20px;
+      right: 20px;
+      background: rgba(18, 18, 18, 0.95);
+      border: 1px solid #00E676;
+      box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 100;
+      transform: translateY(-80px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast-overlay.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ─── 2-Step Progressive Form Panes ─────────────────────────────────── */
+    .auth-step-pane {
+      animation: fadeInStep 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeInStep {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="viewport" role="main" aria-label="wow Food Recipes Screen 5 Auth Gate">
+    
+    <!-- Ambient Glow Orb -->
+    <div class="glow-orb"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast-overlay" id="auth-toast">
+      <span class="material-symbols-outlined text-[#00E676] text-[22px]">check_circle</span>
+      <div class="flex-1">
+        <p class="text-xs font-bold text-white" id="toast-title">Authentication Verified</p>
+        <p class="text-[10px] text-neutral-400" id="toast-desc">Welcome to wow Food Recipes. Opening setup...</p>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="w-full flex flex-col items-center text-center mt-0 mb-1 relative">
+      
+      <!-- Upper Right Language Selector Bar -->
+      <div class="w-full flex justify-end items-center mb-0.5 pr-1">
+        <button id="btn-language-selector" type="button" class="bg-black/60 border border-white/15 hover:border-[#FF9900]/60 rounded-full px-3 py-1 flex items-center space-x-2 transition cursor-pointer shadow-[0_0_14px_rgba(255,153,0,0.15)] group active:scale-95" aria-label="Select Application Language" title="Change Language">
+          <span class="text-sm" id="current-lang-flag">🇺🇸</span>
+          <span class="text-[11px] font-bold text-neutral-200 tracking-wider group-hover:text-white" id="current-lang-text">English</span>
+          <span class="material-symbols-outlined text-[#FF9900] text-[16px] transition-transform group-hover:rotate-180">expand_more</span>
+        </button>
+      </div>
+
+      <!-- Centered Cursive Script Brand Logo Image (Compressed Top & Bottom Cushion) -->
+      <div class="flex items-center justify-center w-full py-0.5">
+        <img
+          src="assets/brand logo.png"
+          alt="wow brand logo"
+          class="h-14 sm:h-16 w-auto object-contain max-w-[210px] drop-shadow-[0_4px_20px_rgba(255,153,0,0.35)] filter brightness-110"
+          loading="eager"
+          onerror="this.onerror=null; this.src='assets/brand-logo.png';"
+        />
+      </div>
+
+    </header>
+
+    <!-- Next-Gen Language Selector Modal (Full-Screen Visual Grid Overlay) -->
+    <div id="lang-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 hidden opacity-0 pointer-events-none transition-all duration-300 ease-out" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+      <!-- Dark Frosted Backdrop -->
+      <div id="lang-modal-backdrop" class="absolute inset-0 bg-black/85 backdrop-blur-xl transition-opacity duration-300"></div>
+
+      <!-- Modal Card Box -->
+      <div id="lang-modal-content" class="relative w-full max-w-[365px] max-h-[760px] bg-[#111113] border border-[#FF9900]/40 rounded-[28px] shadow-[0_0_50px_rgba(0,0,0,0.95),0_0_25px_rgba(255,153,0,0.2)] flex flex-col overflow-hidden transform scale-95 transition-all duration-300">
+        
+        <!-- Modal Top Bar -->
+        <div class="px-5 pt-4 pb-3 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 rounded-xl bg-[#FF9900]/15 border border-[#FF9900]/40 flex items-center justify-center text-[#FF9900]">
+              <span class="material-symbols-outlined text-[18px]">translate</span>
+            </div>
+            <div>
+              <h3 id="lang-modal-title" class="text-sm font-bold text-white tracking-tight">Select Language</h3>
+              <p class="text-[10px] text-neutral-400">Auto-detected from your device locale</p>
+            </div>
+          </div>
+          <button type="button" id="btn-close-lang-modal" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-neutral-400 hover:text-white flex items-center justify-center transition cursor-pointer active:scale-90" aria-label="Close language selector">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <!-- Sticky Search Box -->
+        <div class="px-5 pt-3.5 pb-2 bg-[#111113]/90 backdrop-blur-md sticky top-0 z-10">
+          <div class="relative flex items-center">
+            <span class="material-symbols-outlined absolute left-3 text-[#FF9900] text-[18px]">search</span>
+            <input
+              id="lang-search-input"
+              type="text"
+              placeholder="Search language or country..."
+              class="w-full bg-black/60 border border-white/15 focus:border-[#FF9900] rounded-xl py-2.5 pl-10 pr-9 text-xs text-white placeholder-neutral-500 font-medium focus:outline-none focus:ring-1 focus:ring-[#FF9900] transition shadow-inner"
+              autocomplete="off"
+            />
+            <button type="button" id="btn-clear-lang-search" class="hidden absolute right-2.5 text-neutral-400 hover:text-white text-xs p-1" aria-label="Clear search">
+              <span class="material-symbols-outlined text-[15px]">cancel</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Visual Grid Container (Scrollable) -->
+        <div class="px-5 py-3 overflow-y-auto no-scrollbar flex-1 max-h-[480px]" id="lang-grid-container">
+          
+          <!-- Section 1: Indian Regional Languages -->
+          <div id="section-indian-languages" class="lang-category-section mb-3.5">
+            <div class="flex items-center justify-between px-1 mb-2">
+              <h4 class="text-[10px] font-bold uppercase tracking-wider text-[#FF9900] flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#FF9900] shadow-[0_0_6px_#FF9900]"></span>
+                <span>Indian Regional Languages</span>
+              </h4>
+              <span class="text-[9px] font-bold text-[#FFB86F] bg-[#FF9900]/10 px-2 py-0.5 rounded-full border border-[#FF9900]/25">11 Dialects</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2" id="lang-grid-indian">
+              <!-- 11 Indian language cards populated via JS -->
+            </div>
+          </div>
+
+          <!-- Section 2: Global Languages -->
+          <div id="section-global-languages" class="lang-category-section mb-1">
+            <div class="flex items-center justify-between px-1 mb-2 pt-2 border-t border-white/10">
+              <h4 class="text-[10px] font-bold uppercase tracking-wider text-neutral-300 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                <span>Global Languages</span>
+              </h4>
+              <span class="text-[9px] font-semibold text-neutral-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">11 Languages</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2" id="lang-grid-global">
+              <!-- 11 Global language cards populated via JS -->
+            </div>
+          </div>
+
+          <!-- Empty search state -->
+          <div id="lang-empty-state" class="hidden flex flex-col items-center justify-center py-10 text-center">
+            <span class="material-symbols-outlined text-3xl text-neutral-500 mb-2">language</span>
+            <p class="text-xs font-semibold text-neutral-300">No languages found</p>
+            <p class="text-[10px] text-neutral-500 mt-0.5">Try searching in English or native script.</p>
+          </div>
+        </div>
+
+        <!-- Modal Footer Info -->
+        <div class="px-5 py-2.5 bg-black/40 border-t border-white/10 flex items-center justify-between text-[10px] text-neutral-400">
+          <span class="flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FE66] shadow-[0_0_6px_#00FE66]"></span>
+            <span>Live System Locale Sync</span>
+          </span>
+          <span id="detected-locale-badge" class="font-mono text-[9px] text-[#FF9900] bg-[#FF9900]/10 px-2 py-0.5 rounded border border-[#FF9900]/25">en-US</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- The Frosted Cyber-Mirror Auth Card (2-Step Progressive Authentication Flow) -->
+    <main class="glass-panel-neon w-full rounded-[24px] px-5 pt-4 pb-8 flex flex-col relative shadow-[0_8px_32px_rgba(0,0,0,0.7)] space-y-3">
+      
+      <!-- Tab Switcher: Login / Sign Up -->
+      <div class="w-full relative flex bg-black/50 p-1 rounded-xl border border-white/10 h-10 items-center overflow-hidden" id="auth-tab-switcher" aria-label="Authentication mode switcher">
+        <!-- Sliding Pill Background Layer (pointer-events-none + z-0 so it never blocks clicks) -->
+        <div id="tab-pill" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-gradient-to-r from-[#FF9900] to-[#FFB86F] rounded-lg transition-transform duration-300 ease-out transform translate-x-0 pointer-events-none z-0"></div>
+        <!-- Interactive Buttons Layer (z-10 + pointer-events-auto guarantees they stay clickable) -->
+        <button type="button" id="tab-login"  class="z-10 flex-1 text-center py-2 text-xs font-bold rounded-lg text-black       transition-colors duration-300 pointer-events-auto cursor-pointer">Login</button>
+        <button type="button" id="tab-signup" class="z-10 flex-1 text-center py-2 text-xs font-bold rounded-lg text-neutral-400 transition-colors duration-300 pointer-events-auto cursor-pointer">Sign Up</button>
+      </div>
+
+      <!-- Card Header: Step Indicator & Title -->
+      <div class="text-center relative">
+        <div class="flex items-center justify-between mb-1 px-1">
+          <span id="auth-step-badge" class="text-[9.5px] font-bold text-[#FF9900] bg-[#FF9900]/10 px-2.5 py-0.5 rounded-full border border-[#FF9900]/25 uppercase tracking-wider">
+            STEP 1 OF 2 • CREDENTIALS
+          </span>
+          <button type="button" id="btn-back-step1" class="hidden text-[10px] font-bold text-neutral-400 hover:text-[#FF9900] transition items-center gap-1 cursor-pointer active:scale-95" aria-label="Go back to credentials">
+            <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+            <span>Edit Credentials</span>
+          </button>
+        </div>
+        <h2 class="text-base sm:text-lg font-bold text-white tracking-tight" id="auth-card-heading">Welcome Back</h2>
+        <p class="text-[11px] text-neutral-400 mt-0.5" id="auth-card-subheading">Sign in to your account.</p>
+      </div>
+
+      <form id="auth-form" onsubmit="event.preventDefault();" class="flex flex-col space-y-3">
+        
+        <!-- ══════════════════════════════════════════════════════════════════
+             STEP 1 VIEW PANE: Basic Credentials (Name, Email, Password)
+             ══════════════════════════════════════════════════════════════════ -->
+        <div id="auth-step-1" class="auth-step-pane flex flex-col space-y-2.5">
+          
+          <!-- Full Name Input Group (50px Height) — Fade-collapse on Login tab -->
+          <div id="field-fullname" class="flex flex-col space-y-1" style="overflow:hidden; transition:max-height 0.3s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out; max-height:0px; opacity:0; margin-top:0px; pointer-events:none;">
+            <label for="auth-name-input" class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 ml-1 cursor-pointer">Full Name</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-[18px] pointer-events-none">person</span>
+              <input
+                id="auth-name-input"
+                class="glass-input w-full h-[50px] rounded-xl py-3 pl-11 pr-4 text-white placeholder-neutral-500 text-xs font-medium focus:ring-0"
+                placeholder="Sarah Jenkins"
+                type="text"
+                value="Sarah Jenkins"
+                autocomplete="name"
+              />
+            </div>
+          </div>
+
+          <!-- Email Address Input (50px Height) -->
+          <div class="flex flex-col space-y-1">
+            <label for="auth-email-input" class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 ml-1 cursor-pointer">Email Address</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 text-[18px] pointer-events-none">mail</span>
+              <input
+                id="auth-email-input"
+                class="glass-input w-full h-[50px] rounded-xl py-3 pl-11 pr-4 text-white placeholder-neutral-500 text-xs font-medium focus:ring-0"
+                placeholder="gourmand@example.com"
+                type="email"
+                value="gourmand@example.com"
+                autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <!-- Password Input (50px Height) -->
+          <div class="flex flex-col space-y-1">
+            <div class="flex justify-between items-center ml-1">
+              <label for="auth-password-input" class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 cursor-pointer">Password</label>
+              <button type="button" id="btn-forgot-password" class="text-[10px] font-semibold text-[#FF9900] hover:text-amber-300 transition-colors uppercase tracking-wider cursor-pointer">Forgot Password?</button>
+            </div>
+            <div class="relative flex items-center glass-input rounded-xl h-[50px] px-3.5 cursor-text" onclick="document.getElementById('auth-password-input').focus()">
+              <span class="material-symbols-outlined text-[#FF9900] text-[18px] mr-2.5 shrink-0 pointer-events-none">lock</span>
+              <input
+                id="auth-password-input"
+                class="bg-transparent text-white placeholder-neutral-500 tracking-wider text-xs font-medium w-full focus:outline-none pr-10"
+                placeholder="••••••••"
+                type="password"
+                value="culinary2026"
+                autocomplete="current-password"
+              />
+              <button type="button" id="btn-toggle-pwd" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors z-10 cursor-pointer" aria-label="Toggle password visibility">
+                <span class="material-symbols-outlined text-[18px]" id="pwd-eye-icon">visibility</span>
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /#auth-step-1 -->
+
+
+        <!-- ══════════════════════════════════════════════════════════════════
+             STEP 2 VIEW PANE: Mobile & OTP Verification + Biometrics
+             ══════════════════════════════════════════════════════════════════ -->
+        <div id="auth-step-2" class="auth-step-pane hidden flex-col space-y-2.5">
+          
+          <!-- Mobile Number & OTP Trigger Section (50px Height) -->
+          <div class="flex flex-col space-y-1">
+            <div class="flex justify-between items-end ml-1">
+              <label for="auth-phone-input" class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 cursor-pointer">Mobile Number</label>
+              <button type="button" id="btn-send-otp" class="text-[9.5px] font-bold text-[#FF9900] hover:text-amber-300 uppercase tracking-widest transition-colors cursor-pointer">SEND SECURE OTP</button>
+            </div>
+            <div class="flex space-x-2">
+              <div class="glass-input rounded-xl h-[50px] px-2.5 flex items-center justify-center space-x-1 w-20 shrink-0 cursor-pointer" onclick="document.getElementById('auth-phone-input').focus()">
+                <span class="relative flex h-2 w-2 mr-1 pointer-events-none">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00FF66] opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-[#00FE66] shadow-[0_0_8px_#00FE66]"></span>
+                </span>
+                <span class="text-xs pointer-events-none">🇮🇳</span>
+                <span class="text-xs font-semibold text-white ml-0.5 pointer-events-none">+91</span>
+              </div>
+              <input
+                id="auth-phone-input"
+                class="glass-input w-full h-[50px] rounded-xl px-3.5 text-white placeholder-neutral-500 text-xs font-medium tracking-wider focus:ring-0"
+                placeholder="98765 43210"
+                type="tel"
+                value="98765 43210"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <!-- OTP 6-Digit Code Grid -->
+          <div class="flex flex-col space-y-1 pt-0.5">
+            <label class="text-[9.5px] font-bold uppercase tracking-wider text-neutral-400 text-center">Enter 6-Digit Access Code</label>
+            <div class="flex justify-center gap-1.5 px-1" id="otp-box-group">
+              <input class="otp-input glass-input w-[38px] h-[46px] rounded-lg text-center text-sm font-bold text-[#FF9900] border-[#FF9900]" maxlength="1" type="text" value="8" data-index="0" />
+              <input class="otp-input glass-input w-[38px] h-[46px] rounded-lg text-center text-sm font-bold text-white border-white/20" maxlength="1" type="text" value="3" data-index="1" />
+              <input class="otp-input glass-input w-[38px] h-[46px] rounded-lg text-center text-sm font-bold text-white border-white/20" maxlength="1" type="text" value="9" data-index="2" />
+              <input class="otp-input glass-input w-[38px] h-[46px] rounded-lg text-center text-sm font-bold text-white border-white/20" maxlength="1" type="text" value="2" data-index="3" />
+              <input class="otp-input glass-input w-[38px] h-[46px] rounded-lg text-center text-sm font-bold text-white border-white/20" maxlength="1" type="text" value="0" data-index="4" />
+              <input class="otp-input glass-input w-[38px] h-[46px] rounded-lg text-center text-sm font-bold text-white border-white/20" maxlength="1" type="text" value="7" data-index="5" />
+            </div>
+            <p class="text-[10px] text-neutral-400 text-center mt-0.5">Resend code in <span class="text-[#FF9900] font-bold" id="countdown-timer">00:29</span></p>
+          </div>
+
+          <!-- Biometric Fingerprint Node -->
+          <div class="flex flex-col items-center pt-0.5">
+            <button type="button" id="btn-biometric-auth" class="relative w-11 h-11 rounded-full border border-[#FF9900]/50 flex items-center justify-center hover:border-[#FF9900] transition group cursor-pointer shadow-[0_0_16px_rgba(255,153,0,0.25)] active:scale-95" title="Authenticate with Touch ID / Biometrics" aria-label="Authenticate with biometrics">
+              <span class="absolute inset-0 rounded-full border border-[#FF9900]/40 animate-ping opacity-25 pointer-events-none"></span>
+              <span class="absolute -inset-1 rounded-full border border-[#FF9900]/25 pulse-ring pointer-events-none"></span>
+              <div class="absolute inset-0 rounded-full bg-[#FF9900]/10 blur-[4px] pointer-events-none"></div>
+              <span class="material-symbols-outlined text-[#FF9900] text-[22px] group-hover:scale-110 transition-transform relative z-10 filter drop-shadow-[0_0_8px_rgba(255,153,0,0.6)] pointer-events-none">fingerprint</span>
+            </button>
+            <span class="text-[9px] text-neutral-400 mt-1">Touch ID / Biometric Quick Pass</span>
+          </div>
+
+        </div><!-- /#auth-step-2 -->
+
+        <!-- Primary CTA Dynamic Button (52px Prominent Height) -->
+        <div class="flex flex-col items-center pt-1">
+          <button type="button" id="btn-activate-account" class="btn-neon-primary w-full h-[52px] rounded-full text-xs font-extrabold uppercase tracking-widest text-black flex items-center justify-center gap-2.5 cursor-pointer shadow-[0_0_25px_rgba(255,153,0,0.45)] active:scale-98 transition-all">
+            <span id="btn-cta-text">CONTINUE TO VERIFY</span>
+            <span class="material-symbols-outlined text-[18px]" id="btn-cta-icon">arrow_forward</span>
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Social OAuth Grid (Clean Deliberate Margin at Bottom of Card) -->
+      <div class="pt-3 pb-1 border-t border-white/10 mt-1">
+        <p class="text-[9px] font-bold text-neutral-400 text-center mb-2.5 uppercase tracking-widest">Or continue with</p>
+        <div class="flex justify-center space-x-3.5">
+          
+          <!-- Google -->
+          <button type="button" class="btn-social-auth w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center hover:border-[#FF9900] hover:shadow-[0_0_12px_rgba(255,153,0,0.4)] transition group active:scale-95" data-provider="Google" title="Sign in with Google" aria-label="Sign in with Google">
+            <svg class="w-4 h-4 fill-neutral-300 group-hover:fill-[#FF9900] transition" viewBox="0 0 24 24">
+              <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"></path>
+            </svg>
+          </button>
+
+          <!-- Apple -->
+          <button type="button" class="btn-social-auth w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center hover:border-[#FF9900] hover:shadow-[0_0_12px_rgba(255,153,0,0.4)] transition group active:scale-95" data-provider="Apple" title="Sign in with Apple" aria-label="Sign in with Apple">
+            <svg class="w-4 h-4 fill-neutral-300 group-hover:fill-[#FF9900] transition" viewBox="0 0 24 24">
+              <path d="M12.22 10.3c-.04-2.22 1.83-3.3 1.9-3.34-1.02-1.48-2.6-1.68-3.18-1.7-1.35-.12-2.65.8-3.34.8-.7 0-1.78-.78-2.9-.76-1.45.02-2.8.84-3.55 2.15-1.52 2.65-.4 6.55 1.1 8.7 .73 1.05 1.6 2.22 2.72 2.18 1.08-.04 1.5-.7 2.8-.7 1.3 0 1.68.7 2.82.7 1.15 0 1.95-1.1 2.68-2.15.82-1.2 1.18-2.38 1.2-2.42-.03-.02-2.26-.88-2.28-3.48zm-1.85-6.5c.6-.72 1-1.75.88-2.8-.88.04-1.98.6-2.6 1.32-.55.62-1.02 1.68-.9 2.7 1 .08 2.02-.5 2.62-1.22z"></path>
+            </svg>
+          </button>
+
+          <!-- Facebook -->
+          <button type="button" class="btn-social-auth w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center hover:border-[#FF9900] hover:shadow-[0_0_12px_rgba(255,153,0,0.4)] transition group active:scale-95" data-provider="Facebook" title="Sign in with Facebook" aria-label="Sign in with Facebook">
+            <svg class="w-4 h-4 fill-neutral-300 group-hover:fill-[#FF9900] transition" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+            </svg>
+          </button>
+
+          <!-- WhatsApp -->
+          <button type="button" class="btn-social-auth w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center hover:border-[#FF9900] hover:shadow-[0_0_12px_rgba(255,153,0,0.4)] transition group active:scale-95" data-provider="WhatsApp" title="Sign in with WhatsApp" aria-label="Sign in with WhatsApp">
+            <svg class="w-4 h-4 fill-neutral-300 group-hover:fill-[#FF9900] transition" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>
+            </svg>
+          </button>
+
+          <!-- Instagram -->
+          <button type="button" class="btn-social-auth w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center hover:border-[#FF9900] hover:shadow-[0_0_12px_rgba(255,153,0,0.4)] transition group active:scale-95" data-provider="Instagram" title="Sign in with Instagram" aria-label="Sign in with Instagram">
+            <svg class="w-4 h-4 fill-neutral-300 group-hover:fill-[#FF9900] transition" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Interactive Logic & State Machine -->
+  <script>
+    (function () {
+      'use strict';
+
+      var DESTINATION = 'onboarding.html';
+      var toast = document.getElementById('auth-toast');
+      var toastTitle = document.getElementById('toast-title');
+      var toastDesc = document.getElementById('toast-desc');
+
+      // ─── Tab mode global (read by setAuthStep when user returns to step 1) ─────
+      // Default: Login. Updated by the DOMContentLoaded tab script below.
+      window.currentTabMode = 'login';
+
+      // 1. Password Visibility Toggle
+      var pwdInput = document.getElementById('auth-password-input');
+      var btnTogglePwd = document.getElementById('btn-toggle-pwd');
+      var eyeIcon = document.getElementById('pwd-eye-icon');
+
+      btnTogglePwd.addEventListener('click', function () {
+        if (pwdInput.type === 'password') {
+          pwdInput.type = 'text';
+          eyeIcon.textContent = 'visibility_off';
+        } else {
+          pwdInput.type = 'password';
+          eyeIcon.textContent = 'visibility';
+        }
+      });
+
+      // ════════════════════════════════════════════════════════════════════════
+      // 2. Next-Gen Language Management System (22 Categorized Options)
+      // ════════════════════════════════════════════════════════════════════════
+      var SUPPORTED_LANGUAGES = [
+        // ─── Indian Regional Languages (11) ──────────────────────────────────
+        { code: 'en-in', flag: '🇮🇳', name: 'English', native: 'English', category: 'indian' },
+        { code: 'hi', flag: '🇮🇳', name: 'Hindi', native: 'हिन्दी', category: 'indian' },
+        { code: 'mr', flag: '🇮🇳', name: 'Marathi', native: 'मराठी', category: 'indian' },
+        { code: 'bn', flag: '🇮🇳', name: 'Bengali', native: 'বাংলা', category: 'indian' },
+        { code: 'te', flag: '🇮🇳', name: 'Telugu', native: 'తెలుగు', category: 'indian' },
+        { code: 'ta', flag: '🇮🇳', name: 'Tamil', native: 'தமிழ்', category: 'indian' },
+        { code: 'gu', flag: '🇮🇳', name: 'Gujarati', native: 'ગુજરાતી', category: 'indian' },
+        { code: 'kn', flag: '🇮🇳', name: 'Kannada', native: 'ಕನ್ನಡ', category: 'indian' },
+        { code: 'ml', flag: '🇮🇳', name: 'Malayalam', native: 'മലയാളം', category: 'indian' },
+        { code: 'pa', flag: '🇮🇳', name: 'Punjabi', native: 'ਪੰਜਾਬੀ', category: 'indian' },
+        { code: 'ur', flag: '🇮🇳', name: 'Urdu', native: 'اردو', category: 'indian' },
+
+        // ─── Global Languages (11) ───────────────────────────────────────────
+        { code: 'es', flag: '🇪🇸', name: 'Spanish', native: 'Español', category: 'global' },
+        { code: 'ja', flag: '🇯🇵', name: 'Japanese', native: '日本語', category: 'global' },
+        { code: 'ko', flag: '🇰🇷', name: 'Korean', native: '한국어', category: 'global' },
+        { code: 'pt', flag: '🇵🇹', name: 'Portuguese', native: 'Português', category: 'global' },
+        { code: 'de', flag: '🇩🇪', name: 'German', native: 'Deutsch', category: 'global' },
+        { code: 'fr', flag: '🇫🇷', name: 'French', native: 'Français', category: 'global' },
+        { code: 'ru', flag: '🇷🇺', name: 'Russian', native: 'Русский', category: 'global' },
+        { code: 'it', flag: '🇮🇹', name: 'Italian', native: 'Italiano', category: 'global' },
+        { code: 'id', flag: '🇮🇩', name: 'Indonesian', native: 'Bahasa Indonesia', category: 'global' },
+        { code: 'ar', flag: '🇸🇦', name: 'Arabic', native: 'العربية', category: 'global' },
+        { code: 'zh', flag: '🇨🇳', name: 'Chinese', native: '中文', category: 'global' }
+      ];
+
+      var btnLangSelector = document.getElementById('btn-language-selector');
+      var langFlagEl = document.getElementById('current-lang-flag');
+      var langTextEl = document.getElementById('current-lang-text');
+      var langModal = document.getElementById('lang-modal');
+      var langModalContent = document.getElementById('lang-modal-content');
+      var langModalBackdrop = document.getElementById('lang-modal-backdrop');
+      var btnCloseLangModal = document.getElementById('btn-close-lang-modal');
+      var langSearchInput = document.getElementById('lang-search-input');
+      var btnClearLangSearch = document.getElementById('btn-clear-lang-search');
+      var langGridIndian = document.getElementById('lang-grid-indian');
+      var langGridGlobal = document.getElementById('lang-grid-global');
+      var sectionIndian = document.getElementById('section-indian-languages');
+      var sectionGlobal = document.getElementById('section-global-languages');
+      var langEmptyState = document.getElementById('lang-empty-state');
+      var detectedLocaleBadge = document.getElementById('detected-locale-badge');
+
+      var currentLanguage = SUPPORTED_LANGUAGES[0]; // Default: 🇮🇳 English
+
+      // Phase 1: Invisible Auto-Detection
+      function detectDeviceLanguage() {
+        var rawLocale = (navigator.language || (navigator.languages && navigator.languages[0]) || 'en-IN');
+        if (detectedLocaleBadge) detectedLocaleBadge.textContent = rawLocale;
+
+        // Check if user has previously chosen a language
+        try {
+          var saved = localStorage.getItem('wow_selected_language');
+          if (saved) {
+            var parsed = JSON.parse(saved);
+            var existing = SUPPORTED_LANGUAGES.find(function (l) { return l.code === parsed.code; });
+            if (existing) return existing;
+          }
+        } catch (e) {
+          console.warn('Locale storage read error:', e);
+        }
+
+        // Match browser language prefix (e.g. "hi-IN" -> "hi", "mr" -> "mr", "ta-IN" -> "ta")
+        var fullCode = rawLocale.toLowerCase();
+        var prefix = fullCode.split('-')[0];
+
+        var matched = SUPPORTED_LANGUAGES.find(function (l) { return l.code === fullCode; }) ||
+                      SUPPORTED_LANGUAGES.find(function (l) { return l.code.split('-')[0] === prefix; });
+        return matched || SUPPORTED_LANGUAGES[0];
+      }
+
+      // Helper to generate Card DOM Element
+      function createLanguageCard(lang) {
+        var isSelected = lang.code === currentLanguage.code;
+
+        var card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'lang-grid-card lang-option relative bg-[#18181B] hover:bg-[#222227] border rounded-2xl p-2.5 flex flex-col items-start text-left transition-all duration-200 cursor-pointer group shadow-sm active:scale-[0.98] ' +
+          (isSelected ? 'border-[#FF9900] bg-[#231A10] shadow-[0_0_14px_rgba(255,153,0,0.25)]' : 'border-white/10 hover:border-[#FF9900]/60');
+        card.setAttribute('data-code', lang.code);
+        card.setAttribute('data-lang', lang.native);
+        card.setAttribute('data-name', lang.name);
+        card.setAttribute('data-native', lang.native);
+        card.setAttribute('data-flag', lang.flag);
+        card.setAttribute('data-category', lang.category);
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between w-full mb-1">
+            <span class="text-xl filter drop-shadow-sm">${lang.flag}</span>
+            <div class="lang-check-badge w-4 h-4 rounded-full border flex items-center justify-center transition-all ${isSelected ? 'bg-[#FF9900] border-[#FF9900] text-black shadow-[0_0_6px_#FF9900]' : 'border-neutral-700 text-transparent'}">
+              <span class="material-symbols-outlined text-[11px] font-bold">check</span>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="text-xs font-bold ${isSelected ? 'text-[#FF9900]' : 'text-white'} tracking-tight group-hover:text-[#FF9900] transition-colors truncate">${lang.native}</div>
+            <div class="text-[9.5px] text-neutral-400 font-medium truncate">${lang.name}</div>
+          </div>
+        `;
+
+        card.addEventListener('click', function () {
+          selectLanguage(lang, true);
+        });
+
+        return card;
+      }
+
+      // Populate Visual Language Grid Cards in Categorized Subheadings
+      function renderLanguageGrid() {
+        if (langGridIndian) {
+          langGridIndian.innerHTML = '';
+          SUPPORTED_LANGUAGES.filter(function (l) { return l.category === 'indian'; }).forEach(function (lang) {
+            langGridIndian.appendChild(createLanguageCard(lang));
+          });
+        }
+
+        if (langGridGlobal) {
+          langGridGlobal.innerHTML = '';
+          SUPPORTED_LANGUAGES.filter(function (l) { return l.category === 'global'; }).forEach(function (lang) {
+            langGridGlobal.appendChild(createLanguageCard(lang));
+          });
+        }
+      }
+
+      // Update Active Language State
+      function selectLanguage(lang, shouldCloseModal) {
+        currentLanguage = lang;
+        
+        // Update trigger display
+        if (langFlagEl) langFlagEl.textContent = lang.flag;
+        if (langTextEl) langTextEl.textContent = lang.native;
+
+        // Persist to localStorage
+        localStorage.setItem('wow_selected_language', JSON.stringify(lang));
+
+        // Re-render grid selection states
+        renderLanguageGrid();
+
+        if (shouldCloseModal) {
+          showToast(lang.flag + ' Language Switched', 'Dialect set to ' + lang.native + ' (' + lang.name + ')');
+          closeLanguageModal();
+        }
+      }
+
+      // Modal Controls
+      function openLanguageModal() {
+        if (!langModal) return;
+        renderLanguageGrid();
+        // Step 1: unmount 'hidden' so the element re-enters the layout
+        langModal.classList.remove('hidden');
+        // Step 2: defer opacity + pointer-events by 10ms so the CSS transition fires
+        setTimeout(function () {
+          langModal.classList.remove('opacity-0', 'pointer-events-none');
+        }, 10);
+        if (langModalContent) {
+          langModalContent.classList.remove('scale-95');
+          langModalContent.classList.add('scale-100');
+        }
+
+        // Reset search
+        if (langSearchInput) {
+          langSearchInput.value = '';
+          if (btnClearLangSearch) btnClearLangSearch.classList.add('hidden');
+          if (langEmptyState) langEmptyState.classList.add('hidden');
+          if (sectionIndian) sectionIndian.style.display = 'block';
+          if (sectionGlobal) sectionGlobal.style.display = 'block';
+          setTimeout(function () {
+            langSearchInput.focus();
+          }, 120);
+        }
+      }
+
+      function closeLanguageModal() {
+        if (!langModal) return;
+        langModal.classList.add('opacity-0', 'pointer-events-none');
+        if (langModalContent) {
+          langModalContent.classList.remove('scale-100');
+          langModalContent.classList.add('scale-95');
+        }
+        // Re-add 'hidden' after the 300ms CSS transition completes so it fully
+        // leaves layout flow and cannot block pointer events beneath it
+        setTimeout(function () {
+          langModal.classList.add('hidden');
+        }, 310);
+      }
+
+      // Instant Real-time Search Filter across English Name, Native Script & Code
+      if (langSearchInput) {
+        langSearchInput.addEventListener('input', function () {
+          var query = langSearchInput.value.toLowerCase().trim();
+          if (btnClearLangSearch) {
+            btnClearLangSearch.classList.toggle('hidden', !query);
+          }
+
+          var indianMatches = 0;
+          var globalMatches = 0;
+
+          document.querySelectorAll('.lang-grid-card').forEach(function (card) {
+            var code = (card.getAttribute('data-code') || '').toLowerCase();
+            var name = (card.getAttribute('data-name') || '').toLowerCase();
+            var nativeName = (card.getAttribute('data-native') || '').toLowerCase();
+            var category = card.getAttribute('data-category');
+            
+            // Search across English name, native script characters, and code
+            var match = code.includes(query) || name.includes(query) || nativeName.includes(query);
+            card.style.display = match ? 'flex' : 'none';
+
+            if (match) {
+              if (category === 'indian') indianMatches++;
+              else globalMatches++;
+            }
+          });
+
+          // Dynamic category heading visibility
+          if (sectionIndian) sectionIndian.style.display = indianMatches > 0 ? 'block' : 'none';
+          if (sectionGlobal) sectionGlobal.style.display = globalMatches > 0 ? 'block' : 'none';
+
+          if (langEmptyState) {
+            langEmptyState.classList.toggle('hidden', (indianMatches + globalMatches) > 0);
+          }
+        });
+      }
+
+      if (btnClearLangSearch) {
+        btnClearLangSearch.addEventListener('click', function () {
+          langSearchInput.value = '';
+          btnClearLangSearch.classList.add('hidden');
+          if (langEmptyState) langEmptyState.classList.add('hidden');
+          if (sectionIndian) sectionIndian.style.display = 'block';
+          if (sectionGlobal) sectionGlobal.style.display = 'block';
+          document.querySelectorAll('.lang-grid-card').forEach(function (card) {
+            card.style.display = 'flex';
+          });
+          langSearchInput.focus();
+        });
+      }
+
+      if (btnLangSelector) {
+        btnLangSelector.addEventListener('click', openLanguageModal);
+      }
+
+      if (btnCloseLangModal) {
+        btnCloseLangModal.addEventListener('click', closeLanguageModal);
+      }
+
+      if (langModalBackdrop) {
+        langModalBackdrop.addEventListener('click', closeLanguageModal);
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && langModal && !langModal.classList.contains('hidden')) {
+          closeLanguageModal();
+        }
+      });
+
+      // Initialize with invisible auto-detection on load
+      var initialLang = detectDeviceLanguage();
+      selectLanguage(initialLang, false);
+
+      // 3. OTP Countdown Timer
+      var countdownEl = document.getElementById('countdown-timer');
+      var seconds = 29;
+      var timerInterval = setInterval(function () {
+        seconds--;
+        if (seconds < 0) {
+          clearInterval(timerInterval);
+          countdownEl.textContent = '00:00';
+          countdownEl.style.color = '#00E676';
+          countdownEl.style.cursor = 'pointer';
+          countdownEl.textContent = 'Resend Now';
+          countdownEl.onclick = resetTimer;
+        } else {
+          countdownEl.textContent = '00:' + (seconds < 10 ? '0' + seconds : seconds);
+        }
+      }, 1000);
+
+      function resetTimer() {
+        seconds = 30;
+        countdownEl.style.color = '#FF9900';
+        countdownEl.style.cursor = 'default';
+        countdownEl.onclick = null;
+        showToast('OTP Dispatched', 'A new 6-digit access code was sent.');
+      }
+
+      document.getElementById('btn-send-otp').addEventListener('click', resetTimer);
+
+      // 4. OTP Inputs — Full focus-hopping engine
+      var otpInputs = document.querySelectorAll('#otp-box-group .otp-input');
+
+      // triggerFormSuccess: hooks into the existing toast + auth completion pipeline
+      function triggerFormSuccess() {
+        var otpCode = Array.from(otpInputs).map(function (b) { return b.value; }).join('');
+        showToast('\u2705 Code Verified', 'OTP ' + otpCode + ' accepted — signing you in…');
+        setTimeout(function () {
+          completeAuthentication(authMethod || 'Email & OTP Credentials');
+        }, 1500);
+      }
+
+      otpInputs.forEach(function (box, index) {
+        // Input: numeric filter + forward hop / auto-submit on 6th digit
+        box.addEventListener('input', function () {
+          // Strip any non-numeric characters immediately
+          box.value = box.value.replace(/[^0-9]/g, '');
+
+          if (box.value.length === 1) {
+            if (index < otpInputs.length - 1) {
+              // Advance focus to next box
+              otpInputs[index + 1].focus();
+            } else {
+              // Last box filled — dismiss keyboard, fire submission
+              box.blur();
+              triggerFormSuccess();
+            }
+          }
+        });
+
+        // Keydown: backspace on empty box steps focus back
+        box.addEventListener('keydown', function (e) {
+          if (e.key === 'Backspace' && box.value.length === 0 && index > 0) {
+            otpInputs[index - 1].focus();
+          }
+        });
+
+        // Paste: handle pasting a full 6-digit code at once
+        box.addEventListener('paste', function (e) {
+          e.preventDefault();
+          var pasted = (e.clipboardData || window.clipboardData)
+            .getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+          pasted.split('').forEach(function (digit, i) {
+            if (otpInputs[i]) otpInputs[i].value = digit;
+          });
+          var lastFilled = Math.min(pasted.length, otpInputs.length) - 1;
+          if (lastFilled >= 0) {
+            if (lastFilled === otpInputs.length - 1) {
+              otpInputs[lastFilled].blur();
+              triggerFormSuccess();
+            } else {
+              otpInputs[lastFilled + 1].focus();
+            }
+          }
+        });
+      });
+
+      // 5. Toast Helper
+      function showToast(title, desc) {
+        toastTitle.textContent = title;
+        toastDesc.textContent = desc;
+        toast.classList.add('show');
+        setTimeout(function () {
+          toast.classList.remove('show');
+        }, 2400);
+      }
+
+      // 6. 2-Step Progressive Authentication Flow State Controller
+      var currentStep = 1;
+      var step1Pane = document.getElementById('auth-step-1');
+      var step2Pane = document.getElementById('auth-step-2');
+      var btnCta = document.getElementById('btn-activate-account');
+      var btnCtaText = document.getElementById('btn-cta-text');
+      var btnCtaIcon = document.getElementById('btn-cta-icon');
+      var btnBackStep1 = document.getElementById('btn-back-step1');
+      var authStepBadge = document.getElementById('auth-step-badge');
+      var authCardHeading = document.getElementById('auth-card-heading');
+      var authCardSubheading = document.getElementById('auth-card-subheading');
+
+      function setAuthStep(step) {
+        currentStep = step;
+        if (step === 1) {
+          if (step1Pane) {
+            step1Pane.classList.remove('hidden');
+            step1Pane.classList.add('flex');
+          }
+          if (step2Pane) {
+            step2Pane.classList.add('hidden');
+            step2Pane.classList.remove('flex');
+          }
+          if (btnCtaText) btnCtaText.textContent = 'CONTINUE TO VERIFY';
+          if (btnCtaIcon) btnCtaIcon.textContent = 'arrow_forward';
+          if (authStepBadge) authStepBadge.textContent = 'STEP 1 OF 2 • CREDENTIALS';
+          if (btnBackStep1) {
+            btnBackStep1.classList.add('hidden');
+            btnBackStep1.classList.remove('flex');
+          }
+          if (authCardHeading) authCardHeading.textContent = (currentTabMode === 'login') ? 'Welcome Back' : 'Create Account';
+          if (authCardSubheading) authCardSubheading.textContent = (currentTabMode === 'login') ? 'Sign in to your account.' : 'Secure your gastronomic journey.';
+        } else {
+          if (step1Pane) {
+            step1Pane.classList.add('hidden');
+            step1Pane.classList.remove('flex');
+          }
+          if (step2Pane) {
+            step2Pane.classList.remove('hidden');
+            step2Pane.classList.add('flex');
+          }
+          if (btnCtaText) btnCtaText.textContent = 'ACTIVATE SECURE ACCOUNT';
+          if (btnCtaIcon) btnCtaIcon.textContent = 'arrow_forward';
+          if (authStepBadge) authStepBadge.textContent = 'STEP 2 OF 2 • VERIFICATION';
+          if (btnBackStep1) {
+            btnBackStep1.classList.remove('hidden');
+            btnBackStep1.classList.add('flex');
+          }
+          if (authCardHeading) authCardHeading.textContent = 'Verify Access';
+          if (authCardSubheading) authCardSubheading.textContent = 'Confirm mobile OTP or biometrics.';
+        }
+      }
+
+      if (btnBackStep1) {
+        btnBackStep1.addEventListener('click', function () {
+          setAuthStep(1);
+        });
+      }
+
+      // 7. Direct Screen Transition Handler (Fast-Track to Screen 1A - AI Personalization)
+      var isAuthenticating = false;
+
+      function completeAuthentication(authMethod, userIdentifier) {
+        if (isAuthenticating) return;
+
+        var nameInput = document.getElementById('auth-name-input');
+        var emailInput = document.getElementById('auth-email-input');
+        var pwdInput = document.getElementById('auth-password-input');
+
+        var userName = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'Sarah Jenkins';
+        var userEmail = userIdentifier || (emailInput && emailInput.value.trim() ? emailInput.value.trim() : 'gourmand@example.com');
+        var method = authMethod || 'Email & OTP Credentials';
+
+        isAuthenticating = true;
+
+        // Set persistent authentication session in localStorage
+        var sessionPayload = {
+          authenticated: true,
+          name: userName,
+          user: userEmail,
+          authMethod: method,
+          role: "PREMIUM_PRO",
+          timestamp: new Date().toISOString()
+        };
+        localStorage.setItem('wow_auth_session', JSON.stringify(sessionPayload));
+
+        showToast('🔐 Access Granted', 'Welcome ' + userName + '! Loading taste setup...');
+
+        // Direct transition to Screen 1A: AI Personalization Setup
+        setTimeout(function () {
+          window.location.href = DESTINATION;
+        }, 350);
+      }
+
+      // Primary CTA Button Click Handler (Step 1: Continue to Verify -> Step 2: Activate Secure Account)
+      if (btnCta) {
+        btnCta.addEventListener('click', function () {
+          if (currentStep === 1) {
+            showToast('Credentials Stored', 'Please confirm mobile OTP or touch fingerprint.');
+            setAuthStep(2);
+          } else {
+            completeAuthentication('Email & OTP Credentials');
+          }
+        });
+      }
+
+      // Form Enter Key Submission Handler
+      var authForm = document.getElementById('auth-form');
+      if (authForm) {
+        authForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (btnCta) btnCta.click();
+        });
+      }
+
+      // Biometrics Button Click
+      var btnBio = document.getElementById('btn-biometric-auth');
+      if (btnBio) {
+        btnBio.addEventListener('click', function () {
+          completeAuthentication('Biometric Touch ID');
+        });
+      }
+
+      // Social Auth Buttons Click
+      document.querySelectorAll('.btn-social-auth').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var provider = btn.getAttribute('data-provider');
+          completeAuthentication(provider + ' OAuth');
+        });
+      });
+
+      // Forgot Password Trigger
+      var btnForgot = document.getElementById('btn-forgot-password');
+      if (btnForgot) {
+        btnForgot.addEventListener('click', function () {
+          showToast('Password Reset', 'Recovery instructions sent to ' + document.getElementById('auth-email-input').value);
+        });
+      }
+
+      // Initialize Step 1 State
+      setAuthStep(1);
+
+    })();
+  </script>
+
+  <!-- Global Viewport Controller Module -->
+  <script src="assets/viewport-controller.js"></script>
+
+  <!-- Tab Switcher Module: DOMContentLoaded-safe, modular -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var tabLogin      = document.getElementById('tab-login');
+      var tabSignup     = document.getElementById('tab-signup');
+      var tabPill       = document.getElementById('tab-pill');
+      var fieldFullName = document.getElementById('field-fullname');
+      var authHeading   = document.getElementById('auth-card-heading');
+
+      function switchToLogin() {
+        if (!tabPill) return;
+        window.currentTabMode = 'login';
+
+        tabPill.style.transform = 'translateX(0)';
+
+        tabLogin.className  = 'z-10 flex-1 text-center py-2 text-xs font-bold rounded-lg text-black       transition-colors duration-300 pointer-events-auto cursor-pointer';
+        tabSignup.className = 'z-10 flex-1 text-center py-2 text-xs font-bold rounded-lg text-neutral-400 transition-colors duration-300 pointer-events-auto cursor-pointer';
+
+        if (authHeading) authHeading.innerText = 'Welcome Back';
+
+        if (fieldFullName) {
+          fieldFullName.style.maxHeight     = '0px';
+          fieldFullName.style.opacity       = '0';
+          fieldFullName.style.marginTop     = '0px';
+          fieldFullName.style.pointerEvents = 'none';
+        }
+      }
+
+      function switchToSignup() {
+        if (!tabPill) return;
+        window.currentTabMode = 'signup';
+
+        tabPill.style.transform = 'translateX(calc(100% + 4px))';
+
+        tabSignup.className = 'z-10 flex-1 text-center py-2 text-xs font-bold rounded-lg text-black       transition-colors duration-300 pointer-events-auto cursor-pointer';
+        tabLogin.className  = 'z-10 flex-1 text-center py-2 text-xs font-bold rounded-lg text-neutral-400 transition-colors duration-300 pointer-events-auto cursor-pointer';
+
+        if (authHeading) authHeading.innerText = 'Create Account';
+
+        if (fieldFullName) {
+          fieldFullName.style.maxHeight     = '100px';
+          fieldFullName.style.opacity       = '1';
+          fieldFullName.style.marginTop     = '12px';
+          fieldFullName.style.pointerEvents = 'auto';
+        }
+      }
+
+      if (tabLogin && tabSignup) {
+        // Direct pointer click handlers — .onclick avoids any stacked listener conflicts
+        tabLogin.onclick  = function (e) { e.preventDefault(); switchToLogin();  };
+        tabSignup.onclick = function (e) { e.preventDefault(); switchToSignup(); };
+
+        // Default to Login view on first load
+        switchToLogin();
+      }
+    });
+  </script>
+
+  <!-- Global Application State Engine -->
+  <script src="app.js"></script>
+
+</body>
+</html>

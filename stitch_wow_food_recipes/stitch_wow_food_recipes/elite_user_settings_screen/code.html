@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Premium System Config</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"primary-fixed": "#ffdcbd", "on-primary-fixed": "#2c1600", background: "#131313", "surface-container-high": "#2a2a2a", primary: "#ffc082", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-fixed-variant": "#00531b", "surface-dim": "#131313", "on-primary": "#4a2800", "secondary-fixed-dim": "#00e55b", "surface-container": "#1f1f1f", "on-secondary-container": "#007128", "on-tertiary-container": "#8d000c", "inverse-on-surface": "#303030", "on-primary-container": "#653a00", "tertiary-fixed": "#ffdad6", "error-container": "#93000a", "on-secondary-fixed": "#002107", "secondary-fixed": "#6bff83", "surface-container-lowest": "#0e0e0e", "on-error-container": "#ffdad6", "surface-container-low": "#1b1b1b", "on-surface-variant": "#dbc2ad", "on-surface": "#e2e2e2", "secondary-container": "#00fe66", outline: "#a38d7a", "outline-variant": "#554434", "inverse-surface": "#e2e2e2", "primary-container": "#ff9900", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "surface-variant": "#353535", "surface-tint": "#ffb86f", "on-tertiary-fixed": "#410002", "tertiary-fixed-dim": "#ffb4ac", "on-tertiary": "#690006", error: "#ffb4ab", "on-primary-fixed-variant": "#693c00", "primary-fixed-dim": "#ffb86f", "on-secondary": "#003911", "on-tertiary-fixed-variant": "#93000d", surface: "#131313", "on-error": "#690005", tertiary: "#ffbcb5", "inverse-primary": "#8a5100", secondary: "#ebffe6"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {base: "8px", gutter: "16px", "stack-md": "12px", "container-margin": "24px", "stack-lg": "24px", "stack-sm": "4px"}, fontFamily: {"display-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "headline-lg": ["EB Garamond"]}, fontSize: {"display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}]}}}};</script>
+<style>
+        /* Custom Utilities */
+        .glass-panel {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-border-amber {
+            border: 1px solid rgba(255, 153, 0, 0.4);
+            box-shadow: 0 0 8px rgba(255, 153, 0, 0.2);
+        }
+        .neon-text-amber {
+            text-shadow: 0 0 10px rgba(255, 153, 0, 0.6);
+        }
+        .neon-text-emerald {
+            text-shadow: 0 0 10px rgba(0, 254, 102, 0.6);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-on-surface font-body-lg text-body-lg min-h-screen selection:bg-primary-container selection:text-black">
+<!-- JSON: TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-lg border-b border-white/10 flex justify-between items-center px-container-margin h-16 transition-opacity">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="menu">menu</button>
+<div class="font-display-lg text-display-lg tracking-tight text-on-surface select-none [&amp;&gt;span:first-child]:text-primary-container">
+<span>anna</span>purna
+        </div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="notifications">notifications</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] pb-[100px] px-container-margin flex flex-col gap-stack-lg max-w-md mx-auto relative">
+<!-- User Requested Header -->
+<div class="text-center w-full">
+<h1 class="font-title-md text-title-md text-white tracking-widest uppercase neon-text-amber opacity-90">Premium System Config</h1>
+</div>
+<!-- HERO SYSTEM BADGE -->
+<section class="relative w-full rounded-xl overflow-hidden neon-border-amber p-6 flex flex-col items-center gap-stack-md" data-alt="A macro texture shot of dark carbon fiber material, illuminated by a subtle, glowing orange neon light from the edge. High contrast, pure black foundation, sleek, futuristic, and premium culinary dark mode aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjYKTaCiBVLYe4ySbKij6cqaOXeX4bEVKIeoWC5unhO0HFFp7Z8XeNFl3FsRQAg7cNZv2MqLjuIwLdSvsfSXVZZK5jhBp4W_ZjplWYMddweWd38YE8Phocdpifu74pytmaCisPSFmGpYX9i0i8I7qGeh2swqkQgyE49G5CsQg7o06KDlfXvXIWGezpVbln7GYtGtuX2__bqso_S1if60L6JDzcpAXEMC5riTHuPgMUfMUjJ85-yk4bCg')">
+<!-- Glass overlay to soften the background -->
+<div class="absolute inset-0 bg-black/60 backdrop-blur-[8px]"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-stack-md">
+<div class="relative">
+<img class="w-24 h-24 rounded-full object-cover border-[3px] border-primary-container shadow-[0_0_20px_rgba(255,153,0,0.8)]" data-alt="A striking, high-definition portrait photograph of a confident woman in a cyberpunk setting. Cinematic lighting with deep shadows and intense neon orange rim light. Rich culinary dark mode aesthetic, premium and elite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIfwML4WodIeQaxBFqNWp1UVdW1eqKi4wr-AhddBXO-oHGpoFkGToUQg6d8Iksmhy3rTMP5uzZFdaARRtfFhamU6qU5Kj8Oz9E6oxd3cAGAI8Ynj3jzzCGBCBuOqW7b6N0skXI-M0652kwUu0H-v1iO093TA7v3H_tVlVP7D-VTRdxtwGAx88Z3MX5abAoEmWMhbv4T_AvrYAknK_3H5-BEiwQnNZpK-h1ZtDbVkq30CUcvfYg7p4yZw"/>
+<div class="absolute bottom-0 right-0 w-6 h-6 bg-secondary-container rounded-full border-2 border-black flex items-center justify-center shadow-[0_0_10px_rgba(0,254,102,0.8)]">
+<span class="material-symbols-outlined text-[14px] text-black" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-white">Anna</h2>
+<p class="font-label-caps text-label-caps text-primary-container tracking-widest mt-1">Premium Pro Lifetime Member</p>
+</div>
+</div>
+</section>
+<!-- TRANS-GLASS CONTROL MENU ITEMS -->
+<section class="flex flex-col gap-stack-sm">
+<!-- Tile 1 -->
+<button class="w-full flex items-center justify-between p-stack-md rounded-lg glass-panel neon-border-amber hover:bg-black/80 transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant">language</span>
+<span class="font-body-lg text-body-lg text-on-surface">System Localization &amp; Language</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<span class="font-body-sm text-body-sm text-primary-container neon-text-amber">English (US)</span>
+<span class="material-symbols-outlined text-primary-container">chevron_right</span>
+</div>
+</button>
+<!-- Tile 2 -->
+<button class="w-full flex items-center justify-between p-stack-md rounded-lg glass-panel neon-border-amber hover:bg-black/80 transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant">eco</span>
+<span class="font-body-lg text-body-lg text-on-surface">AI Dietary Matrix Filters</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<span class="font-body-sm text-body-sm text-secondary-container neon-text-emerald">Pure Veg Profile Active</span>
+<span class="material-symbols-outlined text-secondary-container">chevron_right</span>
+</div>
+</button>
+<!-- Tile 3 -->
+<div class="w-full flex items-center justify-between p-stack-md rounded-lg glass-panel neon-border-amber">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant">fingerprint</span>
+<span class="font-body-lg text-body-lg text-on-surface">Biometric Encryption Lock</span>
+</div>
+<!-- Custom Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-secondary-container after:border-secondary-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary-container/20 border border-white/10 shadow-[0_0_8px_rgba(0,254,102,0.4)]"></div>
+</label>
+</div>
+<!-- Tile 4 -->
+<button class="w-full flex items-center justify-between p-stack-md rounded-lg glass-panel neon-border-amber hover:bg-black/80 transition-colors active:scale-[0.98]">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+<span class="font-body-lg text-body-lg text-on-surface">Manage Subscription &amp; Invoices</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary-container">chevron_right</span>
+</div>
+</button>
+</section>
+</main>
+<!-- JSON: BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-base pb-safe bg-black/60 backdrop-blur-lg border-t border-white/10 md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform w-16">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform w-16">
+<span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform w-16">
+<span class="material-symbols-outlined mb-1" data-icon="favorite">favorite</span>
+<span class="font-label-caps text-label-caps">Favorites</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform w-16">
+<span class="material-symbols-outlined mb-1" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-label-caps text-label-caps">Kitchen</span>
+</button>
+<!-- Active Profile Tab -->
+<button class="flex flex-col items-center justify-center text-primary drop-shadow-[0_0_8px_rgba(255,153,0,0.6)] active:scale-90 transition-transform w-16">
+<span class="material-symbols-outlined mb-1" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</button>
+</nav>
+</body></html>

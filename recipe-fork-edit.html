@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="wow Food Recipes — Recipe Fork & Edit Mode Core (SCR-03I)." />
+  <title>wow | Edit Recipe</title>
+
+  <!-- Google Fonts: EB Garamond + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Reset & Design Tokens ──────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black:          #0B0F14;
+      --surface-base:   #0B0F14;
+      --surface-card:   #161618;
+      --surface-charcoal: #1C1C1E;
+      --surface-secondary: #2C2C2E;
+      --surface-chip:   #1E1E24;
+      --surface-input:  #121214;
+
+      --crimson:        #3DF2E0;
+      --crimson-hover:  #5AFCEB;
+      --crimson-glow:   rgba(61, 242, 224, 0.4);
+      --crimson-dim:    rgba(61, 242, 224, 0.15);
+      --crimson-border: rgba(61, 242, 224, 0.35);
+
+      --emerald:        #00E676;
+      --emerald-dim:    rgba(0, 230, 118, 0.15);
+      --amber:          #FBBF24;
+
+      --text-white:     #FFFFFF;
+      --text-main:      #E5E5EA;
+      --text-muted:     #8E8E93;
+      --text-dim:       #636366;
+
+      --border-soft:    rgba(255, 255, 255, 0.08);
+      --border-subtle:  rgba(255, 255, 255, 0.14);
+
+      --font-serif:     'EB Garamond', Georgia, serif;
+      --font-sans:      'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--black);
+      color: var(--text-white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    /* ─── 393px × 852px Mobile Viewport Frame ───────────────────────────── */
+    #viewport {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      background-color: var(--black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 44px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 32px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .tap-effect {
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      cursor: pointer;
+    }
+    .tap-effect:active {
+      transform: scale(0.96);
+      opacity: 0.85;
+    }
+
+    /* ─── STATUS BAR ───────────────────────────────────────────────────── */
+    .status-bar {
+      height: 44px;
+      padding: 12px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-white);
+      z-index: 50;
+      background: rgba(11, 15, 20, 0.92);
+      backdrop-filter: blur(12px);
+      flex-shrink: 0;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-bar-icons .material-symbols-outlined {
+      font-size: 16px;
+    }
+
+    /* ─── TOP APP BAR ──────────────────────────────────────────────────── */
+    .edit-header {
+      padding: 8px 18px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11, 15, 20, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+      z-index: 40;
+      flex-shrink: 0;
+    }
+
+    .edit-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-close-edit {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      outline: none;
+    }
+
+    .edit-page-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: white;
+    }
+
+    .btn-save-fork {
+      background: transparent;
+      border: none;
+      color: var(--crimson);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 6px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-save-fork:hover {
+      background: var(--crimson-dim);
+    }
+
+    /* ─── SCROLLABLE FORM BODY ─────────────────────────────────────────── */
+    .edit-content-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Active Recipe Context Preview Card */
+    .recipe-context-card {
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .recipe-context-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(61, 242, 224, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(61, 242, 224, 0.15);
+    }
+
+    .recipe-thumb-wrap {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      border: 1px solid var(--border-soft);
+      flex-shrink: 0;
+    }
+
+    .recipe-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recipe-context-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .recipe-context-tag {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--crimson);
+    }
+
+    .recipe-context-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .recipe-context-author {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn-change-photo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Form Fields */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-label-hint {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 48px;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 0 42px 0 14px;
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .form-input:hover {
+      transform: translateY(-3px);
+      border-color: rgba(61, 242, 224, 0.3);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.15);
+    }
+
+    .form-input:focus {
+      border-color: var(--crimson);
+      box-shadow: 0 0 0 1px var(--crimson), 0 0 12px var(--crimson-dim);
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 18px;
+    }
+
+    /* 2-Column Row for Times */
+    .form-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Fork Custom Substitutions Card */
+    .fork-substitutions-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sub-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sub-card-title {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .sub-toggle-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(61, 242, 224, 0.35);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.15);
+    }
+
+    .sub-toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .sub-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .sub-reason {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    /* Switch toggle */
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 38px;
+      height: 22px;
+    }
+
+    .switch-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #2c2c2e;
+      border-radius: 22px;
+      transition: 0.25s;
+    }
+
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.25s;
+    }
+
+    input:checked + .switch-slider {
+      background-color: var(--crimson);
+      box-shadow: 0 0 8px var(--crimson-glow);
+    }
+
+    input:checked + .switch-slider:before {
+      transform: translateX(16px);
+    }
+
+    /* Chef Custom Notes Textarea */
+    .form-textarea {
+      width: 100%;
+      min-height: 80px;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      resize: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .form-textarea:hover {
+      transform: translateY(-3px);
+      border-color: rgba(61, 242, 224, 0.3);
+      box-shadow: 0 6px 16px rgba(61, 242, 224, 0.15);
+    }
+
+    .form-textarea:focus {
+      border-color: var(--crimson);
+      box-shadow: 0 0 0 1px var(--crimson), 0 0 12px var(--crimson-dim);
+    }
+
+    /* Notice Tip */
+    .sync-notice-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-soft);
+    }
+
+    /* ─── FOOTER ACTION ────────────────────────────────────────────────── */
+    .edit-footer {
+      padding: 14px 18px 26px;
+      background: rgba(11, 15, 20, 0.95);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn-delete-fork {
+      width: 100%;
+      height: 48px;
+      border-radius: 16px;
+      background: var(--surface-charcoal);
+      border: 1px solid #3DF2E0;
+      color: #3DF2E0;
+      font-size: 13.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(61, 242, 224, 0.15);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .btn-delete-fork .material-symbols-outlined {
+      color: #3DF2E0;
+      transition: color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .btn-delete-fork:hover {
+      transform: translateY(-2px);
+      background: #3DF2E0;
+      border-color: #3DF2E0;
+      color: #0B0F14;
+      box-shadow: 0 6px 20px rgba(61, 242, 224, 0.35);
+    }
+
+    .btn-delete-fork:hover .material-symbols-outlined {
+      color: #0B0F14;
+    }
+
+    /* Toast */
+    .edit-toast {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(20, 20, 24, 0.95);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--crimson);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 12px var(--crimson-glow);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .edit-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="viewport" role="main" aria-label="Recipe Fork and Edit Mode">
+
+    <!-- ─── 1. STATUS BAR ──────────────────────────────────────────────── -->
+    <div class="status-bar" aria-hidden="true">
+      <span>9:41</span>
+      <div class="status-bar-icons">
+        <span class="material-symbols-outlined">signal_cellular_4_bar</span>
+        <span class="material-symbols-outlined">wifi</span>
+        <span class="material-symbols-outlined">battery_full</span>
+      </div>
+    </div>
+
+    <!-- ─── 2. FLOATING TOAST ──────────────────────────────────────────── -->
+    <div class="edit-toast" id="global-toast">
+      <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]" id="toast-icon" style="color:#3DF2E0;">check_circle</span>
+      <span id="toast-msg">Recipe Fork Saved</span>
+    </div>
+
+    <!-- ─── 3. TOP APP BAR ─────────────────────────────────────────────── -->
+    <header class="edit-header">
+      <div class="edit-header-left">
+        <a href="recipe-detail.html" class="btn-close-edit tap-effect" id="btn-close-edit" aria-label="Cancel and Close">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </a>
+        <h1 class="edit-page-title">Edit Recipe</h1>
+      </div>
+      <button class="btn-save-fork tap-effect" id="btn-save-recipe" type="button" aria-label="Save Recipe Changes">
+        <span class="material-symbols-outlined text-[18px]">done</span>
+        <span>Save</span>
+      </button>
+    </header>
+
+    <!-- ─── 4. SCROLLABLE FORM STACK ───────────────────────────────────── -->
+    <main class="edit-content-body no-scrollbar">
+
+      <!-- Active Recipe Context Preview Card -->
+      <article class="recipe-context-card">
+        <div class="recipe-thumb-wrap">
+          <img src="assets/sesame-chicken.png" alt="Honey Sesame Chicken" id="preview-thumb-img" onerror="this.src='https://images.unsplash.com/photo-1525755662778-989d0524087e?w=300';" />
+        </div>
+        <div class="recipe-context-info">
+          <span class="recipe-context-tag">Active Recipe Fork</span>
+          <h2 class="recipe-context-title" id="context-recipe-name">Honey Sesame Chicken</h2>
+          <span class="recipe-context-author">Original by Chef Sarah • 480 kcal</span>
+        </div>
+        <button class="btn-change-photo tap-effect" id="btn-change-photo" type="button" aria-label="Change photo">
+          <span class="material-symbols-outlined text-[16px]">add_a_photo</span>
+        </button>
+      </article>
+
+      <!-- Form Inputs -->
+      <form id="fork-recipe-form" onsubmit="event.preventDefault();" style="display:flex; flex-direction:column; gap:14px;">
+
+        <!-- Recipe Name -->
+        <div class="form-group">
+          <label class="form-label" for="input-recipe-title">
+            <span>Recipe Name</span>
+            <span class="form-label-hint">Custom title</span>
+          </label>
+          <div class="input-wrapper">
+            <input class="form-input" id="input-recipe-title" type="text" value="Honey Sesame Chicken (Chef Sarah Fork)" />
+            <span class="material-symbols-outlined input-icon">edit_note</span>
+          </div>
+        </div>
+
+        <!-- 2-Col Times: Prep Time & Cook Time -->
+        <div class="form-row-2col">
+          <div class="form-group">
+            <label class="form-label" for="input-prep-time">Prep Time</label>
+            <div class="input-wrapper">
+              <input class="form-input" id="input-prep-time" type="text" value="10 min" />
+              <span class="material-symbols-outlined input-icon">schedule</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="input-cook-time">Cook Time</label>
+            <div class="input-wrapper">
+              <input class="form-input" id="input-cook-time" type="text" value="20 min" />
+              <span class="material-symbols-outlined input-icon">timer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Servings Stepper -->
+        <div class="form-group">
+          <label class="form-label" for="input-servings">
+            <span>Default Servings</span>
+            <span class="form-label-hint">Auto-scales ingredients</span>
+          </label>
+          <div class="input-wrapper">
+            <input class="form-input" id="input-servings" type="number" min="1" max="16" value="4" />
+            <span class="material-symbols-outlined input-icon">group</span>
+          </div>
+        </div>
+
+        <!-- Ingredient Fork Substitutions Drawer -->
+        <div class="fork-substitutions-card">
+          <div class="sub-card-header">
+            <span class="sub-card-title">
+              <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]" style="color:#3DF2E0;">swap_horiz</span>
+              <span>Smart Ingredient Forks</span>
+            </span>
+            <span style="font-size:10px; font-weight:700; color:var(--emerald);">AI Suggested</span>
+          </div>
+
+          <!-- Swap 1: Tamari Gluten Free -->
+          <div class="sub-toggle-item">
+            <div class="sub-toggle-text">
+              <span class="sub-name">Swap Soy Sauce ➔ Gluten-Free Tamari</span>
+              <span class="sub-reason">Low Sodium &amp; 100% Celiac Safe</span>
+            </div>
+            <label class="switch-toggle" aria-label="Toggle Tamari Substitution">
+              <input type="checkbox" id="toggle-tamari" checked />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <!-- Swap 2: Organic Maple Glaze -->
+          <div class="sub-toggle-item">
+            <div class="sub-toggle-text">
+              <span class="sub-name">Swap Honey ➔ Grade-A Maple Syrup</span>
+              <span class="sub-reason">Vegan &amp; Lower Glycemic Index</span>
+            </div>
+            <label class="switch-toggle" aria-label="Toggle Maple Syrup Substitution">
+              <input type="checkbox" id="toggle-maple" />
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Custom Chef Notes -->
+        <div class="form-group">
+          <label class="form-label" for="input-chef-notes">
+            <span>Chef's Fork Notes</span>
+            <span class="form-label-hint">Private annotations</span>
+          </label>
+          <textarea class="form-textarea" id="input-chef-notes" placeholder="e.g. Double the toasted sesame seeds; crisp chicken for an extra 2 mins before glazing.">Double the toasted sesame seeds and toast in a dry skillet first.</textarea>
+        </div>
+
+        <!-- Dynamic Sync Notice -->
+        <div class="sync-notice-pill">
+          <span class="material-symbols-outlined text-[15px] text-[#3DF2E0]" style="color:#3DF2E0;">sync</span>
+          <span>Ingredients and voice cooking guide sync dynamically upon saving.</span>
+        </div>
+
+      </form>
+
+    </main>
+
+    <!-- ─── 5. FOOTER DELETION & RESET ACTION ──────────────────────────── -->
+    <footer class="edit-footer">
+      <button class="btn-delete-fork tap-effect" id="btn-delete-fork" type="button" aria-label="Delete or Reset Recipe Fork">
+        <span class="material-symbols-outlined text-[18px]">delete</span>
+        <span>Delete Recipe Fork</span>
+      </button>
+      <div style="width:120px; height:4px; background:#444; border-radius:2px; margin:4px auto 0;"></div>
+    </footer>
+
+  </div><!-- /#viewport -->
+
+  <!-- ─── Recipe Fork State Script ───────────────────────────────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      var inputTitle = document.getElementById('input-recipe-title');
+      var inputPrep = document.getElementById('input-prep-time');
+      var inputCook = document.getElementById('input-cook-time');
+      var inputServings = document.getElementById('input-servings');
+      var inputNotes = document.getElementById('input-chef-notes');
+      var toggleTamari = document.getElementById('toggle-tamari');
+      var toggleMaple = document.getElementById('toggle-maple');
+      var contextTitle = document.getElementById('context-recipe-name');
+
+      var toastEl = document.getElementById('global-toast');
+      var toastMsg = document.getElementById('toast-msg');
+      var toastIcon = document.getElementById('toast-icon');
+      var toastTimer = null;
+
+      function showToast(msg, icon) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMsg.textContent = msg;
+        if (icon) toastIcon.textContent = icon;
+        toastEl.classList.add('show');
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('show');
+        }, 2200);
+      }
+
+      // Load existing fork from localStorage
+      try {
+        var savedFork = localStorage.getItem('wow_recipe_fork_sesame');
+        if (savedFork) {
+          var parsed = JSON.parse(savedFork);
+          if (parsed.title) inputTitle.value = parsed.title;
+          if (parsed.prep) inputPrep.value = parsed.prep;
+          if (parsed.cook) inputCook.value = parsed.cook;
+          if (parsed.servings) inputServings.value = parsed.servings;
+          if (parsed.notes) inputNotes.value = parsed.notes;
+          if (parsed.tamari !== undefined) toggleTamari.checked = parsed.tamari;
+          if (parsed.maple !== undefined) toggleMaple.checked = parsed.maple;
+          contextTitle.textContent = parsed.title;
+        }
+      } catch (e) {
+        console.warn('Could not read local fork state', e);
+      }
+
+      // Update context title on typing
+      inputTitle.addEventListener('input', function () {
+        contextTitle.textContent = inputTitle.value.trim() || 'Honey Sesame Chicken';
+      });
+
+      // Save Fork Action
+      document.getElementById('btn-save-recipe').addEventListener('click', function () {
+        var forkData = {
+          title: inputTitle.value.trim() || 'Honey Sesame Chicken',
+          prep: inputPrep.value.trim() || '10 min',
+          cook: inputCook.value.trim() || '20 min',
+          servings: parseInt(inputServings.value, 10) || 4,
+          notes: inputNotes.value.trim(),
+          tamari: toggleTamari.checked,
+          maple: toggleMaple.checked,
+          updatedAt: new Date().toISOString()
+        };
+
+        try {
+          localStorage.setItem('wow_recipe_fork_sesame', JSON.stringify(forkData));
+        } catch (e) {
+          console.error(e);
+        }
+
+        showToast('Recipe Fork Saved Successfully!', 'check_circle');
+
+        setTimeout(function () {
+          window.location.href = 'recipe-detail.html?fork=saved';
+        }, 1200);
+      });
+
+      // Delete Fork Action
+      document.getElementById('btn-delete-fork').addEventListener('click', function () {
+        if (confirm('Reset this recipe back to original chef defaults?')) {
+          try {
+            localStorage.removeItem('wow_recipe_fork_sesame');
+          } catch (e) {}
+          showToast('Recipe Fork Reset to Defaults', 'restore');
+          setTimeout(function () {
+            window.location.href = 'recipe-detail.html?fork=reset';
+          }, 1200);
+        }
+      });
+
+      // Photo upload trigger mock
+      document.getElementById('btn-change-photo').addEventListener('click', function () {
+        showToast('Select photo from gallery', 'add_photo_alternate');
+      });
+
+    })();
+  </script>
+
+  <!-- Global Application State Engine -->
+  <script src="app.js"></script>
+
+</body>
+</html>

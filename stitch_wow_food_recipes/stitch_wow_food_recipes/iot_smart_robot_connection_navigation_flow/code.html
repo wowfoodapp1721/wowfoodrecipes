@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IoT Smart Robot Connection Navigation Flow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #000000;
+      color: #F8F9FA;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .dot-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+    }
+    /* Animated path styling */
+    @keyframes dashForward {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+    @keyframes dashReverse {
+      to {
+        stroke-dashoffset: 40;
+      }
+    }
+    .animate-wire-blue {
+      stroke-dasharray: 6, 6;
+      animation: dashForward 1.6s linear infinite;
+    }
+    .animate-wire-red {
+      stroke-dasharray: 6, 6;
+      animation: dashReverse 1.6s linear infinite;
+    }
+    .pulse-glow {
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body class="min-h-screen dot-grid p-6 md:p-12 flex flex-col items-center justify-start overflow-x-hidden selection:bg-[#00E5FF]/20 selection:text-white">
+
+  <!-- Header Section -->
+  <header class="w-full max-w-[1480px] mb-10 flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6 gap-4">
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 tracking-wider">
+          SYSTEM: INTERACTIVE PROTOTYPE FLOW
+        </span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-[#FF3B30]/10 text-[#FF3B30] border border-[#FF3B30]/30 tracking-wider">
+          ROUTE: 12A ➔ 12B // MODAL OVERLAY
+        </span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white flex items-center gap-3">
+        IoT Smart Robot Connection Navigation Flow
+      </h1>
+      <p class="text-white/60 text-sm mt-1 max-w-2xl font-normal">
+        Architectural UX blueprint demonstrating stateful modal overlay launch from Settings to the Chef Magic pairing drawer, complete with transition triggers, micro-interactions, and reverse back-stack cancellation.
+      </p>
+    </div>
+
+    <!-- Quick Spec Legend -->
+    <div class="flex items-center gap-6 bg-[#121214] border border-white/10 px-5 py-3 rounded-xl shadow-2xl backdrop-blur-md">
+      <div class="flex items-center gap-2.5">
+        <span class="w-3 h-3 rounded-full bg-[#00E5FF] shadow-[0_0_10px_#00E5FF]"></span>
+        <div class="text-xs">
+          <p class="text-white/40 font-mono text-[10px] uppercase tracking-wider">Trigger Path</p>
+          <p class="font-semibold text-white">Slide Up (250ms)</p>
+        </div>
+      </div>
+      <div class="h-6 w-px bg-white/10"></div>
+      <div class="flex items-center gap-2.5">
+        <span class="w-3 h-3 rounded-full bg-[#FF3B30] shadow-[0_0_10px_#FF3B30]"></span>
+        <div class="text-xs">
+          <p class="text-white/40 font-mono text-[10px] uppercase tracking-wider">Dismissal</p>
+          <p class="font-semibold text-white">Slide Down (200ms)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Canvas Board Container -->
+  <main class="w-full max-w-[1480px] relative">
+    
+    <!-- SVG Vector Flow Overlay Layer (Absolute positioning behind or over cards) -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none z-30" preserveAspectRatio="none" viewBox="0 0 1480 940">
+      <defs>
+        <!-- Blue forward marker -->
+        <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#00E5FF"/>
+        </marker>
+        <!-- Red reverse marker -->
+        <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#FF3B30"/>
+        </marker>
+        <!-- Gradients -->
+        <linearGradient id="grad-blue-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.9" />
+          <stop offset="100%" stop-color="#38BDF8" stop-opacity="1" />
+        </linearGradient>
+        <linearGradient id="grad-red-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FF3B30" stop-opacity="1" />
+          <stop offset="100%" stop-color="#FF453A" stop-opacity="0.8" />
+        </linearGradient>
+      </defs>
+
+      <!-- 1. PRIMARY FORWARD PATH: From Screen 12A Row (approx x: 420, y: 550) to Screen 12B Drawer (approx x: 970, y: 440) -->
+      <!-- Smooth Arching Bezier curve -->
+      <path d="M 420 545 C 570 545, 680 435, 960 435" 
+            fill="none" 
+            stroke="#00E5FF" 
+            stroke-width="3" 
+            stroke-linecap="round"
+            filter="drop-shadow(0 0 8px rgba(0,229,255,0.7))"
+            marker-end="url(#arrow-blue)" />
+      
+      <!-- Animated dashed particle runner -->
+      <path d="M 420 545 C 570 545, 680 435, 960 435" 
+            fill="none" 
+            stroke="#FFFFFF" 
+            stroke-width="1.8" 
+            class="animate-wire-blue" 
+            opacity="0.9" />
+
+      <!-- 2. REVERSE DISMISSAL PATH: From Screen 12B Close X (approx x: 1320, y: 435) -> Arching over top back down to Screen 12A Baseline (approx x: 420, y: 820) -->
+      <path d="M 1320 435 C 1370 280, 780 180, 680 320 C 600 420, 560 760, 420 815" 
+            fill="none" 
+            stroke="#FF3B30" 
+            stroke-width="2.5" 
+            stroke-linecap="round"
+            stroke-dasharray="7,5"
+            class="animate-wire-red"
+            filter="drop-shadow(0 0 6px rgba(255,59,48,0.6))"
+            marker-end="url(#arrow-red)" />
+
+      <!-- Anchor Pin Circles on SVG -->
+      <circle cx="420" cy="545" r="5" fill="#00E5FF" filter="drop-shadow(0 0 6px #00E5FF)"/>
+      <circle cx="965" cy="435" r="4" fill="#00E5FF"/>
+      <circle cx="1320" cy="435" r="5" fill="#FF3B30" filter="drop-shadow(0 0 6px #FF3B30)"/>
+      <circle cx="420" cy="815" r="4" fill="#FF3B30"/>
+    </svg>
+
+    <!-- Side-by-Side Artboards Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
+
+      <!-- LEFT COLUMN: Screen 12A (Profile & Settings) [Cols 1-5] -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <!-- Card Header Meta -->
+        <div class="w-[390px] flex items-center justify-between mb-3 px-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-white/40"></span>
+            <span class="font-mono text-xs font-bold text-white tracking-wide">SCREEN 12A : ORIGIN</span>
+          </div>
+          <span class="text-[11px] font-mono text-white/50 bg-white/5 px-2.5 py-1 rounded border border-white/10">Profile &amp; Settings</span>
+        </div>
+
+        <!-- Phone Mockup Container 12A -->
+        <div class="w-[390px] h-[820px] bg-[#000000] rounded-[44px] border-[6px] border-[#222224] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_30px_rgba(255,59,48,0.08)] flex flex-col relative overflow-hidden">
+          
+          <!-- Status Bar -->
+          <div class="pt-3 px-6 flex justify-between items-center text-white/90 text-xs font-medium shrink-0 z-20">
+            <span>9:41</span>
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+              <div class="w-5 h-2.5 border border-white/80 rounded-sm p-0.5 flex items-center">
+                <div class="h-full w-3/4 bg-white rounded-2xs"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Navigation Header -->
+          <div class="px-6 py-3 flex items-center justify-between shrink-0">
+            <div class="w-7"></div>
+            <h2 class="text-base font-bold text-white tracking-wide">Profile &amp; Settings</h2>
+            <button class="w-7 h-7 flex items-center justify-center text-white/70 hover:text-white">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            </button>
+          </div>
+
+          <!-- Scrollable Viewport Content -->
+          <div class="flex-1 px-5 overflow-y-hidden flex flex-col justify-start">
+            
+            <!-- User Avatar & Identity -->
+            <div class="flex flex-col items-center mt-2 mb-4">
+              <div class="relative">
+                <div class="w-20 h-20 rounded-full border-2 border-[#FF3B30] p-1 shadow-[0_0_20px_rgba(255,59,48,0.5)] flex items-center justify-center bg-[#131313]">
+                  <div class="w-full h-full rounded-full bg-[#1C1C1E] flex items-center justify-center overflow-hidden">
+                    <svg class="w-10 h-10 text-[#FF3B30]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  </div>
+                </div>
+                <div class="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-[#FF3B30] border-2 border-black flex items-center justify-center">
+                  <svg class="w-3 h-3 text-white fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-2.5 flex items-center gap-1.5">
+                Chef Explorer <span class="text-xs text-[#FF3B30]">🔥</span>
+              </h3>
+              <p class="text-xs text-white/50">Premium Member since 2026</p>
+              
+              <!-- Badges -->
+              <div class="flex items-center gap-2 mt-2">
+                <span class="text-[11px] bg-[#1C1C1E] text-[#FF453A] px-2.5 py-0.5 rounded-full border border-white/5 font-medium">Tier: Executive Pro</span>
+                <span class="text-[11px] bg-[#1C1C1E] text-[#FFB340] px-2.5 py-0.5 rounded-full border border-white/5 font-medium">Streak: 18 Days</span>
+              </div>
+            </div>
+
+            <!-- Dietary Blueprint Metrics Card -->
+            <div class="bg-[#161618] rounded-2xl p-4 border border-white/5 mb-4 shadow-lg">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-white/70 flex items-center gap-1.5">
+                  <span class="text-[#FF3B30]">📈</span> DIETARY BLUEPRINT METRICS
+                </span>
+                <span class="text-[10px] bg-[#FF3B30]/20 text-[#FF3B30] px-2 py-0.5 rounded-full font-bold">Active Goal</span>
+              </div>
+              <div class="flex justify-between items-baseline text-xs mb-1.5">
+                <span class="text-white/60">Daily Calorie Cap</span>
+                <span class="font-mono font-bold text-white text-sm">1,640 <span class="text-white/40 text-xs">/ 2,100 kcal</span></span>
+              </div>
+              <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden mb-3">
+                <div class="h-full bg-gradient-to-r from-[#FF3B30] to-[#FF9500] w-[78%] rounded-full"></div>
+              </div>
+              
+              <!-- Macro mini columns -->
+              <div class="grid grid-cols-3 gap-2 pt-1 border-t border-white/5 text-center">
+                <div class="bg-black/40 p-1.5 rounded-lg">
+                  <span class="text-[10px] text-white/40 block">Protein <span class="text-[#FF453A] font-bold">85%</span></span>
+                  <span class="text-xs font-bold text-white">112g<span class="text-white/30 text-[10px]">/130</span></span>
+                </div>
+                <div class="bg-black/40 p-1.5 rounded-lg">
+                  <span class="text-[10px] text-white/40 block">Carbs <span class="text-[#FFB340] font-bold">68%</span></span>
+                  <span class="text-xs font-bold text-white">136g<span class="text-white/30 text-[10px]">/200</span></span>
+                </div>
+                <div class="bg-black/40 p-1.5 rounded-lg">
+                  <span class="text-[10px] text-white/40 block">Fats <span class="text-[#30D158] font-bold">54%</span></span>
+                  <span class="text-xs font-bold text-white">38g<span class="text-white/30 text-[10px]">/70</span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Settings Menu Stack (With Trigger Card Highlighted) -->
+            <div class="bg-[#161618] rounded-2xl border border-white/5 divide-y divide-white/5 overflow-hidden">
+              
+              <!-- ITEM 1: TRIGGER TARGET "Smart Robot Connectivity" -->
+              <div id="trigger-robot-row" class="relative p-3.5 flex items-center justify-between bg-gradient-to-r from-[#00E5FF]/15 via-[#161618] to-transparent border-l-4 border-[#00E5FF] shadow-[inset_0_0_20px_rgba(0,229,255,0.15)] transition-all">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-[#00E5FF]/20 text-[#00E5FF] flex items-center justify-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-white flex items-center gap-1.5">
+                      Smart Robot Connectivity (Chef Magic)
+                      <span class="w-2 h-2 rounded-full bg-[#30D158] animate-pulse"></span>
+                    </h4>
+                    <p class="text-[10px] text-white/50">IoT Cooker &amp; Blender Sync</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-mono font-bold text-[#00E5FF] bg-[#00E5FF]/10 px-2 py-0.5 rounded border border-[#00E5FF]/30 animate-pulse">
+                    TAP HERE
+                  </span>
+                  <svg class="w-4 h-4 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </div>
+
+                <!-- Floating Anchor Pin Tag -->
+                <div class="absolute -top-3 -right-2 bg-[#00E5FF] text-black text-[9px] font-mono font-extrabold px-2 py-0.5 rounded-full shadow-[0_0_10px_#00E5FF] uppercase tracking-wider">
+                  Origin : Trigger 01
+                </div>
+              </div>
+
+              <!-- Item 2: Privacy & Security -->
+              <div class="p-3.5 flex items-center justify-between opacity-60">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-white/5 text-white/80 flex items-center justify-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-semibold text-white">Privacy &amp; Security</h4>
+                    <p class="text-[10px] text-white/40">Biometrics &amp; Data Vault</p>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-white/30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </div>
+
+              <!-- Item 3: Notification Preferences -->
+              <div class="p-3.5 flex items-center justify-between opacity-60">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-white/5 text-white/80 flex items-center justify-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-semibold text-white">Notification Preferences</h4>
+                    <p class="text-[10px] text-white/40">Prep alerts &amp; weekly digest</p>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-white/30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Bottom Navigation Bar (Active on Profile) -->
+          <div class="mt-auto border-t border-white/10 bg-[#0A0A0C]/90 backdrop-blur-md px-6 py-2.5 flex justify-between items-center z-20">
+            <div class="flex flex-col items-center text-[#FF3B30]">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <span class="text-[9px] font-bold mt-0.5">Profile</span>
+              <span class="w-1 h-1 rounded-full bg-[#FF3B30] mt-0.5"></span>
+            </div>
+            <div class="flex flex-col items-center text-white/40">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              <span class="text-[9px] mt-0.5">Home</span>
+            </div>
+            <div class="flex flex-col items-center text-white/40">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span class="text-[9px] mt-0.5">Planner</span>
+            </div>
+            <div class="flex flex-col items-center text-white/40">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              <span class="text-[9px] mt-0.5">Lists</span>
+            </div>
+          </div>
+
+          <!-- Android Home Indicator Pill Bar -->
+          <div class="pb-2 pt-1 flex justify-center bg-[#0A0A0C]">
+            <div class="w-32 h-1 bg-white/30 rounded-full"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: Interactive Transition Specifications & Telemetry [Cols 6-7] -->
+      <div class="lg:col-span-2 flex flex-col justify-center items-center py-12 gap-8 z-20">
+        
+        <!-- Forward Transition Specification Pill -->
+        <div class="w-full bg-[#121214]/95 border-2 border-[#00E5FF]/60 rounded-2xl p-4 shadow-[0_0_30px_rgba(0,229,255,0.25)] backdrop-blur-xl relative">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider text-[#00E5FF] flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#00E5FF] animate-ping"></span>
+              ACTION TRIGGER
+            </span>
+            <span class="text-[10px] font-mono text-white/50">250ms Easing</span>
+          </div>
+          <p class="text-xs font-bold text-white leading-relaxed">
+            On Tap ➔ Open Overlay ➔ Slide Up (250ms)
+          </p>
+          <div class="mt-2.5 pt-2 border-t border-white/10 flex flex-col gap-1 text-[11px] font-mono text-white/60">
+            <div class="flex justify-between">
+              <span>Curve:</span>
+              <span class="text-[#00E5FF]">cubic-bezier(0.16, 1, 0.3, 1)</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Backdrop:</span>
+              <span class="text-white/80">60% Black Blur (12px)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reverse Dismissal Specification Pill -->
+        <div class="w-full bg-[#121214]/95 border-2 border-[#FF3B30]/60 rounded-2xl p-4 shadow-[0_0_30px_rgba(255,59,48,0.25)] backdrop-blur-xl relative">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-mono font-extrabold uppercase tracking-wider text-[#FF3B30] flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#FF3B30] animate-pulse"></span>
+              REVERSE EXIT
+            </span>
+            <span class="text-[10px] font-mono text-white/50">200ms Spring</span>
+          </div>
+          <p class="text-xs font-bold text-white leading-relaxed">
+            On Close ('X') ➔ Dismiss Overlay
+          </p>
+          <div class="mt-2.5 pt-2 border-t border-white/10 flex flex-col gap-1 text-[11px] font-mono text-white/60">
+            <div class="flex justify-between">
+              <span>Handler:</span>
+              <span class="text-[#FF3B30]">Navigator.pop()</span>
+            </div>
+            <div class="flex justify-between">
+              <span>State:</span>
+              <span class="text-white/80">Preserve Active Sync</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- IoT Bridge Status Pill -->
+        <div class="w-full bg-[#161618] border border-white/10 rounded-xl p-3 text-center">
+          <span class="text-[10px] font-mono text-white/40 block mb-1">REAL-TIME BLUETOOTH / WI-FI PROTOCOL</span>
+          <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#30D158]">
+            <span class="w-2 h-2 rounded-full bg-[#30D158]"></span>
+            Chef Magic v2.4 Connected
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Screen 12B (IoT Robot Pairing Sheet) [Cols 8-12] -->
+      <div class="lg:col-span-5 flex flex-col items-center">
+        <!-- Card Header Meta -->
+        <div class="w-[390px] flex items-center justify-between mb-3 px-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#00E5FF]"></span>
+            <span class="font-mono text-xs font-bold text-white tracking-wide">SCREEN 12B : DESTINATION OVERLAY</span>
+          </div>
+          <span class="text-[11px] font-mono text-[#00E5FF] bg-[#00E5FF]/10 px-2.5 py-1 rounded border border-[#00E5FF]/20">Modal Bottom Sheet</span>
+        </div>
+
+        <!-- Phone Mockup Container 12B -->
+        <div class="w-[390px] h-[820px] bg-[#000000] rounded-[44px] border-[6px] border-[#222224] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_35px_rgba(0,229,255,0.12)] flex flex-col relative overflow-hidden">
+          
+          <!-- Dimmed Blurred Background Layer of Profile Screen -->
+          <div class="absolute inset-0 bg-[#000000] opacity-40 blur-[3px] pointer-events-none p-5 flex flex-col">
+            <!-- Simulated blurred silhouette -->
+            <div class="w-20 h-20 rounded-full border border-red-500/30 mx-auto mt-12 mb-3"></div>
+            <div class="h-4 w-32 bg-white/20 rounded mx-auto mb-6"></div>
+            <div class="h-28 bg-[#1C1C1E]/40 rounded-2xl mb-4"></div>
+            <div class="h-44 bg-[#1C1C1E]/40 rounded-2xl"></div>
+          </div>
+
+          <!-- Frosted Backdrop Blur Overlay (60% Black) -->
+          <div class="absolute inset-0 bg-black/60 backdrop-blur-md z-10"></div>
+
+          <!-- Floating Modal Bottom Sheet Drawer Component -->
+          <div class="mt-auto w-full bg-[#1C1C1E] rounded-t-[36px] p-6 pb-4 border-t border-white/15 relative z-20 shadow-[0_-15px_40px_rgba(0,0,0,0.8)] flex flex-col">
+            
+            <!-- Drag Handle Bar -->
+            <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-4"></div>
+
+            <!-- Drawer Header (With Highlighted Close Button) -->
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-lg font-bold text-white tracking-tight">Smart Cooking Robot</h3>
+              
+              <!-- Close Action 'X' Button Target -->
+              <div class="relative">
+                <button id="close-drawer-btn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white flex items-center justify-center transition-colors border border-white/10 shadow-[0_0_12px_rgba(255,59,48,0.5)]">
+                  <svg class="w-4 h-4 text-[#FF3B30]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <!-- Dismiss Anchor Tag -->
+                <span class="absolute -top-7 -right-1 bg-[#FF3B30] text-white text-[9px] font-mono font-extrabold px-2 py-0.5 rounded-full shadow-[0_0_8px_#FF3B30] uppercase whitespace-nowrap">
+                  Reverse Exit
+                </span>
+              </div>
+            </div>
+
+            <!-- Glowing Central IoT Smart Cooker Graphic -->
+            <div class="flex flex-col items-center justify-center my-4">
+              <div class="relative w-36 h-36 flex items-center justify-center">
+                <!-- Concentric Pulsating Rings -->
+                <div class="absolute inset-0 rounded-full border border-[#30D158]/30 animate-ping opacity-40"></div>
+                <div class="absolute inset-2 rounded-full border border-[#30D158]/50 shadow-[0_0_25px_rgba(48,209,88,0.3)]"></div>
+                <div class="absolute inset-6 rounded-full border-2 border-dashed border-[#30D158]/70"></div>
+                
+                <!-- Center Core Multi-Cooker Icon -->
+                <div class="w-20 h-20 rounded-full bg-[#121214] border border-[#30D158] flex items-center justify-center shadow-[0_0_30px_rgba(48,209,88,0.5)]">
+                  <svg class="w-10 h-10 text-[#30D158]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <!-- Robotic / Smart Cooker Silhouette -->
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 01-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Status Headings -->
+              <h4 class="text-base font-bold text-white mt-4">Chef Magic Connected</h4>
+              <div class="inline-flex items-center gap-1.5 mt-1.5 px-3 py-1 rounded-full bg-[#30D158]/10 border border-[#30D158]/30">
+                <span class="w-2 h-2 rounded-full bg-[#30D158] animate-pulse"></span>
+                <span class="text-xs font-mono text-[#30D158] font-medium">Wi-Fi Strength: Excellent • 2.4GHz</span>
+              </div>
+            </div>
+
+            <!-- Active Recipe Sync Row with Vibrant Red Toggle -->
+            <div class="bg-[#121214] rounded-2xl p-4 border border-white/5 flex items-center justify-between mt-4 mb-6 shadow-inner">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-white/5 text-white flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white/80" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                </div>
+                <div>
+                  <h5 class="text-xs font-bold text-white">Active Recipe Sync</h5>
+                  <p class="text-[10px] text-white/50">Instant step temperature &amp; timer sync</p>
+                </div>
+              </div>
+
+              <!-- Active Red Toggle Switch ON -->
+              <div class="w-12 h-6 bg-[#FF3B30] rounded-full p-0.5 flex items-center justify-end shadow-[0_0_12px_rgba(255,59,48,0.6)] cursor-pointer">
+                <div class="w-5 h-5 bg-white rounded-full shadow-md"></div>
+              </div>
+            </div>
+
+            <!-- Primary Action CTA Button: "Run Machine Diagnostic" -->
+            <button class="w-full py-3.5 bg-gradient-to-r from-[#FF3B30] to-[#FF453A] hover:opacity-95 text-white font-bold rounded-2xl shadow-[0_0_25px_rgba(255,59,48,0.5)] flex items-center justify-center gap-2 text-sm transition-all transform active:scale-[0.98]">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              Run Machine Diagnostic
+            </button>
+
+            <!-- Android Home Indicator Pill Bar -->
+            <div class="pt-5 pb-1 flex justify-center">
+              <div class="w-32 h-1 bg-white/30 rounded-full"></div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Developer Handoff Engineering Specifications -->
+    <section class="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Panel 1: Route & Lifecycle -->
+      <div class="bg-[#121214] border border-white/10 rounded-2xl p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[#00E5FF]/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-lg bg-[#00E5FF]/20 text-[#00E5FF] font-mono text-xs flex items-center justify-center font-bold">01</span>
+          <h4 class="text-sm font-bold text-white tracking-wide uppercase font-mono">Modal Event Lifecycle</h4>
+        </div>
+        <p class="text-xs text-white/60 leading-relaxed mb-3">
+          Tapping <code class="text-[#00E5FF] font-mono">Smart Robot Connectivity</code> triggers a semi-modal bottom sheet overlay with a 60% black background blur filter (<code class="text-white/80 font-mono">backdrop-blur-md</code>).
+        </p>
+        <div class="bg-black/60 p-3 rounded-xl border border-white/5 font-mono text-[11px] text-white/80">
+          <span class="text-white/40">// Route Trigger</span><br>
+          showModalBottomSheet(<br>
+          &nbsp;&nbsp;context: context,<br>
+          &nbsp;&nbsp;barrierColor: Colors.black.withOpacity(0.6),<br>
+          &nbsp;&nbsp;builder: (ctx) =&gt; RobotPairingSheet()<br>
+          );
+        </div>
+      </div>
+
+      <!-- Panel 2: IoT Sync & Machine Handshake -->
+      <div class="bg-[#121214] border border-white/10 rounded-2xl p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[#30D158]/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-lg bg-[#30D158]/20 text-[#30D158] font-mono text-xs flex items-center justify-center font-bold">02</span>
+          <h4 class="text-sm font-bold text-white tracking-wide uppercase font-mono">IoT Handshake &amp; State</h4>
+        </div>
+        <p class="text-xs text-white/60 leading-relaxed mb-3">
+          Persistent polling at 2.4GHz verifies appliance connectivity. The switch toggles live recipe telemetry sync between app timers and induction burner modules.
+        </p>
+        <div class="bg-black/60 p-3 rounded-xl border border-white/5 font-mono text-[11px] text-white/80">
+          <span class="text-white/40">// Telemetry Payload</span><br>
+          {<br>
+          &nbsp;&nbsp;<span class="text-[#30D158]">"device"</span>: <span class="text-white">"Chef Magic Multi-Cooker"</span>,<br>
+          &nbsp;&nbsp;<span class="text-[#30D158]">"rssi"</span>: <span class="text-white">-42 dBm (Excellent)</span>,<br>
+          &nbsp;&nbsp;<span class="text-[#30D158]">"activeSync"</span>: <span class="text-[#FF3B30]">true</span><br>
+          }
+        </div>
+      </div>
+
+      <!-- Panel 3: Reverse Dismissal & Diagnostics -->
+      <div class="bg-[#121214] border border-white/10 rounded-2xl p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-[#FF3B30]/5 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-6 h-6 rounded-lg bg-[#FF3B30]/20 text-[#FF3B30] font-mono text-xs flex items-center justify-center font-bold">03</span>
+          <h4 class="text-sm font-bold text-white tracking-wide uppercase font-mono">Dismissal &amp; Diagnostics</h4>
+        </div>
+        <p class="text-xs text-white/60 leading-relaxed mb-3">
+          Dismissal via the close 'X' icon or backdrop drag slides the sheet down in 200ms without resetting established pairing states. "Run Machine Diagnostic" dispatches hardware ping tests.
+        </p>
+        <div class="bg-black/60 p-3 rounded-xl border border-white/5 font-mono text-[11px] text-white/80">
+          <span class="text-white/40">// Dismissal / Action Handler</span><br>
+          onClose: () =&gt; Navigator.pop(context),<br>
+          onDiagnostic: () =&gt; dispatchTestPing(<br>
+          &nbsp;&nbsp;target: <span class="text-white">'0xCHEF_MAGIC_BLE'</span><br>
+          );
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer Copyright & Architecture Marker -->
+    <footer class="mt-10 mb-4 text-center">
+      <p class="font-mono text-xs text-white/30 tracking-wider uppercase">
+        WOW FOOD RECIPES • V4.2.0 (BUILD 2026) // IOT PAIRING FLOW ARCHITECTURE VERIFIED
+      </p>
+    </footer>
+
+  </main>
+
+</body>
+</html>

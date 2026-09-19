@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-[#000000] text-white h-screen max-h-screen overflow-hidden selection:bg-orange-500/30"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annapurna - Dashboard Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>tailwind.config = {theme: {extend: {colors: {brand: {orange: "#FF5400", amber: "#FF9900", gold: "#E5A93C", dark: "#000000"}, "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000 !important;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<!-- Full native mobile app viewport (fills 100% width and height without device bezel or fake center container) -->
+<div class="w-full h-screen max-h-screen overflow-hidden bg-black flex flex-col relative">
+<!-- Top Status / Header Row (Screen-4A exact replication) -->
+<div class="fixed top-0 left-0 right-0 w-full shrink-0 bg-black/95 backdrop-blur-md pt-2 pb-2 z-50 border-b border-white/[0.06]">
+<!-- Header Row (Location + Actions) -->
+<div class="px-4 pb-1.5 flex items-center justify-between">
+<!-- Location & Subtitle -->
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 cursor-pointer group">
+<span class="material-symbols-outlined text-[#FF5400] text-lg leading-none">location_on</span>
+<span class="text-white text-sm font-semibold tracking-wide group-hover:text-amber-400 transition-colors">Mumbai, India</span>
+<span class="material-symbols-outlined text-zinc-400 text-base leading-none">expand_more</span>
+</div>
+<span class="text-xs text-zinc-400 font-medium pl-6 pt-0.5">Namaste, Chef</span>
+</div>
+<!-- Right Action Icons: Activity Graph with Green dot + Notification Icon -->
+<div class="flex items-center gap-3">
+<div class="relative w-10 h-10 rounded-full bg-zinc-900/90 border border-zinc-800/80 flex items-center justify-center cursor-pointer hover:border-zinc-700 transition-all">
+<span class="material-symbols-outlined text-zinc-200 text-lg">leaderboard</span>
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#00E676] rounded-full ring-2 ring-black"></span>
+</div>
+<button aria-label="Notifications" class="relative w-10 h-10 rounded-full bg-zinc-900/90 border border-zinc-800/80 flex items-center justify-center cursor-pointer hover:border-orange-500/50 transition-all">
+<span class="material-symbols-outlined text-[#FF5400] text-xl">notifications_active</span>
+</button>
+</div>
+</div>
+<!-- Centered Brand Logo: Compact Clay Pot Handi + lowercase 'annapurna' serif -->
+<div class="flex flex-col items-center justify-center pt-0 pb-1.5">
+<div class="flex flex-col items-center gap-1">
+<svg class="w-10 h-10 shrink-0 drop-shadow-[0_0_16px_rgba(217,125,84,0.45)]" fill="none" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="potGrad" x1="110" x2="290" y1="200" y2="360">
+<stop offset="0%" stop-color="#E37B50"></stop>
+<stop offset="60%" stop-color="#D97D54"></stop>
+<stop offset="100%" stop-color="#B5542B"></stop>
+</lineargradient>
+<lineargradient gradientunits="userSpaceOnUse" id="lidGrad" x1="130" x2="270" y1="140" y2="200">
+<stop offset="0%" stop-color="#E7865B"></stop>
+<stop offset="100%" stop-color="#C86236"></stop>
+</lineargradient>
+<filter height="160%" id="steamGlow" width="160%" x="-30%" y="-30%">
+<fedropshadow dx="0" dy="0" flood-color="#34d399" flood-opacity="0.7" stddeviation="3.5"></fedropshadow>
+</filter>
+</defs>
+<g fill="none" filter="url(#steamGlow)" stroke="#34d399" stroke-linecap="round" stroke-width="6">
+<path d="M165 125 C 155 95, 175 65, 168 35" opacity="0.85"></path>
+<path d="M200 115 C 190 80, 215 50, 205 20" opacity="0.95"></path>
+<path d="M235 125 C 225 95, 245 65, 238 35" opacity="0.85"></path>
+</g>
+<circle cx="200" cy="138" fill="#D97D54" r="13" stroke="#FF9466" stroke-width="2"></circle>
+<path d="M125 195 C 130 145, 270 145, 275 195 Z" fill="url(#lidGrad)"></path>
+<path d="M155 162 C 180 152, 220 152, 245 162" fill="none" opacity="0.6" stroke="#FFB28A" stroke-linecap="round" stroke-width="3"></path>
+<rect fill="#365C47" height="22" rx="11" stroke="#2A4736" stroke-width="1.5" width="184" x="108" y="190"></rect>
+<rect fill="#4E7D63" height="4" opacity="0.6" rx="2" width="168" x="116" y="193"></rect>
+<path d="M118 206 C 118 206, 75 255, 75 305 C 75 355, 130 375, 200 375 C 270 375, 325 355, 325 305 C 325 255, 282 206, 282 206 Z" fill="url(#potGrad)"></path>
+<path d="M102 245 C 88 275, 92 315, 114 340" fill="none" opacity="0.35" stroke="#FFFFFF" stroke-linecap="round" stroke-width="6"></path>
+<path d="M135 240 C 170 262, 230 262, 265 240" fill="none" opacity="0.55" stroke="#FFAB82" stroke-linecap="round" stroke-width="3.5"></path>
+<ellipse cx="200" cy="370" fill="#8E3B18" opacity="0.4" rx="60" ry="7"></ellipse>
+</svg>
+<span class="font-serif text-2xl font-bold tracking-tight text-white select-none leading-none">
+<span class="text-[#FF5400]">anna</span><span class="">purna</span>
+</span>
+</div>
+</div>
+<!-- Snug Capsule Search Bar -->
+<div class="px-4 pt-1 pb-1">
+<div class="w-full rounded-full h-12 pl-2 pr-2 py-1 flex items-center justify-between shadow-[0_4px_24px_rgba(0,0,0,0.4)] bg-[#1c1c1e]/70 backdrop-blur-xl border border-white/[0.08]">
+<div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/[0.05]">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12H3Z" fill="white"></path>
+<line stroke="white" stroke-width="2" x1="8" x2="16" y1="5" y2="9"></line>
+<line stroke="white" stroke-width="2" x1="7" x2="17" y1="8" y2="6"></line>
+</svg>
+</div>
+<div class="flex-1 px-3 text-left">
+<span class="font-medium text-sm select-none text-[#8E8E93] tracking-[0.5px]">Let's Cook something...</span>
+</div>
+<button aria-label="Search" class="w-8 h-8 rounded-full bg-[#FF6B00] flex items-center justify-center shrink-0 hover:brightness-110 transition-all shadow-[0_0_12px_rgba(255,107,0,0.4)]">
+<span class="material-symbols-outlined text-white text-lg">search</span>
+</button>
+</div>
+</div><div class="px-4 pt-2 pb-1 flex items-center gap-2 overflow-x-auto no-scrollbar"><button class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FF6B00] text-white shadow-[0_0_12px_rgba(255,107,0,0.4)] shrink-0 transition-transform active:scale-95">VEG</button><button class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-zinc-300 bg-white/5 border border-white/10 shrink-0 hover:border-white/20 transition-all active:scale-95">KETO</button><button class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-zinc-300 bg-white/5 border border-white/10 shrink-0 hover:border-white/20 transition-all active:scale-95">GLUTEN-FREE</button><button class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-zinc-300 bg-white/5 border border-white/10 shrink-0 hover:border-white/20 transition-all active:scale-95">LOW-CARB</button><button class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-zinc-300 bg-white/5 border border-white/10 shrink-0 hover:border-white/20 transition-all active:scale-95">HIGH-PROTEIN</button></div>
+</div>
+<!-- Centered Brand Logo: Clay Pot Handi with Crown flourish + lowercase "annapurna" serif -->
+<!-- Screen-4A Exact Search Bar Replication (High-contrast Capsule Pill) -->
+<!-- Main Content Flow (Directly on Pure Black #000000 Canvas) -->
+<main class="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar flex flex-col gap-6 pt-3 pb-4" style="padding-top: 242px; padding-bottom: 130px;"><!-- SECTION: Curated Creations / Featured Recipes Header -->
+<section class="flex flex-col gap-4 px-4">
+<div class="flex items-center justify-between">
+<h2 class="text-base font-bold tracking-tight text-white uppercase">CURATED CREATIONS</h2>
+<span class="text-xs text-[#FF6B00] font-semibold cursor-pointer hover:underline">View All</span>
+</div>
+<!-- SINGLE-COLUMN FULL-WIDTH RECIPE FEED -->
+<div class="flex flex-col gap-5">
+<!-- CARD 1: Spaghetti Carbonara -->
+<article class="w-full flex flex-col rounded-[16px] overflow-hidden border border-white/10 bg-[#0B0B0B] shadow-[0_4px_24px_rgba(0,0,0,0.4)] cursor-pointer group transition-all">
+<!-- Wide Panoramic Photo Frame -->
+<div class="w-full aspect-[16/9] relative overflow-hidden bg-black">
+<img alt="Spaghetti Carbonara" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMAL63mwRmZmAJnXeKDoJSlVhYLPk7eYZqnB8dqxC-t_6WhkQg4ODB-g7geklsgf3x3LCal0Di6xTFg1-wyqeulYSJI5EnFDJ96SGdvaHC3IiEQfDL5lmc65gBVo4bUfXVI7P85qtdHopJs3yLw5Lmfh7uSMxIiBVqNKph4pAOTIH24IZIGi5Rsk75MsYZZZg1piwG87HiGdT7LkllyCm4YNZS4IbYsjvnL48EzS_8R7Qq1w-yBQTUBQ"/>
+<!-- Floating Frosted Pill -->
+<div class="absolute bottom-2.5 left-2.5 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white font-medium flex items-center gap-1.5 border border-white/10 shadow-md">
+<span class="">⏱️ 25 Min</span>
+<span class="text-white/40">•</span>
+<span class="">👥 Serves 4</span>
+</div>
+</div>
+<!-- Details Content Area -->
+<div class="p-4 flex flex-col gap-2.5">
+<!-- Multi-tag Chips System & Bookmark -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="bg-[#FF6B00] text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase shadow-[0_0_8px_rgba(255,107,0,0.3)]">FOR DINNER</span>
+<span class="bg-[#00E676]/20 border border-[#00E676]/40 text-[#00E676] px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">PASTA &amp; GRAINS</span>
+</div>
+<button aria-label="Bookmark Recipe" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg leading-none">bookmark</span>
+</button>
+</div>
+<!-- Headline & Description -->
+<div class="flex flex-col gap-1">
+<h3 class="text-xl font-bold text-white tracking-tight group-hover:text-[#FF6B00] transition-colors">Spaghetti Carbonara</h3>
+<p class="text-sm text-[#8E8E93] leading-snug">Roman-style. Guanciale, egg yolks, Pecorino.</p>
+</div>
+</div>
+</article>
+<!-- CARD 2: Prime Pan-Seared Ribeye -->
+<article class="w-full flex flex-col rounded-[16px] overflow-hidden border border-white/10 bg-[#0B0B0B] shadow-[0_4px_24px_rgba(0,0,0,0.4)] cursor-pointer group transition-all">
+<!-- Wide Panoramic Photo Frame -->
+<div class="w-full aspect-[16/9] relative overflow-hidden bg-black">
+<img alt="Prime Pan-Seared Ribeye" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRzlXLshrPbnGblvjYEozYRec_in5xGs_jNrP0H5dCZmv2WdXXogEkA1ZtqGmMEMLmBWA4vxs6V5-I07eBbxw7Ms9muN01orlpC5v1QsupT9EyWHFhIBwSBDUs-6BC5ZVGI6irkzpHT1A5lhiMJeIkKVBxnVfaXq3pSDftPhOz3CqGc-HeWf8B0nvvPKLLGX8zzKnnksGBBiMyBy6ljUvyoZsAmD0acBDF93troEANYEI77R5-wOFkmw"/>
+<!-- Floating Frosted Pill -->
+<div class="absolute bottom-2.5 left-2.5 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white font-medium flex items-center gap-1.5 border border-white/10 shadow-md">
+<span class="">⏱️ 20 Min</span>
+<span class="text-white/40">•</span>
+<span class="">👥 Serves 2</span>
+</div>
+</div>
+<!-- Details Content Area -->
+<div class="p-4 flex flex-col gap-2.5">
+<!-- Multi-tag Chips System & Bookmark -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="bg-[#FF6B00] text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase shadow-[0_0_8px_rgba(255,107,0,0.3)]">CHEF'S SIGNATURE</span>
+<span class="bg-amber-400/20 border border-amber-400/40 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">STEAKHOUSE &amp; GRILL</span>
+</div>
+<button aria-label="Bookmark Recipe" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg leading-none">bookmark</span>
+</button>
+</div>
+<!-- Headline & Description -->
+<div class="flex flex-col gap-1">
+<h3 class="text-xl font-bold text-white tracking-tight group-hover:text-[#FF6B00] transition-colors">Prime Pan-Seared Ribeye</h3>
+<p class="text-sm text-[#8E8E93] leading-snug">Dry-aged cut, garlic herb basting, flaky sea salt.</p>
+</div>
+</div>
+</article>
+</div>
+</section><section class="flex flex-col px-4 mt-2 mb-4">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-xs font-semibold tracking-wider text-white/90 uppercase">PRIMARY INGREDIENTS &amp; APPLIANCE</h3>
+</div>
+<div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-1 mb-3.5">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-white/10 text-xs font-medium text-white shadow-sm shrink-0 hover:border-white/20 transition-all active:scale-95">
+<svg class="w-3.5 h-3.5 text-[#FF6B00]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M17.5 7.5C15 5 13 5 11 7l-5.5 5.5c-2 2-2 4 0 6s4 2 6 0L17 13c2-2 2-4-.5-6.5z"></path><circle cx="16.5" cy="7.5" fill="currentColor" r=".5"></circle></svg>
+<span class="">Poultry</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-white/10 text-xs font-medium text-white shadow-sm shrink-0 hover:border-white/20 transition-all active:scale-95">
+<svg class="w-3.5 h-3.5 text-[#00C853]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13C4 7 11 3 20 3c0 9-4 17-9 17Z"></path><path d="M11 20c-1-5 2-9 9-17"></path></svg>
+<span class="">Veggies</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-white/10 text-xs font-medium text-white shadow-sm shrink-0 hover:border-white/20 transition-all active:scale-95">
+<svg class="w-3.5 h-3.5 text-[#FFD600]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 11h16a1 1 0 0 1 1 1c0 5-4 9-9 9s-9-4-9-9a1 1 0 0 1 1-1Z"></path><path d="M8 11V7"></path><path d="M12 11V5"></path><path d="M16 11V7"></path></svg>
+<span class="">Pasta</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-white/10 text-xs font-medium text-white shadow-sm shrink-0 hover:border-white/20 transition-all active:scale-95">
+<svg class="w-3.5 h-3.5 text-[#FF6B00]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 2h8v3H8z"></path><path d="M9 5v3l-3 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8l-3-4V5"></path></svg>
+<span class="">Dairy &amp;</span>
+</button>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#161616] border border-white/10 text-[11px] font-medium text-white/80 shrink-0 hover:border-white/20 transition-all active:scale-95">
+<span class="">Air Fryer</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#161616] border border-white/10 text-[11px] font-medium text-white/80 shrink-0 hover:border-white/20 transition-all active:scale-95">
+<span class="">Slow Cooker</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#161616] border border-white/10 text-[11px] font-medium text-white/80 shrink-0 hover:border-white/20 transition-all active:scale-95">
+<span class="">Tandoor / Oven</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#161616] border border-white/10 text-[11px] font-medium text-white/80 shrink-0 hover:border-white/20 transition-all active:scale-95">
+<span class="">Instant Pot</span>
+</button>
+</div>
+</section></main>
+<!-- Screen-4A Sticky Footer Navigation (Fixed to viewport window, 5 tabs, "Explore" highlighted) -->
+<nav class="fixed bottom-0 left-0 right-0 shrink-0 w-full z-50 bg-black/95 backdrop-blur-md border-t border-white/10 px-3 py-2 flex items-center justify-around"><!-- Tab 1: Home (ACTIVE HIGHLIGHTED) --><a class="flex flex-col items-center justify-center py-1 text-[#FF6B00] relative group" href="#"><span class="material-symbols-outlined text-[23px] drop-shadow-[0_0_8px_rgba(255,84,0,0.7)] group-hover:scale-110 transition-transform">home</span><span class="text-[10px] font-bold tracking-tight mt-0.5 text-[#FF6B00] drop-shadow-[0_0_6px_rgba(255,84,0,0.5)]">Home</span><!-- Glowing Active Indicator dot --><span class="w-1.5 h-1.5 rounded-full bg-[#FF6B00] shadow-[0_0_6px_#FF5400] mt-0.5"></span></a><!-- Tab 2: Explore --><a class="flex flex-col items-center justify-center py-1 text-zinc-400 hover:text-zinc-200 transition-colors group" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">explore</span><span class="text-[10px] font-medium tracking-tight mt-0.5">Explore</span></a><!-- Tab 3: Saved --><a class="flex flex-col items-center justify-center py-1 text-zinc-400 hover:text-zinc-200 transition-colors group" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">bookmark</span><span class="text-[10px] font-medium tracking-tight mt-0.5">Saved</span></a><!-- Tab 4: Planner --><a class="flex flex-col items-center justify-center py-1 text-zinc-400 hover:text-zinc-200 transition-colors group" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">calendar_today</span><span class="text-[10px] font-medium tracking-tight mt-0.5">Planner</span></a><!-- Tab 5: Lists --><a class="flex flex-col items-center justify-center py-1 text-zinc-400 hover:text-zinc-200 transition-colors group" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">checklist</span><span class="text-[10px] font-medium tracking-tight mt-0.5">Lists</span></a></nav>
+</div>
+</body></html>

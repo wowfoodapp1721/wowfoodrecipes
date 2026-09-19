@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="wow Food Recipes — Honey Sesame Chicken Recipe Detail. Complete ingredients, instructions, and WOW MATRIX 7.2 health score." />
+  <title>wow | Honey Sesame Chicken</title>
+
+  <!-- Google Fonts: EB Garamond (brand serif) + Work Sans / Plus Jakarta Sans (UI body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+
+  <!-- wow Chef AI Stylesheet -->
+  <link rel="stylesheet" href="assets/chef-ai.css" />
+
+  <!-- Central Dynamic Recipe Router -->
+  <script src="recipe-controller.js"></script>
+
+  <style>
+    /* ─── CSS Reset & Box Sizing ───────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ─── Global Design Tokens ─────────────────────────────────────────── */
+    :root {
+      /* Stitch 'wow food recipes' — Nocturnal Gastronomy token set */
+      --black: #0B0F14;
+      --crimson: #3DF2E0;
+      /* signature vibrant neon cyan accent */
+      --crimson-hover: #20C5B5;
+      --crimson-glow: rgba(61, 242, 224, 0.45);
+      --crimson-dim: rgba(61, 242, 224, 0.15);
+      --crimson-border: rgba(61, 242, 224, 0.35);
+      --emerald: #00E676;
+      --emerald-dim: rgba(0, 230, 118, 0.15);
+      --amber: #FBBF24;
+
+      --surface-card: #131920;
+      --surface-card-hover: #1A232E;
+      --surface-elevated: #1B232D;
+      --surface-chip: #19212C;
+      --surface-glass: rgba(11, 15, 20, 0.75);
+
+      --text-white: #FFFFFF;
+      --text-muted: #8E8E93;
+      --text-dim: #A0A0A0;
+      --text-sub: #E2E2E2;
+
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-focus: rgba(255, 255, 255, 0.25);
+
+      /* Typography */
+      --font-serif: 'EB Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', 'Work Sans', -apple-system, sans-serif;
+    }
+
+    /* ─── Desktop Centering & Page Background ──────────────────────────── */
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--black);
+      color: var(--text-white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    /* ─── Mobile Viewport Frame (Strict 393px × 852px) ─────────────────── */
+    #viewport {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      background-color: var(--black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 44px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 32px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    /* Scrollbar Utilities */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Tap feedback */
+    .tap-effect {
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      cursor: pointer;
+    }
+
+    .tap-effect:active {
+      transform: scale(0.96);
+      opacity: 0.85;
+    }
+
+    /* ─── STATUS BAR ───────────────────────────────────────────────────── */
+    .status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 44px;
+      padding: 10px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 60;
+      pointer-events: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-white);
+    }
+
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-bar-icons .material-symbols-outlined {
+      font-size: 16px;
+    }
+
+    /* ─── UPPER FIXED HEADER SECTION ───────────────────────────────────── */
+    #recipe-header {
+      position: relative;
+      width: 100%;
+      flex-shrink: 0;
+      background-color: var(--black);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--border-soft);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+      padding-top: 40px;
+    }
+
+    /* Media Banner Graphic Block */
+    .media-container-wrapper {
+      padding: 0 16px;
+      width: 100%;
+    }
+
+    .media-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 12px;
+      /* Strict 12px border-radius profile */
+      background-color: #0A0A0A;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .media-cover-img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      image-rendering: auto;
+      object-position: center;
+      border-radius: 12px;
+      /* Strictly applied to image boundary node */
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .media-container:hover .media-cover-img {
+      transform: scale(1.03);
+    }
+
+    /* Atmospheric Vignette */
+    .media-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+          rgba(0, 0, 0, 0.85) 0%,
+          rgba(0, 0, 0, 0.25) 45%,
+          rgba(0, 0, 0, 0.65) 100%);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    /* Media Header Controls (Top Row) */
+    .media-top-nav {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 20;
+    }
+
+    .icon-circle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+      text-decoration: none;
+    }
+
+    .icon-circle-btn .material-symbols-outlined {
+      font-size: 20px;
+    }
+
+    .live-category-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(11, 15, 20, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--crimson-border);
+      box-shadow: 0 0 12px rgba(61, 242, 224, 0.25);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--crimson);
+    }
+
+    .live-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--crimson);
+      box-shadow: 0 0 8px var(--crimson);
+      animation: pulseGlow 1.8s infinite;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+    }
+
+    /* Floating Micro Badges on Media (Bottom Left) */
+    .media-bottom-badges {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 20;
+    }
+
+    .chef-signature-pill {
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(61, 242, 224, 0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(61, 242, 224, 0.45);
+      color: var(--crimson);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .calorie-pill {
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .calorie-pill .material-symbols-outlined {
+      font-size: 13px;
+      color: var(--crimson);
+    }
+
+    /* Title & Action Row */
+    .header-details-stack {
+      padding: 10px 18px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .recipe-main-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      text-align: left;
+    }
+
+    .action-button-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2px 0 4px;
+    }
+
+    .header-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      color: var(--text-white);
+      font-size: 13px;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .header-action-btn.pill-bordered {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .header-action-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--crimson);
+    }
+
+    .header-action-btn.saved svg {
+      fill: var(--crimson);
+      stroke: var(--crimson);
+    }
+
+    /* ─── 3-TAB SEGMENTED NAVIGATION ───────────────────────────────────── */
+    .tab-nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0 16px;
+    }
+
+    .tab-segmented-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .tab-nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 12px 4px 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .tab-nav-btn.active {
+      color: var(--text-white);
+      font-weight: 700;
+    }
+
+    .tab-active-slider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 33.333%;
+      height: 3px;
+      padding: 0 8px;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+      transform: translateX(0) translateZ(0);
+    }
+
+    .tab-active-line {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: var(--crimson);
+      border-radius: 3px;
+      box-shadow: 0 0 10px var(--crimson-glow);
+    }
+
+    /* ─── MAIN SCROLLABLE CONTENT VIEWPORT ─────────────────────────────── */
+    #scroll-content {
+      flex: 1;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      background-color: var(--black);
+      padding: 14px 16px 128px;
+      /* 128px (pb-32) bottom padding to clear the fixed floating footer */
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Tab Panels Transition */
+    .tab-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: fadeInTab 0.25s ease-out;
+    }
+
+    .tab-panel.hidden {
+      display: none;
+    }
+
+    @keyframes fadeInTab {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── TAB 1: INGREDIENTS VIEW ──────────────────────────────────────── */
+    .recipe-intro-text {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .see-more-link {
+      background: none;
+      border: none;
+      color: var(--crimson);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 13.5px;
+    }
+
+    .time-info-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 2px 0;
+    }
+
+    .time-info-row .material-symbols-outlined {
+      font-size: 17px;
+      color: var(--crimson);
+    }
+
+    /* Servings & Units Controls */
+    .servings-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 10px 14px;
+    }
+
+    .servings-stepper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--crimson);
+      color: var(--black);
+      font-size: 18px;
+      font-weight: 800;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding-bottom: 2px;
+      cursor: pointer;
+    }
+
+    .servings-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .convert-units-btn {
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-white);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Ingredient List Item Cards */
+    .ingredients-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ingredient-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      transition: border-color 0.2s ease;
+    }
+
+    .ingredient-card:hover {
+      border-color: var(--border-subtle);
+    }
+
+    .ingredient-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ingredient-img-wrapper {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      overflow: hidden;
+      flex-shrink: 0;
+      padding: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .round-shape,
+    .ingredient-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      image-rendering: auto;
+      display: block;
+    }
+
+    .ingredient-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    .ingredient-amount {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--crimson);
+      text-align: right;
+    }
+
+    .add-shopping-list-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-white);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .add-shopping-list-btn .material-symbols-outlined {
+      font-size: 18px;
+      color: var(--crimson);
+    }
+
+    /* ─── TAB 2: INSTRUCTIONS VIEW ─────────────────────────────────────── */
+    .instructions-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .instruction-step-card {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .step-number-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--crimson);
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(61, 242, 224, 0.4);
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #FFFFFF;
+    }
+
+    .step-timer-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--crimson);
+      background: rgba(61, 242, 224, 0.12);
+      border: 1px solid rgba(61, 242, 224, 0.3);
+      border-radius: 12px;
+      padding: 2px 8px;
+      margin-top: 6px;
+    }
+
+    .step-timer-chip .material-symbols-outlined {
+      font-size: 13px;
+      color: var(--crimson);
+    }
+
+    /* ─── TAB 3: HEALTH SCORE VIEW ('WOW MATRIX 7.2') ─────────────────── */
+    .wow-matrix-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wow-matrix-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: -30px;
+      width: 110px;
+      height: 110px;
+      background: radial-gradient(circle, rgba(61, 242, 224, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .matrix-ring-container {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .matrix-ring-svg {
+      width: 84px;
+      height: 84px;
+      transform: rotate(-90deg);
+    }
+
+    .matrix-ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 6;
+    }
+
+    .matrix-ring-progress {
+      fill: none;
+      stroke: var(--crimson);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 226.19;
+      stroke-dashoffset: 13.57; /* default 94% */
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.65));
+      transition: stroke-dashoffset 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .matrix-ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .matrix-ring-number {
+      font-size: 22px;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1;
+      font-family: var(--font-sans);
+    }
+
+    .matrix-ring-caption {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--crimson);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 1px;
+    }
+
+    .matrix-telemetry-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      flex: 1;
+      gap: 3px;
+    }
+
+    .matrix-brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      background: rgba(61, 242, 224, 0.12);
+      border: 1px solid rgba(61, 242, 224, 0.3);
+      border-radius: 12px;
+      padding: 2px 7px;
+    }
+
+    .matrix-brand-tag .material-symbols-outlined {
+      font-size: 12px;
+      color: var(--crimson);
+    }
+
+    .matrix-score-heading {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      margin-top: 2px;
+    }
+
+    .matrix-score-subtext {
+      font-size: 11.5px;
+      color: #8E8E93;
+      font-weight: 500;
+    }
+
+    .matrix-about-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      border-left: 1px solid var(--border-soft);
+      padding-left: 12px;
+      color: var(--text-muted);
+      background: none;
+      border-top: none;
+      border-right: none;
+      border-bottom: none;
+      cursor: pointer;
+    }
+
+    .matrix-about-action .material-symbols-outlined {
+      font-size: 18px;
+    }
+
+    .matrix-about-action span {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    /* Macro Grid Cards */
+    .macro-grid-2x2 {
+      display: grid;
+      grid-cols: 2;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .macro-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .macro-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .macro-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-white);
+      margin: 2px 0 6px;
+    }
+
+    .macro-bar-track {
+      width: 100%;
+      height: 5px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .macro-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .macro-bar-fill.emerald {
+      background: #10B981;
+    }
+
+    .macro-bar-fill.crimson {
+      background: var(--crimson);
+    }
+
+    /* Nutrition Breakdown Table */
+    .nutrition-table-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      overflow: hidden;
+      padding: 4px 14px;
+    }
+
+    .nutrition-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+    }
+
+    .nutrition-row:last-child {
+      border-bottom: none;
+    }
+
+    .nutrition-name {
+      color: var(--text-white);
+      font-weight: 500;
+    }
+
+    .nutrition-val {
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+
+    .nutrition-pct {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: 4px;
+      font-weight: 400;
+    }
+
+    /* ─── SHARED RECOMMENDATIONS & RATINGS ─────────────────────────────── */
+    .community-rating-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .like-dislike-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    .feedback-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .feedback-pill.liked,
+    .feedback-pill.liked .feedback-metric-text {
+      color: #34D399;
+      /* clean vibrant green tint */
+    }
+
+    .feedback-pill.disliked,
+    .feedback-pill.disliked .feedback-metric-text {
+      color: #3DF2E0;
+    }
+
+    .feedback-icon-box {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feedback-icon-box.green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .feedback-icon-box.red {
+      background: rgba(61, 242, 224, 0.15);
+      color: #3DF2E0;
+      border: 1px solid rgba(61, 242, 224, 0.35);
+    }
+
+    .feedback-icon-box .material-symbols-outlined {
+      font-size: 14px;
+      line-height: 1;
+      display: block;
+      user-select: none;
+    }
+
+    .feedback-metric-text {
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .recipe-tag {
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--surface-chip);
+      border: 1px solid var(--border-soft);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-dim);
+    }
+
+    /* You May Also Like Section */
+    .suggested-recipes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+    }
+
+    .suggested-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .suggested-thumb-wrapper {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #151515;
+    }
+
+    .suggested-thumb-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .suggested-vignette {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .suggested-bookmark {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+
+    .suggested-bookmark .material-symbols-outlined {
+      font-size: 14px;
+    }
+
+    .suggested-meta-box {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+    }
+
+    .suggested-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .suggested-time {
+      font-size: 10px;
+      color: var(--crimson);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 3px;
+    }
+
+    .suggested-time .material-symbols-outlined {
+      font-size: 12px;
+    }
+
+    .suggested-author-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 0 2px;
+    }
+
+    .author-avatar-badge {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--crimson-dim);
+      border: 1px solid var(--crimson-border);
+      color: var(--crimson);
+      font-size: 9px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .author-name {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ─── PRIMARY FIXED FOOTER ACTION ──────────────────────────────────── */
+    #fixed-footer-action {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 12px 18px 24px;
+      background: linear-gradient(to top,
+          rgba(11, 15, 20, 1) 0%,
+          rgba(11, 15, 20, 0.96) 65%,
+          rgba(11, 15, 20, 0) 100%);
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .start-cooking-btn {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 52px;
+      border-radius: 30px;
+      background: var(--crimson);
+      color: #0B0F14;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 24px rgba(61, 242, 224, 0.45);
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+
+    .start-cooking-btn:hover {
+      background: var(--crimson-hover);
+      box-shadow: 0 6px 28px rgba(61, 242, 224, 0.6);
+    }
+
+    .start-cooking-btn:active {
+      transform: scale(0.98);
+    }
+
+    .start-cooking-btn .material-symbols-outlined {
+      font-size: 22px;
+      color: #0B0F14;
+    }
+
+    /* Home Indicator bar for iOS frame styling */
+    .home-indicator {
+      width: 130px;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    /* ─── SCREEN 3F: RECIPE SAVED TOAST OVERLAY ────────────────────────── */
+    #toast-saved-recipe {
+      position: absolute;
+      bottom: 84px;
+      left: 16px;
+      right: 16px;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface-elevated);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transform: translateY(120px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    }
+
+    #toast-saved-recipe.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toast-left-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast-icon-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--crimson);
+      color: #0B0F14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .toast-icon-circle .material-symbols-outlined {
+      font-size: 15px;
+      color: #0B0F14;
+    }
+
+    .toast-message-text {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    .toast-undo-btn {
+      background: none;
+      border: none;
+      color: var(--crimson);
+      font-size: 12.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
+
+    /* ─── UNIVERSAL ACTION BOTTOM SHEET DRAWER (SCR-03E) ──────────────── */
+    #action-sheet-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 80;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    #action-sheet-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .action-sheet-drawer {
+      background: #131920;
+      border-top: 1px solid var(--border-subtle);
+      border-radius: 28px 28px 0 0;
+      padding: 12px 16px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    #action-sheet-overlay.open .action-sheet-drawer {
+      transform: translateY(0);
+    }
+
+    .action-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 0 auto 12px;
+    }
+
+    .action-sheet-title {
+      font-family: 'Plus Jakarta Sans', 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #FFFFFF;
+      border-left: 3px solid #3DF2E0;
+      padding: 1px 8px 6px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+    }
+
+    .action-sheet-dot {
+      color: #3DF2E0;
+      text-shadow: 0 0 8px rgba(61, 242, 224, 0.7);
+      margin: 0 6px;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .action-sheet-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 12px;
+      border-radius: 16px;
+      background: transparent;
+      border: none;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .action-sheet-item:hover,
+    .action-sheet-item:active {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .action-sheet-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    .action-sheet-item-left .material-symbols-outlined {
+      font-size: 22px;
+      color: var(--crimson);
+    }
+
+    .action-sheet-cancel {
+      margin-top: 10px;
+      width: 100%;
+      height: 46px;
+      border-radius: 16px;
+      background: #1B232D;
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ─── SOCIAL SHARE OVERLAY SHEET ───────────────────────────────────── */
+    #share-sheet-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 85;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    #share-sheet-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .share-sheet-drawer {
+      background: #0B0F14;
+      border-top: 1.5px solid #3DF2E0;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.95), 0 -2px 16px rgba(61, 242, 224, 0.2);
+      border-radius: 28px 28px 0 0;
+      padding: 12px 18px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #share-sheet-overlay.open .share-sheet-drawer {
+      transform: translateY(0);
+    }
+
+    .share-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+
+    .share-sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .share-sheet-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      font-family: var(--font-sans);
+    }
+
+    .share-sheet-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+
+    .share-sheet-close-btn:hover {
+      background: rgba(61, 242, 224, 0.15);
+      border-color: #3DF2E0;
+      color: #3DF2E0;
+      transform: scale(1.05);
+    }
+
+    .share-sheet-close-btn:active {
+      transform: scale(0.95);
+    }
+
+    .share-networks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 4px 0 8px;
+    }
+
+    .share-network-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #131920;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 14px 6px 12px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      outline: none;
+    }
+
+    .share-network-item:hover {
+      background: #1A232E;
+      border-color: rgba(61, 242, 224, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .share-network-item:active {
+      transform: scale(0.96);
+    }
+
+    .share-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+    }
+
+    .share-network-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #8E8E93;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+
+    /* ─── FULL-SCREEN STEP-BY-STEP COOKING SESSION MODAL ───────────────── */
+    #cooking-session-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 70;
+      background-color: var(--black);
+      color: var(--text-white);
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    #cooking-session-modal.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-nav-bar {
+      height: 56px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 40px;
+      /* offset for top status bar */
+    }
+
+    .modal-step-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--crimson);
+    }
+
+    .modal-step-counter {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+
+    .timer-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--crimson-dim);
+      border: 1px solid var(--crimson-border);
+      color: var(--crimson);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .timer-badge .material-symbols-outlined {
+      font-size: 15px;
+    }
+
+    .modal-scroll-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step-hero-media {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #151515;
+      border: 1px solid var(--border-soft);
+    }
+
+    .step-hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .step-active-pill {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--crimson);
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modal-step-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.25;
+    }
+
+    .modal-step-desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .step-ingredients-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .step-ingredients-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .step-ing-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13.5px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .step-ing-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .modal-bottom-actions {
+      padding: 14px 16px 28px;
+      background: rgba(11, 15, 20, 0.95);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-nav-action-btn {
+      flex: 1;
+      height: 48px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .modal-nav-action-btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .modal-nav-action-btn.primary {
+      background: var(--crimson);
+      color: #0B0F14;
+      box-shadow: 0 4px 16px rgba(61, 242, 224, 0.4);
+    }
+
+    .modal-nav-action-btn.primary .material-symbols-outlined {
+      color: #0B0F14;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====================================================================== -->
+  <!-- MAIN MOBILE VIEWPORT CONTAINER (393px × 852px)                         -->
+  <!-- ====================================================================== -->
+  <div id="viewport">
+
+    <!-- 1. TOP STATUS BAR (Native iOS Canvas Overlay) -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-bar-icons">
+        <span class="material-symbols-outlined">signal_cellular_4_bar</span>
+        <span class="material-symbols-outlined">wifi</span>
+        <span class="material-symbols-outlined">battery_full</span>
+      </div>
+    </div>
+
+    <!-- 2. UPPER FIXED HEADER WITH MEDIA BLOCK -->
+    <header id="recipe-header">
+
+      <!-- Polished Media Container (Strict 12px Border Radius Profile) -->
+      <div class="media-container-wrapper">
+        <div class="media-container">
+          <!-- Food Graphic Image Scaling Smoothly to Fit Bounds -->
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhkRAP1-x1EDloTwbMiM44umpD39zC1S9hERLua9S7eGNpSB1vptxWAy7HDcum8hpfrLKq6USwRJ5Lhqd6KFEgRTsDCddmb177ffamRaMiWWgHrnnHdGlAKkwQrrKvlgEswZhu7fyS0wHApLxFx5_52Xw-9ccDda7rqjKqypv6SDCp7V1RBgPoFCHCyV285XwR8L6Cd1v0wl1aRvnv6PMlP7u7Id0oYJFGPLyaUUIQwr76XTk_dpStCX7I2LnqYJlb2nU"
+            alt="Honey Sesame Chicken" class="media-cover-img" />
+          <div class="media-vignette"></div>
+
+          <!-- Top Navigation Controls Overlay -->
+          <div class="media-top-nav">
+            <a href="dashboard.html" class="icon-circle-btn tap-effect" aria-label="Return to Dashboard">
+              <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <div class="live-category-badge">
+              <span class="live-pulse-dot"></span>
+              <span>POULTRY CLASSIC</span>
+            </div>
+            <button class="icon-circle-btn tap-effect" id="btn-kebab-menu" aria-label="More Options"
+              onclick="openActionSheet()">
+              <span class="material-symbols-outlined">more_vert</span>
+            </button>
+          </div>
+
+          <!-- Bottom Micro Badges Overlay -->
+          <div class="media-bottom-badges">
+            <span class="chef-signature-pill">Chef's Signature</span>
+            <span class="calorie-pill">
+              <span class="material-symbols-outlined">local_fire_department</span>
+              480 kcal
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recipe Title & Action Button Stack -->
+      <div class="header-details-stack">
+        <h1 class="recipe-main-title">Honey Sesame Chicken</h1>
+
+        <!-- 3 Functional Action Buttons in Horizontal Flex Row -->
+        <div class="action-button-row">
+          <!-- Bookmark / Likes Button -->
+          <button class="header-action-btn tap-effect" id="bookmark-action-btn" onclick="toggleBookmark()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span id="bookmark-count-text">240.6k</span>
+          </button>
+
+          <!-- Add to Collection -->
+          <button class="header-action-btn pill-bordered tap-effect" onclick="triggerSaveToast('Added to Weekly Plan')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+              style="width:14px;height:14px;">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Add to</span>
+          </button>
+
+          <!-- Share Button -->
+          <button class="header-action-btn tap-effect" id="btn-share-recipe" onclick="openShareSheet()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>Share</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. TAB CONTROL STATE NAVIGATION BAR -->
+      <nav class="tab-nav-bar">
+        <div class="tab-segmented-row relative">
+          <!-- Tab 1: Ingredients -->
+          <button class="tab-nav-btn active text-white font-bold" id="tab-btn-0" onclick="switchRecipeTab(0)">
+            Ingredients
+          </button>
+          <!-- Tab 2: Instructions -->
+          <button class="tab-nav-btn text-[#8E8E93]" id="tab-btn-1" onclick="switchRecipeTab(1)">
+            Instructions
+          </button>
+          <!-- Tab 3: Health Score -->
+          <button class="tab-nav-btn text-[#8E8E93]" id="tab-btn-2" onclick="switchRecipeTab(2)">
+            Health Score
+          </button>
+
+          <!-- Sliding Vibrant Red Indicator Underneath -->
+          <div class="tab-active-slider transition-all duration-300 ease-out transform" id="tab-slider">
+            <span class="tab-active-line"></span>
+          </div>
+        </div>
+      </nav>
+
+    </header>
+
+    <!-- ================================================================== -->
+    <!-- 4. MAIN SCROLLABLE CONTENT BODY                                     -->
+    <!-- ================================================================== -->
+    <main id="scroll-content" class="no-scrollbar">
+
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <!-- TAB 1 CONTENT: INGREDIENTS VIEW (ACTIVE DEFAULT)                 -->
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <section class="tab-panel" id="tab-panel-0">
+
+        <!-- Recipe Intro Summary -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <p class="recipe-intro-text">
+            To freeze simply follow all directions except the cooking. Place chicken and aromatic marinade in a gallon
+            freezer bag. Be sure to glaze thoroughly before skillet searing...
+            <button class="see-more-link" onclick="switchRecipeTab(1)">See more</button>
+          </p>
+          <div class="time-info-row">
+            <span class="material-symbols-outlined">schedule</span>
+            <span>Prep: 10 min &nbsp;•&nbsp; Cook: 20 min</span>
+          </div>
+        </div>
+
+        <!-- Servings Stepper & Measurement Unit Controls -->
+        <div class="servings-control-bar">
+          <div class="servings-stepper">
+            <button class="step-btn tap-effect" onclick="adjustServings(-1)" aria-label="Decrease Servings">−</button>
+            <span class="servings-label" id="servings-display">4 servings</span>
+            <button class="step-btn tap-effect" onclick="adjustServings(1)" aria-label="Increase Servings">+</button>
+          </div>
+          <button class="convert-units-btn tap-effect" id="unit-toggle-btn" onclick="toggleUnits()">
+            Convert Units
+          </button>
+        </div>
+
+        <!-- Ingredient Measurement List -->
+        <div class="ingredients-stack">
+
+          <!-- Ingredient Item 1: Chicken Breast -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX_diutDHz4MOqm15UGcP9m7lVCQX39FnQ-8JkAyedPkqmP8HY1PIxrCobyQ-wlRA-oJ30G1EJeotiIszl4d7i9DdH1xo8-rHLKug7JRfy0zm1AX4Cgjyk8_8n3WfIjumjnqaYVG_K5pQqdappUxFBwgVu3d7L-eaUNreUD2ZIu63Uipclc7clhwpV9aRnoqymv8PnnFdv20CcQKoMw-X4nZBOVP8qQwdZ1J8tqdpfWoVVLoKr7_UcSA"
+                  alt="Chicken breast" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Boneless Chicken Breasts</span>
+            </div>
+            <span class="ingredient-amount" data-base="4" data-unit="pieces">4 pieces</span>
+          </div>
+
+          <!-- Ingredient Item 2: Honey -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY9219aaAAqKy8S_OkjV4UxH-7mY5GFCwtauoM0zQtyz2Kdv2m4pb3FYws1LCHP6MMZN9elG82rVj3xIOcI_TqaJX7FyUKEbeml4M_xhrKsjwTfUqBpBwOxTZJGXNpt7vVDB-STjoqUDcF2Q7VA6_kKLdBkQuRxKw1xRcxEpukaKUFV-hmDpRf2_BqZouFW_ayOxdWfFWEh1R-iijyarBsagVoEqJCJ3F8OOkQdPQpZbsCtn8y11nO_w"
+                  alt="Honey" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Pure Blossom Honey</span>
+            </div>
+            <span class="ingredient-amount" data-base="0.333" data-unit="cup">1/3 cup honey</span>
+          </div>
+
+          <!-- Ingredient Item 3: Soy Sauce -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV5_qgMP5M5LFjuU65rVQ3n8VpaUldiF6kWeISyo6Bjmnd3U4SWTASQOkPPqAkGgB7wZWoKh__aBhNDAUeMs_fCZeblR5r4sOfS9CC124B1i1C6XHaPddpGMu7tF2bUH9DQzzkeVj7kMtl9yiZbiRgw-OjpJRaAUkzxYKXYJqLCr2-MrSYzHYHy7JABNLXo_tFAk0Ec4v76NFMIkRqySyFvg9iiPzDS3eNpoBzbI-8Md1OQI84olE_eQ"
+                  alt="Soy sauce" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Dark Aged Soy Sauce</span>
+            </div>
+            <span class="ingredient-amount" data-base="0.25" data-unit="cup">1/4 cup soy sauce</span>
+          </div>
+
+          <!-- Ingredient Item 4: Diced Onions -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_I4nRDt5F-xByh916kDP4YEjJP4TYpLp4EBBynR3dQq4xCvZjx6GGHAKjTV97SajdG1E7JAEYMevRQTlOIFgbLljMZFmkAofhPa4eKzyaFKZinIdz1SQEMcdHX0YTVpCw_Lq1oLy3T2eTdyt5rhkPsV9mIPjqxoe4PPb-1ItR7i-KwT9rCtEF-CXVYkC3szGxXPFbLNy6nywBeEM3IGWxoN3hd8cppF4uxO7fhWS_seMR70aIHFSsZw"
+                  alt="Diced onions" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Diced Yellow Onions</span>
+            </div>
+            <span class="ingredient-amount" data-base="0.25" data-unit="cup">1/4 cup diced</span>
+          </div>
+
+          <!-- Ingredient Item 5: Toasted Sesame Seeds -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSNbbnj_Pt8MBJeE3qfB-vlkWcoZWgOW3S6uJGITZbcBVMWRwRChCoc_-01_2Z5RkpiPmCk54Vl7XXEfQ4M_KNSUei9fgGdf4oRrO8Lx3yj4JaLdkpwN958PCj6BeHlX_XBbe0XSy_QXzBeHBr2hzQ2Rd7-aVDHfOyMi6xnIAkfZOjXmhNhyJtxkeCkBSyTKO-0kNOc4fFAtwBkJbsRNOAZo73JikzRMdMY_H6bhYqDuHwRaq3qbEHLQ"
+                  alt="Sesame seeds" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Toasted White Sesame</span>
+            </div>
+            <span class="ingredient-amount" data-base="2" data-unit="tbsp">2 tbsp seeds</span>
+          </div>
+
+          <!-- Ingredient Item 6: Fresh Minced Garlic -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ2sHb1gmOj8nMAVHCGPXUrZDrkzXTE_AnANvmAYDSshQHii8prIaVgyMb2VMDZPEOF5m28crIaW9Vm-qBxEVT7LVIIxrIFGGDYbZ0P0QBVHmuJq1Yc8j1W8GTJc7RRyj3Xicd5FX9vAW7eYGcCyrn6GkjsN-p8rFpGkNi29wfO0sqIfvjRHl-B6HaQvNJBwlkcXk0mLmK1nZJBGwU1waquSmPhRFw0wuh1DsUOIzwEj5P4H4x_gT_yQ"
+                  alt="Garlic" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Minced Garlic Cloves</span>
+            </div>
+            <span class="ingredient-amount" data-base="2" data-unit="cloves">2 cloves</span>
+          </div>
+
+          <!-- Ingredient Item 7: Sea Salt & Black Pepper -->
+          <div class="ingredient-card">
+            <div class="ingredient-left">
+              <div class="ingredient-img-wrapper">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3l0C-cZh-RzxY0aHwbdqAApsbdPAlnbvd9rCwhjArbUuHDQd2yOfEjRelyzYePUnI0b_9txeXx_-caA9C8DL92Hf-7t2rpgHgEVdRnPRBgR0PGd7bubyWHlafblvqMIfl9pWp9NufUEJO1YcTCBvymoj3kKGpmlA3yS3jItoQdT-70sYNw-TSGfDdh3xESi2zjKDfb0UI9LzFfFSVN3U9GnfqTd0k1pEyn09nchs6uCIJFKsVDzP1EA"
+                  alt="Sea Salt" class="round-shape" />
+              </div>
+              <span class="ingredient-name">Sea Salt & Cracked Pepper</span>
+            </div>
+            <span class="ingredient-amount">To taste</span>
+          </div>
+
+        </div>
+
+        <!-- Add to Shopping List Action Button -->
+        <button class="add-shopping-list-btn tap-effect" onclick="window.location.href='grocery.html'">
+          <span class="material-symbols-outlined">playlist_add</span>
+          <span>Add to Shopping List</span>
+        </button>
+
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <!-- TAB 2 CONTENT: INSTRUCTIONS VIEW                                 -->
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <section class="tab-panel hidden" id="tab-panel-1">
+
+        <div class="instructions-header-bar">
+          <div class="time-info-row">
+            <span class="material-symbols-outlined">timer</span>
+            <span id="step-total-time">Total Time: 30 minutes</span>
+          </div>
+          <span id="step-count-badge"
+            style="font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.06);border:1px solid var(--border-soft);color:var(--text-muted);font-weight:700;">
+            4 Steps
+          </span>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="instruction-step-card">
+          <div class="step-number-badge">1</div>
+          <div class="step-content">
+            <h4 class="step-title">1. Prep &amp; Ingredient Mise en Place</h4>
+            <p class="step-desc">
+              Cook spaghetti in boiling salted water until al dente. Whisk egg yolks and Pecorino Romano cheese in a separate bowl with black pepper.
+            </p>
+            <div class="step-timer-chip">
+              <span class="material-symbols-outlined">timer</span>
+              <span>05:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="instruction-step-card">
+          <div class="step-number-badge">2</div>
+          <div class="step-content">
+            <h4 class="step-title">2. Aromatics &amp; Skillet Saut&eacute;</h4>
+            <p class="step-desc">
+              Crisp the diced guanciale (or pancetta) in a skillet over medium heat until the fat renders out and the meat becomes beautifully golden brown.
+            </p>
+            <div class="step-timer-chip">
+              <span class="material-symbols-outlined">timer</span>
+              <span>08:00</span>
+            </div>
+            <div class="step-img-wrapper" style="margin-top:10px;border-radius:12px;overflow:hidden;">
+              <img
+                src="assets/images/cooking-skillet.jpg"
+                alt="2. Aromatics &amp; Skillet Saut&eacute;" onerror="this.parentNode.style.display='none';"
+                style="width:100%;height:130px;object-fit:cover;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="instruction-step-card">
+          <div class="step-number-badge">3</div>
+          <div class="step-content">
+            <h4 class="step-title">3. Emulsify Sauce</h4>
+            <p class="step-desc">
+              Drain pasta, reserving a cup of cooking water. Toss hot pasta into the skillet fat off the heat. Pour the egg mix in and stir rapidly to create a rich, creamy sauce.
+            </p>
+            <div class="step-timer-chip">
+              <span class="material-symbols-outlined">timer</span>
+              <span>04:00</span>
+            </div>
+            <div class="step-img-wrapper" style="margin-top:10px;border-radius:12px;overflow:hidden;">
+              <img
+                src="assets/images/pasta-emulsify.jpg"
+                alt="3. Emulsify Sauce" onerror="this.parentNode.style.display='none';"
+                style="width:100%;height:130px;object-fit:cover;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="instruction-step-card">
+          <div class="step-number-badge">4</div>
+          <div class="step-content">
+            <h4 class="step-title">4. Garnish &amp; Serve</h4>
+            <p class="step-desc">
+              Plate the creamy pasta immediately. Top with an extra dusting of grated Pecorino Romano cheese and freshly cracked black pepper. Serve hot!
+            </p>
+            <div class="step-timer-chip">
+              <span class="material-symbols-outlined">timer</span>
+              <span>03:00</span>
+            </div>
+            <div class="step-img-wrapper" style="margin-top:10px;border-radius:12px;overflow:hidden;">
+              <img
+                src="assets/carbonara.png"
+                alt="4. Garnish &amp; Serve" onerror="this.parentNode.style.display='none';"
+                style="width:100%;height:130px;object-fit:cover;" />
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <!-- TAB 3 CONTENT: HEALTH SCORE VIEW ('WOW MATRIX 7.2')              -->
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <section class="tab-panel hidden pb-28 pb-32" id="tab-panel-2" style="padding-bottom: 120px;">
+
+        <!-- 1. OVERALL WOW MATRIX HEALTH SCORE CARD (CIRCULAR PROGRESS RING) -->
+        <div class="wow-matrix-card">
+          <!-- Left: Circular Neon Cyan Progress Ring SVG -->
+          <div class="matrix-ring-container">
+            <svg class="matrix-ring-svg" viewBox="0 0 80 80">
+              <circle class="matrix-ring-bg" cx="40" cy="40" r="36" />
+              <circle id="matrix-progress-circle" class="matrix-ring-progress" cx="40" cy="40" r="36" stroke-dasharray="226.19" stroke-dashoffset="13.57" />
+            </svg>
+            <div class="matrix-ring-center">
+              <span class="matrix-ring-number" id="matrix-ring-score">94</span>
+              <span class="matrix-ring-caption">SCORE</span>
+            </div>
+          </div>
+
+          <!-- Center: Telemetry Breakdown -->
+          <div class="matrix-telemetry-col">
+            <div class="matrix-brand-tag">
+              <span class="material-symbols-outlined">verified</span>
+              <span>WOW MATRIX 7.2</span>
+            </div>
+            <h4 class="matrix-score-heading" id="matrix-score-title">Health Score: 94/100</h4>
+            <span class="matrix-score-subtext" id="matrix-score-subtext">High Protein • Heart Healthy</span>
+          </div>
+
+          <!-- Right: Info Action -->
+          <button class="matrix-about-action tap-effect"
+            onclick="triggerSaveToast('WOW MATRIX telemetry computed from micronutrient density & macros')">
+            <span class="material-symbols-outlined">info</span>
+            <span>About</span>
+          </button>
+        </div>
+
+        <!-- 2. Macro Nutrients 2x2 Grid -->
+        <div class="macro-grid-2x2">
+          <!-- Protein -->
+          <div class="macro-card">
+            <span class="macro-label">Protein</span>
+            <div class="macro-val">42.1g</div>
+            <div class="macro-bar-track">
+              <div class="macro-bar-fill emerald" style="width: 84%;"></div>
+            </div>
+          </div>
+          <!-- Carbohydrates -->
+          <div class="macro-card">
+            <span class="macro-label">Carbohydrates</span>
+            <div class="macro-val">38.5g</div>
+            <div class="macro-bar-track">
+              <div class="macro-bar-fill crimson" style="width: 55%;"></div>
+            </div>
+          </div>
+          <!-- Fat -->
+          <div class="macro-card">
+            <span class="macro-label">Total Fat</span>
+            <div class="macro-val">14.2g</div>
+            <div class="macro-bar-track">
+              <div class="macro-bar-fill emerald" style="width: 32%;"></div>
+            </div>
+          </div>
+          <!-- Dietary Fiber -->
+          <div class="macro-card">
+            <span class="macro-label">Dietary Fiber</span>
+            <div class="macro-val">1.8g</div>
+            <div class="macro-bar-track">
+              <div class="macro-bar-fill emerald" style="width: 48%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Detailed Nutrition Per Serving Table -->
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:14px;font-weight:700;color:var(--text-white);">Nutrition per serving</span>
+          <div class="nutrition-table-card">
+            <div class="nutrition-row">
+              <span class="nutrition-name">Calories</span>
+              <div><span class="nutrition-val">480 kcal</span><span class="nutrition-pct">(24% DV)</span></div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-name">Total Fat</span>
+              <div><span class="nutrition-val">14.20g</span><span class="nutrition-pct">(18% DV)</span></div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-name">Carbohydrates</span>
+              <div><span class="nutrition-val">38.50g</span><span class="nutrition-pct">(14% DV)</span></div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-name">Sugars</span>
+              <div><span class="nutrition-val">18.30g</span><span class="nutrition-pct">(36% DV)</span></div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-name">Protein</span>
+              <div><span class="nutrition-val">42.10g</span><span class="nutrition-pct">(84% DV)</span></div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-name">Sodium</span>
+              <div><span class="nutrition-val">820.00mg</span><span class="nutrition-pct">(35% DV)</span></div>
+            </div>
+            <div class="nutrition-row">
+              <span class="nutrition-name">Dietary Fiber</span>
+              <div><span class="nutrition-val">1.80g</span><span class="nutrition-pct">(6% DV)</span></div>
+            </div>
+          </div>
+          <p style="font-size:10.5px;color:var(--text-muted);padding-left:4px;">
+            * Percent Daily Values are based on a standard 2,000 calorie diet.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <!-- SHARED SECTION: COMMUNITY RATINGS & SUGGESTIONS                  -->
+      <!-- ──────────────────────────────────────────────────────────────── -->
+      <section class="community-rating-card" id="community-feedback-card">
+        <h3 class="section-subtitle">Community Feedback</h3>
+        <div class="like-dislike-row">
+          <div class="feedback-pill liked">
+            <div class="feedback-icon-box green">
+              <span class="material-symbols-outlined">thumb_up</span>
+            </div>
+            <span id="liked-count-text" class="feedback-metric-text liked-count">367 liked</span>
+          </div>
+          <div class="feedback-pill disliked">
+            <div class="feedback-icon-box red">
+              <span class="material-symbols-outlined">thumb_down</span>
+            </div>
+            <span id="disliked-count-text" class="feedback-metric-text disliked-count">20 disliked</span>
+          </div>
+        </div>
+        <div class="tag-cloud">
+          <span class="recipe-tag">Delicious</span>
+          <span class="recipe-tag">Go-to Classic</span>
+          <span class="recipe-tag">Quick Prep</span>
+          <span class="recipe-tag">Great Leftovers</span>
+          <span class="recipe-tag">One-Pan Dish</span>
+        </div>
+      </section>
+
+      <!-- Suggested Pairings -->
+      <section style="display:flex;flex-direction:column;gap:8px;">
+        <h3 class="section-subtitle">You May Also Like</h3>
+        <div class="suggested-recipes-grid">
+
+          <!-- Suggested 1 -->
+          <div class="suggested-card tap-effect" onclick="triggerSaveToast('Recipe loaded in view')">
+            <div class="suggested-thumb-wrapper">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9NfkpYxh1h9in6BoXPuF5UDpgjvYyjX7xNL8APphaMG9eWwExnaww52CvTijzue-4CqJ6jbh-Hq8gN8E1IUWEwzr2phYGclxfkNCN9rrLnzHJRVmCz1ydRKhpAhZnGKb-L3BYuiAxIDmx4gGnXEYiD6VW7e8WbTbycccOcsYfM7RoWu_ZnKHP1pbFlUcJ6ylxrijHXqip7fQwEuZOEfH-9XKfJ53lF4q3n0rk-KDmZg7m-p8QxSyNgw"
+                alt="Cheesy Vegetable Soup" />
+              <div class="suggested-vignette"></div>
+              <button class="suggested-bookmark" aria-label="Save Recipe">
+                <span class="material-symbols-outlined">bookmark_border</span>
+              </button>
+              <div class="suggested-meta-box">
+                <h4 class="suggested-title">Cheesy Vegetable Soup</h4>
+                <div class="suggested-time">
+                  <span class="material-symbols-outlined">schedule</span>
+                  <span>25m</span>
+                </div>
+              </div>
+            </div>
+            <div class="suggested-author-row">
+              <div class="author-avatar-badge">R</div>
+              <span class="author-name">therecipecritic.com</span>
+            </div>
+          </div>
+
+          <!-- Suggested 2 -->
+          <div class="suggested-card tap-effect" onclick="triggerSaveToast('Recipe loaded in view')">
+            <div class="suggested-thumb-wrapper">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDprQpaTbV934d_ucKOseAuqXp4Cw1XSGViPERJmmPnD8NwDd33XWxllK9pYxTXHep3m3QVs4PY7GZ6XSq539k2lqahvKBAGBUvIEen_Fnm2jqhejKlqMQ5O2DWyf1P4Xl8obJi2QF-uxAhX7B_F4fD18RkNu-4JsZzZxcQ6Zxyt0MvezpD4xoHuTWvG4yCUv0mLzxEST7-SlvAILoWNkpdoytIIKDs6WIrXQOQ_bNgfGW8OKPJrt783g"
+                alt="Ham Potato Cheddar Soup" />
+              <div class="suggested-vignette"></div>
+              <button class="suggested-bookmark" aria-label="Save Recipe">
+                <span class="material-symbols-outlined">bookmark_border</span>
+              </button>
+              <div class="suggested-meta-box">
+                <h4 class="suggested-title">Ham Potato Cheddar Soup</h4>
+                <div class="suggested-time">
+                  <span class="material-symbols-outlined">schedule</span>
+                  <span>4h</span>
+                </div>
+              </div>
+            </div>
+            <div class="suggested-author-row">
+              <div class="author-avatar-badge">R</div>
+              <span class="author-name">Robin Peierl</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================================================================== -->
+    <!-- 5. SCREEN 3F: RECIPE SAVED TOAST OVERLAY NOTIFICATION              -->
+    <!-- ================================================================== -->
+    <aside id="toast-saved-recipe" aria-label="Notification">
+      <div class="toast-left-content">
+        <div class="toast-icon-circle">
+          <span class="material-symbols-outlined">check</span>
+        </div>
+        <span class="toast-message-text" id="toast-msg">Recipe saved to your collection</span>
+      </div>
+      <button class="toast-undo-btn tap-effect" onclick="hideToast()">UNDO</button>
+    </aside>
+
+    <!-- ─── UNIVERSAL ACTION BOTTOM SHEET DRAWER (SCR-03E) ──────────────── -->
+    <div id="action-sheet-overlay" onclick="closeActionSheetOnBackdrop(event)">
+      <div class="action-sheet-drawer" id="action-sheet-drawer">
+        <div class="action-sheet-handle"></div>
+        <div class="action-sheet-title">RECIPE OPTIONS <span class="action-sheet-dot">•</span> WOW VAULT</div>
+
+        <!-- Option 1: Save Recipe -->
+        <button class="action-sheet-item" id="sheet-btn-save" type="button" onclick="handleSheetSave()">
+          <div class="action-sheet-item-left">
+            <span class="material-symbols-outlined">bookmark</span>
+            <span>Save Recipe</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px] text-gray-500">chevron_right</span>
+        </button>
+
+        <!-- Option 2: Edit / Fork Recipe (SCR-03I) -->
+        <a href="recipe-fork-edit.html" class="action-sheet-item" id="sheet-btn-edit">
+          <div class="action-sheet-item-left">
+            <span class="material-symbols-outlined">edit_note</span>
+            <span>Edit / Fork Recipe</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px] text-gray-500">chevron_right</span>
+        </a>
+
+        <!-- Option 3: Print Recipe (SCR-03J) -->
+        <a href="recipe-print.html" class="action-sheet-item" id="sheet-btn-print">
+          <div class="action-sheet-item-left">
+            <span class="material-symbols-outlined">print</span>
+            <span>Print Recipe &amp; PDF</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px] text-gray-500">chevron_right</span>
+        </a>
+
+        <!-- Option 4: Leave Feedback -->
+        <button class="action-sheet-item" id="sheet-btn-feedback" type="button" onclick="handleSheetFeedback()">
+          <div class="action-sheet-item-left">
+            <span class="material-symbols-outlined">reviews</span>
+            <span>Leave Chef Feedback</span>
+          </div>
+          <span class="material-symbols-outlined text-[18px] text-gray-500">chevron_right</span>
+        </button>
+
+        <button class="action-sheet-cancel tap-effect" type="button" onclick="closeActionSheet()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- ─── SOCIAL SHARE OVERLAY SHEET ─────────────────────────────────── -->
+    <div id="share-sheet-overlay" onclick="closeShareSheetOnBackdrop(event)" role="dialog" aria-modal="true" aria-labelledby="share-sheet-title">
+      <div class="share-sheet-drawer" id="share-sheet-drawer">
+        <div class="share-sheet-handle"></div>
+        <div class="share-sheet-header">
+          <h3 class="share-sheet-title" id="share-sheet-title">Share Recipe via</h3>
+          <button class="share-sheet-close-btn tap-effect" id="btn-close-share-sheet" onclick="closeShareSheet()" aria-label="Close share sheet">✕</button>
+        </div>
+
+        <div class="share-networks-grid">
+          <!-- 1. WhatsApp -->
+          <button class="share-network-item tap-effect" id="share-btn-whatsapp" onclick="handleShareOption('WhatsApp')" aria-label="Share via WhatsApp">
+            <div class="share-icon-wrapper">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#25D366"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 11C16.8 11 11 16.8 11 24C11 26.4 11.7 28.7 12.9 30.7L11.2 37L17.7 35.3C19.6 36.4 21.7 37 24 37C31.2 37 37 31.2 37 24C37 16.8 31.2 11 24 11ZM30.4 28.1C30.1 28.9 28.9 29.7 27.9 29.9C27.2 30 26.3 30.1 23.4 28.9C19.7 27.4 17.3 23.6 17.1 23.4C17 23.2 15.6 21.3 15.6 19.3C15.6 17.3 16.6 16.3 17.1 15.9C17.4 15.6 17.9 15.5 18.4 15.5C18.6 15.5 18.7 15.5 18.8 15.5C19.2 15.5 19.5 15.6 19.7 16.1C20 16.8 20.7 18.4 20.8 18.6C20.9 18.8 20.9 19.1 20.8 19.3C20.7 19.6 20.6 19.7 20.4 20C20.2 20.2 20 20.4 19.8 20.7C19.6 20.9 19.4 21.1 19.6 21.5C19.9 22 20.8 23.4 22.1 24.6C23.8 26.1 25.3 26.7 25.7 26.9C26.1 27.1 26.4 27 26.7 26.7C27 26.4 27.5 25.7 27.8 25.2C28.1 24.7 28.4 24.8 28.8 24.9C29.2 25.1 31.5 26.2 32 26.5C32.4 26.7 32.8 26.8 32.9 27C33 27.3 33 27.9 30.4 28.1Z" fill="white"/>
+              </svg>
+            </div>
+            <span class="share-network-label">WhatsApp</span>
+          </button>
+
+          <!-- 2. Telegram -->
+          <button class="share-network-item tap-effect" id="share-btn-telegram" onclick="handleShareOption('Telegram')" aria-label="Share via Telegram">
+            <div class="share-icon-wrapper">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#24A1DE"/>
+                <path d="M34 15.2L13.2 23.2C11.8 23.8 11.8 24.6 13 25L18.3 26.6L30.7 18.8C31.3 18.4 31.8 18.7 31.3 19.1L21.3 28.1L20.9 33.5C21.4 33.5 21.7 33.3 22 33L24.7 30.4L30.4 34.6C31.4 35.1 32.2 34.8 32.5 33.6L36.2 16.5C36.6 14.8 35.5 14.1 34 15.2Z" fill="white"/>
+              </svg>
+            </div>
+            <span class="share-network-label">Telegram</span>
+          </button>
+
+          <!-- 3. Instagram -->
+          <button class="share-network-item tap-effect" id="share-btn-instagram" onclick="handleShareOption('Instagram')" aria-label="Share via Instagram">
+            <div class="share-icon-wrapper">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <defs>
+                  <radialGradient id="ig-gradient-share" cx="30%" cy="105%" r="115%">
+                    <stop offset="0%" stop-color="#FFD15C"/>
+                    <stop offset="25%" stop-color="#FF5D5D"/>
+                    <stop offset="55%" stop-color="#D62976"/>
+                    <stop offset="75%" stop-color="#962FBF"/>
+                    <stop offset="100%" stop-color="#4F5BD5"/>
+                  </radialGradient>
+                </defs>
+                <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#ig-gradient-share)"/>
+                <rect x="11.5" y="11.5" width="25" height="25" rx="7" stroke="white" stroke-width="2.5" fill="none"/>
+                <circle cx="24" cy="24" r="5.8" stroke="white" stroke-width="2.5" fill="none"/>
+                <circle cx="30.5" cy="17.5" r="1.5" fill="white"/>
+              </svg>
+            </div>
+            <span class="share-network-label">Instagram</span>
+          </button>
+
+          <!-- 4. Facebook -->
+          <button class="share-network-item tap-effect" id="share-btn-facebook" onclick="handleShareOption('Facebook')" aria-label="Share via Facebook">
+            <div class="share-icon-wrapper">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#1877F2"/>
+                <path d="M26.9 36V24.5H30.8L31.4 20H26.9V17.1C26.9 15.8 27.3 14.9 29.1 14.9H31.5V10.9C31.1 10.8 29.7 10.7 28.1 10.7C24.7 10.7 22.4 12.8 22.4 16.6V20H18.5V24.5H22.4V36H26.9Z" fill="white"/>
+              </svg>
+            </div>
+            <span class="share-network-label">Facebook</span>
+          </button>
+
+          <!-- 5. Pinterest -->
+          <button class="share-network-item tap-effect" id="share-btn-pinterest" onclick="handleShareOption('Pinterest')" aria-label="Share via Pinterest">
+            <div class="share-icon-wrapper">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#E60023"/>
+                <path d="M24 11C16.8 11 11 16.8 11 24C11 29.5 14.4 34.2 19.3 36C19.2 34.9 19.1 33.4 19.3 32.1C19.6 30.9 21 25 21 25C21 25 20.6 24.2 20.6 22.9C20.6 21 21.7 19.6 23.1 19.6C24.3 19.6 24.8 20.5 24.8 21.6C24.8 22.8 24 24.5 23.6 26.2C23.3 27.6 24.4 28.8 25.8 28.8C28.4 28.8 30.4 26.1 30.4 22.1C30.4 18.5 27.9 16 24.2 16C19.9 16 17.4 19.2 17.4 22.6C17.4 23.9 17.8 25.2 18.4 26C18.6 26.2 18.6 26.3 18.5 26.7C18.4 27.1 18.2 28.1 18.1 28.4C18 28.8 17.8 28.9 17.4 28.7C14.9 27.5 13.7 24.4 13.7 22.2C13.7 17.1 17.9 12.5 24.5 12.5C29.8 12.5 33.9 16.3 33.9 21.7C33.9 27 30.6 31.2 26 31.2C24.5 31.2 23 30.3 22.5 29.4L21.6 32.8C21.3 34 20.4 35.5 19.8 36.5C21.1 36.8 22.5 37 24 37C31.2 37 37 31.2 37 24C37 16.8 31.2 11 24 11Z" fill="white"/>
+              </svg>
+            </div>
+            <span class="share-network-label">Pinterest</span>
+          </button>
+
+          <!-- 6. More Options -->
+          <button class="share-network-item tap-effect" id="share-btn-more" onclick="handleShareOption('More Options')" aria-label="More share options">
+            <div class="share-icon-wrapper">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="rgba(61, 242, 224, 0.12)" stroke="#3DF2E0" stroke-width="1.5"/>
+                <circle cx="15" cy="24" r="2.5" fill="#3DF2E0"/>
+                <circle cx="24" cy="24" r="2.5" fill="#3DF2E0"/>
+                <circle cx="33" cy="24" r="2.5" fill="#3DF2E0"/>
+              </svg>
+            </div>
+            <span class="share-network-label">More Options</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 6. PRIMARY FIXED FOOTER ACTION BUTTON                              -->
+    <!-- ================================================================== -->
+    <footer id="fixed-footer-action">
+      <button class="start-cooking-btn tap-effect" id="start-cooking-action-btn" onclick="openCookingSession()">
+        <span class="material-symbols-outlined">skillet</span>
+        <span>Start Cooking Session</span>
+      </button>
+      <div class="home-indicator"></div>
+    </footer>
+
+    <!-- ================================================================== -->
+    <!-- 7. FULL-SCREEN STEP-BY-STEP COOKING SESSION MODAL (SCREEN 4A)      -->
+    <!-- ================================================================== -->
+    <div id="cooking-session-modal">
+
+      <!-- Modal Navigation Top Bar -->
+      <div class="modal-nav-bar">
+        <button class="icon-circle-btn tap-effect" onclick="closeCookingSession()" aria-label="Close Cooking Session">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <span class="modal-step-tag">Cook Mode</span>
+          <span class="modal-step-counter" id="modal-step-indicator">Step 1 of 4</span>
+        </div>
+        <div class="timer-badge">
+          <span class="material-symbols-outlined">timer</span>
+          <span id="session-timer-text">10:00</span>
+        </div>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="modal-scroll-body no-scrollbar">
+
+        <!-- Active Step Graphic Image -->
+        <div class="step-hero-media">
+          <img id="modal-step-img"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzFYLS1EvIPMNIB7pr3lY5Z3VvpHPpxi1EyZvZ5SWodXRPMKVlt5fOJAIgDWsyLoXORIIRsRQ0OQmbHxumstTvjj3FTnI3BQwxnUkzCdKhPTYuYJnLuCUjQ3Gzozl6N8Hr70_AhnXeaEMK8jGsRPTVoaJJSeYpfZ4FEUaMp1QNwCbGkvThLMr07X4D5KTWC1VrP0a-P9k35bOtRvFDKAC_RfR5GwKavaCfufC_YbnY7Dy-UmV1pIxSIA"
+            alt="Step 1 Preparation" onerror="this.parentNode.style.display='none';" />
+          <span class="step-active-pill" id="modal-step-badge">Active Step</span>
+        </div>
+
+        <!-- Step Narrative -->
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <h2 class="modal-step-title" id="modal-step-heading">Step 1: Prep & Coat the Chicken</h2>
+          <p class="modal-step-desc" id="modal-step-instruction">
+            Pat the chicken breasts dry with paper towels. Cut into bite-sized 1-inch pieces. Place into a medium mixing
+            bowl and season evenly with salt, pepper, and cornstarch until fully coated.
+          </p>
+        </div>
+
+        <!-- Step Ingredients Breakdown -->
+        <div class="step-ingredients-box" id="modal-step-ingredients">
+          <span class="step-ingredients-title">Ingredients for this step</span>
+          <div class="step-ing-row">
+            <span>Chicken Breasts</span>
+            <span style="color:var(--crimson);font-weight:700;">4 pieces (diced)</span>
+          </div>
+          <div class="step-ing-row">
+            <span>Sea Salt & Black Pepper</span>
+            <span style="color:var(--text-muted);">To taste</span>
+          </div>
+          <div class="step-ing-row">
+            <span>Cornstarch / Coating</span>
+            <span style="color:var(--text-muted);">2 tbsp</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Bottom Navigation Controls -->
+      <div class="modal-bottom-actions">
+        <button class="modal-nav-action-btn secondary tap-effect" id="prev-step-btn" onclick="navigateStep(-1)" disabled
+          style="opacity:0.4;cursor:not-allowed;">
+          <span class="material-symbols-outlined">chevron_left</span>
+          <span>Previous</span>
+        </button>
+        <button class="modal-nav-action-btn primary tap-effect" id="next-step-btn" onclick="navigateStep(1)">
+          <span>Next</span>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- JAVASCRIPT STATE ENGINE & MICRO-INTERACTIONS                           -->
+  <!-- ====================================================================== -->
+  <script>
+    /* ─── Tab State Navigation ─────────────────────────────────────────── */
+    let currentActiveTab = 0;
+
+    function switchRecipeTab(tabIndex) {
+      currentActiveTab = tabIndex;
+
+      // Update button styles & dynamically swap active text classes
+      for (let i = 0; i < 3; i++) {
+        const btn = document.getElementById(`tab-btn-${i}`);
+        const panel = document.getElementById(`tab-panel-${i}`);
+        if (btn) {
+          if (i === tabIndex) {
+            btn.classList.add('active', 'text-white', 'font-bold');
+            btn.classList.remove('text-[#8E8E93]', 'text-gray-400');
+          } else {
+            btn.classList.remove('active', 'text-white', 'font-bold');
+            btn.classList.add('text-[#8E8E93]');
+          }
+        }
+        if (panel) {
+          if (i === tabIndex) {
+            panel.classList.remove('hidden');
+            panel.classList.add('tab-panel--active');
+          } else {
+            panel.classList.add('hidden');
+            panel.classList.remove('tab-panel--active');
+          }
+        }
+      }
+
+      // Slide indicator line smoothly with hardware-accelerated transform
+      const slider = document.getElementById('tab-slider');
+      if (slider) {
+        slider.style.transform = `translateX(${tabIndex * 100}%) translateZ(0)`;
+      }
+    }
+
+    // Attach click listeners to smoothly trigger tabs
+    document.addEventListener('DOMContentLoaded', () => {
+      [0, 1, 2].forEach(idx => {
+        const btn = document.getElementById(`tab-btn-${idx}`);
+        if (btn) {
+          btn.addEventListener('click', (e) => {
+            switchRecipeTab(idx);
+          });
+        }
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Ensure accurate image mapping per step card in Instructions tab
+        const stepCards = document.querySelectorAll("#tab-panel-1 .instruction-step-card");
+        if (stepCards && stepCards.length >= 4) {
+            const step2Img = stepCards[1].querySelector("img");
+            if (step2Img) {
+                step2Img.style.display = "block";
+                step2Img.src = "assets/images/cooking-skillet.jpg";
+            }
+            const step3Img = stepCards[2].querySelector("img");
+            if (step3Img) {
+                step3Img.style.display = "block";
+                step3Img.src = "assets/images/pasta-emulsify.jpg";
+            }
+            const step4Img = stepCards[3].querySelector("img");
+            if (step4Img) {
+                step4Img.style.display = "block";
+                step4Img.src = "assets/carbonara.png";
+            }
+        }
+    });
+
+    /* ─── Servings Stepper Multiplier ──────────────────────────────────── */
+    let currentServings = 4;
+    const baseServings = 4;
+
+    function adjustServings(delta) {
+      const newServings = currentServings + delta;
+      if (newServings < 1 || newServings > 20) return;
+      currentServings = newServings;
+
+      document.getElementById('servings-display').textContent = `${currentServings} servings`;
+
+      // Update ingredient measurement amounts
+      const ratio = currentServings / baseServings;
+      const amountEls = document.querySelectorAll('.ingredient-amount[data-base]');
+      amountEls.forEach(el => {
+        const baseVal = parseFloat(el.getAttribute('data-base'));
+        const unit = el.getAttribute('data-unit');
+        const calculated = (baseVal * ratio);
+
+        let formatted = '';
+        if (unit === 'cup') {
+          if (Math.abs(calculated - 0.333) < 0.05) formatted = '1/3 cup';
+          else if (Math.abs(calculated - 0.25) < 0.05) formatted = '1/4 cup';
+          else if (Math.abs(calculated - 0.5) < 0.05) formatted = '1/2 cup';
+          else if (Math.abs(calculated - 0.666) < 0.05) formatted = '2/3 cup';
+          else if (Math.abs(calculated - 0.75) < 0.05) formatted = '3/4 cup';
+          else if (Math.abs(calculated - 1) < 0.05) formatted = '1 cup';
+          else formatted = `${calculated.toFixed(2)} cups`;
+        } else if (unit === 'pieces') {
+          formatted = `${Math.round(calculated)} pieces`;
+        } else if (unit === 'tbsp') {
+          formatted = `${(calculated).toFixed(1).replace('.0', '')} tbsp`;
+        } else if (unit === 'cloves') {
+          formatted = `${Math.round(calculated)} cloves`;
+        }
+        el.textContent = formatted;
+      });
+    }
+
+    /* ─── Unit Conversion Toggle ───────────────────────────────────────── */
+    let isMetric = false;
+    function toggleUnits() {
+      isMetric = !isMetric;
+      const btn = document.getElementById('unit-toggle-btn');
+      btn.textContent = isMetric ? 'Metric (g/ml)' : 'US Customary';
+      triggerSaveToast(isMetric ? 'Switched to Metric units' : 'Switched to US units');
+    }
+
+    /* ─── Bookmark & Toast Triggering ──────────────────────────────────── */
+    let isSaved = false;
+    let toastTimer = null;
+
+    function toggleBookmark() {
+      isSaved = !isSaved;
+      const btn = document.getElementById('bookmark-action-btn');
+      const countEl = document.getElementById('bookmark-count-text');
+
+      if (isSaved) {
+        btn.classList.add('saved');
+        countEl.textContent = '240.7k';
+        triggerSaveToast('Recipe saved to your collection');
+      } else {
+        btn.classList.remove('saved');
+        countEl.textContent = '240.6k';
+        triggerSaveToast('Recipe removed from bookmarks');
+      }
+    }
+
+    function triggerSaveToast(customMessage) {
+      const toast = document.getElementById('toast-saved-recipe');
+      const msgEl = document.getElementById('toast-msg');
+      if (customMessage) {
+        msgEl.textContent = customMessage;
+      } else {
+        msgEl.textContent = 'Recipe saved to your collection';
+      }
+
+      toast.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    function hideToast() {
+      const toast = document.getElementById('toast-saved-recipe');
+      toast.classList.remove('show');
+      if (isSaved) {
+        isSaved = false;
+        document.getElementById('bookmark-action-btn').classList.remove('saved');
+        document.getElementById('bookmark-count-text').textContent = '240.6k';
+      }
+    }
+
+    /* ─── Interactive Step-by-Step Cooking Session ─────────────────────── */
+    const cookingSteps = [
+      {
+        stepNum: 1,
+        title: "1. Prep & Ingredient Mise en Place",
+        instruction: "Cook spaghetti in boiling salted water until al dente. Whisk egg yolks and Pecorino Romano cheese in a separate bowl with black pepper.",
+        ingredients: [
+          { name: "Bronze-Cut Spaghetti", amt: "400g" },
+          { name: "Egg Yolks", amt: "4 yolks + 1 whole" },
+          { name: "Pecorino Romano", amt: "100g" },
+          { name: "Black Pepper", amt: "2 tsp" }
+        ],
+        timer: "09:00",
+        img: ""
+      },
+      {
+        stepNum: 2,
+        title: "2. Aromatics & Skillet Sauté",
+        instruction: "Crisp the diced guanciale (or pancetta) in a skillet over medium heat until the fat renders out and the meat becomes beautifully golden brown.",
+        ingredients: [
+          { name: "Cured Guanciale", amt: "200g cubed" }
+        ],
+        timer: "08:00",
+        img: "assets/images/cooking-skillet.jpg"
+      },
+      {
+        stepNum: 3,
+        title: "3. Emulsify Sauce",
+        instruction: "Drain pasta, reserving a cup of cooking water. Toss hot pasta into the skillet fat off the heat. Pour the egg mix in and stir rapidly to create a rich, creamy sauce.",
+        ingredients: [
+          { name: "Hot Starchy Pasta Water", amt: "1/2 cup" },
+          { name: "Egg-Cheese Cream", amt: "From Step 1" }
+        ],
+        timer: "03:00",
+        img: "assets/images/pasta-emulsify.jpg"
+      },
+      {
+        stepNum: 4,
+        title: "4. Garnish & Serve",
+        instruction: "Plate the creamy pasta immediately. Top with an extra dusting of grated Pecorino Romano cheese and freshly cracked black pepper. Serve hot!",
+        ingredients: [
+          { name: "Grated Pecorino", amt: "To dust" },
+          { name: "Cracked Black Pepper", amt: "To finish" }
+        ],
+        timer: "02:00",
+        img: "assets/carbonara.png"
+      }
+    ];
+
+    let currentCookingStepIdx = 0;
+
+    function openCookingSession() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const recipeKey = urlParams.get('id') || urlParams.get('name') || urlParams.get('recipe') || urlParams.get('slug') || '52772';
+      if (typeof window.navigateToImmersiveCooking === 'function') {
+        window.navigateToImmersiveCooking(recipeKey, 1);
+      } else {
+        window.location.href = `cooking-guide.html?id=${encodeURIComponent(recipeKey)}&step=1`;
+      }
+    }
+
+    function closeCookingSession() {
+      const modal = document.getElementById('cooking-session-modal');
+      modal.classList.remove('open');
+    }
+
+    function renderCurrentCookingStep() {
+      const step = cookingSteps[currentCookingStepIdx];
+      document.getElementById('modal-step-indicator').textContent = `Step ${step.stepNum} of ${cookingSteps.length}`;
+      document.getElementById('session-timer-text').textContent = step.timer;
+      document.getElementById('modal-step-heading').textContent = step.title;
+      document.getElementById('modal-step-instruction').textContent = step.instruction;
+      document.getElementById('modal-step-img').src = step.img;
+
+      // Render ingredients list for step
+      const ingBox = document.getElementById('modal-step-ingredients');
+      let ingHtml = `<span class="step-ingredients-title">Ingredients for this step</span>`;
+      step.ingredients.forEach(item => {
+        ingHtml += `
+          <div class="step-ing-row">
+            <span>${item.name}</span>
+            <span style="color:var(--crimson);font-weight:700;">${item.amt}</span>
+          </div>
+        `;
+      });
+      ingBox.innerHTML = ingHtml;
+
+      // Update button states
+      const prevBtn = document.getElementById('prev-step-btn');
+      const nextBtn = document.getElementById('next-step-btn');
+
+      if (currentCookingStepIdx === 0) {
+        prevBtn.disabled = true;
+        prevBtn.style.opacity = '0.4';
+        prevBtn.style.cursor = 'not-allowed';
+      } else {
+        prevBtn.disabled = false;
+        prevBtn.style.opacity = '1';
+        prevBtn.style.cursor = 'pointer';
+      }
+
+      if (currentCookingStepIdx === cookingSteps.length - 1) {
+        nextBtn.innerHTML = `<span>Finish Cooking</span><span class="material-symbols-outlined">check_circle</span>`;
+      } else {
+        nextBtn.innerHTML = `<span>Next</span><span class="material-symbols-outlined">chevron_right</span>`;
+      }
+    }
+
+    function navigateStep(delta) {
+      if (delta === 1 && currentCookingStepIdx === cookingSteps.length - 1) {
+        closeCookingSession();
+        triggerSaveToast('🎉 Cooking Session Complete! Bon Appétit!');
+        return;
+      }
+      const targetIdx = currentCookingStepIdx + delta;
+      if (targetIdx >= 0 && targetIdx < cookingSteps.length) {
+        currentCookingStepIdx = targetIdx;
+        renderCurrentCookingStep();
+      }
+    }
+
+    /* ─── Universal Action Sheet (SCR-03E) Logic ───────────────────────── */
+    function openActionSheet() {
+      const overlay = document.getElementById('action-sheet-overlay');
+      if (overlay) overlay.classList.add('open');
+    }
+
+    function closeActionSheet() {
+      const overlay = document.getElementById('action-sheet-overlay');
+      if (overlay) overlay.classList.remove('open');
+    }
+
+    function closeActionSheetOnBackdrop(e) {
+      if (e.target.id === 'action-sheet-overlay') {
+        closeActionSheet();
+      }
+    }
+
+    function handleSheetSave() {
+      closeActionSheet();
+      toggleBookmark();
+    }
+
+    function handleSheetFeedback() {
+      closeActionSheet();
+      triggerSaveToast('⭐️ Thank you! Rating: 5/5 Stars submitted.');
+    }
+
+    /* ─── Social Share Overlay Sheet Logic ─────────────────────────────── */
+    function openShareSheet() {
+      const overlay = document.getElementById('share-sheet-overlay');
+      if (overlay) {
+        overlay.classList.add('open');
+      }
+    }
+
+    function closeShareSheet() {
+      const overlay = document.getElementById('share-sheet-overlay');
+      if (overlay) {
+        overlay.classList.remove('open');
+      }
+    }
+
+    function closeShareSheetOnBackdrop(e) {
+      if (e.target.id === 'share-sheet-overlay') {
+        closeShareSheet();
+      }
+    }
+
+    function handleShareOption(network) {
+      closeShareSheet();
+
+      // Dynamically resolve active recipe title and current URL
+      const titleEl = document.querySelector('.recipe-main-title');
+      const recipeTitle = (titleEl && titleEl.textContent) ? titleEl.textContent.trim() : 'Spaghetti Carbonara';
+      const shareTitle = `${recipeTitle} on wow recipes`;
+      const shareUrl = window.location.href;
+      const encodedTitle = encodeURIComponent(shareTitle);
+      const encodedUrl = encodeURIComponent(shareUrl);
+
+      switch (network) {
+        case 'WhatsApp': {
+          const targetUrl = `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedUrl}`;
+          window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          triggerSaveToast('✨ Opening WhatsApp...');
+          break;
+        }
+        case 'Telegram': {
+          const targetUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
+          window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          triggerSaveToast('✨ Opening Telegram...');
+          break;
+        }
+        case 'Facebook': {
+          const targetUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+          window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          triggerSaveToast('✨ Opening Facebook...');
+          break;
+        }
+        case 'Pinterest': {
+          const targetUrl = `https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedTitle}`;
+          window.open(targetUrl, '_blank', 'noopener,noreferrer');
+          triggerSaveToast('✨ Opening Pinterest...');
+          break;
+        }
+        case 'Instagram': {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareUrl).catch(() => {});
+          }
+          triggerSaveToast('Recipe link copied! Paste on Instagram.');
+          break;
+        }
+        case 'More Options':
+        default: {
+          // Check if the application is running via a live server instead of a local file path
+          const isSecureContext = window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+          if (navigator.share && isSecureContext) {
+              navigator.share({
+                  title: 'Spaghetti Carbonara | wow Chef AI',
+                  text: 'Check out this predictive recipe!',
+                  url: window.location.href
+              }).catch((error) => console.log('Sharing canceled', error));
+          } else {
+              // Safe direct execution for local file previews to bypass browser crashing:
+              const dummyInput = document.createElement('input');
+              document.body.appendChild(dummyInput);
+              dummyInput.value = window.location.href;
+              dummyInput.select();
+              document.execCommand('copy');
+              document.body.removeChild(dummyInput);
+              
+              // Call your custom app notice banner
+              alert('Recipe link successfully copied to clipboard!');
+          }
+          break;
+        }
+      }
+    }
+
+    // State Machine Intent Handler (SCR-09A ➔ SCR-03A, SCR-03I Fork Hydration)
+    document.addEventListener('DOMContentLoaded', () => {
+      // Bind Share Button click listener
+      const shareBtn = document.getElementById('btn-share-recipe');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openShareSheet();
+        });
+      }
+
+      // Bind individual click listeners to each social network option
+      const networkBindings = [
+        { id: 'share-btn-whatsapp', network: 'WhatsApp' },
+        { id: 'share-btn-telegram', network: 'Telegram' },
+        { id: 'share-btn-instagram', network: 'Instagram' },
+        { id: 'share-btn-facebook', network: 'Facebook' },
+        { id: 'share-btn-pinterest', network: 'Pinterest' },
+        { id: 'share-btn-more', network: 'More Options' }
+      ];
+
+      networkBindings.forEach(({ id, network }) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleShareOption(network);
+          });
+        }
+      });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const origin = urlParams.get('origin');
+      const forkParam = urlParams.get('fork');
+
+      if (forkParam === 'saved') {
+        setTimeout(() => {
+          triggerSaveToast('✨ Recipe Fork & Custom Ratios Saved!');
+        }, 300);
+      } else if (forkParam === 'reset') {
+        setTimeout(() => {
+          triggerSaveToast('🔄 Recipe Reset to Original Defaults');
+        }, 300);
+      }
+
+      if (origin === 'SCR_09A_SOCIAL_FEED') {
+        const backBtn = document.querySelector('.media-top-nav a[href="dashboard.html"]');
+        if (backBtn) {
+          backBtn.href = 'social-feed.html';
+          backBtn.setAttribute('aria-label', 'Return to Community Feed');
+        }
+        setTimeout(() => {
+          triggerSaveToast('✨ Arrived from Community Feed • Ingredients Ready');
+        }, 400);
+      }
+
+      // Automatically render active recipe from dynamic state cache
+      if (typeof window.renderActiveRecipeDetail === 'function') {
+        window.renderActiveRecipeDetail();
+      }
+    });
+  </script>
+
+  <!-- Global State Dynamic Parameter System & Routing Engine -->
+  <script src="assets/recipe-system.js"></script>
+  <!-- Central Dynamic Recipe Router -->
+  <script src="recipe-controller.js"></script>
+  <!-- Global Application State Engine -->
+  <script src="app.js"></script>
+
+  <!-- wow Chef AI Conversational Assistant Component -->
+  <script src="assets/chef-ai.js"></script>
+</body>
+
+</html>

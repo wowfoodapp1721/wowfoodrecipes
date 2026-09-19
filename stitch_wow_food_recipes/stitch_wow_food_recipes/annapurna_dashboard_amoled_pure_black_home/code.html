@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annapurna - Dashboard Home</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>tailwind.config = {theme: {extend: {colors: {brand: {orange: "#FF5400", amber: "#FF9900", gold: "#E5A93C", dark: "#000000"}, "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000 !important;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen flex justify-center selection:bg-orange-500/30">
+<!-- Mobile Device Frame Container -->
+<div class="w-full max-w-[420px] bg-black min-h-screen flex flex-col relative pb-28">
+<!-- Top Status / Header Row (Screen-4A exact replication) -->
+<header class="pt-4 px-5 pb-3 flex items-center justify-between z-20">
+<!-- Location & Subtitle -->
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 cursor-pointer group">
+<span class="material-symbols-outlined text-[#FF5400] text-lg leading-none">location_on</span>
+<span class="text-white text-sm font-semibold tracking-wide group-hover:text-amber-400 transition-colors">Mumbai, India</span>
+<span class="material-symbols-outlined text-zinc-400 text-base leading-none">expand_more</span>
+</div>
+<span class="text-xs text-zinc-400 font-medium pl-6 pt-0.5">Namaste, Chef</span>
+</div>
+<!-- Right Action Icons: Activity Graph with Green dot + Chef Hat Notification -->
+<div class="flex items-center gap-3.5">
+<!-- Circular Activity Graph Icon with Active Green Notification Dot -->
+<div class="relative w-10 h-10 rounded-full bg-zinc-900/90 border border-zinc-800/80 flex items-center justify-center cursor-pointer hover:border-zinc-700 transition-all">
+<span class="material-symbols-outlined text-zinc-200 text-lg">leaderboard</span>
+<!-- Active Green Dot -->
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#00E676] rounded-full ring-2 ring-black"></span>
+</div>
+<!-- Orange Chef Hat / Notification Bell Icon -->
+<button aria-label="Notifications" class="relative w-10 h-10 rounded-full bg-zinc-900/90 border border-zinc-800/80 flex items-center justify-center cursor-pointer hover:border-orange-500/50 transition-all">
+<span class="material-symbols-outlined text-[#FF5400] text-xl">notifications_active</span>
+</button>
+</div>
+</header>
+<!-- Centered Brand Logo (Exact replication: Traditional Handi pot with crown + lowercase annapurna serif) -->
+<div class="flex flex-col items-center justify-center pt-1 pb-4 z-20">
+<div class="flex items-center gap-2.5">
+<!-- Signature Clay Pot Handi with Crown Icon in Gold/Orange -->
+<svg class="w-8 h-8 text-[#FF9900]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 48 48">
+<!-- Crown Flourish / Infinity Lid -->
+<path d="M16 14C16 11.5 19 9 24 9C29 9 32 11.5 32 14" stroke="#FF9900" stroke-width="3"></path>
+<circle cx="24" cy="7" fill="#FF9900" r="2"></circle>
+<!-- Handi Pot Body -->
+<path d="M12 18H36" stroke="#FF9900" stroke-width="3"></path>
+<path d="M14 18C11 22 10 27 10 31C10 38 16 41 24 41C32 41 38 38 38 31C38 27 37 22 34 18" stroke="#FF9900" stroke-width="3"></path>
+<path d="M18 29C20 31.5 28 31.5 30 29" stroke="#FF9900" stroke-width="2.2"></path>
+</svg>
+<span class="font-serif text-3xl font-bold tracking-tight text-white select-none">
+<span class="text-[#FF5400]">anna</span><span>purna</span>
+</span>
+</div>
+</div>
+<!-- Screen-4A Exact Search Bar Replication (High-contrast Capsule Pill) -->
+<div class="px-5 pb-5 z-20">
+<div class="w-full bg-white rounded-full h-14 pl-2 pr-2 py-1.5 flex items-center justify-between shadow-[0_4px_24px_rgba(255,255,255,0.08)]">
+<!-- Far Left: Isolated Black Circle with Bowl & Chopsticks Icon -->
+<div class="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<!-- Bowl -->
+<path d="M3 12C3 16.97 7.03 21 12 21C16.97 21 21 16.97 21 12H3Z" fill="white"></path>
+<!-- Steam / Chopsticks -->
+<line stroke="white" stroke-width="2" x1="8" x2="16" y1="5" y2="9"></line>
+<line stroke="white" stroke-width="2" x1="7" x2="17" y1="8" y2="6"></line>
+</svg>
+</div>
+<!-- Center Placeholder Text in Soft Gray -->
+<div class="flex-1 px-3 text-left">
+<span class="text-zinc-500 font-medium text-base tracking-normal select-none">Let's Cook something...</span>
+</div>
+<!-- Far Right: Solid Vibrant Orange Circle with White Magnifying Glass -->
+<button aria-label="Search" class="w-10 h-10 rounded-full bg-[#FF5400] flex items-center justify-center shrink-0 hover:bg-[#ff681c] transition-colors">
+<span class="material-symbols-outlined text-white text-xl">search</span>
+</button>
+</div>
+</div>
+<!-- Main Content Flow (Floating directly over Pure Black #000000) -->
+<main class="flex-1 flex flex-col gap-6">
+<!-- SECTION: Signature Categories (Horizontal Scrolling Row on Pure Black) -->
+<section class="flex flex-col gap-3">
+<div class="px-5 flex items-center justify-between">
+<h2 class="text-xs uppercase font-bold tracking-widest text-zinc-300">Signature Categories</h2>
+<span class="text-xs text-amber-500 font-semibold cursor-pointer hover:underline">View All</span>
+</div>
+<!-- Borderless circular image shortcuts directly against black canvas -->
+<div class="flex items-center gap-4 overflow-x-auto no-scrollbar px-5 py-1">
+<!-- Category 1: Spicy Indian -->
+<div class="flex flex-col items-center gap-2 shrink-0 cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+<img alt="Spicy Indian" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJEVGSm4p1ucVJfny9MxENgHNzPisOrzDkvUU09gk_VA-zdqjMxS1H8MDCYpKZV-QRStGI5ILHheah1B-78Pths0mWqlTRHZqUxPgrxzR7TDOoPkU78i7QIOK605IophjvnFnMu5zt0ly4K2cL29yzhmSrq29m-8H-8BVSuQecF-I-cAU65XIhNA_9rGyWtuSjUxTHlk3Ue-onwh7Z0z66ocgJAmkw295nYQ7M1oj1rv90kupHoymmJw"/>
+</div>
+<span class="text-xs font-semibold text-zinc-200 tracking-tight group-hover:text-amber-400 transition-colors">Spicy Indian</span>
+</div>
+<!-- Category 2: Healthy Greens -->
+<div class="flex flex-col items-center gap-2 shrink-0 cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+<img alt="Healthy Greens" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOVrFyYcY8MP3Fi9RCZN6oX2lPEOssbv3Oue0iYoTd_S-mpIIaTGmd51ZNVFK1MTSxr3SXnjre-DozrQRknIKHxe6gXAC6n89CsT8rCfTfKblFGIAW1k68AW7D4bDvKOw8JJ_wvgv2eKknYl80zzayHq3emLvmrZTxHdeiLW58iFLkGDC6MkvLIb9AVeP22cVgek5DvY3UsJpQ8CKq87-yhvu0YHA73WYlJc9qG3xfgAfE_L9U4tcc9Q"/>
+</div>
+<span class="text-xs font-semibold text-zinc-200 tracking-tight group-hover:text-amber-400 transition-colors">Healthy Greens</span>
+</div>
+<!-- Category 3: High-Protein -->
+<div class="flex flex-col items-center gap-2 shrink-0 cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+<img alt="High-Protein" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-aNqV2FzGJ2YAdByaTeQE3XrrlNcqTQEUzzDeIUaHvOFP8Utji6D-svs3cK8alURQ8vrt3xQ2HbLtfXK-WdwkZoZTXfnAzFPlm-mI-NUHm8GhukS6kq2hSoImW7aXNxxmdhd57AzOVT-HxylXdsYrueK81brh25UAzXfcEHESI651SiKkOaoPcN3-uva_6-Q9wMi7coAhBpf5GGMtlx_AO9FGh_GE0Q82aoXIzrDRp-Kvna7lU0A-DA"/>
+</div>
+<span class="text-xs font-semibold text-zinc-200 tracking-tight group-hover:text-amber-400 transition-colors">High-Protein</span>
+</div>
+<!-- Category 4: Slow Simmered -->
+<div class="flex flex-col items-center gap-2 shrink-0 cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+<img alt="Slow Simmered" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJy1JMomSLI_qYt3752wGMagazdetOMm-1EDVmz0Edi1PhA0sPJGujMzLJDpBfv_s1w-d5u0utP6AfbfnoLnCAYxhpCnmdINyDXiBghvIPd9OqldA2TwwClmyX-Z96SKtccS81uyYKEgwm07HZH0-dDmc7Icn0-2ZKKnFMMym_Homt-zE19W33ONWXVB1oFrRgjOrCmz4ZYhe_LPmERqllCnlYDQtv-rJD5uweCpOcXGIZSTiQrzNejg"/>
+</div>
+<span class="text-xs font-semibold text-zinc-200 tracking-tight group-hover:text-amber-400 transition-colors">Dal &amp; Gravies</span>
+</div>
+<!-- Category 5: Royal Biryanis -->
+<div class="flex flex-col items-center gap-2 shrink-0 cursor-pointer group">
+<div class="w-16 h-16 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+<img alt="Royal Biryanis" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz4pDF5jiV37UEHFzkmGfK1wf6TUD5Tm4W5tU5LjxBj55qRuW7V-OWKXzQaRO8PcV_hF4qHaMbV3J7egpE3ARzlo57EKmQVQqpEyR6cOI5qLw4RZBlLKbnYfKWMz-IKqobmZ7U20VILvMkg1TiUngHUxnSU20w7_2ALZLF1DsqaCsjYIghI08SFIbOAzMmxszoO_5stoJ0CKSaauLgSsSvWqE9qz8udx7Jif9YhExyPwmmXqrVHrORyA"/>
+</div>
+<span class="text-xs font-semibold text-zinc-200 tracking-tight group-hover:text-amber-400 transition-colors">Royal Biryani</span>
+</div>
+</div>
+</section>
+<!-- SECTION: Floating Recipe Masonry (Staggered 2-Column Unbound Grid on Pure Black #000000) -->
+<section class="px-5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h2 class="text-xs uppercase font-bold tracking-widest text-zinc-300">Curated Creations</h2>
+<span class="text-xs text-zinc-500 font-medium">Staggered Masonry</span>
+</div>
+<!-- 2-Column Staggered Layout - Pure Floating, No Gray Container Cards -->
+<div class="grid grid-cols-2 gap-x-4 gap-y-6 items-start">
+<!-- Column 1 (Left) -->
+<div class="flex flex-col gap-6">
+<!-- Recipe Card 1: Artisanal Neapolitan Pizza -->
+<div class="flex flex-col cursor-pointer group">
+<div class="w-full rounded-[12px] overflow-hidden bg-black aspect-[3/4] relative">
+<img alt="Artisanal Pizza Napoletana" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1U8vRn91fx6C5hCWJNJWycrvs9z_cnccXB3Z29BZJ4GePrnf1zTIzb2eqrPOiqkwmQISbEIr64ANdlhRqi23xCiU4tC-3N--5aE9Y1c8WzOHu-RbfH7f6m_MEKOTbrT4XtMwNllBNGeqmg8iWVJaJpLHb6dNVHDVNkATgc9I21ublAQ4yKQ22LI3XB45u3sXaZLfv43C4_G7qQjp4LNTWFKA30PVyHfEm9eD9YUS4NuFXY8zNezo0pyzWI"/>
+<!-- Subtle Floating Pure Veg Tag -->
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-emerald-400 border border-emerald-500/30">VEG</span>
+</div>
+<div class="pt-2.5 flex flex-col">
+<h3 class="text-sm font-semibold text-white group-hover:text-orange-400 transition-colors line-clamp-1 leading-snug">Artisanal Pizza Napoletana</h3>
+<div class="flex items-center gap-2 text-xs text-amber-500 font-medium pt-1">
+<span>⏱️ 25 Min</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">Easy</span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2: Dal Makhani Bukhara -->
+<div class="flex flex-col cursor-pointer group">
+<div class="w-full rounded-[12px] overflow-hidden bg-black aspect-[4/5] relative">
+<img alt="Slow Cooked Dal Makhani" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJy1JMomSLI_qYt3752wGMagazdetOMm-1EDVmz0Edi1PhA0sPJGujMzLJDpBfv_s1w-d5u0utP6AfbfnoLnCAYxhpCnmdINyDXiBghvIPd9OqldA2TwwClmyX-Z96SKtccS81uyYKEgwm07HZH0-dDmc7Icn0-2ZKKnFMMym_Homt-zE19W33ONWXVB1oFrRgjOrCmz4ZYhe_LPmERqllCnlYDQtv-rJD5uweCpOcXGIZSTiQrzNejg"/>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-emerald-400 border border-emerald-500/30">VEG</span>
+</div>
+<div class="pt-2.5 flex flex-col">
+<h3 class="text-sm font-semibold text-white group-hover:text-orange-400 transition-colors line-clamp-1 leading-snug">Dal Makhani Bukhara</h3>
+<div class="flex items-center gap-2 text-xs text-amber-500 font-medium pt-1">
+<span>⏱️ 45 Min</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">Masterclass</span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3: Pan-Seared Salmon -->
+<div class="flex flex-col cursor-pointer group">
+<div class="w-full rounded-[12px] overflow-hidden bg-black aspect-square relative">
+<img alt="Pan-Seared Salmon" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-aNqV2FzGJ2YAdByaTeQE3XrrlNcqTQEUzzDeIUaHvOFP8Utji6D-svs3cK8alURQ8vrt3xQ2HbLtfXK-WdwkZoZTXfnAzFPlm-mI-NUHm8GhukS6kq2hSoImW7aXNxxmdhd57AzOVT-HxylXdsYrueK81brh25UAzXfcEHESI651SiKkOaoPcN3-uva_6-Q9wMi7coAhBpf5GGMtlx_AO9FGh_GE0Q82aoXIzrDRp-Kvna7lU0A-DA"/>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-amber-400 border border-amber-500/30">CHEF PICK</span>
+</div>
+<div class="pt-2.5 flex flex-col">
+<h3 class="text-sm font-semibold text-white group-hover:text-orange-400 transition-colors line-clamp-1 leading-snug">Herb Glazed Salmon</h3>
+<div class="flex items-center gap-2 text-xs text-amber-500 font-medium pt-1">
+<span>⏱️ 20 Min</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">High-Pro</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2 (Right - Staggered Offset) -->
+<div class="flex flex-col gap-6 pt-5">
+<!-- Recipe Card 4: Royal Awadhi Biryani -->
+<div class="flex flex-col cursor-pointer group">
+<div class="w-full rounded-[12px] overflow-hidden bg-black aspect-[4/5] relative">
+<img alt="Royal Awadhi Biryani" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz4pDF5jiV37UEHFzkmGfK1wf6TUD5Tm4W5tU5LjxBj55qRuW7V-OWKXzQaRO8PcV_hF4qHaMbV3J7egpE3ARzlo57EKmQVQqpEyR6cOI5qLw4RZBlLKbnYfKWMz-IKqobmZ7U20VILvMkg1TiUngHUxnSU20w7_2ALZLF1DsqaCsjYIghI08SFIbOAzMmxszoO_5stoJ0CKSaauLgSsSvWqE9qz8udx7Jif9YhExyPwmmXqrVHrORyA"/>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-orange-400 border border-orange-500/30">PREMIUM</span>
+</div>
+<div class="pt-2.5 flex flex-col">
+<h3 class="text-sm font-semibold text-white group-hover:text-orange-400 transition-colors line-clamp-1 leading-snug">Royal Awadhi Biryani</h3>
+<div class="flex items-center gap-2 text-xs text-amber-500 font-medium pt-1">
+<span>⏱️ 50 Min</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">Signature</span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 5: Mediterranean Garden Bowl -->
+<div class="flex flex-col cursor-pointer group">
+<div class="w-full rounded-[12px] overflow-hidden bg-black aspect-[3/4] relative">
+<img alt="Mediterranean Garden Salad Bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOVrFyYcY8MP3Fi9RCZN6oX2lPEOssbv3Oue0iYoTd_S-mpIIaTGmd51ZNVFK1MTSxr3SXnjre-DozrQRknIKHxe6gXAC6n89CsT8rCfTfKblFGIAW1k68AW7D4bDvKOw8JJ_wvgv2eKknYl80zzayHq3emLvmrZTxHdeiLW58iFLkGDC6MkvLIb9AVeP22cVgek5DvY3UsJpQ8CKq87-yhvu0YHA73WYlJc9qG3xfgAfE_L9U4tcc9Q"/>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-emerald-400 border border-emerald-500/30">VEG</span>
+</div>
+<div class="pt-2.5 flex flex-col">
+<h3 class="text-sm font-semibold text-white group-hover:text-orange-400 transition-colors line-clamp-1 leading-snug">Mediterranean Bowl</h3>
+<div class="flex items-center gap-2 text-xs text-amber-500 font-medium pt-1">
+<span>⏱️ 15 Min</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">Fresh</span>
+</div>
+</div>
+</div>
+<!-- Recipe Card 6: Fiery Chicken Tikka Skewers -->
+<div class="flex flex-col cursor-pointer group">
+<div class="w-full rounded-[12px] overflow-hidden bg-black aspect-[4/5] relative">
+<img alt="Fiery Tandoori Chicken Tikka" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJEVGSm4p1ucVJfny9MxENgHNzPisOrzDkvUU09gk_VA-zdqjMxS1H8MDCYpKZV-QRStGI5ILHheah1B-78Pths0mWqlTRHZqUxPgrxzR7TDOoPkU78i7QIOK605IophjvnFnMu5zt0ly4K2cL29yzhmSrq29m-8H-8BVSuQecF-I-cAU65XIhNA_9rGyWtuSjUxTHlk3Ue-onwh7Z0z66ocgJAmkw295nYQ7M1oj1rv90kupHoymmJw"/>
+<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-red-400 border border-red-500/30">SPICY</span>
+</div>
+<div class="pt-2.5 flex flex-col">
+<h3 class="text-sm font-semibold text-white group-hover:text-orange-400 transition-colors line-clamp-1 leading-snug">Fiery Chicken Tikka</h3>
+<div class="flex items-center gap-2 text-xs text-amber-500 font-medium pt-1">
+<span>⏱️ 30 Min</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">Tandoor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Screen-4A Exact Bottom Navigation Bar Replication (Pure Black #000000 background, 5 tabs, "Explore" highlighted) -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] bg-black border-t border-zinc-900/90 z-50 px-3 py-2 flex items-center justify-around">
+<!-- Tab 1: Home (Minimalist House) -->
+<a class="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">home</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Home</span>
+</a>
+<!-- Tab 2: Explore (ACTIVE HIGHLIGHTED: Magnifying glass in amber/orange) -->
+<a class="flex flex-col items-center justify-center py-1 text-[#FF5400] relative group" href="#">
+<span class="material-symbols-outlined text-[23px] drop-shadow-[0_0_8px_rgba(255,84,0,0.7)] group-hover:scale-110 transition-transform">explore</span>
+<span class="text-[10px] font-bold tracking-tight mt-0.5 text-[#FF5400] drop-shadow-[0_0_6px_rgba(255,84,0,0.5)]">Explore</span>
+<!-- Subtle Active Indicator dot -->
+<span class="w-1 h-1 rounded-full bg-[#FF5400] mt-0.5"></span>
+</a>
+<!-- Tab 3: Saved (Ribbon Bookmark) -->
+<a class="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">bookmark</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Saved</span>
+</a>
+<!-- Tab 4: Planner (Calendar) -->
+<a class="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">calendar_today</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Planner</span>
+</a>
+<!-- Tab 5: Lists (Bullet-List Checklist) -->
+<a class="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-300 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">checklist</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Lists</span>
+</a>
+</nav>
+</div>
+</body></html>

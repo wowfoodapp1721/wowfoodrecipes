@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="wow Food Recipes — IoT Smart Robot Pairing & Support Diagnostic Core (SCR-12B ➔ SCR-03H)." />
+  <title>wow | IoT Smart Robot & Support Core</title>
+
+  <!-- Google Fonts: EB Garamond (Brand Serif) + Plus Jakarta Sans (UI body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ─── CSS Reset & AMOLED Global Tokens ───────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black:          #0B0F14;
+      --surface-base:   #0B0F14;
+      --surface-card:   #131920;
+      --surface-charcoal: #17202A;
+      --surface-secondary: #1F2C3A;
+      --surface-chip:   #17202A;
+      --surface-input:  #131920;
+
+      --crimson:        #3DF2E0;
+      --crimson-hover:  #20C5B5;
+      --crimson-glow:   rgba(61, 242, 224, 0.45);
+      --crimson-dim:    rgba(61, 242, 224, 0.15);
+      --crimson-border: rgba(61, 242, 224, 0.35);
+      --cyan:           #3DF2E0;
+
+      --emerald:        #00E676;
+      --emerald-bright: #34D399;
+      --emerald-glow:   rgba(16, 185, 129, 0.4);
+      --emerald-dim:    rgba(16, 185, 129, 0.15);
+
+      --mango:          #FF9900;
+      --amber:          #FBBF24;
+
+      --text-white:     #FFFFFF;
+      --text-main:      #E5E5EA;
+      --text-muted:     #8E9BA8;
+      --text-dim:       #636366;
+
+      --border-soft:    rgba(255, 255, 255, 0.08);
+      --border-subtle:  rgba(255, 255, 255, 0.14);
+      --border-focus:   rgba(61, 242, 224, 0.5);
+
+      --font-serif:     'EB Garamond', Georgia, serif;
+      --font-sans:      'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--black);
+      color: var(--text-white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    /* ─── 393px × 852px Mobile Frame ───────────────────────────────────── */
+    #viewport {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      background-color: var(--black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 44px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 32px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ─── STATUS BAR ───────────────────────────────────────────────────── */
+    .status-bar {
+      height: 44px;
+      padding: 12px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-white);
+      z-index: 50;
+      background: rgba(11, 15, 20, 0.9);
+      backdrop-filter: blur(12px);
+      flex-shrink: 0;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-bar-icons .material-symbols-outlined {
+      font-size: 16px;
+    }
+
+    /* ─── SCREEN 12A: PROFILE & SETTINGS BASE VIEW ───────────────────────── */
+    #view-settings-base {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 18px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .header-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px 0 16px;
+      margin: 0;
+      width: 100%;
+    }
+
+    .header-page-title {
+      display: flex;
+      flex-direction: row;
+      white-space: nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 0;
+      padding: 0;
+      text-transform: lowercase;
+      line-height: 1;
+    }
+
+    .header-page-title .brand-wow {
+      color: #FFFFFF;
+      font-family: 'Britannic Bold', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-style: italic;
+      font-size: 26px;
+      font-weight: 900;
+      margin-right: 6px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .header-page-title .sub-title {
+      color: #3DF2E0;
+      font-style: italic;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 10px rgba(61, 242, 224, 0.5);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .header-filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    /* Profile Card */
+    .profile-hero-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 10px 0 4px;
+      flex-shrink: 0;
+    }
+
+    .avatar-glow-ring {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--crimson), #20C5B5);
+      box-shadow: 0 0 24px var(--crimson-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #000;
+    }
+
+    .verified-badge-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--crimson);
+      color: #0B0F14;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .profile-name {
+      font-size: 19px;
+      font-weight: 800;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .profile-sub {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .tier-streak-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill-stat {
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pill-stat strong {
+      color: var(--crimson);
+    }
+
+    /* Dietary Blueprint Card */
+    .dietary-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .card-top-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .calorie-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .calorie-row strong {
+      color: var(--text-white);
+      font-size: 14px;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 7px;
+      border-radius: 4px;
+      background: #242428;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--crimson), #20C5B5);
+      width: 78%;
+    }
+
+    .macro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .macro-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .macro-title {
+      font-size: 10px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .macro-value {
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    /* Go Pro Banner */
+    .pro-banner {
+      background: var(--surface-charcoal);
+      border: 1px solid var(--crimson);
+      border-radius: 20px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 0 16px var(--crimson-glow);
+      flex-shrink: 0;
+    }
+
+    .pro-banner-btn {
+      padding: 8px 16px;
+      border-radius: 14px;
+      background-color: var(--crimson);
+      color: #0B0F14;
+      font-size: 11.5px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--crimson-glow);
+    }
+
+    /* Sign Out Action Capsule */
+    .btn-signout-capsule {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      border-radius: 30px;
+      background: var(--surface-card);
+      border: 1px solid #3DF2E0;
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      outline: none;
+      user-select: none;
+    }
+
+    .btn-signout-capsule:hover {
+      background: #3DF2E0;
+      color: #0B0F14;
+      box-shadow: 0 0 25px rgba(61, 242, 224, 0.45), 0 4px 15px rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-signout-capsule:active {
+      transform: scale(0.97);
+    }
+
+    /* Settings Menu Rows */
+    .menu-group {
+      background: var(--surface-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-row-btn {
+      width: 100%;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-white);
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .menu-row-btn:last-child {
+      border-bottom: none;
+    }
+
+    .menu-row-btn:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .menu-row-btn:active {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+    }
+
+    .menu-title-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    .menu-sub-text {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .green-dot-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #3DF2E0;
+      box-shadow: 0 0 8px #3DF2E0;
+      display: inline-block;
+    }
+
+    /* ─── SCREEN 12B: IOT ROBOT PAIRING DRAWER OVERLAY ───────────────────── */
+    #iot-pairing-drawer {
+      position: absolute;
+      inset: 0;
+      z-index: 60;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #iot-pairing-drawer.drawer--open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pairing-drawer-card {
+      background: #0B0F14;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 32px 32px 0 0;
+      padding: 12px 20px 36px;
+      box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      max-height: 88%;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #iot-pairing-drawer.drawer--open .pairing-drawer-card {
+      transform: translateY(0);
+    }
+
+    .drawer-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.25);
+      margin-bottom: 2px;
+    }
+
+    .pairing-drawer-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 10px;
+    }
+
+    .pairing-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .btn-close-drawer {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-close-drawer:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Central Pulsing Concentric Robot Machine Hero */
+    .robot-hero-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    .pulsing-aura-radar {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .aura-ring-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(61, 242, 224, 0.3);
+      animation: pulseRadar 3.5s ease-in-out infinite;
+    }
+
+    .aura-ring-inner {
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(61, 242, 224, 0.5);
+      background: rgba(61, 242, 224, 0.06);
+      box-shadow: 0 0 30px rgba(61, 242, 224, 0.35);
+    }
+
+    @keyframes pulseRadar {
+      0%, 100% { transform: scale(0.94); opacity: 0.7; }
+      50% { transform: scale(1.06); opacity: 0.35; }
+    }
+
+    .robot-core-circle {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #17202A 0%, #0B0F14 100%);
+      border: 1px solid rgba(61, 242, 224, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(61, 242, 224, 0.2);
+    }
+
+    .robot-active-node-led {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3DF2E0;
+      box-shadow: 0 0 8px #3DF2E0;
+      animation: ping 1.5s infinite;
+    }
+
+    .robot-device-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+
+    .robot-conn-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(61, 242, 224, 0.1);
+      border: 1px solid rgba(61, 242, 224, 0.35);
+      color: #3DF2E0;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+
+    /* Active Recipe Sync Card */
+    .sync-toggle-card {
+      width: 100%;
+      background: var(--surface-secondary);
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle-switch-btn {
+      width: 46px;
+      height: 26px;
+      border-radius: 13px;
+      background: var(--crimson);
+      border: none;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--crimson-glow);
+      transition: all 0.2s;
+    }
+
+    .toggle-switch-btn.off {
+      background: #48484A;
+      box-shadow: none;
+      justify-content: flex-start;
+    }
+
+    .toggle-knob {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Live Telemetry Sensors Grid */
+    .telemetry-sensors-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .sensor-item-card {
+      background: #17202A;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .sensor-item-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(61, 242, 224, 0.25);
+      border-color: rgba(61, 242, 224, 0.4);
+    }
+
+    .sensor-icon {
+      font-size: 16px;
+      color: #3DF2E0;
+    }
+
+    .sensor-label {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .sensor-value {
+      font-size: 12px;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* ─── STATE MACHINE DIAGNOSTIC TRIGGER BUTTON ────────────────────────── */
+    .run-diagnostic-btn {
+      width: 100%;
+      height: 48px;
+      background: var(--crimson);
+      border-radius: 24px;
+      border: none;
+      color: #0B0F14;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--crimson-glow);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .run-diagnostic-btn:hover {
+      background: var(--crimson-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(61, 242, 224, 0.55);
+    }
+
+    .run-diagnostic-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Diagnostic Scanning Animation Banner */
+    .diagnostic-scanning-box {
+      width: 100%;
+      background: rgba(255, 59, 48, 0.08);
+      border: 1px solid var(--crimson);
+      border-radius: 14px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11.5px;
+      color: white;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scan-step-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ─── SCREEN 3H: SUBMIT ISSUE DETAILS (SUPPORT CORE VIEW) ────────────── */
+    #view-screen-3h {
+      position: absolute;
+      inset: 0;
+      z-index: 70;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+
+    #view-screen-3h.view--active {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .support-header-bar {
+      height: 52px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(12px);
+    }
+
+    .support-back-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .support-page-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .support-content-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 18px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .device-context-preview {
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .device-thumb-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: #141416;
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--crimson);
+      flex-shrink: 0;
+    }
+
+    .device-context-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .device-sub-label {
+      font-size: 10.5px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .device-main-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .device-mac-info {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .input-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-label-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .form-text-input {
+      width: 100%;
+      height: 44px;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 0 14px;
+      color: white;
+      font-size: 13.5px;
+      outline: none;
+    }
+
+    .form-text-input:focus {
+      border-color: var(--crimson);
+    }
+
+    .form-description-textarea {
+      width: 100%;
+      height: 190px;
+      background: var(--surface-input);
+      border: 1px solid var(--surface-secondary);
+      border-radius: 18px;
+      padding: 12px 14px;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11.5px;
+      line-height: 1.45;
+      resize: none;
+      outline: none;
+    }
+
+    .form-description-textarea:focus {
+      border-color: var(--crimson);
+      box-shadow: 0 0 12px var(--crimson-dim);
+    }
+
+    .submit-issue-btn {
+      width: 100%;
+      height: 48px;
+      background: var(--crimson);
+      border-radius: 24px;
+      border: none;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--crimson-glow);
+      margin-top: 6px;
+    }
+
+    .submit-issue-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* ─── SUCCESS CONFIRMATION MODAL ────────────────────────────────────── */
+    #ticket-success-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 80;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #ticket-success-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .success-card {
+      width: 100%;
+      background: #18181B;
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 24px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .success-icon-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--emerald-dim);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 0 20px var(--emerald-glow);
+    }
+
+    /* ─── TOAST NOTIFICATION ────────────────────────────────────────────── */
+    .toast-pill {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(20, 20, 24, 0.95);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--crimson);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 12px var(--crimson-glow);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ─── BOTTOM PERSISTENT NAVIGATION BAR ───────────────────────────────── */
+    #app-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 76px;
+      z-index: 50;
+      background-color: rgba(11, 15, 20, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-soft, rgba(255, 255, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 4px 12px;
+      box-sizing: border-box;
+    }
+
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 2px 2px;
+      flex: 1;
+      min-width: 0;
+      color: #6D6D72;
+      transition: all 0.25s ease-in-out;
+      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-tab:active {
+      transform: scale(0.95);
+    }
+
+    .nav-tab .material-symbols-outlined {
+      font-size: 22px;
+      line-height: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .nav-tab .nav-label,
+    .nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      margin-top: 3px;
+      white-space: nowrap;
+      text-align: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* Micro-Indicator Dot Glow (4px Neon Cyan circular dot) */
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #3DF2E0;
+      box-shadow: 0 0 8px #3DF2E0;
+      opacity: 0;
+      transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+      pointer-events: none;
+    }
+
+    /* Interactive Hover & Focus States (Neon Cyan Glow) */
+    .nav-tab:hover,
+    .nav-tab:focus-visible {
+      color: #3DF2E0;
+    }
+
+    .nav-tab:hover .material-symbols-outlined,
+    .nav-tab:focus-visible .material-symbols-outlined {
+      color: #3DF2E0;
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.7));
+      transform: scale(1.08);
+    }
+
+    .nav-tab:hover .nav-label,
+    .nav-tab:focus-visible .nav-label {
+      color: #3DF2E0;
+      text-shadow: 0 0 6px rgba(61, 242, 224, 0.5);
+    }
+
+    .nav-tab:hover::after,
+    .nav-tab:focus-visible::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    /* Active Selected State - Locked in Solid Neon Cyan */
+    .nav-tab.nav-tab--active,
+    .nav-tab--active {
+      color: #3DF2E0 !important;
+    }
+
+    .nav-tab.nav-tab--active .material-symbols-outlined,
+    .nav-tab--active .material-symbols-outlined {
+      color: #3DF2E0 !important;
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.7)) !important;
+    }
+
+    .nav-tab.nav-tab--active .nav-label,
+    .nav-tab--active .nav-label {
+      color: #3DF2E0 !important;
+      text-shadow: 0 0 6px rgba(61, 242, 224, 0.5) !important;
+      font-weight: 600;
+    }
+
+    .nav-tab.nav-tab--active::after,
+    .nav-tab--active::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    .nav-tab:has(.nav-active-dot)::after {
+      display: none;
+    }
+
+    .nav-active-dot {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #3DF2E0 !important;
+      box-shadow: 0 0 8px #3DF2E0 !important;
+    }
+
+    /* ─── MISSING KEYFRAMES (CRITICAL FIX) ─────────────────────────────── */
+    @keyframes ping {
+      0%   { transform: scale(1);   opacity: 1; }
+      60%  { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ─── FIRMWARE UPDATE ROW ───────────────────────────────────────────── */
+    .firmware-update-row {
+      width: 100%;
+      background: rgba(251, 191, 36, 0.07);
+      border: 1px solid rgba(251, 191, 36, 0.32);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .firmware-install-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: var(--amber);
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-sans);
+    }
+
+    .firmware-install-badge:hover  { background: rgba(251, 191, 36, 0.28); }
+    .firmware-install-badge:active { transform: scale(0.96); }
+
+    /* ─── UNPAIR GHOST BUTTON ───────────────────────────────────────────── */
+    .unpair-btn {
+      width: 100%;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--crimson-border);
+      border-radius: 24px;
+      color: var(--crimson);
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .unpair-btn:hover {
+      background: rgba(61, 242, 224, 0.08);
+      border-color: var(--crimson);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(61, 242, 224, 0.25);
+    }
+    .unpair-btn:active { transform: scale(0.98); }
+
+    /* ─── SUPPORT FORM: CHAR COUNTER ────────────────────────────────────── */
+    .char-counter {
+      font-size: 10.5px;
+      color: var(--text-dim);
+      text-align: right;
+      padding-right: 2px;
+      transition: color 0.2s;
+    }
+
+    .char-counter.near-limit { color: var(--amber); }
+    .char-counter.at-limit   { color: var(--crimson); font-weight: 700; }
+  </style>
+</head>
+
+<body>
+
+  <div id="viewport" role="main" aria-label="IoT Smart Robot & Diagnostic Settings Core">
+
+    <!-- ─── 1. TOP STATUS BAR ────────────────────────────────────────────── -->
+    <div class="status-bar" aria-hidden="true">
+      <span>9:41</span>
+      <div class="status-bar-icons">
+        <span class="material-symbols-outlined">signal_cellular_4_bar</span>
+        <span class="material-symbols-outlined">wifi</span>
+        <span class="material-symbols-outlined">battery_full</span>
+      </div>
+    </div>
+
+    <!-- ─── 2. FLOATING TOAST NOTIFICATION ───────────────────────────────── -->
+    <div class="toast-pill" id="global-toast">
+      <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]" id="toast-icon">check_circle</span>
+      <span id="toast-msg">Settings saved</span>
+    </div>
+
+    <!-- ─── 3. SCREEN 12A: PROFILE & SETTINGS BASE VIEW ──────────────────── -->
+    <main id="view-settings-base" class="no-scrollbar pb-28">
+      
+      <div class="header-bar">
+        <h1 class="header-page-title">
+          <span class="brand-wow">wow</span>
+          <span class="sub-title">profile &amp; setting</span>
+        </h1>
+        <button class="header-filter-btn" aria-label="Filter settings">
+          <span class="material-symbols-outlined text-[20px]">tune</span>
+        </button>
+      </div>
+
+      <!-- Chef Avatar Hero -->
+      <div class="profile-hero-card">
+        <div class="avatar-glow-ring">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Chef Explorer" class="avatar-img" />
+          <div class="verified-badge-icon">
+            <span class="material-symbols-outlined text-[12px]">verified</span>
+          </div>
+          <button type="button" id="btn-change-avatar" class="absolute bottom-1 left-2 w-6 h-6 rounded-full bg-[#181818] border border-white/10 text-neutral-400 hover:text-white flex items-center justify-center backdrop-blur-sm cursor-pointer active:scale-90 transition-transform shadow-lg z-20" aria-label="Change Profile Photo">
+            <span class="material-symbols-outlined text-[12px] font-bold">photo_camera</span>
+          </button>
+        </div>
+
+        <h2 class="profile-name">
+          Chef Explorer
+          <span class="material-symbols-outlined text-[18px] text-[#3DF2E0]">local_fire_department</span>
+        </h2>
+        <div class="profile-sub">Executive Gastronomy Member • Active 2026</div>
+
+        <div class="tier-streak-row">
+          <span class="pill-stat">Tier: <strong>Executive Pro</strong></span>
+          <span class="pill-stat">Streak: <strong style="color:var(--amber);">18 Days</strong></span>
+        </div>
+      </div>
+
+      <!-- Dietary Blueprint Metrics Card -->
+      <section class="dietary-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(61,242,224,0.15)] hover:border-white/10">
+        <!-- Header Row Alignment -->
+        <div class="w-full flex flex-row items-center justify-between py-2 px-1 mb-2 select-none">
+          <div class="flex items-center space-x-1.5 text-neutral-400">
+            <span class="material-symbols-outlined text-[13px] text-[#3DF2E0] flex items-center justify-center">analytics</span>
+            <span class="text-[9px] font-black tracking-widest uppercase text-neutral-400">Dietary Blueprint Metrics</span>
+          </div>
+          <span class="text-[8px] font-black tracking-widest text-[#0B0F14] bg-[#3DF2E0] border border-[#3DF2E0] rounded-full px-2.5 py-0.5 uppercase whitespace-nowrap leading-none h-5 flex items-center justify-center shadow-[0_0_10px_rgba(61,242,224,0.35)]">Active Goal</span>
+        </div>
+
+        <!-- Main Calorie Tracking Row -->
+        <div class="w-full flex items-center justify-between px-1 text-xs select-none">
+          <span class="text-neutral-400 font-bold">Daily Calorie Cap</span>
+          <span class="text-white font-black"><span class="text-sm">1,640</span><span class="text-neutral-500 font-bold"> / 2,100 kcal</span></span>
+        </div>
+
+        <!-- Core Main Orange Progress Bar Timeline Component -->
+        <div class="w-full h-1.5 bg-neutral-800 rounded-full mt-2 mb-4 overflow-hidden mx-1">
+          <div class="h-full bg-gradient-to-r from-[#3DF2E0] to-[#20C5B5] rounded-full shadow-[0_0_8px_rgba(61,242,224,0.4)]" style="width: 78% !important;"></div>
+        </div>
+
+        <!-- THREE FLOATING MACRO PANEL CARDS GRID ARCHITECTURE -->
+        <div class="grid grid-cols-3 gap-2 mx-1 select-none">
+          
+          <!-- MACRO CARD 1: PROTEIN -->
+          <div class="bg-[#181818]/80 border border-white/5 rounded-xl p-2.5 flex flex-col relative overflow-hidden">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="text-neutral-400">Protein</span>
+              <span class="text-[#3DF2E0] font-black">85%</span>
+            </div>
+            <div class="text-xs font-black text-white mt-1.5">112g<span class="text-[9px] text-neutral-500 font-bold">/130g</span></div>
+            <!-- Bottom Crimson Red Indicator Bar Line -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-[#3DF2E0] shadow-[0_0_6px_rgba(61,242,224,0.5)]"></div>
+          </div>
+
+          <!-- MACRO CARD 2: CARBS -->
+          <div class="bg-[#181818]/80 border border-white/5 rounded-xl p-2.5 flex flex-col relative overflow-hidden">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="text-neutral-400">Carbs</span>
+              <span class="text-amber-500 font-black">68%</span>
+            </div>
+            <div class="text-xs font-black text-white mt-1.5">136g<span class="text-[9px] text-neutral-500 font-bold">/200g</span></div>
+            <!-- Bottom Amber Yellow Indicator Bar Line -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-amber-500"></div>
+          </div>
+
+          <!-- MACRO CARD 3: FATS -->
+          <div class="bg-[#181818]/80 border border-white/5 rounded-xl p-2.5 flex flex-col relative overflow-hidden">
+            <div class="flex justify-between items-center text-[10px] font-bold">
+              <span class="text-neutral-400">Fats</span>
+              <span class="text-emerald-500 font-black">54%</span>
+            </div>
+            <div class="text-xs font-black text-white mt-1.5">38g<span class="text-[9px] text-neutral-500 font-bold">/70g</span></div>
+            <!-- Bottom Mint Green Indicator Bar Line -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-emerald-500"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Go Pro Masterclass Banner -->
+      <div class="pro-banner transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(61,242,224,0.2)] cursor-pointer" onclick="openGoProCheckoutModal()">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span class="material-symbols-outlined text-[24px] text-[#FBBF24]">workspace_premium</span>
+          <div>
+            <div style="font-size:13px; font-weight:800; color:white;">Unlock 500+ Robot Recipes</div>
+            <div style="font-size:10.5px; color:var(--text-muted);">Exclusive Masterclasses &amp; IoT Telemetry</div>
+          </div>
+        </div>
+        <button class="pro-banner-btn" type="button" id="btn-go-pro" onclick="openGoProCheckoutModal()">Go Pro</button>
+      </div>
+
+      <!-- Settings Menu List Stack -->
+      <div class="w-full bg-[#131313]/60 border border-white/5 rounded-3xl p-4 flex flex-col space-y-4 mb-4 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(255,255,255,0.06)] hover:border-white/10">
+        <!-- ROW 1: SMART ROBOT -->
+        <div id="btn-open-iot-sheet" class="flex items-center justify-between transition-all duration-200 active:scale-[0.99] cursor-pointer py-1" onclick="openSettingsAction('robot')">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">precision_manufacturing</span></div>
+            <div class="flex flex-col"><span class="text-xs font-bold text-white">Smart Robot Connectivity (Chef Magic)</span><span class="text-[10px] text-neutral-400">ChefBot Pro 4L • BLE 5.2 &amp; Wi-Fi Sync</span></div>
+          </div>
+          <div class="flex items-center space-x-2">
+      <div class="relative flex h-2 w-2 items-center justify-center">
+        <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_#00FE66]"></span>
+      </div>
+      <span class="text-neutral-400 text-xs font-bold">&gt;</span>
+    </div>
+        </div>
+
+        <!-- ROW 2: VOICE ASSISTANT -->
+        <div class="flex items-center justify-between border-t border-white/5 pt-3 transition-all duration-200 active:scale-[0.99] cursor-pointer py-1" onclick="openSettingsAction('voice')">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">mic</span></div>
+            <div class="flex flex-col"><span class="text-xs font-bold text-white">Voice Assistant Calibration <span class="text-[10px] text-neutral-400 font-normal">Hands-free</span></span><span class="text-[10px] text-neutral-400">Kitchen Mic Acoustic Profile</span></div>
+          </div>
+          <span class="text-neutral-400 text-xs font-bold">&gt;</span>
+        </div>
+
+        <!-- ROW 3: DIETARY PREFERENCES -->
+        <div id="btn-diet-pref" class="flex items-center justify-between border-t border-white/5 pt-3 transition-all duration-200 active:scale-[0.99] cursor-pointer py-1" onclick="openSettingsAction('diet')">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">nutrition</span></div>
+            <div class="flex flex-col"><span class="text-xs font-bold text-white">Dietary Preferences &amp; Allergies <span class="text-[10px] text-neutral-400 font-normal">Nut-Free,</span></span><span class="text-[10px] text-neutral-400">Low-Carb, High-Protein Profiles</span></div>
+          </div>
+          <span class="text-neutral-400 text-xs font-bold">&gt;</span>
+        </div>
+
+        <!-- ROW 4: NOTIFICATION PREFERENCES -->
+        <div class="flex items-center justify-between border-t border-white/5 pt-3 transition-all duration-200 active:scale-[0.99] cursor-pointer py-1" onclick="openSettingsAction('notif')">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">notifications</span></div>
+            <div class="flex flex-col"><span class="text-xs font-bold text-white">Notification Preferences</span><span class="text-[10px] text-neutral-400">Prep alerts &amp; weekly digest</span></div>
+          </div>
+          <span class="text-neutral-400 text-xs font-bold">&gt;</span>
+        </div>
+
+        <!-- ROW 5: HELP & SUPPORT -->
+        <div id="btn-support-direct" class="flex items-center justify-between border-t border-white/5 pt-3 transition-all duration-200 active:scale-[0.99] cursor-pointer py-1">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">help</span></div>
+            <div class="flex flex-col"><span class="text-xs font-bold text-white">Help &amp; Support</span><span class="text-[10px] text-neutral-400">24/7 Culinary Concierge</span></div>
+          </div>
+          <span class="text-neutral-400 text-xs font-bold">&gt;</span>
+        </div>
+      </div>
+
+      <!-- Secure Sign Out & System Version Footer -->
+      <div class="flex flex-col items-center justify-center pt-3 pb-2 space-y-3">
+        <button type="button" id="btn-signout-account" class="btn-signout-capsule" onclick="if(confirm('Are you sure you want to log out of your 7-Star Epicure Account?')) { window.location.href='auth.html'; }">
+          Sign Out of Account
+        </button>
+        <span class="text-[8px] font-mono tracking-widest text-neutral-500 block text-center uppercase select-none pt-1 pb-6">
+          WOW FOOD RECIPES • V4.2.0 (BUILD 2026)
+        </span>
+      </div>
+
+    </main>
+
+    <!-- ─── 4. SCREEN 12B: IOT SMART ROBOT PAIRING MODAL DRAWER ───────────── -->
+    <div id="iot-pairing-drawer" aria-hidden="true">
+      <div class="pairing-drawer-card">
+        <div class="drawer-handle"></div>
+
+        <div class="pairing-drawer-header">
+          <h2 class="pairing-title">Smart Cooking Robot</h2>
+          <button class="btn-close-drawer" id="btn-close-iot-drawer" type="button" aria-label="Close Smart Robot Dialog">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+
+        <!-- Central Concentric Pulsing Radar Hero Graphic -->
+        <div class="robot-hero-wrap">
+          <div class="pulsing-aura-radar">
+            <div class="aura-ring-outer"></div>
+            <div class="aura-ring-inner"></div>
+            <div class="robot-core-circle">
+              <!-- Robotic Cooker SVG Icon -->
+              <svg class="w-12 h-12 text-[#3DF2E0] drop-shadow-[0_0_10px_rgba(61,242,224,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:44px; height:44px;">
+                <path d="M5 11h14c.55 0 1 .45 1 1v4c0 3-3 6-8 6s-8-3-8-6v-4c0-.55.45-1 1-1z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path>
+                <path d="M6 11c0-3.5 2.5-6 6-6s6 2.5 6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path>
+                <path d="M10 5V3m4 2V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"></path>
+                <circle cx="12" cy="15.5" r="2.2" stroke="currentColor" fill="rgba(61,242,224,0.2)" stroke-width="1.5"></circle>
+              </svg>
+              <span class="robot-active-node-led"></span>
+            </div>
+          </div>
+
+          <h3 class="robot-device-title">ChefBot Pro 4L Connected</h3>
+          <div class="robot-conn-meta">
+            <span class="green-dot-pulse" style="width:6px; height:6px;"></span>
+            <span>Wi-Fi Strength: Excellent • 2.4GHz • BLE 5.2</span>
+          </div>
+        </div>
+
+        <!-- Recipe Sync Toggle Row -->
+        <div class="sync-toggle-card">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; border-radius:10px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; color:white;">
+              <span class="material-symbols-outlined text-[18px]">sync</span>
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:700; color:white;">Active Recipe Sync</div>
+              <div style="font-size:10.5px; color:var(--text-muted);">Real-time step temperature &amp; timer telemetry</div>
+            </div>
+          </div>
+
+          <button class="toggle-switch-btn" id="btn-toggle-sync" type="button" role="switch" aria-checked="true">
+            <div class="toggle-knob"></div>
+          </button>
+        </div>
+
+        <!-- Live Sensor Telemetry -->
+        <div class="telemetry-sensors-grid">
+          <div class="sensor-item-card">
+            <span class="material-symbols-outlined sensor-icon text-[#3DF2E0]">thermostat</span>
+            <span class="sensor-label">Induction Temp</span>
+            <span class="sensor-value">185°C</span>
+          </div>
+          <div class="sensor-item-card">
+            <span class="material-symbols-outlined sensor-icon text-[#3DF2E0]">speed</span>
+            <span class="sensor-label">Stir Blade</span>
+            <span class="sensor-value">120 RPM</span>
+          </div>
+          <div class="sensor-item-card">
+            <span class="material-symbols-outlined sensor-icon text-[#3DF2E0]">wifi_tethering</span>
+            <span class="sensor-label">BLE Latency</span>
+            <span class="sensor-value">12 ms</span>
+          </div>
+        </div>
+
+        <!-- ── Firmware Update Status Banner ─────────────────────────────── -->
+        <div class="firmware-update-row" id="firmware-update-row">
+          <div>
+            <div style="font-size:11px; font-weight:700; color:var(--amber); margin-bottom:3px;">Firmware Update Available</div>
+            <div style="font-size:10px; color:var(--text-muted);">v2.4.1-rc3 → <strong style="color:var(--text-white);">v2.5.0</strong> &nbsp;·&nbsp; Stir precision +12%</div>
+          </div>
+          <button class="firmware-install-badge" id="btn-install-firmware" type="button">
+            <span class="material-symbols-outlined" style="font-size:13px;">system_update</span>
+            Install
+          </button>
+        </div>
+
+        <!-- Diagnostic Scanning Simulation Progress Area -->
+        <div class="diagnostic-scanning-box" id="diagnostic-scan-progress">
+          <div class="scan-step-row" id="scan-step-1">
+            <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]">check_circle</span>
+            <span>Scanning BLE Handshake Channel 2.4G...</span>
+          </div>
+          <div class="scan-step-row" id="scan-step-2">
+            <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]">check_circle</span>
+            <span>Checking Thermocouple 0x7E3 Sensors...</span>
+          </div>
+          <div class="scan-step-row" id="scan-step-3" style="color:var(--crimson); font-weight:700;">
+            <span class="material-symbols-outlined text-[16px] text-[#FF3B30]">warning</span>
+            <span>[HARDWARE_LOG_ERR_12B]: Handshake timeout on retry 3.</span>
+          </div>
+          <div style="font-size:10.5px; color:var(--text-muted); margin-top:4px;">
+            Redirecting to Support Core with injected stack trace...
+          </div>
+        </div>
+
+        <!-- STATE MACHINE TRIGGER: RUN MACHINE DIAGNOSTIC (SCR-12B ➔ SCR-03H) -->
+        <button class="run-diagnostic-btn" id="btn-run-diagnostic" data-action="launch-hardware-diagnostic" type="button">
+          <span class="material-symbols-outlined text-[20px]">troubleshoot</span>
+          <span>Troubleshoot / Run Diagnostics</span>
+        </button>
+
+        <!-- Secondary Ghost: Unpair / Forget Device -->
+        <button class="unpair-btn" id="btn-unpair-device" type="button">
+          <span class="material-symbols-outlined" style="font-size:18px;">link_off</span>
+          <span>Unpair / Forget This Device</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ─── 5. SCREEN 3H: SUBMIT ISSUE DETAILS (SUPPORT CORE VIEW) ────────── -->
+    <div id="view-screen-3h" aria-hidden="true">
+      <header class="support-header-bar">
+        <button class="support-back-btn" id="btn-back-from-3h" type="button" aria-label="Return to Settings">
+          <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        </button>
+        <h2 class="support-page-title">Submit Issue Details</h2>
+      </header>
+
+      <div class="support-content-body no-scrollbar">
+        <!-- Hardware / Device Context Preview Card -->
+        <div class="device-context-preview">
+          <div class="device-thumb-box">
+            <span class="material-symbols-outlined text-[28px]">precision_manufacturing</span>
+          </div>
+          <div class="device-context-text">
+            <span class="device-sub-label">Attached Diagnostic Context</span>
+            <span class="device-main-title">ChefBot Pro 4L Multi-Cooker</span>
+            <span class="device-mac-info">MAC: 3C:84:27:E1:59:B0 • Firmware v2.4.1-rc3</span>
+          </div>
+        </div>
+
+        <!-- Category Dropdown -->
+        <div class="input-field-group">
+          <label class="input-label-tag" for="issue-category-select">Issue Category</label>
+          <select class="form-text-input" id="issue-category-select" style="background:var(--surface-charcoal);">
+            <option value="HARDWARE_IOT" selected>Smart Appliance / Robot Connection</option>
+            <option value="RECIPE_ERROR">Recipe Step or Temperature Issue</option>
+            <option value="ACCOUNT_BILLING">Account &amp; Pro Subscription</option>
+            <option value="GROCERY_DELIVERY">Grocery Flash Delivery Inquiry</option>
+          </select>
+        </div>
+
+        <!-- User Email -->
+        <div class="input-field-group">
+          <label class="input-label-tag" for="issue-email-input">Your Registered Email</label>
+          <input type="email" class="form-text-input" id="issue-email-input" value="avdhutkhanolkar75@gmail.com" />
+        </div>
+
+        <!-- Details Textarea with Injected Diagnostic Log -->
+        <div class="input-field-group">
+          <label class="input-label-tag" for="issue-description-input">Technical Logs &amp; Notes</label>
+          <textarea class="form-description-textarea" id="issue-description-input" placeholder="Explain what happened during pairing..." maxlength="1000"></textarea>
+          <div class="char-counter" id="char-counter" aria-live="polite">0 / 1000</div>
+        </div>
+
+        <!-- Attachment action -->
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 0;">
+          <button type="button" style="background:none; border:none; color:var(--crimson); font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:4px;" id="btn-attach-photo">
+            <span class="material-symbols-outlined text-[16px]">attach_file</span>
+            <span>Attach Error Screenshot (Optional)</span>
+          </button>
+          <span style="font-size:10.5px; color:var(--text-dim);">Auto-attached: BLE Log 0x7E3</span>
+        </div>
+
+        <!-- Primary Action: Submit Issue Details -->
+        <button class="submit-issue-btn" id="btn-submit-issue-form" type="button">
+          <span class="material-symbols-outlined text-[20px]">send</span>
+          <span>Submit Issue Details</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── 6. SUCCESS CONFIRMATION MODAL ────────────────────────────────── -->
+    <div id="ticket-success-modal" aria-hidden="true">
+      <div class="success-card">
+        <div class="success-icon-badge">
+          <span class="material-symbols-outlined">verified</span>
+        </div>
+        <h3 style="font-size:18px; font-weight:800; color:white;">Diagnostic Ticket Created</h3>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.45;">
+          Your diagnostic stack trace <strong>[HARDWARE_LOG_ERR_12B]</strong> has been submitted to the ChefBot hardware engineering team.
+        </p>
+
+        <div style="background:rgba(0,0,0,0.5); border:1px solid var(--border-soft); border-radius:14px; padding:10px 14px; width:100%; display:flex; justify-content:space-between; font-size:12px; margin:4px 0;">
+          <span style="color:var(--text-dim);">Ticket ID:</span>
+          <strong style="color:var(--crimson); font-family:monospace;">#TKT-8942-IOT</strong>
+        </div>
+
+        <button class="run-diagnostic-btn" id="btn-return-settings" style="height:44px; margin-top:8px;" type="button">
+          <span>Return to Profile &amp; Settings</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── 6a. ULTRA-PREMIUM SUBSCRIPTION PAYWALL MODAL ──────────────── -->
+    <div id="premium-plan-modal" style="background: linear-gradient(180deg, rgba(10, 16, 20, 0.95) 0%, rgba(11, 15, 20, 0.99) 100%) !important; backdrop-filter: blur(40px) saturate(160%) !important;" class="fixed inset-0 z-50 overflow-y-auto hidden flex flex-col p-6 space-y-5 rounded-[44px] max-w-[393px] mx-auto border border-white/10 animate-fade-in relative">
+      
+      <!-- Immersive Neon Cyan Ambient Mesh Aura Layer Overlay -->
+      <div class="absolute top-0 left-0 right-0 h-80 pointer-events-none z-0 select-none opacity-20" style="background: radial-gradient(circle at 50% 15%, #3DF2E0 0%, transparent 65%) !important; filter: blur(60px) !important;"></div>
+
+      <!-- Top Navigation Control Bar Track -->
+      <div class="w-full flex items-center justify-between pt-4 pb-2 z-10 relative shrink-0">
+        <span class="text-[8px] font-black tracking-widest text-[#3DF2E0] bg-[#3DF2E0]/10 px-3 py-1 rounded-full border border-[#3DF2E0]/20 uppercase">Campaign Invite Link</span>
+        <button type="button" id="btn-close-premium" class="w-7 h-7 rounded-full bg-black/60 border border-white/10 text-neutral-400 hover:text-white flex items-center justify-center text-[11px] font-bold cursor-pointer active:scale-90 transition-transform">✕</button>
+      </div>
+
+      <!-- Core Immersive Headline Stack -->
+      <div class="w-full text-center flex flex-col space-y-1.5 z-10 relative select-none">
+        <h3 class="text-xl font-black text-white tracking-tight leading-tight">Unlock Premium<br/>Masterclasses</h3>
+        <p class="text-[10px] text-neutral-400 max-w-[240px] mx-auto leading-normal">Learn authentic secret culinary techniques from 7-star global master chefs natively.</p>
+      </div>
+
+      <!-- THREE INTERACTIVE SUBSCRIPTION PLAN TIERS OPTIONS ROWS -->
+      <div class="flex flex-col space-y-3 z-10 relative flex-1 overflow-y-auto no-scrollbar">
+        
+        <!-- TIER 1: MONTHLY PASS -->
+        <label class="paywall-tier-label w-full bg-[#131313]/50 border border-white/5 rounded-2xl p-4 flex items-center justify-between cursor-pointer select-none transition-all duration-300 hover:border-white/10 active:scale-[0.99]">
+          <input type="radio" name="paywall_tier" value="monthly" data-title="Monthly Pass" data-price="₹129" class="hidden" />
+          <div class="flex items-center space-x-3.5">
+            <div class="tier-radio-dot w-4 h-4 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5"><div class="w-full h-full rounded-full bg-transparent transition-colors duration-200"></div></div>
+            <div class="flex flex-col"><span class="text-xs font-black text-white">Monthly Pass</span><span class="text-[9px] text-neutral-400 mt-0.5">Full premium access, cancel anytime.</span></div>
+          </div>
+          <span class="text-xs font-black text-white">₹129</span>
+        </label>
+
+        <!-- TIER 2: 6-MONTH BUNDLE -->
+        <label class="paywall-tier-label w-full bg-[#131313]/50 border border-white/5 rounded-2xl p-4 flex items-center justify-between cursor-pointer select-none transition-all duration-300 hover:border-white/10 active:scale-[0.99]">
+          <input type="radio" name="paywall_tier" value="bundle" data-title="6-Month Bundle" data-price="₹449" class="hidden" />
+          <div class="flex items-center space-x-3.5">
+            <div class="tier-radio-dot w-4 h-4 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5"><div class="w-full h-full rounded-full bg-transparent transition-colors duration-200"></div></div>
+            <div class="flex flex-col"><span class="text-xs font-black text-white">6-Month Bundle</span><span class="text-[9px] text-neutral-400 mt-0.5">Breaks down to just ₹75 / month.</span></div>
+          </div>
+          <span class="text-xs font-black text-white">₹449</span>
+        </label>
+
+        <!-- TIER 3: PREMIUM PRO ANNUAL (GLOWING SELECTION TARGET BEST VALUE) -->
+        <label class="paywall-tier-label w-full bg-[#3DF2E0]/10 border-2 border-[#3DF2E0] rounded-2xl p-4 flex items-center justify-between cursor-pointer select-none relative shadow-[0_0_20px_rgba(61,242,224,0.25)] transition-all duration-300 active:scale-[0.99] mt-2">
+          <input type="radio" name="paywall_tier" value="annual" data-title="Premium Pro Annual" data-price="₹699" checked class="hidden" />
+          <!-- Absolute Premium Tag Badge Floating Pill -->
+          <span class="absolute -top-2.5 right-6 text-[8px] font-black text-[#0B0F14] bg-[#3DF2E0] rounded-full px-2.5 py-0.5 tracking-wider uppercase border border-[#3DF2E0]/20 shadow-md">Best Value — Only ₹58/mo</span>
+          
+          <div class="flex items-center space-x-3.5">
+            <div class="tier-radio-dot w-4 h-4 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5"><div class="w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_8px_#3DF2E0]"></div></div>
+            <div class="flex flex-col"><span class="text-xs font-black text-white">Premium Pro Annual</span><span class="text-[9px] text-neutral-300 mt-0.5">Billed annually. Full masterclasses library & chef notes.</span></div>
+          </div>
+          <span class="text-xs font-black text-white">₹699</span>
+        </label>
+
+      </div>
+
+      <!-- STICKY ACTION CONTROL FOOTER BUTTON ELEMENT LAYER -->
+      <div class="w-full flex flex-col space-y-3.5 z-10 relative pt-2 shrink-0 select-none pb-24 px-1">
+        <button type="button" id="btn-activate-premium-plan" class="w-full bg-gradient-to-r from-[#3DF2E0] to-[#20C5B5] text-[#0B0F14] rounded-xl py-3.5 text-xs font-black tracking-widest uppercase shadow-[0_4px_24px_rgba(61,242,224,0.45)] cursor-pointer active:scale-97 transition-all flex items-center justify-center space-x-1.5">
+          <span>ACTIVATE YOUR PLAN</span>
+          <span class="material-symbols-outlined text-[13px] font-bold text-[#0B0F14]">lock_open</span>
+        </button>
+        <div class="w-full flex items-center justify-center space-x-6 text-[8px] font-mono text-neutral-600 tracking-wider">
+          <button type="button" class="hover:underline">Restore Purchases</button>
+          <span>•</span>
+          <button type="button" class="hover:underline">Terms of Service</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 2026 ULTRA-PREMIUM GLASSMORPHISM & NEO-GLOW PAYMENT GATEWAY POPUP ─── -->
+    <div id="payment-gateway-modal" class="fixed inset-0 overflow-y-auto hidden flex flex-col p-5 space-y-4 rounded-[44px] max-w-[393px] mx-auto border border-white/10 select-none transform translate-y-full opacity-0 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]" style="z-index: 99999 !important; background: #0B0F14 !important; backdrop-filter: blur(16px) saturate(180%) !important; -webkit-backdrop-filter: blur(16px) saturate(180%) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(61, 242, 224, 0.15) !important;">
+      
+      <!-- Atmospheric Ambient Glow Orbs -->
+      <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-40 pointer-events-none z-0 opacity-25" style="background: radial-gradient(circle, #3DF2E0 0%, #20C5B5 40%, transparent 75%) !important; filter: blur(45px) !important;"></div>
+      <div class="absolute bottom-10 right-0 w-44 h-44 pointer-events-none z-0 opacity-15" style="background: radial-gradient(circle, #00E676 0%, transparent 70%) !important; filter: blur(40px) !important;"></div>
+
+      <!-- MAIN PAYMENT OPTIONS VIEW -->
+      <div id="neo-payment-options-view" class="w-full flex flex-col space-y-4 z-10 relative flex-1">
+        
+        <!-- Header Row with Minimalist Close Button -->
+        <div class="w-full flex items-center justify-between pt-3 pb-1 shrink-0">
+          <div class="flex flex-col">
+            <div class="flex items-center space-x-1.5 mb-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#3DF2E0] shadow-[0_0_8px_#3DF2E0] animate-pulse"></span>
+              <span class="text-[9px] font-black text-[#3DF2E0] tracking-widest uppercase">Secure Gateway 2026</span>
+            </div>
+            <h4 class="text-base font-black text-white tracking-tight uppercase">Select Payment Mode</h4>
+          </div>
+          <button type="button" id="btn-cancel-payment" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-400 hover:text-white flex items-center justify-center text-xs font-bold cursor-pointer active:scale-90 transition-all">✕</button>
+        </div>
+
+        <!-- Dynamic Invoice Summary Glass Card -->
+        <div class="w-full rounded-2xl p-3.5 flex items-center justify-between z-10 relative border border-white/10" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center border border-[#3DF2E0]/30 shadow-[0_0_12px_rgba(61,242,224,0.2)]" style="background: rgba(61, 242, 224, 0.1);">
+              <span class="material-symbols-outlined text-[#3DF2E0] text-[20px]">workspace_premium</span>
+            </div>
+            <div class="flex flex-col">
+              <span id="payment-summary-plan" class="text-xs font-black text-white">Premium Pro Annual</span>
+              <span class="text-[9px] text-neutral-400 mt-0.5">500+ Chef Masterclasses & AI Scanner</span>
+            </div>
+          </div>
+          <div class="flex flex-col text-right">
+            <span class="text-[8px] font-black text-[#3DF2E0] uppercase tracking-widest">Total Payable</span>
+            <span id="payment-summary-price" class="text-base font-black text-white mt-0.5">₹699</span>
+          </div>
+        </div>
+
+        <!-- SCROLLABLE PAYMENT MODES CONTAINER -->
+        <div class="flex flex-col space-y-3.5 z-10 relative flex-1 overflow-y-auto no-scrollbar pr-0.5 pb-2">
+          
+          <!-- ─── GROUP 1: POPULAR INDIAN UPI (2x2 Grid) ─── -->
+          <div class="flex flex-col space-y-1.5">
+            <div class="flex items-center justify-between px-1">
+              <span class="text-[9px] font-black text-neutral-400 tracking-wider uppercase">1. Popular Indian UPI</span>
+              <span class="text-[8px] font-mono text-[#00E676] bg-[#00E676]/10 px-1.5 py-0.5 rounded border border-[#00E676]/20">Zero Convenience Fee</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <!-- GPay -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border-2 border-[#3DF2E0] bg-[#3DF2E0]/10 cursor-pointer transition-all duration-200 shadow-[0_0_16px_rgba(61,242,224,0.25)] group" data-method="gpay">
+                <input type="radio" name="active_gateway" value="gpay" checked class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center font-bold text-[11px] text-white">
+                    <span class="text-[#4285F4]">G</span><span class="text-[#EA4335]">P</span><span class="text-[#FBBC05]">a</span><span class="text-[#34A853]">y</span>
+                  </div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-white">Google Pay</span>
+                  <span class="text-[8px] text-neutral-400">Instant UPI App</span>
+                </div>
+              </label>
+
+              <!-- PhonePe -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group" data-method="phonepe">
+                <input type="radio" name="active_gateway" value="phonepe" class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#5f259f]/40 border border-[#5f259f]/60 flex items-center justify-center font-bold text-[10px] text-[#A259FF]">Pe</div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-transparent"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-neutral-300">PhonePe</span>
+                  <span class="text-[8px] text-neutral-500">UPI & Wallet</span>
+                </div>
+              </label>
+
+              <!-- Paytm -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group" data-method="paytm">
+                <input type="radio" name="active_gateway" value="paytm" class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#002e6e]/40 border border-[#00b9f5]/50 flex items-center justify-center font-bold text-[9px] text-[#00b9f5]">Paytm</div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-transparent"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-neutral-300">Paytm</span>
+                  <span class="text-[8px] text-neutral-500">UPI & Postpaid</span>
+                </div>
+              </label>
+
+              <!-- Amazon Pay -->
+              <label class="neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group" data-method="amazonpay">
+                <input type="radio" name="active_gateway" value="amazonpay" class="hidden" />
+                <div class="flex items-center justify-between mb-2">
+                  <div class="w-6 h-6 rounded-lg bg-[#ff9900]/20 border border-[#ff9900]/40 flex items-center justify-center font-bold text-[10px] text-[#FF9900]">pay</div>
+                  <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                    <div class="w-full h-full rounded-full bg-transparent"></div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-black text-neutral-300">Amazon Pay</span>
+                  <span class="text-[8px] text-neutral-500">UPI & Balance</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- ─── GROUP 2: CARDS & NETBANKING ─── -->
+          <div class="flex flex-col space-y-1.5">
+            <span class="text-[9px] font-black text-neutral-400 tracking-wider uppercase px-1">2. Cards & Netbanking</span>
+            
+            <!-- Cards Option -->
+            <label class="neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200" data-method="cards">
+              <input type="radio" name="active_gateway" value="cards" class="hidden" />
+              <div class="flex items-center space-x-3">
+                <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                  <div class="w-full h-full rounded-full bg-transparent"></div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-black text-neutral-300">Credit / Debit Cards</span>
+                    <span class="text-[8px] font-mono text-neutral-400 bg-white/5 px-1.5 py-0.2 rounded">Visa • MC • RuPay</span>
+                  </div>
+                  <span class="text-[8px] text-neutral-500 mt-0.5">Domestic & International Cards Supported</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-neutral-400 text-[18px]">credit_card</span>
+            </label>
+
+            <!-- Netbanking Option -->
+            <label class="neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200" data-method="netbanking">
+              <input type="radio" name="active_gateway" value="netbanking" class="hidden" />
+              <div class="flex items-center space-x-3">
+                <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                  <div class="w-full h-full rounded-full bg-transparent"></div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-black text-neutral-300">Netbanking & Portals</span>
+                    <span class="text-[8px] font-mono text-neutral-400 bg-white/5 px-1.5 py-0.2 rounded">50+ Banks</span>
+                  </div>
+                  <span class="text-[8px] text-neutral-500 mt-0.5">HDFC, ICICI, SBI, Axis, Kotak & more</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-neutral-400 text-[18px]">account_balance</span>
+            </label>
+          </div>
+
+          <!-- ─── GROUP 3: SECURE GATEWAYS ─── -->
+          <div class="flex flex-col space-y-1.5">
+            <span class="text-[9px] font-black text-neutral-400 tracking-wider uppercase px-1">3. Express Gateways</span>
+
+            <!-- Razorpay Option -->
+            <label class="neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200" data-method="razorpay">
+              <input type="radio" name="active_gateway" value="razorpay" class="hidden" />
+              <div class="flex items-center space-x-3">
+                <div class="radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5">
+                  <div class="w-full h-full rounded-full bg-transparent"></div>
+                </div>
+                <div class="flex flex-col">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-black text-neutral-300">Razorpay Express Checkout</span>
+                    <span class="text-[8px] font-mono text-[#00E676] bg-[#00E676]/10 px-1.5 py-0.2 rounded border border-[#00E676]/20">1-Click</span>
+                  </div>
+                  <span class="text-[8px] text-neutral-500 mt-0.5">Biometric & Saved Payment Fast Route</span>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-[#00E676] text-[18px]">verified_user</span>
+            </label>
+          </div>
+
+        </div>
+
+        <!-- STICKY ACTION BUTTON CONTAINER -->
+        <div class="w-full flex flex-col space-y-2 z-10 relative pt-2 shrink-0 pb-1 px-1">
+          <button type="button" id="btn-process-final-payment" class="w-full rounded-xl py-4 text-xs font-black tracking-widest text-[#0B0F14] uppercase cursor-pointer active:scale-97 transition-all flex items-center justify-center space-x-2" style="background: linear-gradient(135deg, #3DF2E0 0%, #20C5B5 100%); box-shadow: 0 0 25px rgba(61, 242, 224, 0.45), 0 4px 15px rgba(0,0,0,0.4);">
+            <span id="btn-pay-text" class="text-[#0B0F14]">PROCEED TO SECURE PAYMENT 🔒</span>
+          </button>
+          <span class="text-[8px] font-mono text-center text-neutral-400 tracking-wider block">🔒 256-Bit SSL Encrypted Secure Checkout</span>
+        </div>
+
+      </div>
+
+      <!-- ─── DYNAMIC EMERALD-GREEN SUCCESS VIEW ─── -->
+      <div id="neo-payment-success-view" class="w-full flex-1 hidden flex-col items-center justify-center py-6 px-4 space-y-6 z-10 relative text-center animate-fade-in">
+        
+        <!-- Radiant Neon-Green Halo Backdrop -->
+        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full pointer-events-none z-0" style="background: radial-gradient(circle, rgba(0, 255, 136, 0.35) 0%, rgba(0, 230, 118, 0.1) 40%, transparent 70%); filter: blur(28px);"></div>
+
+        <!-- Glowing Emerald Checkmark Badge -->
+        <div class="relative z-10 w-20 h-20 rounded-full flex items-center justify-center border-2 border-[#00FF88] shadow-[0_0_35px_rgba(0,255,136,0.6)]" style="background: rgba(0, 255, 136, 0.12);">
+          <span class="material-symbols-outlined text-[42px] text-[#00FF88] font-bold">check_circle</span>
+        </div>
+
+        <!-- Success Message Header -->
+        <div class="flex flex-col space-y-2 z-10 relative">
+          <div class="inline-flex items-center justify-center space-x-1.5 px-3 py-1 rounded-full bg-[#00FF88]/10 border border-[#00FF88]/30 mx-auto">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FF88] shadow-[0_0_6px_#00FF88]"></span>
+            <span class="text-[9px] font-black text-[#00FF88] tracking-widest uppercase">Transaction Approved</span>
+          </div>
+          <h3 class="text-2xl font-black text-white tracking-tight" style="color: #00FF88; text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);">Payment Successful!</h3>
+          <p class="text-xs text-neutral-300 max-w-[280px] mx-auto leading-relaxed">Welcome to Premium Pro Masterclasses! Your premium chef privileges have been successfully unlocked.</p>
+        </div>
+
+        <!-- Digital Receipt Mini Card -->
+        <div class="w-full rounded-2xl p-4 border border-white/10 flex flex-col space-y-2.5 z-10 relative" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);">
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-neutral-400 font-mono uppercase">Plan Activated:</span>
+            <span id="success-receipt-plan" class="text-white font-black">Premium Pro Annual VIP</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px]">
+            <span class="text-neutral-400 font-mono uppercase">Amount Paid:</span>
+            <span id="success-receipt-amount" class="text-[#00FF88] font-black font-mono">₹699.00 (Incl. Taxes)</span>
+          </div>
+          <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-white/5">
+            <span class="text-neutral-500 font-mono uppercase">Reference:</span>
+            <span id="success-receipt-ref" class="text-neutral-300 font-mono text-[9px]">TXN-WOW-8842-PRO</span>
+          </div>
+        </div>
+
+        <!-- Action Button: Start Cooking -->
+        <div class="w-full pt-2 z-10 relative">
+          <button type="button" id="btn-start-cooking-success" class="w-full rounded-xl py-4 text-xs font-black tracking-widest text-black uppercase cursor-pointer active:scale-97 transition-all flex items-center justify-center space-x-2" style="background: linear-gradient(135deg, #00FF88 0%, #00E676 100%); box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);">
+            <span>Start Cooking 🍳</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ─── 6b. CINEMATIC SETTINGS CONTEXTUAL ACTION DRAWER ─────────── -->
+    <div id="settings-action-drawer" class="absolute inset-x-0 bottom-0 z-50 bg-[#0B0F14]/95 backdrop-blur-2xl border-t border-white/10 rounded-t-[36px] pt-6 px-6 pb-24 flex flex-col space-y-4 shadow-[0_-15px_40px_rgba(0,0,0,0.6)] transform translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hidden select-none">
+      <!-- Interactive Top Drag Pull Bar Header Row -->
+      <div class="w-full flex flex-col items-center space-y-3.5 shrink-0">
+        <div class="w-10 h-1 bg-neutral-700 rounded-full opacity-60"></div>
+        <div class="w-full flex items-center justify-between">
+          <h4 id="drawer-action-title" class="text-sm font-black text-white uppercase tracking-wider">System Control</h4>
+          <button type="button" id="btn-close-action-drawer" class="w-7 h-7 rounded-full bg-white/5 border border-white/10 text-neutral-400 hover:text-white flex items-center justify-center text-[11px] font-black uppercase cursor-pointer active:scale-90 transition-transform">✕</button>
+        </div>
+      </div>
+      <!-- Premium Fluid Content Injection Panel -->
+      <div id="drawer-action-content-slot" class="w-full flex flex-col flex-1 overflow-y-auto no-scrollbar py-2 pb-6"></div>
+    </div>
+
+    <!-- ─── 7. BOTTOM PERSISTENT NAVIGATION BAR ──────────────────────────── -->
+    <nav id="app-nav" aria-label="Main application navigation">
+      <!-- Tab 1: Home -->
+      <a href="dashboard.html" class="nav-tab" id="nav-home" aria-label="Home Feed" data-tab="home">
+        <span class="material-symbols-outlined" aria-hidden="true">home</span>
+        <span class="nav-label">Home</span>
+      </a>
+
+      <!-- Tab 2: Explore -->
+      <a href="search-pantry.html" class="nav-tab" id="nav-explore" aria-label="Explore & Search" data-tab="explore">
+        <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+        <span class="nav-label">Explore</span>
+      </a>
+
+      <!-- Tab 3: Pantry Scan -->
+      <a href="pantry_scan.html" class="nav-tab" id="nav-scan" aria-label="Kitchen Ingredient Camera Scanner" data-tab="scan">
+        <span class="material-symbols-outlined" aria-hidden="true">photo_camera</span>
+        <span class="nav-label">Pantry Scan</span>
+      </a>
+
+      <!-- Tab 4: Collection -->
+      <a href="collection.html" class="nav-tab" id="nav-collection" aria-label="Saved Recipes Collection" data-tab="collection">
+        <span class="material-symbols-outlined" aria-hidden="true">bookmark</span>
+        <span class="nav-label">Collection</span>
+      </a>
+
+      <!-- Tab 5: Grocery -->
+      <a href="grocery.html" class="nav-tab" id="nav-grocery" aria-label="Smart Grocery List" data-tab="grocery">
+        <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+        <span class="nav-label">Grocery</span>
+      </a>
+
+      <!-- Tab 6: Pro Chef -->
+      <a href="chef-ai-showcase.html" class="nav-tab" id="nav-chef-ai" aria-label="Pro Chef AI Assistant" data-tab="chef-ai">
+        <span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>
+        <span class="nav-label">Pro Chef</span>
+      </a>
+    </nav>
+
+  </div><!-- /#viewport -->
+
+  <!-- ─── Interactive State Machine & IoT Diagnostic Script ──────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Cinematic Settings Contextual Action Drawer Controller
+      const actionDrawer = document.getElementById('settings-action-drawer');
+      const actionTitle = document.getElementById('drawer-action-title');
+      const actionSlot = document.getElementById('drawer-action-content-slot');
+      const actionClose = document.getElementById('btn-close-action-drawer');
+
+      window.openSettingsAction = function(actionKey) {
+        if (!actionDrawer || !actionTitle || !actionSlot) return;
+        
+        actionDrawer.classList.remove('hidden');
+        // Spring physics calculation timing trigger completely free
+        setTimeout(() => { actionDrawer.style.transform = 'translateY(0)'; }, 20);
+
+        if (actionKey === 'robot') {
+          actionTitle.innerText = "Smart Robot Sync";
+          actionSlot.innerHTML = `
+            <div class="flex flex-col space-y-4 py-3 items-center text-center">
+              <div class="relative w-16 h-16 flex items-center justify-center bg-[#3DF2E0]/10 border border-[#3DF2E0]/30 rounded-full shadow-[0_0_20px_rgba(61,242,224,0.2)]">
+                <div class="absolute inset-1 border border-dashed border-[#3DF2E0]/50 rounded-full animate-spin"></div>
+                <span class="material-symbols-outlined text-[#3DF2E0] text-xl animate-pulse">precision_manufacturing</span>
+              </div>
+              <div class="flex flex-col space-y-1">
+                <p class="text-xs font-bold text-white tracking-tight">ChefBot Pro 4L Detected</p>
+                <p class="text-[10px] text-neutral-400 leading-normal">Active pairing channel established via Bluetooth BLE 5.2</p>
+              </div>
+              <button type="button" id="btn-disconnect-sync-action" onclick="closeActionDrawerAndOpenIot()" class="w-full bg-gradient-to-r from-[#3DF2E0] to-[#20C5B5] text-[#0B0F14] font-black rounded-xl py-3 text-xs tracking-wider uppercase shadow-[0_4px_20px_rgba(61,242,224,0.4)] active:scale-97 transition-all mb-6 cursor-pointer">ENTER DEVICE CONTROL</button>
+            </div>
+          `;
+        } else if (actionKey === 'voice') {
+          actionTitle.innerText = "Voice Assistant Calibration";
+          actionSlot.innerHTML = `
+            <div class="flex flex-col space-y-4 py-2">
+              <p class="text-[11px] text-neutral-400 leading-relaxed font-medium">Kitchen acoustics calibration engine optimizes mic capture thresholds for hands-free landscape commands.</p>
+              <!-- Premium Live Frequency Equalizer Layout Wave -->
+              <div class="h-10 bg-black/40 border border-white/5 rounded-xl p-3 flex items-center justify-center space-x-1.5 overflow-hidden">
+                <div class="w-1 bg-[#3DF2E0] rounded-full animate-pulse h-6"></div>
+                <div class="w-1 bg-[#3DF2E0] rounded-full animate-pulse h-4" style="animation-delay:0.15s"></div>
+                <div class="w-1 bg-[#3DF2E0] rounded-full animate-pulse h-8" style="animation-delay:0.3s"></div>
+                <div class="w-1 bg-[#3DF2E0] rounded-full animate-pulse h-5" style="animation-delay:0.45s"></div>
+                <div class="w-1 bg-[#3DF2E0] rounded-full animate-pulse h-7" style="animation-delay:0.6s"></div>
+              </div>
+              <div class="flex justify-between items-center bg-white/5 border border-white/5 rounded-xl px-3 py-2 text-xs font-bold"><span class="text-neutral-300">Mic Sensitivity Gain</span><span class="text-[#3DF2E0]">+4.5 dB</span></div>
+            </div>
+          `;
+        } else if (actionKey === 'diet') {
+          actionTitle.innerText = "Dietary Profile Selection";
+          actionSlot.innerHTML = `
+            <div class="grid grid-cols-2 gap-2.5 py-1">
+              <div class="bg-[#3DF2E0]/10 border border-[#3DF2E0]/50 text-[#3DF2E0] rounded-xl p-3 text-center text-xs font-black shadow-[0_0_10px_rgba(61,242,224,0.2)] cursor-pointer">✓ NUT-FREE</div>
+              <div class="bg-[#3DF2E0]/10 border border-[#3DF2E0]/50 text-[#3DF2E0] rounded-xl p-3 text-center text-xs font-black shadow-[0_0_10px_rgba(61,242,224,0.2)] cursor-pointer">✓ LOW-CARB</div>
+              <div class="bg-[#131313]/60 border border-white/5 text-neutral-500 rounded-xl p-3 text-center text-xs font-bold cursor-pointer hover:border-white/10 hover:text-white transition-colors">VEGAN</div>
+              <div class="bg-[#3DF2E0]/10 border border-[#3DF2E0]/50 text-[#3DF2E0] rounded-xl p-3 text-center text-xs font-black shadow-[0_0_10px_rgba(61,242,224,0.2)] cursor-pointer">✓ HIGH-PROTEIN</div>
+            </div>
+          `;
+        } else if (actionKey === 'notif') {
+          actionTitle.innerText = "Notification Nodes";
+          actionSlot.innerHTML = `
+            <div class="flex flex-col space-y-2.5 py-1">
+              <div class="flex justify-between items-center bg-black/30 border border-white/5 rounded-xl px-4 py-3 text-xs font-bold"><div class="flex flex-col"><span class="text-white">Kitchen Prep Alerts</span><span class="text-[10px] text-neutral-500 font-medium">Realtime scanner countdown ticks</span></div><input type="checkbox" checked class="w-4 h-4 accent-[#3DF2E0] rounded cursor-pointer" /></div>
+              <div class="flex justify-between items-center bg-black/30 border border-white/5 rounded-xl px-4 py-3 text-xs font-bold"><div class="flex flex-col"><span class="text-white">Weekly AI Digest</span><span class="text-[10px] text-neutral-500 font-medium">Circadian health metric logs</span></div><input type="checkbox" checked class="w-4 h-4 accent-[#3DF2E0] rounded cursor-pointer" /></div>
+            </div>
+          `;
+        }
+      };
+
+      window.closeActionDrawerAndOpenIot = function() {
+        if (actionDrawer) {
+          actionDrawer.style.transform = 'translateY(100%)';
+          setTimeout(function() {
+            actionDrawer.classList.add('hidden');
+            openIotDrawer();
+          }, 250);
+        } else {
+          openIotDrawer();
+        }
+      };
+
+      if (actionClose) {
+        actionClose.onclick = function(e) {
+          e.preventDefault();
+          if (!actionDrawer) return;
+          actionDrawer.style.transform = 'translateY(100%)';
+          setTimeout(() => { actionDrawer.classList.add('hidden'); }, 300);
+        };
+      }
+
+      // Toast Notification System
+      var toastEl = document.getElementById('global-toast');
+      var toastMsg = document.getElementById('toast-msg');
+      var toastTimer = null;
+
+      function showToast(message, icon) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMsg.textContent = message;
+        if (icon) {
+          document.getElementById('toast-icon').textContent = icon;
+        }
+        toastEl.classList.add('show');
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('show');
+        }, 2600);
+      }
+
+      // Drawer Open & Close
+      var iotDrawer = document.getElementById('iot-pairing-drawer');
+      var btnCloseIot = document.getElementById('btn-close-iot-drawer');
+
+      function openIotDrawer() {
+        iotDrawer.classList.add('drawer--open');
+        iotDrawer.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeIotDrawer() {
+        iotDrawer.classList.remove('drawer--open');
+        iotDrawer.setAttribute('aria-hidden', 'true');
+      }
+
+      btnCloseIot.addEventListener('click', closeIotDrawer);
+
+      // Recipe Sync Toggle
+      var btnToggleSync = document.getElementById('btn-toggle-sync');
+      btnToggleSync.addEventListener('click', function () {
+        var isOff = btnToggleSync.classList.contains('off');
+        if (isOff) {
+          btnToggleSync.classList.remove('off');
+          btnToggleSync.setAttribute('aria-checked', 'true');
+          showToast('Active Recipe Sync: Enabled', 'sync');
+        } else {
+          btnToggleSync.classList.add('off');
+          btnToggleSync.setAttribute('aria-checked', 'false');
+          showToast('Active Recipe Sync: Paused', 'sync_disabled');
+        }
+      });
+
+      // State Machine Re-route Mapping (SCR-12B ➔ SCR-03H)
+      var btnRunDiagnostic = document.getElementById('btn-run-diagnostic');
+      var scanProgress = document.getElementById('diagnostic-scan-progress');
+      var viewScreen3h = document.getElementById('view-screen-3h');
+      var btnBackFrom3h = document.getElementById('btn-back-from-3h');
+      var issueTextarea = document.getElementById('issue-description-input');
+      var btnSubmitIssue = document.getElementById('btn-submit-issue-form');
+      var successModal = document.getElementById('ticket-success-modal');
+      var btnReturnSettings = document.getElementById('btn-return-settings');
+      var btnSupportDirect = document.getElementById('btn-support-direct');
+
+      var diagnosticLogPayload = {
+        sourceScreen: "SCREEN_12B_IOT_PAIRING",
+        errorCode: "HARDWARE_LOG_ERR_12B",
+        timestamp: new Date().toISOString(),
+        injectedLogTag: "[HARDWARE_LOG_ERR_12B]\n-- Diagnostic Trace: BLE Hardware handshake timed out at retry cycle 3.\n-- Device: ChefBot Pro 4L (MAC: 3C:84:27:E1:59:B0)\n-- Firmware: v2.4.1-rc3 | Channel: BLE_2.4GHz | Error code: 0x7E3\n----------------------------------------\nUser details: "
+      };
+
+      function openScreen3H(logTag) {
+        closeIotDrawer();
+        viewScreen3h.classList.add('view--active');
+        viewScreen3h.setAttribute('aria-hidden', 'false');
+
+        // Hydrate form with injected hardware log
+        issueTextarea.value = logTag || diagnosticLogPayload.injectedLogTag;
+        
+        // Position cursor at the end of the text for seamless user input
+        setTimeout(function () {
+          issueTextarea.focus();
+          issueTextarea.setSelectionRange(issueTextarea.value.length, issueTextarea.value.length);
+        }, 300);
+      }
+
+      function closeScreen3H() {
+        viewScreen3h.classList.remove('view--active');
+        viewScreen3h.setAttribute('aria-hidden', 'true');
+      }
+
+      // Run Diagnostics Action Flow
+      btnRunDiagnostic.addEventListener('click', function () {
+        btnRunDiagnostic.disabled = true;
+        btnRunDiagnostic.style.opacity = '0.7';
+        btnRunDiagnostic.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px; display:inline-block; animation:spin 0.75s linear infinite;">progress_activity</span><span>Scanning Machine Hardware...</span>';
+
+        scanProgress.style.display = 'flex';
+
+        setTimeout(function () {
+          // Transition to Screen 3H with context
+          openScreen3H(diagnosticLogPayload.injectedLogTag);
+
+          // Reset button
+          btnRunDiagnostic.disabled = false;
+          btnRunDiagnostic.style.opacity = '1';
+          btnRunDiagnostic.innerHTML = '<span class="material-symbols-outlined text-[20px]">troubleshoot</span><span>Troubleshoot / Run Diagnostics</span>';
+          scanProgress.style.display = 'none';
+        }, 1800);
+      });
+
+      btnBackFrom3h.addEventListener('click', function (e) {
+        if (e) e.preventDefault();
+        // Explicit clean state transition back to primary Profile & Settings list container
+        closeScreen3H();
+        closeIotDrawer();
+        
+        // Completely clear all dynamic overlay states
+        if (successModal) {
+          successModal.classList.remove('show');
+          successModal.setAttribute('aria-hidden', 'true');
+        }
+        var actionDrawer = document.getElementById('settings-action-drawer');
+        if (actionDrawer) {
+          actionDrawer.classList.remove('drawer--open');
+          actionDrawer.style.transform = 'translateY(100%)';
+          setTimeout(function () { actionDrawer.classList.add('hidden'); }, 300);
+        }
+        var paywallOverlay = document.getElementById('premium-plan-modal');
+        if (paywallOverlay) paywallOverlay.classList.add('hidden');
+        var paymentOverlay = document.getElementById('payment-gateway-modal');
+        if (paymentOverlay) paymentOverlay.classList.add('hidden');
+      });
+
+      btnSupportDirect.addEventListener('click', function () {
+        openScreen3H("[HARDWARE_GENERAL_LOG]\n-- Device: ChefBot Pro 4L\n-- User details: ");
+      });
+
+      // Submit Form
+      btnSubmitIssue.addEventListener('click', function () {
+        successModal.classList.add('show');
+        successModal.setAttribute('aria-hidden', 'false');
+        if (navigator.vibrate) navigator.vibrate([40, 80, 40]);
+      });
+
+      btnReturnSettings.addEventListener('click', function () {
+        successModal.classList.remove('show');
+        successModal.setAttribute('aria-hidden', 'true');
+        closeScreen3H();
+        closeIotDrawer();
+        showToast('Support ticket #TKT-8942-IOT logged successfully', 'task_alt');
+      });
+
+      // Premium Paywall Modal & Localized Payment Gateway Controllers
+      const activatePlanBtn = document.getElementById('btn-activate-premium-plan');
+      const paywallOverlay = document.getElementById('premium-plan-modal');
+      const paymentOverlay = document.getElementById('payment-gateway-modal');
+      const finalPaymentBtn = document.getElementById('btn-process-final-payment');
+      const cancelPaymentBtn = document.getElementById('btn-cancel-payment');
+      const successOverlay = document.getElementById('premium-success-modal');
+      const closeSuccessBtn = document.getElementById('btn-close-success-modal');
+      const closePremiumBtn = document.getElementById('btn-close-premium');
+
+      // Dynamic Paywall Tier Selection Options Handling
+      const paywallTierLabels = document.querySelectorAll('.paywall-tier-label');
+      paywallTierLabels.forEach(label => {
+        label.addEventListener('click', function() {
+          const radio = label.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+
+          paywallTierLabels.forEach(l => {
+            l.className = "paywall-tier-label w-full bg-[#131313]/50 border border-white/5 rounded-2xl p-4 flex items-center justify-between cursor-pointer select-none transition-all duration-300 hover:border-white/10 active:scale-[0.99]";
+            const dot = l.querySelector('.tier-radio-dot');
+            if (dot) {
+              dot.className = "tier-radio-dot w-4 h-4 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5";
+              const inner = dot.querySelector('div');
+              if (inner) inner.className = "w-full h-full rounded-full bg-transparent transition-colors duration-200";
+            }
+          });
+
+          label.className = "paywall-tier-label w-full bg-[#3DF2E0]/10 border-2 border-[#3DF2E0] rounded-2xl p-4 flex items-center justify-between cursor-pointer select-none relative shadow-[0_0_20px_rgba(61,242,224,0.25)] transition-all duration-300 active:scale-[0.99] mt-2";
+          const dot = label.querySelector('.tier-radio-dot');
+          if (dot) {
+            dot.className = "tier-radio-dot w-4 h-4 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5";
+            const inner = dot.querySelector('div');
+            if (inner) inner.className = "w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_8px_#3DF2E0]";
+          }
+        });
+      });
+
+      // Global cross-routing connection function to wake up the magical screen free of charge
+      window.openGoProCheckoutModal = function() {
+        if (paywallOverlay) {
+          paywallOverlay.classList.remove('hidden');
+        }
+      };
+
+      if (closePremiumBtn && paywallOverlay) {
+        closePremiumBtn.onclick = function(e) {
+          e.preventDefault();
+          paywallOverlay.classList.add('hidden');
+        };
+      }
+
+      // Dynamic plan interception on checkout activation
+      let selectedPlanTitle = "Premium Pro Annual";
+      let selectedPlanPrice = "₹699";
+
+      const neoOptionsView = document.getElementById('neo-payment-options-view');
+      const neoSuccessView = document.getElementById('neo-payment-success-view');
+      const startCookingBtn = document.getElementById('btn-start-cooking-success');
+
+      function openPaymentModal() {
+        if (!paymentOverlay) return;
+
+        // Reset views
+        if (neoOptionsView) neoOptionsView.classList.remove('hidden');
+        if (neoSuccessView) {
+          neoSuccessView.classList.add('hidden');
+          neoSuccessView.classList.remove('flex');
+        }
+
+        // Get chosen plan
+        const selectedRadio = document.querySelector('input[name="paywall_tier"]:checked');
+        if (selectedRadio) {
+          selectedPlanTitle = selectedRadio.getAttribute('data-title') || "Premium Pro Annual";
+          selectedPlanPrice = selectedRadio.getAttribute('data-price') || "₹699";
+        }
+
+        // Hydrate invoice summary nodes
+        const summaryPlan = document.getElementById('payment-summary-plan');
+        const summaryPrice = document.getElementById('payment-summary-price');
+        const receiptPlan = document.getElementById('success-receipt-plan');
+        const receiptPrice = document.getElementById('success-receipt-amount');
+        if (summaryPlan) summaryPlan.innerText = selectedPlanTitle;
+        if (summaryPrice) summaryPrice.innerText = selectedPlanPrice;
+        if (receiptPlan) receiptPlan.innerText = selectedPlanTitle + " VIP";
+        if (receiptPrice) receiptPrice.innerText = selectedPlanPrice + " (Incl. Taxes)";
+
+        // Hide paywall & slide-up payment gateway
+        if (paywallOverlay) paywallOverlay.classList.add('hidden');
+        paymentOverlay.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          paymentOverlay.style.transform = 'translateY(0)';
+          paymentOverlay.style.opacity = '1';
+        });
+      }
+
+      function closePaymentModal() {
+        if (!paymentOverlay) return;
+        paymentOverlay.style.transform = 'translateY(100%)';
+        paymentOverlay.style.opacity = '0';
+        setTimeout(() => {
+          paymentOverlay.classList.add('hidden');
+          if (paywallOverlay) paywallOverlay.classList.remove('hidden');
+        }, 300);
+      }
+
+      if (activatePlanBtn) {
+        activatePlanBtn.onclick = function(e) {
+          e.preventDefault();
+          openPaymentModal();
+        };
+      }
+
+      if (cancelPaymentBtn) {
+        cancelPaymentBtn.onclick = function(e) {
+          e.preventDefault();
+          closePaymentModal();
+        };
+      }
+
+      // Interactive Gateway Card Selection (UPI, Cards, Netbanking, Razorpay)
+      const neoGatewayCards = document.querySelectorAll('.neo-gateway-card');
+      neoGatewayCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const radio = card.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+
+          neoGatewayCards.forEach(c => {
+            c.className = "neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 cursor-pointer transition-all duration-200 group";
+            if (c.dataset.method === 'cards' || c.dataset.method === 'netbanking' || c.dataset.method === 'razorpay') {
+              c.className = "neo-gateway-card w-full p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 flex items-center justify-between cursor-pointer transition-all duration-200";
+            }
+            const dot = c.querySelector('.radio-indicator');
+            if (dot) {
+              dot.className = "radio-indicator w-3.5 h-3.5 rounded-full border-2 border-neutral-600 flex items-center justify-center p-0.5";
+              const inner = dot.querySelector('div');
+              if (inner) inner.className = "w-full h-full rounded-full bg-transparent";
+            }
+            const title = c.querySelector('.text-xs');
+            if (title) {
+              title.className = "text-xs font-black text-neutral-300";
+            }
+          });
+
+          // Selected active state
+          if (card.dataset.method === 'cards' || card.dataset.method === 'netbanking' || card.dataset.method === 'razorpay') {
+            card.className = "neo-gateway-card w-full p-3 rounded-xl border-2 border-[#3DF2E0] bg-[#3DF2E0]/10 flex items-center justify-between cursor-pointer transition-all duration-200 shadow-[0_0_16px_rgba(61,242,224,0.25)]";
+          } else {
+            card.className = "neo-gateway-card relative flex flex-col justify-between p-3 rounded-xl border-2 border-[#3DF2E0] bg-[#3DF2E0]/10 cursor-pointer transition-all duration-200 shadow-[0_0_16px_rgba(61,242,224,0.25)] group";
+          }
+
+          const activeDot = card.querySelector('.radio-indicator');
+          if (activeDot) {
+            activeDot.className = "radio-indicator w-3.5 h-3.5 rounded-full border-2 border-[#3DF2E0] flex items-center justify-center p-0.5";
+            const inner = activeDot.querySelector('div');
+            if (inner) inner.className = "w-full h-full rounded-full bg-[#3DF2E0] shadow-[0_0_6px_#3DF2E0]";
+          }
+          const activeTitle = card.querySelector('.text-xs');
+          if (activeTitle) {
+            activeTitle.className = "text-xs font-black text-white";
+          }
+        });
+      });
+
+      // 1.2-Second Live Secure Banking Check Simulation & Emerald Success View Transition
+      if (finalPaymentBtn && paymentOverlay) {
+        finalPaymentBtn.onclick = function(e) {
+          e.preventDefault();
+
+          // Live fast loading ring spinner inside button
+          finalPaymentBtn.disabled = true;
+          finalPaymentBtn.style.opacity = "0.9";
+          finalPaymentBtn.innerHTML = `
+            <div class="inline-block w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div>
+            <span>VERIFYING SECURE PAYMENT...</span>
+          `;
+
+          // Exactly 1.2 seconds live banking check simulation
+          setTimeout(() => {
+            if (neoOptionsView) neoOptionsView.classList.add('hidden');
+            if (neoSuccessView) {
+              neoSuccessView.classList.remove('hidden');
+              neoSuccessView.classList.add('flex');
+            }
+
+            // Generate unique secure transaction reference
+            const refEl = document.getElementById('success-receipt-ref');
+            if (refEl) {
+              refEl.innerText = 'TXN-WOW-' + Math.floor(100000 + Math.random() * 900000) + '-PRO';
+            }
+
+            // Reset button state
+            finalPaymentBtn.disabled = false;
+            finalPaymentBtn.style.opacity = "1";
+            finalPaymentBtn.innerHTML = `
+              <span id="btn-pay-text">PROCEED TO SECURE PAYMENT 🔒</span>
+            `;
+
+            // Persist premium status in localStorage
+            localStorage.setItem('wow_is_premium', 'true');
+          }, 1200);
+        };
+      }
+
+      // "Start Cooking 🍳" Action Handler
+      if (startCookingBtn && paymentOverlay) {
+        startCookingBtn.onclick = function(e) {
+          e.preventDefault();
+
+          // Silently persist subscription tokens
+          localStorage.setItem('wow_premium_user', 'true');
+          localStorage.setItem('wow_is_premium', 'true');
+          if (window.WowAppState) {
+            window.WowAppState.setVIPStatus(true);
+          }
+
+          // Smoothly close popup and return smoothly to workspace view
+          paymentOverlay.style.transform = 'translateY(100%)';
+          paymentOverlay.style.opacity = '0';
+          setTimeout(() => {
+            paymentOverlay.classList.add('hidden');
+          }, 300);
+
+          // Update user profile tier badge to VIP PRO
+          const profileStatusBadge = document.querySelector('.profile-vip-badge');
+          if (profileStatusBadge) {
+            profileStatusBadge.innerHTML = '⭐ VIP MASTERCLASS PRO';
+            profileStatusBadge.classList.add('text-[#00FF88]');
+          }
+        };
+      }
+
+      // Unpair Device — confirmation flow
+      var btnUnpair = document.getElementById('btn-unpair-device');
+      var unpairConfirmed = false;
+      btnUnpair.addEventListener('click', function () {
+        if (!unpairConfirmed) {
+          unpairConfirmed = true;
+          btnUnpair.style.borderColor = 'var(--crimson)';
+          btnUnpair.style.background = 'rgba(255,59,48,0.1)';
+          btnUnpair.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">warning</span><span>Tap again to confirm unpair</span>';
+          setTimeout(function () {
+            unpairConfirmed = false;
+            btnUnpair.style.borderColor = '';
+            btnUnpair.style.background = '';
+            btnUnpair.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">link_off</span><span>Unpair / Forget This Device</span>';
+          }, 3000);
+        } else {
+          unpairConfirmed = false;
+          closeIotDrawer();
+          showToast('ChefBot Pro 4L unpaired successfully', 'link_off');
+          btnUnpair.style.borderColor = '';
+          btnUnpair.style.background = '';
+          btnUnpair.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">link_off</span><span>Unpair / Forget This Device</span>';
+        }
+      });
+
+      // Firmware Install Badge
+      document.getElementById('btn-install-firmware').addEventListener('click', function () {
+        var badge = document.getElementById('btn-install-firmware');
+        badge.textContent = 'Installing…';
+        badge.disabled = true;
+        badge.style.opacity = '0.65';
+        setTimeout(function () {
+          document.getElementById('firmware-update-row').style.display = 'none';
+          showToast('Firmware v2.5.0 installed successfully', 'system_update');
+        }, 2200);
+      });
+
+      // Live Character Counter for support textarea
+      var issueTextareaEl = document.getElementById('issue-description-input');
+      var charCounterEl   = document.getElementById('char-counter');
+      var MAX_CHARS = 1000;
+
+      function updateCharCounter() {
+        var len = issueTextareaEl.value.length;
+        charCounterEl.textContent = len + ' / ' + MAX_CHARS;
+        charCounterEl.classList.remove('near-limit', 'at-limit');
+        if (len >= MAX_CHARS) {
+          charCounterEl.classList.add('at-limit');
+        } else if (len >= Math.floor(MAX_CHARS * 0.85)) {
+          charCounterEl.classList.add('near-limit');
+        }
+      }
+
+      issueTextareaEl.addEventListener('input', updateCharCounter);
+
+      // Also update counter when form is hydrated via openScreen3H
+      var _origOpenScreen3H = openScreen3H;
+      openScreen3H = function (logTag) {
+        _origOpenScreen3H(logTag);
+        setTimeout(updateCharCounter, 50);
+      };
+
+      // Avatar Change Photo Trigger
+      const avatarBtn = document.getElementById('btn-change-avatar');
+      if(avatarBtn) {
+        avatarBtn.onclick = function(e) {
+          e.preventDefault();
+          // Simulate premium system local gallery media file selector trigger cleanly free of charge
+          alert('Wow System: Accessing local photo library storage context to change avatar selection path...');
+        };
+      }
+
+      // URL Query Param auto-loader for deep links
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('screen') === '3h') {
+        openScreen3H();
+      } else if (urlParams.get('sheet') === 'closed') {
+        closeIotDrawer();
+      }
+    }());
+  </script>
+
+  <!-- Global Application State Engine -->
+  <script src="app.js"></script>
+
+</body>
+</html>

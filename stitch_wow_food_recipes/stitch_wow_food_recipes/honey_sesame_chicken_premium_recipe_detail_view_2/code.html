@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Honey Sesame Chicken - Premium Recipe Detail View</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Inter & EB Garamond -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {brand: "#FF6B00", surface: "#131313", card: "#121212", muted: "#8E8E93", "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {sans: ["Inter", "sans-serif"], serif: ["\"EB Garamond\"", "serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    /* Prevent default document overscroll bounce on mobile */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      color: #FFFFFF;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom scrollbar for lower panel */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 107, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-black text-white h-screen flex flex-col justify-start overflow-hidden select-none">
+<!-- ================================================================= -->
+<!-- 1. UPPER FIXED WINDOW LAYOUT (NON-SCROLLABLE ANCHOR PANEL)        -->
+<!-- ================================================================= -->
+<header class="flex-shrink-0 w-full bg-[#000000] z-40 border-b border-white/[0.08] shadow-[0_12px_32px_rgba(0,0,0,0.85)]" id="fixed-upper-window">
+<!-- Top Navigation Utility Bar (Floating over image / Header top) -->
+<div class="relative w-full overflow-hidden">
+<!-- Media Cover Image with 16px bottom-corner curves -->
+<div class="relative w-full h-[225px] sm:h-[250px] overflow-hidden rounded-b-[16px]">
+<img alt="Honey Sesame Chicken" class="w-full h-full object-cover object-center transform transition-transform duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD5-Vj2Ad1sTQPEl-aPNANUuSKybueyC5J42NDgEpfUdkOJ5X_gf4g9Ai7ipL8UldXBT8WIgdLdv97Wni0duLvjr8JaYSyuFFGuLyn3ttLxbPdthxf8zJ962lDEoW_wXtk1nffubKipEs80vvy-6SzyMipF-DbgI1rRkVdlNLW7aUneG-tcN0S_CZMn80bieHkQ11j-dJ-RhCYdXWU8l9YBbsLxiEPRQRLxjkhgZZM5Sj9CAEsooLrGg"/>
+<!-- Atmospheric Vignette Gradients -->
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/60 pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-transparent pointer-events-none"></div>
+<!-- Floating Top App Bar Navigation -->
+<div class="absolute top-0 left-0 right-0 px-4 pt-3 flex items-center justify-between z-20">
+<button aria-label="Go Back" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white active:scale-90 transition-transform shadow-lg">
+<i class="w-5 h-5" data-lucide="chevron-left"></i>
+</button>
+<div class="flex items-center gap-2">
+<!-- Brand Badge -->
+<div class="px-2.5 py-1 rounded-full bg-black/65 backdrop-blur-md border border-[#FF6B00]/40 flex items-center gap-1.5 shadow-lg">
+<span class="w-2 h-2 rounded-full bg-[#FF6B00] animate-pulse"></span>
+<span class="text-[11px] font-semibold tracking-wider text-[#FF6B00] uppercase font-sans">Annapurna Gourmet</span>
+</div>
+<button aria-label="Bookmark Recipe" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white active:scale-90 transition-transform shadow-lg">
+<i class="w-4 h-4 text-white" data-lucide="bookmark"></i>
+</button>
+</div>
+</div>
+<!-- Recipe Meta Pill Tag overlay on image -->
+<div class="absolute bottom-3 left-4 flex items-center gap-2 z-10">
+<span class="px-2.5 py-1 rounded-md text-[11px] font-medium tracking-wide bg-[#FF6B00]/20 border border-[#FF6B00]/40 text-[#FF6B00] backdrop-blur-md">
+            CHEF'S SIGNATURE
+          </span>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-medium tracking-wide bg-black/70 border border-white/15 text-white/90 backdrop-blur-md flex items-center gap-1">
+<i class="w-3.5 h-3.5 text-[#FF6B00]" data-lucide="flame"></i> 480 kcal
+          </span>
+</div>
+</div>
+</div>
+<!-- Title & Action Section directly under media frame -->
+<div class="px-4 pt-3 pb-3">
+<!-- Title: color #FFFFFF, font-weight bold, size 24pt (32px) -->
+<h1 class="text-[24pt] font-bold text-[#FFFFFF] leading-tight tracking-tight font-serif mb-2.5">
+        Honey Sesame Chicken
+      </h1>
+<!-- Precisely 3 Functional Pill-Action Buttons in Flex Row with Even Padding Spacing -->
+<div class="flex items-center justify-between gap-2.5 w-full">
+<!-- 1. Save Button: Hollow pill, ultra-thin 1px border profile rgba(255,255,255,0.2) enclosing white text -->
+<button class="flex-1 py-2 px-2.5 rounded-full border border-white/20 bg-transparent text-white text-[12.5px] font-medium tracking-wide flex items-center justify-center gap-1.5 active:scale-95 transition-all hover:border-white/40 hover:bg-white/5" id="btn-save" onclick="toggleSave(this)">
+<i class="w-3.5 h-3.5 text-white transition-colors" data-lucide="heart" id="save-icon"></i>
+<span id="save-label">Save</span>
+</button>
+<!-- 2. Add to Menu Plan Button: Centered, high-visibility vivid accent orange block (#FF6B00) containing black text labels -->
+<button class="flex-[1.4] py-2 px-3 rounded-full bg-[#FF6B00] text-black text-[12.5px] font-bold tracking-tight flex items-center justify-center gap-1.5 shadow-[0_0_18px_rgba(255,107,0,0.45)] active:scale-95 transition-all hover:bg-[#ff7a1a]" id="btn-add-plan" onclick="addToPlan(this)">
+<i class="w-3.5 h-3.5 text-black" data-lucide="calendar-plus"></i>
+<span>Add to Menu Plan</span>
+</button>
+<!-- 3. Share Button: Minimalistic elegant translucent glassmorphism background structure (rgba(255, 255, 255, 0.08)) -->
+<button class="flex-1 py-2 px-2.5 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/10 text-white text-[12.5px] font-medium tracking-wide flex items-center justify-center gap-1.5 active:scale-95 transition-all hover:bg-white/[0.14]" id="btn-share" onclick="shareRecipe()">
+<i class="w-3.5 h-3.5 text-white" data-lucide="share-2"></i>
+<span>Share</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ================================================================= -->
+<!-- 2. LOWER SCROLL VIEW WINDOW (INDEPENDENT VIEWPORT PANEL)         -->
+<!-- ================================================================= -->
+<main class="flex-1 flex flex-col min-h-0 bg-[#000000] relative">
+<!-- Sticky Segment Switch Selector at Top Border of Scroll Path -->
+<nav class="flex-shrink-0 w-full bg-[#000000]/95 backdrop-blur-md border-b border-white/[0.08] z-30 px-4">
+<div class="flex items-center justify-around text-center w-full">
+<!-- Tab 1: Ingredients -->
+<button class="tab-btn relative py-3.5 px-3 text-[14px] font-semibold transition-colors duration-200 text-white focus:outline-none flex-1" id="tab-ingredients" onclick="switchTab('ingredients')">
+<span>Ingredients</span>
+<!-- Prominent accent active bar trace: #FF6B00 -->
+<span class="active-indicator absolute bottom-0 left-2 right-2 h-[2.5px] bg-[#FF6B00] rounded-full shadow-[0_0_10px_#FF6B00]"></span>
+</button>
+<!-- Tab 2: Instructions -->
+<button class="tab-btn relative py-3.5 px-3 text-[14px] font-semibold transition-colors duration-200 text-[#8E8E93] hover:text-white/80 focus:outline-none flex-1" id="tab-instructions" onclick="switchTab('instructions')">
+<span>Instructions</span>
+<span class="active-indicator hidden absolute bottom-0 left-2 right-2 h-[2.5px] bg-[#FF6B00] rounded-full shadow-[0_0_10px_#FF6B00]"></span>
+</button>
+<!-- Tab 3: Health Score -->
+<button class="tab-btn relative py-3.5 px-3 text-[14px] font-semibold transition-colors duration-200 text-[#8E8E93] hover:text-white/80 focus:outline-none flex-1" id="tab-health" onclick="switchTab('health')">
+<span>Health Score</span>
+<span class="active-indicator hidden absolute bottom-0 left-2 right-2 h-[2.5px] bg-[#FF6B00] rounded-full shadow-[0_0_10px_#FF6B00]"></span>
+</button>
+</div>
+</nav>
+<!-- Scrollable Frame rolling vertically inside isolated layout track -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-4 py-4 space-y-4 pb-24">
+<!-- Cooking Meta Details Bar: "Prep: 10 min | Cook: 20 min" -->
+<section class="w-full rounded-xl bg-gradient-to-r from-white/[0.05] via-white/[0.03] to-transparent border border-white/[0.08] p-3.5 flex items-center justify-between text-sm shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#FF6B00]/15 border border-[#FF6B00]/30 flex items-center justify-center text-[#FF6B00]">
+<i class="w-4 h-4" data-lucide="clock"></i>
+</div>
+<div>
+<p class="text-[11px] uppercase tracking-wider text-[#8E8E93] font-medium">Cooking Timeline</p>
+<p class="text-[13px] font-semibold text-white tracking-wide">
+              Prep: <span class="text-[#FF6B00]">10 min</span> <span class="text-[#8E8E93] mx-1">|</span> Cook: <span class="text-[#FF6B00]">20 min</span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-right">
+<div class="border-l border-white/10 pl-3">
+<p class="text-[11px] uppercase tracking-wider text-[#8E8E93] font-medium">Servings</p>
+<p class="text-[13px] font-semibold text-white">4 Portions</p>
+</div>
+<div class="border-l border-white/10 pl-3">
+<p class="text-[11px] uppercase tracking-wider text-[#8E8E93] font-medium">Skill</p>
+<p class="text-[13px] font-semibold text-[#FF6B00]">Beginner</p>
+</div>
+</div>
+</section>
+<!-- ============================================================= -->
+<!-- TAB CONTENT CONTAINER 1: INGREDIENTS                          -->
+<!-- ============================================================= -->
+<div class="tab-pane space-y-3.5" id="content-ingredients">
+<div class="flex items-center justify-between pt-1">
+<h2 class="text-xs uppercase tracking-wider font-bold text-[#8E8E93]">Ingredients (8 Items)</h2>
+<span class="text-xs text-[#FF6B00] font-medium flex items-center gap-1 cursor-pointer">
+<i class="w-3.5 h-3.5" data-lucide="check-circle-2"></i> Check All
+          </span>
+</div>
+<!-- Ingredient Bullet Card 1 -->
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-between hover:border-[#FF6B00]/30 transition-colors">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 accent-[#FF6B00] rounded cursor-pointer" type="checkbox"/>
+<div>
+<p class="text-[13.5px] font-medium text-white">Boneless Chicken Breast</p>
+<p class="text-[11px] text-[#8E8E93]">Cut into 1-inch bite-sized cubes</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-[#FF6B00] bg-[#FF6B00]/10 px-2 py-1 rounded-md border border-[#FF6B00]/20">500g</span>
+</div>
+<!-- Ingredient Bullet Card 2 -->
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-between hover:border-[#FF6B00]/30 transition-colors">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 accent-[#FF6B00] rounded cursor-pointer" type="checkbox"/>
+<div>
+<p class="text-[13.5px] font-medium text-white">Pure Raw Wild Honey</p>
+<p class="text-[11px] text-[#8E8E93]">Organic floral grade for glaze</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-white/90 bg-white/5 px-2 py-1 rounded-md border border-white/10">3 tbsp</span>
+</div>
+<!-- Ingredient Bullet Card 3 -->
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-between hover:border-[#FF6B00]/30 transition-colors">
+<div class="flex items-center gap-3">
+<input checked="" class="w-4 h-4 accent-[#FF6B00] rounded cursor-pointer" type="checkbox"/>
+<div>
+<p class="text-[13.5px] font-medium text-white">Toasted White Sesame Seeds</p>
+<p class="text-[11px] text-[#8E8E93]">Dry roasted golden finish</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-white/90 bg-white/5 px-2 py-1 rounded-md border border-white/10">2 tbsp</span>
+</div>
+<!-- Ingredient Bullet Card 4 -->
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-between hover:border-[#FF6B00]/30 transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 accent-[#FF6B00] rounded cursor-pointer" type="checkbox"/>
+<div>
+<p class="text-[13.5px] font-medium text-white">Dark Soy Sauce &amp; Sesame Oil</p>
+<p class="text-[11px] text-[#8E8E93]">Naturally brewed low sodium</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-white/90 bg-white/5 px-2 py-1 rounded-md border border-white/10">2 tbsp each</span>
+</div>
+<!-- Ingredient Bullet Card 5 -->
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-between hover:border-[#FF6B00]/30 transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 accent-[#FF6B00] rounded cursor-pointer" type="checkbox"/>
+<div>
+<p class="text-[13.5px] font-medium text-white">Fresh Minced Garlic &amp; Ginger</p>
+<p class="text-[11px] text-[#8E8E93]">Freshly grated paste</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-white/90 bg-white/5 px-2 py-1 rounded-md border border-white/10">1 tbsp</span>
+</div>
+<!-- Ingredient Bullet Card 6 -->
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] flex items-center justify-between hover:border-[#FF6B00]/30 transition-colors">
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 accent-[#FF6B00] rounded cursor-pointer" type="checkbox"/>
+<div>
+<p class="text-[13.5px] font-medium text-white">Cornstarch &amp; Spring Onions</p>
+<p class="text-[11px] text-[#8E8E93]">For crispy coating &amp; garnish</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-white/90 bg-white/5 px-2 py-1 rounded-md border border-white/10">1/4 cup</span>
+</div>
+<!-- Smart Pantry Sync Callout -->
+<div class="p-3 rounded-xl bg-gradient-to-r from-[#FF6B00]/15 to-black border border-[#FF6B00]/30 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-[#FF6B00] flex items-center justify-center text-black font-bold text-xs">
+<i class="w-3.5 h-3.5" data-lucide="sparkles"></i>
+</div>
+<div>
+<p class="text-[12px] font-semibold text-white">Pantry AI Auto-Detected</p>
+<p class="text-[10.5px] text-white/70">5 of 6 ingredients are already in your kitchen fridge</p>
+</div>
+</div>
+<button class="text-xs font-semibold text-[#FF6B00] bg-black/50 px-2.5 py-1 rounded-lg border border-[#FF6B00]/40">
+            Order Rest
+          </button>
+</div>
+</div>
+<!-- ============================================================= -->
+<!-- TAB CONTENT CONTAINER 2: INSTRUCTIONS                         -->
+<!-- ============================================================= -->
+<div class="tab-pane hidden space-y-3.5" id="content-instructions">
+<div class="flex items-center justify-between pt-1">
+<h2 class="text-xs uppercase tracking-wider font-bold text-[#8E8E93]">Step-by-Step Method</h2>
+<span class="text-xs text-[#FF6B00] font-medium flex items-center gap-1">
+<i class="w-3.5 h-3.5" data-lucide="play-circle"></i> Audio Guide Ready
+          </span>
+</div>
+<!-- Step 1 Card -->
+<div class="p-3.5 rounded-xl bg-[#111111] border border-white/[0.06] space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-[#FF6B00] text-black text-xs font-bold flex items-center justify-center">1</span>
+<h3 class="text-sm font-semibold text-white">Velveting &amp; Marinating</h3>
+</div>
+<span class="text-[11px] text-[#8E8E93] flex items-center gap-1"><i class="w-3 h-3" data-lucide="timer"></i> 5 min</span>
+</div>
+<p class="text-[13px] text-white/80 leading-relaxed pl-8">
+            Coat chicken cubes evenly with cornstarch, light soy sauce, and sea salt. Let rest for 10 minutes to lock in juiciness and promote golden crispiness.
+          </p>
+</div>
+<!-- Step 2 Card -->
+<div class="p-3.5 rounded-xl bg-[#111111] border border-white/[0.06] space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">2</span>
+<h3 class="text-sm font-semibold text-white">Crisp Pan-Searing</h3>
+</div>
+<span class="text-[11px] text-[#8E8E93] flex items-center gap-1"><i class="w-3 h-3" data-lucide="timer"></i> 8 min</span>
+</div>
+<p class="text-[13px] text-white/80 leading-relaxed pl-8">
+            Heat 2 tablespoons of oil in a wok or deep skillet over medium-high heat. Sear chicken pieces in a single layer until exterior turns bubbly and golden-brown.
+          </p>
+</div>
+<!-- Step 3 Card -->
+<div class="p-3.5 rounded-xl bg-[#111111] border border-white/[0.06] space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">3</span>
+<h3 class="text-sm font-semibold text-white">Glaze &amp; Honey Infusion</h3>
+</div>
+<span class="text-[11px] text-[#8E8E93] flex items-center gap-1"><i class="w-3 h-3" data-lucide="timer"></i> 5 min</span>
+</div>
+<p class="text-[13px] text-white/80 leading-relaxed pl-8">
+            Lower flame to medium. Whisk raw honey, garlic, ginger, and sesame oil directly into the pan. Toss continuously until sticky amber bubbles coat every bite.
+          </p>
+</div>
+<!-- Step 4 Card -->
+<div class="p-3.5 rounded-xl bg-[#111111] border border-white/[0.06] space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">4</span>
+<h3 class="text-sm font-semibold text-white">Toasted Garnish</h3>
+</div>
+<span class="text-[11px] text-[#8E8E93] flex items-center gap-1"><i class="w-3 h-3" data-lucide="timer"></i> 2 min</span>
+</div>
+<p class="text-[13px] text-white/80 leading-relaxed pl-8">
+            Turn off heat. Shower generously with toasted sesame seeds and fresh scallion batons. Serve immediately over steamed jasmine rice.
+          </p>
+</div>
+</div>
+<!-- ============================================================= -->
+<!-- TAB CONTENT CONTAINER 3: HEALTH SCORE                         -->
+<!-- ============================================================= -->
+<div class="tab-pane hidden space-y-3.5" id="content-health">
+<div class="flex items-center justify-between pt-1">
+<h2 class="text-xs uppercase tracking-wider font-bold text-[#8E8E93]">Nutritional Intelligence</h2>
+<span class="text-xs text-emerald-400 font-semibold bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">Grade A+</span>
+</div>
+<!-- Overall Score Ring Card -->
+<div class="p-4 rounded-xl bg-gradient-to-br from-[#121212] via-[#0a0a0a] to-[#151515] border border-white/[0.08] flex items-center justify-between">
+<div class="space-y-1">
+<span class="text-xs text-[#FF6B00] font-medium tracking-wide uppercase">Metabolic Quality</span>
+<h3 class="text-2xl font-bold text-white tracking-tight">88 / 100</h3>
+<p class="text-[11.5px] text-[#8E8E93]">High lean protein, naturally sweetened with raw honey.</p>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-[#FF6B00] flex items-center justify-center shadow-[0_0_20px_rgba(255,107,0,0.35)]">
+<span class="text-base font-extrabold text-white">88%</span>
+</div>
+</div>
+<!-- Macro Breakdown Grid -->
+<div class="grid grid-cols-3 gap-2.5">
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] text-center">
+<p class="text-[11px] text-[#8E8E93] font-medium uppercase">Protein</p>
+<p class="text-base font-bold text-emerald-400 mt-0.5">38g</p>
+<p class="text-[10px] text-emerald-400/80">76% Daily</p>
+</div>
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] text-center">
+<p class="text-[11px] text-[#8E8E93] font-medium uppercase">Carbs</p>
+<p class="text-base font-bold text-amber-400 mt-0.5">26g</p>
+<p class="text-[10px] text-amber-400/80">9% Daily</p>
+</div>
+<div class="p-3 rounded-xl bg-[#111111] border border-white/[0.06] text-center">
+<p class="text-[11px] text-[#8E8E93] font-medium uppercase">Healthy Fats</p>
+<p class="text-base font-bold text-sky-400 mt-0.5">14g</p>
+<p class="text-[10px] text-sky-400/80">Sesame Oil</p>
+</div>
+</div>
+<!-- Dietary Diagnostic Badges -->
+<div class="p-3.5 rounded-xl bg-[#111111] border border-white/[0.06] space-y-2">
+<h4 class="text-xs font-semibold text-white uppercase tracking-wider">Dietary Attributes</h4>
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">High Protein</span>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-sky-500/10 border border-sky-500/20 text-sky-300">Dairy Free</span>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-purple-500/10 border border-purple-500/20 text-purple-300">Refined Sugar Free</span>
+<span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-amber-500/10 border border-amber-500/20 text-amber-300">Zinc &amp; Selenium Rich</span>
+</div>
+</div>
+</div>
+<!-- Persistent Launch Cook Mode CTA Pill inside Scroll View Bottom -->
+<div class="pt-2">
+<button class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#FF6B00] to-[#FF8800] text-black font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-[0_4px_25px_rgba(255,107,0,0.4)] active:scale-98 transition-transform">
+<i class="w-4 h-4" data-lucide="chef-hat"></i>
+<span>Start Cooking with Chef AI Voice Mode</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Interactive JavaScript Logic -->
+<script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Tab Switching Logic
+    function switchTab(tabKey) {
+      const tabs = ['ingredients', 'instructions', 'health'];
+      
+      tabs.forEach(key => {
+        const btn = document.getElementById(`tab-${key}`);
+        const indicator = btn.querySelector('.active-indicator');
+        const content = document.getElementById(`content-${key}`);
+        
+        if (key === tabKey) {
+          btn.classList.remove('text-[#8E8E93]');
+          btn.classList.add('text-white');
+          indicator.classList.remove('hidden');
+          content.classList.remove('hidden');
+        } else {
+          btn.classList.add('text-[#8E8E93]');
+          btn.classList.remove('text-white');
+          indicator.classList.add('hidden');
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    // Save Button Interactive State
+    let isSaved = false;
+    function toggleSave(btn) {
+      isSaved = !isSaved;
+      const label = document.getElementById('save-label');
+      const icon = document.getElementById('save-icon');
+      
+      if (isSaved) {
+        btn.classList.add('bg-white/15', 'border-[#FF6B00]');
+        icon.classList.add('fill-[#FF6B00]', 'text-[#FF6B00]');
+        label.textContent = 'Saved';
+        label.classList.add('text-[#FF6B00]');
+      } else {
+        btn.classList.remove('bg-white/15', 'border-[#FF6B00]');
+        icon.classList.remove('fill-[#FF6B00]', 'text-[#FF6B00]');
+        label.textContent = 'Save';
+        label.classList.remove('text-[#FF6B00]');
+      }
+    }
+
+    // Add to Plan Button Feedback
+    function addToPlan(btn) {
+      const origText = btn.innerHTML;
+      btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-black"></i><span>Added to Plan!</span>`;
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = origText;
+        lucide.createIcons();
+      }, 1800);
+    }
+
+    // Share Feedback
+    function shareRecipe() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Honey Sesame Chicken - Annapurna',
+          text: 'Check out this delicious Honey Sesame Chicken recipe on Annapurna!',
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        alert('Recipe link copied to clipboard!');
+      }
+    }
+  </script>
+</body></html>

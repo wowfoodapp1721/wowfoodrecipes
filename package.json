@@ -1,0 +1,19 @@
+{
+  "name": "obsidian-epicure-app",
+  "version": "1.0.0",
+  "description": "Wow Food Recipes - Nocturnal Gastronomy Web Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "npx -y serve . -l 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "playwright": "^1.63.0"
+  }
+}
