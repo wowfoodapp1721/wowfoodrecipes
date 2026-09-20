@@ -1,0 +1,180 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Explore - FlavorCraft</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'pure-black': '#000000',
+            'charcoal-card': '#1C1C1E',
+            'charcoal-border': '#2C2C2E',
+            'brand-red': '#FF3B30',
+            'accent-green': '#34C759',
+            'muted-gray': '#8E8E93',
+            'soft-white': '#F2F2F7',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-pure-black text-soft-white font-sans antialiased min-h-screen w-full selection:bg-brand-red selection:text-white">
+<!-- Native Mobile Edge-to-Edge Container (Full viewport width, no letterbox) -->
+<div class="w-full min-h-screen flex flex-col relative pb-28">
+<!-- Native Android Status Bar -->
+<header class="w-full pt-3 px-5 flex justify-between items-center text-xs font-semibold text-white/90 select-none">
+<span class="tracking-tight text-sm font-medium">9:41</span>
+<div class="flex items-center gap-1.5 text-[14px]">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</header>
+<!-- Header Title Section -->
+<div class="px-5 pt-4 pb-2">
+<h1 class="text-[22px] font-bold tracking-tight text-white font-sans">WOW EXPLORE</h1>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 px-5 flex flex-col gap-6 pt-1">
+<!-- Search Bar -->
+<div class="w-full relative flex items-center">
+<div class="w-full flex items-center bg-charcoal-card border border-charcoal-border rounded-2xl px-4 py-3.5 shadow-sm focus-within:border-brand-red/60 transition-colors">
+<span class="material-symbols-outlined text-white/40 mr-2.5 text-[22px]">search</span>
+<input class="bg-transparent text-sm w-full text-white placeholder-muted-gray focus:outline-none font-medium" placeholder="Search cuisines, ingredients, or chef..." readonly="" type="text">
+<button aria-label="Voice Search" class="ml-2 w-8 h-8 rounded-full bg-brand-red/10 flex items-center justify-center text-brand-red active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px] fill">mic</span>
+</button>
+</div>
+</div>
+<!-- AI Pantry Scanner Feature Widget -->
+<section class="w-full">
+<div class="w-full bg-charcoal-card rounded-2xl p-4 border border-accent-green/40 shadow-[0_0_18px_rgba(52,199,89,0.18)] flex items-center justify-between relative overflow-hidden active:scale-[0.99] transition-transform cursor-pointer group">
+<!-- Subtle glowing background gradient -->
+<div class="absolute -right-6 -bottom-6 w-28 h-28 bg-accent-green/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center gap-3.5 z-10">
+<div class="w-11 h-11 rounded-xl bg-accent-green/15 border border-accent-green/30 flex items-center justify-center text-accent-green group-hover:bg-accent-green/25 transition-colors">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs uppercase tracking-wider font-bold text-accent-green flex items-center gap-1.5">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse"></span>
+                AI Pantry Scanner
+              </span>
+<span class="text-sm font-bold text-white tracking-wide mt-0.5">Scan Your Ingredients</span>
+</div>
+</div>
+<div class="z-10 px-2.5 py-1 rounded-full bg-accent-green/10 border border-accent-green/30 flex items-center gap-1.5 text-accent-green text-[11px] font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px] fill">auto_awesome</span>
+<span class="">AI Match Active</span>
+</div>
+</div>
+</section>
+<!-- Cuisine Categories Carousel -->
+<section class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<h2 class="text-xs uppercase font-bold tracking-wider text-muted-gray">EXPLORE CUISINES</h2>
+<span class="text-xs font-semibold text-brand-red cursor-pointer hover:underline">View All</span>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar pb-1 -mx-5 px-5"><!-- Card 1: Japanese --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Japanese Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1VlYMdjzymB_tJDmVOTBL2xmwx9T70bYuBkETYQZSbrLGYhYqkS-LhQhnNiZtHvdTPakEHOV8_wQECKcfYFJhOlaair-LnxywkSsxNUEMMcZmLzr-9HR6iKodaMZvlwaGsHAG8yiJCfQome2g7Gl4a-_p4VjZT78RQRIKoqyMgmMO6mOLp20kiKA9JIS5cErFjUI-y1IveWU4pIVUxS38HgCFIzhX55wMdWTW89JHumVzcctz2RA2do-LP5"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Japanese</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">140+</span></div></div><!-- Card 2: Italian --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Italian Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1U2K1xk9OM9VUWE5N6t2VPWie_PYijw6WRu2BIzzjahTpPd86yNc6euq4p6pz6F1IJqliLMsno_eb9pZcMvOndluADx6XppukjQipwahkrYj6C-nt3GwBhta9kb9YZC5Y_Pp9BpuAH_uPtnAUtedF5wzluNg9PLdDXeBNhPVbzknbL_mJ44EsiGEtrk1Adz98q6z-RkrO3EWWZPVx2pObwr-1BcQ2aWVgzrscCWen0j3KJ_Qwu-5zImaab2"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Italian</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">95+</span></div></div><!-- Card 3: French --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="French Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI7skHIm-t6Y96IWL5bhRlgo1Zz-usOZw84a7ete0YcYaawBOWDppTBCDYNWtZ1_Q4YE-2vDg7Br51HiPwR5CVflr65lGT0Wjv2RrDYyLC7jMica8X6gsCHyImG9Xd2mTB9_R7UU13PcoZAo8du9zDJBETxy4gcc7NJRfFuUUesg2ldH3GO7_SwAAg7qSz-kyWddblnaIc2XZcVvT78wuYPTStlfP11u3pmh85i2jACVF0_MGrDRREsA"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">French</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">80+</span></div></div><!-- Card 4: Chinese --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Chinese Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6vg_xUxIx70tEEidbDw2xREcgybevZdStdkOLvbW9gKUsfDA5v66Fa8TBWckmTxEq_2kNfEo4J5cfZbLQDqlKlfxjRCIBWefkdYujQGdKsZ86dv7wbAhcQATtwrsfbovAQHtgLQ8tTMnqs9iy81KTOmWzm8XkTnExuGQ_1YxQH4yHm1kkKhncSacEOQb2ExTbVvhwNkdcHP2Uqa-3ldcaN31bsqJn60XTgIgyPa9EpfXI9D2t-64c5w"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Chinese</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">115+</span></div></div><!-- Card 5: Thai --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Thai Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDECbFQsMTY83Ro8wx38NZhpc3vG2Wov1I0eSuU6g7S_jWYSSJ9UcnueiCQkI2Kikrysp9dMLJnGBo7Bmkyk_9lSL_Z3ROUyqzYt74ZbIRViu4CDBhasovrPQCwT8vlvadB-1Zw9BmzbrrXtSstZB_Y3EHuYNR7h5tNSl8oxoFEOCRhGAhN4KNYT5bGzRe2ddsJxyvVHd1UdL5PoSGDFObAndUHPsho8cGqmb7DCPWOGhayYAKwR6B-cg"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Thai</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">70+</span></div></div><!-- Card 6: Korean --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Korean Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBei99ApUUlkbuMwN1Z5GmSUvoNm4Clv5yVwBlUCHVTBRS3zDkzVVoliQ2JhIghv3ughw3F4QoOG6CL71DJIDn4YlbErcGL2Ft6lInDSORto3ca_H_oT716rnpi9R1hxPImP4DjcAsfmjxSo4odXdVwsOfLMPZdEnjZ0viX6-9j5tv5ptoLiD1V42fS9pyrpvXNGbKwNvMwrjmbtAW6ApFE2F9-aPOnQoUOKVDoS9BjVBmBQTZB-MtWlQ"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Korean</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">65+</span></div></div><!-- Card 7: Turkish --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Turkish Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdfFQiPYpcY_xE12D4K5hjMWgAgDzi_L70lXzoxco9vOnblH4V31qXPIDy35bVDX3AmOinBzbjCh79geOiGAWkMiW2xZX782TeDsmgqcsW-7P6uhMbDoURnLtWTfY2vxRv_EiyJ9LVvcz5XT8SMUZUlCKx4Ehp2OqmaEWC8JHNIo-usNo_do_ex5Gj0conScTW0IWbXMKYnGZxEvfHKmzaywML9MM8I79SIOQcEPUTEC1Q40O08nBNhw"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Turkish</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">55+</span></div></div><!-- Card 8: Spanish --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Spanish Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw0u8SUjZwwyM41K6rz770zvfwLbYIukweHNQdFCQolCWiHKrwhZczqsXqQn4FDfDsVroAaFKj6xMMpP7XZJODSuAaq_U_FdCMamCIeSZGB6qvCoQMC4vr-2mMrRnGA6eViYy3wPvgO8FJOk3f9AUto_SL55K3KfHs5LhEaL3cRJBc0kQ6WLiQQNFXlJ_259tAEm1UjSBcvqHC26DxschfRxqqQ6-bYeSQJHtScaweP28sZ9FffUm2JQ"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Spanish</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">50+</span></div></div><!-- Card 9: Mexican --><div class="flex-shrink-0 w-36 h-36 bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden relative group cursor-pointer shadow-md active:scale-95 transition-transform"><img alt="Mexican Cuisine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1W3cnDx7vkiJAM0Ds2A_wK1aXldXg6YHO5EOVd--p15DJgfJOoyJZU2C4iwwyBHCihvrw3rhF19AC9SZ_L3ZU3BctFCJoMn8vtbgmXouymROLTMUXp0EsQf5sztF9_xM3gIIZJADj8ShwIsfS0ora60eKiGTA3dP6wxqfP-UxFfQLfG_eFoj0T5_lx9s_85ldg77SPdOp7d9nCh-bkfz1kIkSBvkiIgmj7o-ONsC6uht5VRVKRsmtH-kcPz"><div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div><div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between"><span class="text-sm font-bold text-white tracking-wide">Mexican</span><span class="text-[10px] font-medium text-white/80 bg-white/15 backdrop-blur-sm px-1.5 py-0.5 rounded">90+</span></div></div></div>
+</section>
+<!-- Trending This Week Section -->
+<section class="flex flex-col gap-3 pt-1">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-brand-red text-[19px] fill">local_fire_department</span>
+<h2 class="text-base font-bold text-white tracking-tight">Trending This Week</h2>
+</div>
+<span class="text-xs font-semibold text-muted-gray">Curated</span>
+</div>
+<!-- Featured Landscape Card -->
+<article class="w-full bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden shadow-xl active:scale-[0.99] transition-transform cursor-pointer">
+<div class="relative w-full aspect-[16/9] overflow-hidden bg-black">
+<img alt="Glistening Honey Sesame Chicken" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida/AEtjO1WCmy_gwguUOh4d8PmdioCm4X1F5QCUk34eHxlBDTZclV7ncx9YvdSOCShpEYcP3IKH8OOIMxxjaUGXpWMNjCSF9dT4C0Qzmaeanjc2e3L8ECoYJ18JMjMcBv2Vman9y3Byb5LLIP25D6vnu8nOfR4NSdF4Zg1hASOjf_gk2CdwPSRnUepClVxEJf_MfbPM45b1j3UoyRvrL-xPgP5BJ5lbu1KIzFuPc8gcL6WmBq_1DHfDonW-OMgb2wz0">
+<div class="absolute inset-0 bg-gradient-to-t from-charcoal-card via-transparent to-black/30"></div>
+<!-- Badges -->
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-brand-red text-white text-[10px] font-bold tracking-wider uppercase shadow-md">
+                CHEF'S SIGNATURE
+              </span>
+<span class="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-amber-400 fill">star</span>
+                4.9
+              </span>
+</div>
+<!-- Bookmark Button -->
+<button aria-label="Save Recipe" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 hover:text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<!-- Recipe Card Content & Metadata -->
+<div class="p-4 pt-3.5 flex flex-col gap-3">
+<div>
+<h3 class="text-lg font-bold text-white tracking-tight font-serif leading-snug">
+                Glistening Honey Sesame Chicken
+              </h3>
+<p class="text-xs text-muted-gray line-clamp-1 mt-0.5">
+                Crispy sweet-savory golden glaze, toasted white sesame...
+              </p>
+</div>
+<!-- Metadata Rows -->
+<div class="flex items-center justify-between border-t border-charcoal-border/70 pt-3 text-xs text-white/80">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-white/70">
+<span class="material-symbols-outlined text-[16px] text-brand-red">schedule</span>
+<span class="">25 Mins</span>
+</div>
+<div class="flex items-center gap-1 text-white/70">
+<span class="material-symbols-outlined text-[16px] text-brand-red">local_fire_department</span>
+<span class="">480 kcal</span>
+</div>
+<div class="flex items-center gap-1 text-white/70">
+<span class="material-symbols-outlined text-[16px] text-brand-red">group</span>
+<span class="">Serves 4</span>
+</div>
+</div>
+<span class="text-brand-red font-semibold flex items-center text-xs gap-0.5">
+                Cook <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</span>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Persistent Bottom Navigation Bar (5 Columns, Fixed Edge-to-Edge) -->
+<nav class="fixed bottom-0 left-0 right-0 w-full bg-pure-black/95 backdrop-blur-xl border-t border-charcoal-border/80 z-50 flex flex-col">
+<div class="grid grid-cols-5 items-center pt-2 px-1 max-w-full pb-4"><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">home</span><span class="text-[10px] font-medium tracking-tight">Home</span></button><button class="flex flex-col items-center justify-center gap-1 text-brand-red relative group"><span class="material-symbols-outlined text-[23px] fill scale-110 drop-shadow-[0_0_8px_rgba(255,59,48,0.5)]">explore</span><span class="text-[10px] font-bold tracking-tight text-white">Explore</span><span class="w-1.5 h-1.5 rounded-full bg-brand-red absolute -bottom-1 shadow-[0_0_6px_#FF3B30]"></span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">bookmark</span><span class="text-[10px] font-medium tracking-tight">Saved</span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">calendar_today</span><span class="text-[10px] font-medium tracking-tight">Planner</span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">person</span><span class="text-[10px] font-medium tracking-tight">Profile</span></button></div>
+<!-- Centered Minimalist Horizontal Android Home Navigation Indicator Pill -->
+<div class="w-full pb-3.5 pt-1 flex justify-center items-center"><div class="w-32 h-1 bg-white/30 rounded-full"></div></div>
+</nav>
+</div>
+
+
+</body></html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="wow Food Recipes — AI Pantry Scanner (SCR-05B & SCR-01C). Live optical kitchen pantry scanner with Gemini Vision 3.7." />
+  <title>wow | AI Pantry Scanner</title>
+
+  <!-- Google Fonts: EB Garamond (Brand Serif) + Plus Jakarta Sans / JetBrains Mono (Tech HUD) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Global Viewport Controller Stylesheet -->
+  <link rel="stylesheet" href="assets/viewport-controller.css" />
+
+  <style>
+    /* ─── CSS Reset & AMOLED Global Tokens ───────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black:          #000000;
+      --surface-hud:    rgba(14, 14, 16, 0.88);
+      --surface-sheet:  #121214;
+      --surface-chip:   #1A1A1E;
+
+      --emerald:        #00E676;
+      --emerald-glow:   rgba(0, 230, 118, 0.45);
+      --emerald-dim:    rgba(0, 230, 118, 0.15);
+      --emerald-border: rgba(0, 230, 118, 0.5);
+
+      --crimson:        #FF3B30;
+      --crimson-glow:   rgba(255, 59, 48, 0.45);
+      --mango:          #FF9900;
+      --mango-glow:     rgba(255, 153, 0, 0.35);
+
+      --text-white:     #FFFFFF;
+      --text-muted:     #8E8E93;
+      --text-dim:       #636366;
+
+      --border-soft:    rgba(255, 255, 255, 0.1);
+      --border-subtle:  rgba(255, 255, 255, 0.16);
+
+      --font-serif:     'EB Garamond', Georgia, serif;
+      --font-sans:      'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono:      'JetBrains Mono', monospace;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--black);
+      color: var(--text-white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    /* ─── 393px × 852px Standard Mobile Viewport ───────────────────────── */
+    #viewport {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      background-color: var(--black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 44px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 32px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ─── CAMERA VIEWFINDER CANVAS & VIDEO ───────────────────────────────── */
+    .camera-feed-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      background-color: #050505;
+    }
+
+    #video-stream {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .fallback-feed-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.9) contrast(1.05);
+      transition: filter 0.3s;
+    }
+
+    .viewfinder-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* ─── TOP CAMERA CONTROL HUD ─────────────────────────────────────────── */
+    .top-camera-hud {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      padding: 16px 18px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    .hud-circle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface-hud);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-soft);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .hud-circle-btn:active {
+      transform: scale(0.92);
+      border-color: var(--emerald);
+    }
+
+    .hud-scanner-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--emerald-border);
+      box-shadow: 0 0 16px var(--emerald-dim);
+    }
+
+    .badge-radar-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+      animation: radarPulse 1.5s infinite;
+    }
+
+    @keyframes radarPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .badge-text {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--emerald);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ─── AR SCANNING HUD & RETICLE OVERLAY ───────────────────────────────── */
+    .ar-hud-overlay {
+      position: absolute;
+      inset: 70px 16px 140px;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .reticle-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 28px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+    }
+
+    /* Emerald Corner Brackets */
+    .corner-bracket {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-color: var(--emerald);
+      border-style: solid;
+      filter: drop-shadow(0 0 8px var(--emerald));
+    }
+    .bracket-tl { top: 0; left: 0; border-width: 3px 0 0 3px; border-top-left-radius: 18px; }
+    .bracket-tr { top: 0; right: 0; border-width: 3px 3px 0 0; border-top-right-radius: 18px; }
+    .bracket-bl { bottom: 0; left: 0; border-width: 0 0 3px 3px; border-bottom-left-radius: 18px; }
+    .bracket-br { bottom: 0; right: 0; border-width: 0 3px 3px 0; border-bottom-right-radius: 18px; }
+
+    /* Animated Horizontal Laser Scan Beam */
+    .laser-scan-beam {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--emerald);
+      box-shadow: 0 0 14px var(--emerald), 0 0 28px var(--emerald);
+      top: 20%;
+      animation: laserSweep 3.2s ease-in-out infinite alternate;
+    }
+
+    .laser-glow-trail {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50px;
+      background: linear-gradient(180deg, rgba(0, 230, 118, 0.25) 0%, transparent 100%);
+      top: 0;
+    }
+
+    @keyframes laserSweep {
+      0% { top: 10%; }
+      100% { top: 85%; }
+    }
+
+    /* AR Bounding Box Element */
+    .ar-bounding-box {
+      position: absolute;
+      border: 2px solid var(--emerald);
+      border-radius: 14px;
+      background: rgba(0, 230, 118, 0.12);
+      box-shadow: 0 0 16px rgba(0, 230, 118, 0.35);
+      pointer-events: auto;
+      cursor: pointer;
+      animation: boxPulse 2s infinite ease-in-out;
+      transition: all 0.2s;
+    }
+
+    .ar-bounding-box:hover {
+      background: rgba(0, 230, 118, 0.25);
+      border-color: #FFFFFF;
+    }
+
+    @keyframes boxPulse {
+      0%, 100% { opacity: 0.95; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.99); }
+    }
+
+    .ar-tag-label {
+      position: absolute;
+      top: -12px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid var(--emerald);
+      border-radius: 12px;
+      padding: 2px 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--emerald);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .tag-icon {
+      font-size: 11px;
+    }
+
+    /* Box 1: Vine Tomatoes */
+    #box-tomatoes {
+      top: 22%;
+      left: 32%;
+      width: 140px;
+      height: 110px;
+    }
+
+    /* Box 2: Buffalo Mozzarella */
+    #box-cheese {
+      top: 52%;
+      left: 14%;
+      width: 130px;
+      height: 100px;
+    }
+
+    /* Box 3: Fresh Garlic Cloves */
+    #box-garlic {
+      top: 48%;
+      right: 12%;
+      width: 110px;
+      height: 90px;
+    }
+
+    /* Central HUD Crosshair */
+    .hud-crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .crosshair-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--emerald);
+      box-shadow: 0 0 6px var(--emerald);
+    }
+
+    .hud-telemetry {
+      position: absolute;
+      bottom: 8px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── BOTTOM SHUTTER CONTROLS TRAY ───────────────────────────────────── */
+    .bottom-camera-controls {
+      position: absolute;
+      bottom: 24px;
+      left: 16px;
+      right: 16px;
+      z-index: 20;
+      background: rgba(18, 18, 20, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-soft);
+      border-radius: 26px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    }
+
+    .control-action-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .control-action-col:hover {
+      color: var(--text-white);
+    }
+
+    .control-icon-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .control-action-col:active .control-icon-circle {
+      transform: scale(0.92);
+      border-color: var(--emerald);
+    }
+
+    .control-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Main Center Shutter Trigger */
+    .shutter-trigger-btn {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      border: 3px solid var(--crimson);
+      background: transparent;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 59, 48, 0.45);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .shutter-trigger-btn:hover {
+      box-shadow: 0 0 28px rgba(255, 59, 48, 0.7);
+    }
+
+    .shutter-trigger-btn:active {
+      transform: scale(0.9);
+    }
+
+    .shutter-inner-disc {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: var(--crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* ─── SUCCESS TRAY BOTTOM SHEET (SCR-01C) ────────────────────────────── */
+    #success-sheet {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      background: linear-gradient(180deg, rgba(20, 24, 21, 0.98) 0%, rgba(12, 12, 14, 0.99) 100%);
+      backdrop-filter: blur(24px);
+      border-top: 2px solid var(--emerald);
+      border-radius: 28px 28px 0 0;
+      padding: 12px 18px 28px;
+      box-shadow: 0 -12px 40px rgba(0, 230, 118, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transform: translateY(105%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #success-sheet.sheet--open {
+      transform: translateY(0);
+    }
+
+    .sheet-drag-handle {
+      width: 44px;
+      height: 4px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 0 auto 4px;
+      cursor: pointer;
+    }
+
+    .sheet-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sheet-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .success-check-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--emerald-dim);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px var(--emerald-glow);
+    }
+
+    .sheet-main-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-white);
+      line-height: 1.1;
+    }
+
+    .sheet-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+    }
+
+    .parsed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: var(--emerald-dim);
+      border: 1px solid var(--emerald-border);
+      color: var(--emerald);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(0, 230, 118, 0.2);
+    }
+
+    /* Inventory Summary Tag Grid */
+    .inventory-tag-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .inventory-tag-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tag-card--active {
+      background: var(--emerald-dim);
+      border-color: var(--emerald-border);
+    }
+
+    .tag-card-top {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--emerald);
+    }
+
+    .tag-card-items {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Core AI Dynamic Substitute Insight Box */
+    .smart-substitute-card {
+      background: linear-gradient(135deg, rgba(255, 153, 0, 0.16) 0%, rgba(255, 59, 48, 0.08) 100%);
+      border: 1px solid rgba(255, 153, 0, 0.4);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    .substitute-icon {
+      font-size: 20px;
+      color: var(--mango);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .substitute-text-wrap {
+      flex: 1;
+    }
+
+    .substitute-heading {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 800;
+      color: var(--mango);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .substitute-desc {
+      font-size: 11.5px;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .substitute-desc strong {
+      color: var(--text-white);
+    }
+
+    /* Sheet Action Buttons */
+    .sheet-actions-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .cta-btn-primary {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--crimson);
+      color: var(--text-white);
+      font-size: 13.5px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 0 16px var(--crimson-glow);
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .cta-btn-primary:active {
+      transform: scale(0.96);
+      background: var(--crimson-hover);
+    }
+
+    .cta-btn-secondary {
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: var(--surface-chip);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-white);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cta-btn-secondary:active {
+      transform: scale(0.96);
+    }
+
+    /* Flashlight Screen Flash Animation */
+    #camera-flash-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: white;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.1s ease-out;
+    }
+  </style>
+</head>
+
+<body data-viewport-mode="immersive" class="viewport-immersive">
+
+  <div id="viewport" role="main" aria-label="AI Pantry Scanner Viewport">
+
+    <!-- Flash Screen Burst Indicator -->
+    <div id="camera-flash-overlay"></div>
+
+    <!-- ─── CAMERA FEED CONTAINER ───────────────────────────────────────── -->
+    <div class="camera-feed-wrap" id="camera-feed-container">
+      <video id="video-stream" autoplay playsinline muted></video>
+      <img
+        id="fallback-feed"
+        class="fallback-feed-img"
+        src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&q=80"
+        alt="Kitchen Countertop with Fresh Produce and Ingredients"
+      />
+      <div class="viewfinder-vignette"></div>
+    </div>
+
+    <!-- ─── TOP CAMERA HUD CONTROLS ─────────────────────────────────────── -->
+    <header class="top-camera-hud">
+      <!-- Dismiss Camera Back to Home Dashboard -->
+      <a href="dashboard.html" class="hud-circle-btn" aria-label="Close Scanner">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </a>
+
+      <!-- Active AI Scanner Badge -->
+      <div class="hud-scanner-badge">
+        <span class="badge-radar-dot"></span>
+        <span class="badge-text">AI PANTRY SCANNER</span>
+      </div>
+
+      <!-- Camera Flip Toggle -->
+      <button class="hud-circle-btn" id="btn-flip-cam" type="button" aria-label="Flip Camera">
+        <span class="material-symbols-outlined text-[20px]">flip_camera_ios</span>
+      </button>
+    </header>
+
+    <!-- ─── AR RETICLE & BOUNDING BOX HUD OVERLAY ───────────────────────── -->
+    <div class="ar-hud-overlay" id="ar-hud">
+      <div class="reticle-frame">
+        <!-- Corner Reticles -->
+        <div class="corner-bracket bracket-tl"></div>
+        <div class="corner-bracket bracket-tr"></div>
+        <div class="corner-bracket bracket-bl"></div>
+        <div class="corner-bracket bracket-br"></div>
+
+        <!-- Laser Scan Sweeper -->
+        <div class="laser-scan-beam" id="laser-beam">
+          <div class="laser-glow-trail"></div>
+        </div>
+
+        <!-- AR Bounding Box 1: Vine Tomatoes -->
+        <div class="ar-bounding-box" id="box-tomatoes" title="Vine-Ripened Tomatoes (98%)">
+          <div class="ar-tag-label">
+            <span class="material-symbols-outlined tag-icon">check_circle</span>
+            <span>Tomato: 98%</span>
+          </div>
+        </div>
+
+        <!-- AR Bounding Box 2: Buffalo Mozzarella -->
+        <div class="ar-bounding-box" id="box-cheese" title="Buffalo Mozzarella (96%)">
+          <div class="ar-tag-label">
+            <span class="material-symbols-outlined tag-icon">check_circle</span>
+            <span>Mozzarella: 96%</span>
+          </div>
+        </div>
+
+        <!-- AR Bounding Box 3: Fresh Garlic Cloves -->
+        <div class="ar-bounding-box" id="box-garlic" title="Garlic Cloves (94%)">
+          <div class="ar-tag-label">
+            <span class="material-symbols-outlined tag-icon">check_circle</span>
+            <span>Garlic: 94%</span>
+          </div>
+        </div>
+
+        <!-- Central HUD Crosshair -->
+        <div class="hud-crosshair">
+          <div class="crosshair-dot"></div>
+        </div>
+
+        <!-- Realtime Telemetry Info -->
+        <div class="hud-telemetry">
+          <span>GEMINI 3.7 VISION</span>
+          <span id="telemetry-fps">60 FPS • 4K HUD</span>
+          <span>CONFIDENCE: 97.4%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── BOTTOM SHUTTER CONTROLS TRAY ─────────────────────────────────── -->
+    <div class="bottom-camera-controls" id="shutter-tray">
+      <!-- Flash Toggle -->
+      <div class="control-action-col" id="btn-flash-toggle">
+        <div class="control-icon-circle">
+          <span class="material-symbols-outlined text-[20px] text-amber-400" id="flash-icon">flash_on</span>
+        </div>
+        <span class="control-label" id="flash-label">Flash</span>
+      </div>
+
+      <!-- Primary Shutter Button -->
+      <button class="shutter-trigger-btn" id="shutter-btn" type="button" aria-label="Trigger AI Scan">
+        <div class="shutter-inner-disc">
+          <span class="material-symbols-outlined text-[28px]">photo_camera</span>
+        </div>
+      </button>
+
+      <!-- Manual Item Entry -->
+      <a href="search-pantry.html" class="control-action-col" style="text-decoration:none;">
+        <div class="control-icon-circle">
+          <span class="material-symbols-outlined text-[20px] text-white">edit_note</span>
+        </div>
+        <span class="control-label">Manual</span>
+      </a>
+    </div>
+
+    <!-- ─── SUCCESS TRAY SHEET (SCR-01C) ─────────────────────────────────── -->
+    <section id="success-sheet" aria-label="Pantry Scan Results Sheet">
+      <div class="sheet-drag-handle" id="sheet-close-handle"></div>
+
+      <!-- Sheet Header -->
+      <div class="sheet-header-row">
+        <div class="sheet-title-group">
+          <div class="success-check-badge">
+            <span class="material-symbols-outlined text-[24px]">verified</span>
+          </div>
+          <div>
+            <h3 class="sheet-main-title">Scan Complete!</h3>
+            <p class="sheet-subtitle">Pantry ingredients recognized</p>
+          </div>
+        </div>
+        <div class="parsed-badge">
+          <span class="material-symbols-outlined text-[13px]">check</span>
+          <span>100% PARSED</span>
+        </div>
+      </div>
+
+      <!-- Inventory Categorized Chips -->
+      <div class="inventory-tag-grid">
+        <!-- Chip 1: Veg -->
+        <div class="inventory-tag-card tag-card--active">
+          <div class="tag-card-top">
+            <span class="material-symbols-outlined text-[14px]">eco</span>
+            <span>4 Veg</span>
+          </div>
+          <div class="tag-card-items">Tomatoes, Basil, Garlic, Onion</div>
+        </div>
+
+        <!-- Chip 2: Dairy -->
+        <div class="inventory-tag-card tag-card--active">
+          <div class="tag-card-top">
+            <span class="material-symbols-outlined text-[14px]">egg_alt</span>
+            <span>1 Dairy</span>
+          </div>
+          <div class="tag-card-items">Buffalo Mozzarella</div>
+        </div>
+
+        <!-- Chip 3: Protein -->
+        <div class="inventory-tag-card">
+          <div class="tag-card-top" style="color:var(--text-dim);">
+            <span class="material-symbols-outlined text-[14px]">set_meal</span>
+            <span>0 Proteins</span>
+          </div>
+          <div class="tag-card-items">None in frame</div>
+        </div>
+      </div>
+
+      <!-- AI Smart Substitution Insight -->
+      <div class="smart-substitute-card">
+        <span class="material-symbols-outlined substitute-icon">auto_awesome</span>
+        <div class="substitute-text-wrap">
+          <div class="substitute-heading">Smart Pairing Engine Ready</div>
+          <div class="substitute-desc">
+            You have <strong>100% of core ingredients</strong> to cook an authentic <em>"Spaghetti Carbonara"</em> or <em>"Honey Sesame Glaze"</em> right now!
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="sheet-actions-row">
+        <a href="recipe-detail.html" class="cta-btn-primary" id="btn-cook-matched">
+          <span>Cook Recipe Now</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+        <a href="search-pantry.html" class="cta-btn-secondary" id="btn-view-all">
+          <span>View All 42</span>
+        </a>
+      </div>
+    </section>
+
+  </div><!-- /#viewport -->
+
+  <!-- ─── Camera & HUD Script Logic ────────────────────────────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      var videoEl = document.getElementById('video-stream');
+      var fallbackImg = document.getElementById('fallback-feed');
+      var shutterBtn = document.getElementById('shutter-btn');
+      var flashOverlay = document.getElementById('camera-flash-overlay');
+      var successSheet = document.getElementById('success-sheet');
+      var shutterTray = document.getElementById('shutter-tray');
+      var sheetHandle = document.getElementById('sheet-close-handle');
+      var btnFlashToggle = document.getElementById('btn-flash-toggle');
+      var flashIcon = document.getElementById('flash-icon');
+      var flashLabel = document.getElementById('flash-label');
+      var btnFlipCam = document.getElementById('btn-flip-cam');
+
+      var flashOn = false;
+      var usingFrontCamera = false;
+
+      // Attempt WebRTC Camera Feed
+      function initCamera() {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({
+            video: { facingMode: usingFrontCamera ? 'user' : 'environment' }
+          })
+          .then(function (stream) {
+            videoEl.srcObject = stream;
+            videoEl.style.display = 'block';
+            fallbackImg.style.display = 'none';
+          })
+          .catch(function (err) {
+            console.log('WebRTC camera fallback enabled: ' + err);
+            videoEl.style.display = 'none';
+            fallbackImg.style.display = 'block';
+          });
+        }
+      }
+      initCamera();
+
+      // Camera Flip
+      btnFlipCam.addEventListener('click', function () {
+        usingFrontCamera = !usingFrontCamera;
+        initCamera();
+      });
+
+      // Flash Toggle
+      btnFlashToggle.addEventListener('click', function () {
+        flashOn = !flashOn;
+        if (flashOn) {
+          flashIcon.textContent = 'flash_off';
+          flashIcon.classList.remove('text-amber-400');
+          flashIcon.classList.add('text-white');
+          flashLabel.textContent = 'On';
+          fallbackImg.style.filter = 'brightness(1.25) contrast(1.15)';
+        } else {
+          flashIcon.textContent = 'flash_on';
+          flashIcon.classList.add('text-amber-400');
+          flashIcon.classList.remove('text-white');
+          flashLabel.textContent = 'Flash';
+          fallbackImg.style.filter = 'brightness(0.9) contrast(1.05)';
+        }
+      });
+
+      // Shutter Trigger & Success Sheet Reveal
+      shutterBtn.addEventListener('click', function () {
+        // Visual shutter flash burst
+        flashOverlay.style.opacity = '0.9';
+        setTimeout(function () {
+          flashOverlay.style.opacity = '0';
+        }, 120);
+
+        // Haptic feedback if supported
+        if (navigator.vibrate) {
+          navigator.vibrate([60, 40, 60]);
+        }
+
+        // Open Success Tray
+        setTimeout(function () {
+          successSheet.classList.add('sheet--open');
+          shutterTray.style.transform = 'translateY(120px)';
+          shutterTray.style.opacity = '0';
+        }, 350);
+      });
+
+      // Close Sheet on Handle Tap
+      sheetHandle.addEventListener('click', function () {
+        successSheet.classList.remove('sheet--open');
+        shutterTray.style.transform = 'translateY(0)';
+        shutterTray.style.opacity = '1';
+      });
+
+      // Interactive AR Bounding Box Clicks
+      var boundingBoxes = document.querySelectorAll('.ar-bounding-box');
+      boundingBoxes.forEach(function (box) {
+        box.addEventListener('click', function () {
+          shutterBtn.click();
+        });
+      });
+    }());
+  </script>
+
+  <!-- Global Application State Engine -->
+  <script src="app.js"></script>
+
+  <!-- Global Viewport Controller Module -->
+  <script src="assets/viewport-controller.js"></script>
+
+</body>
+</html>

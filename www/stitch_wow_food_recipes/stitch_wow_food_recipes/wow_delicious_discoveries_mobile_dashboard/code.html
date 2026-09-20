@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>wow - Delicious Discoveries Master Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {"brand-red": "#FF3B30", "brand-green": "#00C853", "charcoal-panel": "#1C1C1E", "card-dark": "#0B0B0B", "pill-dark": "#141416", "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {sans: ["Plus Jakarta Sans", "sans-serif"], script: ["Great Vibes", "cursive"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#000000] text-white font-sans antialiased min-h-screen pb-28 select-none">
+<!-- 1. MINIMALIST BRAND HEADER -->
+<header class="sticky top-0 z-40 bg-[#1C1C1E] border-b border-white/5 px-4 pt-3 pb-3 shadow-lg">
+<div class="flex items-center justify-between">
+<!-- LEFT MARGIN: Circular user profile frame with red ring -->
+<div class="flex items-center">
+<div class="relative w-10 h-10 rounded-full ring-2 ring-[#FF3B30] p-0.5 overflow-hidden flex-shrink-0"><img alt="User Profile" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1VInm6PLNvEueVQM8C6an6qf83fX8wKAYXsSCTogqhk_r0-3RMwmV5No66cy6WUoQmeZb0cVx0o2N5QS9wGS36hy26R7MwMdAuSQQTt7Xn76Cj5JaCWt9rZ7lN5DBpRCIIbY9pNoyFw76tsilSwBKnHO9gOPXr-_YIcZxQlvvW1YHasTg06wAIV16NmD-c4Raz9CR0DOP99CASEBVkyhNwXk4MC4ZlqQ8NSyGcnDiMQyp0Dy9DPaMY7_YCG"/></div>
+</div>
+<!-- CENTERED LOGO: Elegant cursive "Delicious" + "DISCOVERIES" rectangle -->
+<div class="flex flex-col items-center justify-center">
+<span class="font-script text-3xl leading-none text-white tracking-wide drop-shadow-sm">Delicious</span>
+<div class="mt-0.5 border border-white/80 px-2 py-0.5 rounded-[3px] bg-white/5">
+<span class="text-[9px] font-extrabold tracking-[0.22em] text-white uppercase block leading-tight">DISCOVERIES</span>
+</div>
+</div>
+<!-- RIGHT MARGIN (LOCKED ASSET & PLACE): Notification container with '17' coral bubble -->
+<div class="flex items-center">
+<button aria-label="Notifications" class="relative w-10 h-10 rounded-full bg-[#2C2C2E] border border-white/10 flex items-center justify-center text-white/90 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<!-- Notification bubble reading "17" -->
+<span class="absolute -top-1 -right-1 bg-[#FF3B30] text-white text-[10px] font-bold h-[18px] min-w-[18px] px-1 rounded-full flex items-center justify-center border-2 border-[#1C1C1E] shadow-sm">
+            17
+          </span>
+</button>
+</div>
+</div>
+<!-- SEARCH BAR & BRAND NAME -->
+<div class="mt-3">
+<div class="relative flex items-center w-full h-11 bg-[#121214] border border-white/10 rounded-full px-3.5 focus-within:border-[#FF3B30]/60 transition-colors">
+<span class="material-symbols-outlined text-white/40 text-[20px] mr-2 flex-shrink-0">search</span>
+<input class="w-full bg-transparent text-sm text-white placeholder-white/40 outline-none pr-10 font-normal" placeholder="Search gourmet recipes, ingredients..." type="text"/>
+<button aria-label="Search Submit" class="absolute right-1 w-9 h-9 bg-[#FF3B30] hover:bg-[#E03227] text-white rounded-full flex items-center justify-center shadow-md shadow-[#FF3B30]/30 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</button>
+</div>
+</div>
+</header>
+<!-- 2. STICKY DIET SELECTION STRIP -->
+<section class="px-4 py-3 bg-[#000000] border-b border-white/5">
+<div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5">
+<!-- "ALL" pill highlighted in solid glowing brand-red -->
+<button class="px-5 py-2 rounded-full bg-[#FF3B30] text-white font-bold text-xs shadow-md shadow-[#FF3B30]/30 tracking-wider flex-shrink-0 active:scale-95 transition-transform">
+        ALL
+      </button>
+<!-- Unselected pills -->
+<button class="px-4 py-2 rounded-full bg-[#121214] border border-white/10 text-white/70 hover:text-white font-medium text-xs tracking-wider flex-shrink-0 active:scale-95 transition-colors">
+        DINNER
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#121214] border border-white/10 text-white/70 hover:text-white font-medium text-xs tracking-wider flex-shrink-0 active:scale-95 transition-colors">
+        HEALTHY
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#121214] border border-white/10 text-white/70 hover:text-white font-medium text-xs tracking-wider flex-shrink-0 active:scale-95 transition-colors">
+        KETO
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#121214] border border-white/10 text-white/70 hover:text-white font-medium text-xs tracking-wider flex-shrink-0 active:scale-95 transition-colors">
+        VEGAN
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#121214] border border-white/10 text-white/70 hover:text-white font-medium text-xs tracking-wider flex-shrink-0 active:scale-95 transition-colors">
+        DESSERTS
+      </button>
+</div>
+</section>
+<!-- 3. UPGRADED COURSE HUB -->
+<section class="px-4 pt-4 pb-2">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-xs font-bold tracking-[0.15em] text-white/80 uppercase">COURSE HUB</h2>
+<a class="text-xs font-semibold text-[#FF3B30] hover:underline" href="#">View All</a>
+</div>
+<!-- Circular touch preview cards: Breakfast, Lunch, Dinner, Desserts -->
+<div class="grid grid-cols-4 gap-3">
+<!-- Breakfast -->
+<div class="flex flex-col items-center group cursor-pointer">
+<div class="w-16 h-16 rounded-full p-0.5 border border-white/15 bg-[#1C1C1E] group-hover:border-[#FF3B30] transition-colors overflow-hidden relative shadow-md shadow-black/60">
+<img alt="Breakfast" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1X8pFWQYuyKaDUjewT4JTUuVd5MBIvxkPZhDsSSAls5t4FiTQn2eN4WEWie42fshAUAODVcmt-wIn-YuCYgPAgubGRfN4PV7Ro1F5uxN-n9z-qpZpkpKa9N3J7rhiKEYQBT-y59VapxBLtrRajoWm2OJzQ6WFZOqdANpf2kP6zwZulKHUCuCtJoL2q6JnIMk38BWs4HJYMI5lZc3xYIh0PXYE2agikeIHN822_hcmtR8eQUZjvv7MnPM-1k"/>
+</div>
+<span class="mt-2 text-xs font-medium text-white/90 text-center group-hover:text-white">Breakfast</span>
+</div>
+<!-- Lunch -->
+<div class="flex flex-col items-center group cursor-pointer">
+<div class="w-16 h-16 rounded-full p-0.5 border border-white/15 bg-[#1C1C1E] group-hover:border-[#FF3B30] transition-colors overflow-hidden relative shadow-md shadow-black/60">
+<img alt="Lunch" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1Uoivs4QxgxN45iu-xxvv6wTtn6VBBIJXXXRyCeBUd47QS1KUtFbKAP8yDXFmV-LqQYWydjtXE9KFDy8mY9U46MPBvIj62gbT0si7Lf61CjA3lSEx8f0qizHNBpee7o6Pl8yzAXXp58rFJ6vQJDtGs6GsDmQ1u9cOlpDq6fCULtlmfq9k3LwnhivNcOuZEtw4L2emCWgooYR8L7acGlAwzrtqU0dEp0CiSHhjr7pzsqq52RrrVJXOKo3bRz"/>
+</div>
+<span class="mt-2 text-xs font-medium text-white/90 text-center group-hover:text-white">Lunch</span>
+</div>
+<!-- Dinner -->
+<div class="flex flex-col items-center group cursor-pointer">
+<div class="w-16 h-16 rounded-full p-0.5 border border-white/15 bg-[#1C1C1E] group-hover:border-[#FF3B30] transition-colors overflow-hidden relative shadow-md shadow-black/60">
+<img alt="Dinner" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1WbkedoyRmT5VZ6vXMvlfU6Z0e3obsAOjjThPmP2QCrq-xX4mJ_F943OAl9KfJIi2naqn2h9Uetw9ayRt4iVM9bvwZ3Qemy9DhqmIkhEsFoPQ0MFpIeiSx1jXech41-zNULvMoc0jdz6zlro0ExuJhAhMXi54U5h868tWaqipqlQSHKIOA5qDl9F3S0r18wQlO5cTcjLnEFazPUUV2n0-nD7TLli8ssCjV3mZMFXNna92B5GauYD93sob4"/>
+</div>
+<span class="mt-2 text-xs font-medium text-white/90 text-center group-hover:text-white">Dinner</span>
+</div>
+<!-- Desserts -->
+<div class="flex flex-col items-center group cursor-pointer">
+<div class="w-16 h-16 rounded-full p-0.5 border border-white/15 bg-[#1C1C1E] group-hover:border-[#FF3B30] transition-colors overflow-hidden relative shadow-md shadow-black/60">
+<img alt="Desserts" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1X_Fh4ywUZd98NFX-NC8zFwhdtsHlxSrl9vWtoaNqysEmeH9DObjy4FE-Db06pmUxLZl9ZF2weJqwPUH4tFS88yU9w9nbYtK6TykdEm1kPxchVFs-0Uz7xnMjokaBh5SSgDYq2rG60A0ocd7tCQEUk_aMQRfByMn0FCnmV4aDoB_mxOA_aNJsA2ZyAShq5PAaqMU8bJSFkeda3XSiPaj-sqVgNlCtBxvAypiwiIkdevi-ag4jvTVKjYW8P6"/>
+</div>
+<span class="mt-2 text-xs font-medium text-white/90 text-center group-hover:text-white">Desserts</span>
+</div>
+</div>
+</section>
+<!-- 4. FULL-WIDTH VERTICAL RECIPE STREAM: CURATED CREATIONS -->
+<section class="pt-5 pb-2">
+<div class="flex items-center justify-between mb-3 px-4">
+<h2 class="text-xs font-bold tracking-[0.15em] text-white/80 uppercase">CURATED CREATIONS</h2>
+<span class="text-[11px] font-medium text-white/40">Showing Today's Specials</span>
+</div>
+<!-- Single column full-width feed -->
+<div class="space-y-4">
+<!-- HERO CARD: Spaghetti Carbonara -->
+<div class="w-full bg-[#0B0B0B] border border-white/10 overflow-hidden shadow-xl shadow-black/80">
+<!-- Panoramic wide photograph container with floating metadata -->
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1A1A1A]">
+<img alt="Spaghetti Carbonara" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WIaILhEaNQOVuHco5-wikczPUrmNSmJudfx0yB52fp4qvhU_AUQh-yrJdbcGGHyCXVqb7Sp3Z_OOZR_hwyN1940Fs0eSHf7oxYjtTexpH0V4Q_0wC5FxvydXsIEQQ3ocbSVRjI4li7lcL3rST-ofWgZERxqh00vdo03vJrKuIGaftFBTLU06LZyxLcI8hU0Y00PJIbS7CEkMtr1gvvynM2LgLIybm9_meKess38Vanc_vgSvMp0S0Qt3b7"/>
+<!-- FIXED METADATA OVERLAY: UTF-8 bullet entity, clean divider dot -->
+<div class="absolute bottom-3 left-3 flex items-center bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-lg">
+<span class="text-[11px] font-semibold text-white tracking-wide flex items-center space-x-1.5">
+<span>🕒 25 Min</span>
+<span class="text-white/60 mx-1">•</span>
+<span>👥 Serves 4</span>
+</span>
+</div>
+<!-- Quick Bookmark Trigger -->
+<button aria-label="Save Recipe" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/80 hover:text-[#FF3B30] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<!-- Recipe Content & Data Tags -->
+<div class="p-3.5">
+<!-- CARD MULTI-TAG BADGES -->
+<div class="flex items-center space-x-2 mb-2">
+<!-- Brand Red tag: FOR DINNER -->
+<span class="px-2.5 py-1 rounded-full bg-[#FF3B30] text-white text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              FOR DINNER
+            </span>
+<!-- Emerald Green tag: PASTA & GRAINS -->
+<span class="px-2.5 py-1 rounded-full bg-[#00C853] text-white text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              PASTA &amp; GRAINS
+            </span>
+</div>
+<h3 class="text-lg font-bold text-white tracking-tight leading-snug">Spaghetti Carbonara</h3>
+<p class="mt-1 text-xs text-[#8E8E93] leading-relaxed">
+            Roman-style authentic preparation. Crispy cured guanciale, velvety egg yolk emulsion, and aged Pecorino Romano.
+          </p>
+</div>
+</div>
+<!-- CARD 2: Prime Pan-Seared Ribeye -->
+<div class="w-full bg-[#0B0B0B] border border-white/10 overflow-hidden shadow-xl shadow-black/80">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-[#1A1A1A]">
+<img alt="Prime Pan-Seared Ribeye" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WLjmEIeWcHCY7faCnrfLEzkAMP-2jc4VxpsNpli2OfVfuP_8QDeHikR4Sr7lvmMCoiSWJxThDKOykdYe6se94jjJOdXTEuw98apCc8w-ABj_RvPVHslPS2YEDGfhNNOyvIH3GpadJjCOfDxiE6DXlEuUdJjiBGCG3w0R7Ul6y0VES8Fx-GmhOsdSIIHk-4ePyqE1lNDJs23MuDKHF3RAbl5KAmpWtHLxnaeGc03UAxnJTzRfmuwR3fOzqS"/>
+<div class="absolute bottom-3 left-3 flex items-center bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 shadow-lg">
+<span class="text-[11px] font-semibold text-white tracking-wide flex items-center space-x-1.5">
+<span>🕒 20 Min</span>
+<span class="text-white/60 mx-1">•</span>
+<span>👥 Serves 2</span>
+</span>
+</div>
+<button aria-label="Save Recipe" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/80 hover:text-[#FF3B30] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+<div class="p-3.5">
+<div class="flex items-center space-x-2 mb-2">
+<span class="px-2.5 py-1 rounded-full bg-[#FF3B30] text-white text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              CHEF'S SIGNATURE
+            </span>
+<span class="px-2.5 py-1 rounded-full bg-[#FFD600] text-black text-[10px] font-bold tracking-wider uppercase shadow-sm">
+              STEAKHOUSE &amp; GRILL
+            </span>
+</div>
+<h3 class="text-lg font-bold text-white tracking-tight leading-snug">Prime Pan-Seared Ribeye</h3>
+<p class="mt-1 text-xs text-[#8E8E93] leading-relaxed">
+            Dry-aged prime cut basted with crushed garlic cloves, fresh garden rosemary, and flaky sea salt crust.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. PRIMARY INGREDIENTS & APPLIANCE BASE -->
+<section class="px-4 pt-6 pb-4">
+<div class="rounded-2xl bg-[#1C1C1E] border border-white/10 p-4 shadow-lg shadow-black/90">
+<h4 class="text-[11px] font-bold tracking-[0.18em] text-white uppercase mb-3">
+        PRIMARY INGREDIENTS &amp; APPLIANCE
+      </h4>
+<!-- ROW 1 (INGREDIENTS): Horizontal dark capsule pills with colored outline icons -->
+<div class="mb-3">
+<span class="text-[10px] font-medium tracking-wider text-white/50 uppercase block mb-1.5">Ingredients Filter</span>
+<div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1">
+<!-- Poultry (#FF3B30) -->
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#121214] border border-white/15 hover:border-[#FF3B30]/50 active:scale-95 transition-all flex-shrink-0">
+<span class="material-symbols-outlined text-[#FF3B30] text-[16px]">restaurant</span>
+<span class="text-xs font-semibold text-white">Poultry</span>
+</button>
+<!-- Veggies (Green) -->
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#121214] border border-white/15 hover:border-[#00C853]/50 active:scale-95 transition-all flex-shrink-0">
+<span class="material-symbols-outlined text-[#00C853] text-[16px]">eco</span>
+<span class="text-xs font-semibold text-white">Veggies</span>
+</button>
+<!-- Pasta (Yellow) -->
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#121214] border border-white/15 hover:border-[#FFD600]/50 active:scale-95 transition-all flex-shrink-0">
+<span class="material-symbols-outlined text-[#FFD600] text-[16px]">ramen_dining</span>
+<span class="text-xs font-semibold text-white">Pasta</span>
+</button>
+<!-- Dairy & More (Orange/Red) -->
+<button class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#121214] border border-white/15 hover:border-[#FF3B30]/50 active:scale-95 transition-all flex-shrink-0">
+<span class="material-symbols-outlined text-[#FF9500] text-[16px]">local_drink</span>
+<span class="text-xs font-semibold text-white">Dairy &amp; More</span>
+</button>
+</div>
+</div>
+<!-- ROW 2 (APPLIANCES): Minimalist secondary dark text chips -->
+<div>
+<span class="text-[10px] font-medium tracking-wider text-white/50 uppercase block mb-1.5">Appliance Quick Sort</span>
+<div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1">
+<button class="px-3 py-1.5 rounded-full bg-[#141416] border border-white/10 text-white/80 hover:text-white text-xs font-medium flex-shrink-0 active:scale-95 transition-colors">
+            Air Fryer
+          </button>
+<button class="px-3 py-1.5 rounded-full bg-[#141416] border border-white/10 text-white/80 hover:text-white text-xs font-medium flex-shrink-0 active:scale-95 transition-colors">
+            Slow Cooker
+          </button>
+<button class="px-3 py-1.5 rounded-full bg-[#141416] border border-white/10 text-white/80 hover:text-white text-xs font-medium flex-shrink-0 active:scale-95 transition-colors">
+            Tandoor / Oven
+          </button>
+<button class="px-3 py-1.5 rounded-full bg-[#141416] border border-white/10 text-white/80 hover:text-white text-xs font-medium flex-shrink-0 active:scale-95 transition-colors">
+            Instant Pot
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM NAVIGATION BAR (FIXED DOCK) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#121214]/90 backdrop-blur-xl border-t border-white/10 px-6 py-2.5 flex items-center justify-between shadow-2xl pb-4">
+<!-- Home (Active with red dot) -->
+<a class="flex flex-col items-center group text-[#FF3B30]" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] font-bold mt-0.5">Home</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF3B30] mt-0.5 shadow-sm shadow-[#FF3B30]/50"></span>
+</a>
+<!-- Explore -->
+<a class="flex flex-col items-center group text-white/50 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="text-[10px] font-medium mt-0.5">Explore</span>
+<span class="w-1.5 h-1.5 rounded-full bg-transparent mt-0.5"></span>
+</a>
+<!-- Saved -->
+<a class="flex flex-col items-center group text-white/50 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">bookmark</span>
+<span class="text-[10px] font-medium mt-0.5">Saved</span>
+<span class="w-1.5 h-1.5 rounded-full bg-transparent mt-0.5"></span>
+</a>
+<!-- Planner -->
+<a class="flex flex-col items-center group text-white/50 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+<span class="text-[10px] font-medium mt-0.5">Planner</span>
+<span class="w-1.5 h-1.5 rounded-full bg-transparent mt-0.5"></span>
+</a>
+<!-- Lists -->
+<a class="flex flex-col items-center group text-white/50 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">checklist</span>
+<span class="text-[10px] font-medium mt-0.5">Lists</span>
+<span class="w-1.5 h-1.5 rounded-full bg-transparent mt-0.5"></span>
+</a>
+</nav>
+</body></html>

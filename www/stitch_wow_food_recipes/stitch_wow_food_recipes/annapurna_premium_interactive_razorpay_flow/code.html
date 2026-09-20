@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>wow Premium - Interactive Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-tint": "#ffb86f", "on-surface": "#e2e2e2", "surface-container-lowest": "#0e0e0e", "secondary-fixed-dim": "#00e55b", "on-surface-variant": "#dbc2ad", "on-error": "#690005", "surface-container-highest": "#353535", "on-primary-container": "#653a00", error: "#ffb4ab", "primary-fixed-dim": "#ffb86f", "surface-variant": "#353535", "on-tertiary-fixed": "#410002", "surface-dim": "#131313", "on-background": "#e2e2e2", "on-secondary-container": "#007128", background: "#131313", "on-secondary-fixed": "#002107", "on-primary-fixed-variant": "#693c00", "surface-bright": "#393939", "tertiary-fixed-dim": "#ffb4ac", "secondary-container": "#00fe66", secondary: "#ebffe6", "on-primary": "#4a2800", "tertiary-container": "#ff9389", "outline-variant": "#554434", outline: "#a38d7a", "on-tertiary-container": "#8d000c", "inverse-primary": "#8a5100", surface: "#131313", "on-secondary": "#003911", primary: "#ffc082", "surface-container": "#1f1f1f", "on-error-container": "#ffdad6", "inverse-surface": "#e2e2e2", "secondary-fixed": "#6bff83", "inverse-on-surface": "#303030", tertiary: "#ffbcb5", "on-primary-fixed": "#2c1600", "tertiary-fixed": "#ffdad6", "on-tertiary": "#690006", "error-container": "#93000a", "on-secondary-fixed-variant": "#00531b", "primary-fixed": "#ffdcbd", "surface-container-low": "#1b1b1b", "surface-container-high": "#2a2a2a", "on-tertiary-fixed-variant": "#93000d", "primary-container": "#ff9900"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"stack-md": "12px", "stack-lg": "24px", "stack-sm": "4px", base: "8px", gutter: "16px", "container-margin": "24px"}, fontFamily: {"title-md": ["Hanken Grotesk"], "headline-lg": ["EB Garamond"], "display-lg": ["EB Garamond"], "label-caps": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "body-sm": ["Hanken Grotesk"], "headline-lg-mobile": ["EB Garamond"]}, fontSize: {"title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}]}}}};</script>
+<style>
+        body { background-color: #000000; }
+        .gold-neon-border { position: relative; }
+        .gold-neon-border::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, #FF3B30, #FF6B5E);
+            box-shadow: 0 0 10px rgba(255,59,48,0.7), 0 0 20px rgba(255,59,48,0.4);
+        }
+        .custom-radio:checked { accent-color: #FF3B30; }
+        
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes slideDown { from { transform: translateY(0); } to { transform: translateY(100%); } }
+        .slide-up-modal { animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .slide-down-modal { animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        .pulse-subtle {
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 16px rgba(255,59,48,0.25); }
+            100% { box-shadow: 0 0 28px rgba(255,59,48,0.5); }
+        }
+
+        /* Hide scrollbars cleanly */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-surface font-body-sm relative overflow-hidden flex flex-col justify-end pb-0 bg-black selection:bg-[#FF3B30]/30 selection:text-white">
+<!-- VIEW 1: PAYWALL HUB (Screen 11) -->
+<div class="relative w-full h-full min-h-screen flex flex-col justify-end transition-opacity duration-300" id="paywall-view">
+<!-- Atmospheric Background Image -->
+<div class="absolute inset-0 bg-cover bg-center opacity-20 w-full h-full pointer-events-none" data-alt="A cinematic, low-key lighting close-up of premium culinary ingredients like saffron threads and gold leaf on black slate, creating a rich, dark mode luxury aesthetic. Subtle warm golden bokeh in the deep background, 8k resolution, highly detailed." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC74DpLMkx5JsJSHPPJnGz7bNZsLPE0t7NRC-NCfjp3-7hQkvkqni0Ncza8n3DhuyE9pNBtQjsMBkXITS2T32NzOhxpZqDxSsBOdqryNVc-XQ0jRdX30gxn_UCLo7FBRXWZSqY_kXgaMBMT0hW1ABdiFAp2AcondOywMppLXx_KwdCAG7LVgTMzjRSE8DItfKC12KxSIuU1DlbO1nXwLxLQZjWbUyOObFKfYogW5rDcUmJ6eckxBPgXjA')"></div>
+<!-- Bottom Sheet Modal -->
+<main class="slide-up-modal relative w-full bg-black/80 backdrop-blur-2xl rounded-t-3xl border border-white/10 border-b-0 pt-stack-lg pb-stack-lg px-container-margin gold-neon-border z-10 flex flex-col gap-stack-lg max-h-[820px] overflow-y-auto no-scrollbar shadow-[0_-15px_40px_rgba(0,0,0,0.8)]">
+<!-- Invitation Strip -->
+<div class="w-full py-2.5 px-4 mb-2 rounded-xl bg-[#FF3B30]/10 border border-[#FF3B30]/40 flex items-center gap-2.5 shadow-[0_0_16px_rgba(255,59,48,0.2)]">
+<span class="material-symbols-outlined text-[#FF3B30] text-lg">campaign</span>
+<p class="text-white text-xs font-semibold tracking-wide uppercase leading-tight">YOUR FRIEND HAS INVITED YOU TO UNLOCK THIS PREMIUM MASTERCLASS RECIPE!</p>
+</div>
+<!-- Drag Handle Indicator -->
+<div class="w-12 h-1 bg-white/20 rounded-full mx-auto -mt-2 mb-1"></div>
+<!-- Header -->
+<header class="text-center flex flex-col items-center gap-1.5">
+<div class="relative flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[44px] text-[#FF3B30] drop-shadow-[0_0_16px_rgba(255,59,48,0.6)]">workspace_premium</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-white tracking-tight font-semibold">Unlock Premium Masterclasses</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-[290px]">Learn authentic secret techniques from global master chefs</p>
+</header>
+<!-- Pricing Options -->
+<section class="flex flex-col gap-3" id="pricing-container">
+<!-- Card 1: Monthly -->
+<label class="pricing-card relative flex items-start gap-stack-md p-3.5 rounded-xl backdrop-blur-md border cursor-pointer transition-all duration-200 bg-[#121212]/90 hover:border-white/30 border-white/10" data-name="Monthly Pass" data-plan="129" style="box-shadow: none;">
+<input class="custom-radio w-5 h-5 mt-1 border-white/30 bg-black/50 text-[#FF3B30] focus:ring-[#FF3B30] focus:ring-offset-black" name="premium_plan" type="radio" value="129"/>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-0.5">
+<span class="font-title-md text-title-md text-white font-medium">Monthly Pass</span>
+<span class="font-title-md text-title-md text-[#FF3B30] font-bold">₹129</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant">Full premium access, cancel anytime.</p>
+</div>
+</label>
+<!-- Card 2: 6-Month -->
+<label class="pricing-card relative flex items-start gap-stack-md p-3.5 rounded-xl backdrop-blur-md border cursor-pointer transition-all duration-200 bg-[#121212]/90 hover:border-white/30 border-white/10" data-name="6-Month Bundle" data-plan="449" style="box-shadow: none;">
+<input class="custom-radio w-5 h-5 mt-1 border-white/30 bg-black/50 text-[#FF3B30] focus:ring-[#FF3B30] focus:ring-offset-black" name="premium_plan" type="radio" value="449"/>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-0.5">
+<span class="font-title-md text-title-md text-white font-medium">6-Month Bundle</span>
+<span class="font-title-md text-title-md text-[#FF3B30] font-bold">₹449</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant">Breaks down to just ₹75 / month.</p>
+</div>
+</label>
+<!-- Card 3: Annual (HERO) -->
+<label class="pricing-card relative flex items-start gap-stack-md p-3.5 rounded-xl bg-[#121212] backdrop-blur-lg border cursor-pointer transition-all duration-200 mt-2 shadow-[0_0_24px_rgba(255,59,48,0.25)] border-[#FF3B30]" data-name="Premium Pro Annual" data-plan="699" style="box-shadow: rgba(255, 59, 48, 0.35) 0px 0px 24px;">
+<div class="absolute -top-3 right-4 bg-[#FF3B30] text-black font-label-caps text-[10px] tracking-wider px-3 py-1 rounded-full font-black shadow-[0_0_12px_rgba(255,59,48,0.5)]">
+                    BEST VALUE — ONLY ₹58/MO!
+                </div>
+<input checked="" class="custom-radio w-5 h-5 mt-1 border-[#FF3B30] bg-black/50 text-[#FF3B30] focus:ring-[#FF3B30] focus:ring-offset-black" name="premium_plan" type="radio" value="699"/>
+<div class="flex-1 pt-0.5">
+<div class="flex justify-between items-center mb-0.5">
+<span class="font-title-md text-title-md text-white font-bold">Premium Pro Annual</span>
+<span class="font-title-md text-title-md text-[#FF3B30] font-bold text-lg">₹699</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant">Billed annually. Full masterclasses library &amp; chef notes.</p>
+</div>
+</label>
+</section>
+<!-- Action Area -->
+<div class="mt-1 flex flex-col gap-3">
+<button class="w-full py-4 rounded-full bg-[#FF3B30] hover:bg-[#ff4f44] text-black font-title-md text-title-md font-black tracking-wide active:scale-[0.98] transition-all duration-200 shadow-[0_8px_25px_rgba(255,59,48,0.45)] flex items-center justify-center gap-2" id="activate-btn">
+<span class="">ACTIVATE YOUR PLAN</span>
+<span class="material-symbols-outlined text-lg">lock_open</span>
+</button>
+<div class="flex justify-center gap-stack-lg mt-1 opacity-60">
+<a class="font-label-caps text-label-caps hover:text-white transition-colors" href="#" onclick="event.preventDefault(); alert('Checking App Store subscriptions...');">Restore Purchases</a>
+<span class="text-white/30">•</span>
+<a class="font-label-caps text-label-caps hover:text-white transition-colors" href="#" onclick="event.preventDefault(); alert('Terms of Service: Premium masterclasses are unlocked instantly.');">Terms of Service</a>
+</div>
+</div>
+</main>
+</div>
+<!-- VIEW 2: UNLOCKED EXPERIENCE (Screen 3-B: Visual Step-by-Step Cooking Mode) -->
+<div class="fixed inset-0 z-40 bg-[#0c0c0c] text-white flex flex-col hidden opacity-0 transition-opacity duration-300 overflow-y-auto no-scrollbar pb-24" id="unlocked-view">
+<!-- Top Bar Navigation -->
+<div class="sticky top-0 z-30 bg-[#0c0c0c]/90 backdrop-blur-md px-4 py-3 border-b border-white/10 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center active:scale-95 text-white/80 hover:text-white" id="back-to-paywall">
+<span class="material-symbols-outlined text-xl">arrow_back</span>
+</button>
+<div>
+<span class="text-[10px] font-bold text-[#FF3B30] uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">verified</span> MASTERCLASS UNLOCKED
+                </span>
+<h2 class="text-sm font-bold text-white leading-tight">Royal Dum Biryani by Chef Sanjeev</h2>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-semibold">Active</span>
+</div>
+<!-- Active Step Hero Banner -->
+<div class="relative w-full aspect-video bg-neutral-900 overflow-hidden">
+<img alt="Dum Biryani Cooking Mode" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB05Eamp5JCfzUqpH5e8VLqGP3SUZTXss37yPtWdzIqwKuL1LI-DVNscc8RCyZ5UwH7o25N84CFkwv2PJlqCsimlzqfssX9fchimceUm5afg2Zh6NvLHGYvuSWWR2UMAKgTW9tMLc9fwslxASecaguSWb_cQitMtcCs8w9kgXhmlU_Hj0w25vT1yCvPPzQSZb1Hyn0ywbDGdsiII1Rkp5K39-mc7kbfHc8BYer1m-aJd4XIxcegZCjE1Q"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#FF3B30] text-black font-bold text-xs uppercase">Step 3 of 7</span>
+<span class="text-xs text-white/90 font-medium">Layering the Saffron Rice</span>
+</div>
+<span class="text-xs text-white/70 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-[#FF3B30]">timer</span> 15 Mins
+            </span>
+</div>
+</div>
+<!-- Interactive Cooking Mode Sheet Content -->
+<div class="p-4 flex flex-col gap-4">
+<!-- VIP Chef Pro Tip Pill -->
+<div class="p-3.5 rounded-xl bg-gradient-to-r from-[#FF3B30]/15 to-transparent border border-[#FF3B30]/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-[#FF3B30] text-xl mt-0.5">hotel_class</span>
+<div>
+<h4 class="text-xs font-bold text-white uppercase tracking-wider">Chef's Secret Technique</h4>
+<p class="text-xs text-on-surface-variant mt-0.5 leading-relaxed">Infuse saffron in warm milk with crushed green cardamom pods for exactly 12 minutes before pouring over the parboiled basmati layer.</p>
+</div>
+</div>
+<!-- Ingredients Checklist -->
+<div class="bg-[#171717] rounded-xl p-4 border border-white/10">
+<h3 class="text-xs font-bold text-white uppercase tracking-wider mb-3 flex items-center justify-between">
+<span class="">Required Mise en Place</span>
+<span class="text-[11px] text-[#FF3B30] font-normal">3 of 5 Ready</span>
+</h3>
+<div class="space-y-2.5">
+<label class="flex items-center gap-3 text-xs text-white/90 cursor-pointer">
+<input checked="" class="rounded bg-white/10 border-white/20 text-[#FF3B30] focus:ring-0 w-4 h-4" type="checkbox"/>
+<span class="">500g Aged Royal Basmati Rice (70% parboiled)</span>
+</label>
+<label class="flex items-center gap-3 text-xs text-white/90 cursor-pointer">
+<input checked="" class="rounded bg-white/10 border-white/20 text-[#FF3B30] focus:ring-0 w-4 h-4" type="checkbox"/>
+<span class="">Kashmiri Saffron soaked in 4 tbsp warm full cream milk</span>
+</label>
+<label class="flex items-center gap-3 text-xs text-white/90 cursor-pointer">
+<input checked="" class="rounded bg-white/10 border-white/20 text-[#FF3B30] focus:ring-0 w-4 h-4" type="checkbox"/>
+<span class="">Crispy golden fried onions (Birista) &amp; chopped mint</span>
+</label>
+<label class="flex items-center gap-3 text-xs text-white/70 cursor-pointer">
+<input class="rounded bg-white/10 border-white/20 text-[#FF3B30] focus:ring-0 w-4 h-4" type="checkbox"/>
+<span class="">3 tbsp Pure A2 Desi Cow Ghee</span>
+</label>
+<label class="flex items-center gap-3 text-xs text-white/70 cursor-pointer">
+<input class="rounded bg-white/10 border-white/20 text-[#FF3B30] focus:ring-0 w-4 h-4" type="checkbox"/>
+<span class="">Whole wheat flour dough seal for handi lid</span>
+</label>
+</div>
+</div>
+<!-- Step Instructions -->
+<div class="bg-[#171717] rounded-xl p-4 border border-white/10">
+<h3 class="text-xs font-bold text-white uppercase tracking-wider mb-2">Step 3 Details</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-3">
+                Distribute half the marinated meat evenly at the base of the heavy-bottom copper vessel. Gently spread an even layer of hot rice, drizzle pure ghee, scatter crispy fried onions, fresh mint leaves, and spoon the fragrant saffron milk across concentric circles.
+            </p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-2.5 rounded-lg bg-white/10 text-white text-xs font-semibold hover:bg-white/15 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-sm">play_circle</span> Watch Video Clip (1:45)
+                </button>
+<button class="py-2.5 px-3 rounded-lg bg-white/10 text-white text-xs font-semibold hover:bg-white/15 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">volume_up</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Hands-Free Cooking Mode Bar -->
+<div class="fixed bottom-4 left-4 right-4 bg-gradient-to-r from-[#1e1e1e] to-[#252525] p-3 rounded-2xl border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.9)] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-[#FF3B30]/20 flex items-center justify-center text-[#FF3B30]">
+<span class="material-symbols-outlined text-base">mic</span>
+</div>
+<div>
+<p class="text-[11px] text-white/60 font-medium">Hands-free voice assistant</p>
+<p class="text-xs text-white font-bold">Say "Next Step" or "Timer"</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-xl bg-[#FF3B30] text-black text-xs font-bold active:scale-95 transition-transform flex items-center gap-1">
+<span class="">Next Step</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- RAZORPAY BOTTOM-SHEET MODAL -->
+<div class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-end justify-center transition-all duration-300" id="razorpay-overlay">
+<!-- Backdrop dismiss target -->
+<div class="absolute inset-0" id="backdrop-dismiss"></div>
+<!-- The Sheet Container -->
+<div class="relative w-full max-w-md bg-[#121418] text-white rounded-t-3xl border-t border-white/15 shadow-[0_-20px_50px_rgba(0,0,0,0.9)] overflow-hidden slide-up-modal z-10" id="razorpay-modal-sheet">
+<!-- Sheet Handle -->
+<div class="w-10 h-1 bg-white/20 rounded-full mx-auto mt-3 mb-1"></div>
+<!-- Razorpay Dark Header -->
+<div class="px-5 pt-3 pb-4 border-b border-white/10 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<!-- Razorpay Icon / Brand badge -->
+<div class="w-9 h-9 rounded-xl bg-[#0C2340] border border-[#2B84EA]/30 flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[#2B84EA] text-xl">payments</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-white tracking-wide">Razorpay</span>
+<span class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-semibold uppercase tracking-wider flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]">verified</span> Trusted
+                        </span>
+</div>
+<p class="text-[11px] text-white/50" id="rzp-merchant-desc">wow Gastronomy Masterclass</p>
+</div>
+</div>
+<!-- Close button -->
+<button class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-colors" id="close-overlay">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Order Summary Strip -->
+<div class="bg-[#171B21] px-5 py-3 border-b border-white/5 flex items-center justify-between">
+<div>
+<span class="text-[10px] uppercase font-bold tracking-wider text-white/40">Amount Payable</span>
+<div class="text-xs text-white/80 font-medium" id="rzp-plan-title">Premium Pro Annual</div>
+</div>
+<div class="text-right">
+<h3 class="text-2xl font-black text-white font-mono tracking-tight" id="rzp-amount">₹699.00</h3>
+</div>
+</div>
+<!-- Payment Method Options -->
+<div class="p-5 flex flex-col gap-3">
+<span class="text-[11px] font-bold text-white/50 uppercase tracking-wider">Preferred UPI Options</span>
+<!-- UPI Apps Row -->
+<div class="grid grid-cols-3 gap-2.5">
+<button class="payment-opt-btn flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl bg-[#1B2028] border border-white/10 hover:border-[#FF3B30]/60 active:scale-95 transition-all text-center" type="button">
+<span class="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold">G</span>
+<span class="text-[11px] font-semibold text-white/90">GPay</span>
+</button>
+<button class="payment-opt-btn flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl bg-[#1B2028] border border-[#FF3B30] ring-1 ring-[#FF3B30]/40 active:scale-95 transition-all text-center" type="button">
+<span class="w-7 h-7 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold">P</span>
+<span class="text-[11px] font-semibold text-white/90">PhonePe</span>
+</button>
+<button class="payment-opt-btn flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl bg-[#1B2028] border border-white/10 hover:border-[#FF3B30]/60 active:scale-95 transition-all text-center" type="button">
+<span class="w-7 h-7 rounded-full bg-sky-500/10 text-sky-400 flex items-center justify-center text-sm font-bold">₹</span>
+<span class="text-[11px] font-semibold text-white/90">Paytm</span>
+</button>
+</div>
+<!-- Other Methods List -->
+<div class="mt-1 space-y-2">
+<button class="w-full p-3 rounded-xl bg-[#1B2028] border border-white/10 flex items-center justify-between text-left hover:border-white/20 transition-colors" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-white/60 text-lg">credit_card</span>
+<span class="text-xs font-semibold text-white/90">Credit / Debit Card (Visa, Mastercard, RuPay)</span>
+</div>
+<span class="material-symbols-outlined text-white/40 text-sm">chevron_right</span>
+</button>
+<button class="w-full p-3 rounded-xl bg-[#1B2028] border border-white/10 flex items-center justify-between text-left hover:border-white/20 transition-colors" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-white/60 text-lg">account_balance</span>
+<span class="text-xs font-semibold text-white/90">Netbanking &amp; Other UPI IDs</span>
+</div>
+<span class="material-symbols-outlined text-white/40 text-sm">chevron_right</span>
+</button>
+</div>
+<!-- Primary Razorpay Pay Button with Dynamic State -->
+<div class="mt-2">
+<button class="w-full py-4 rounded-xl bg-[#FF3B30] hover:bg-[#ff4f44] text-black font-bold text-sm tracking-wide active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(255,59,48,0.4)]" id="rzp-submit-btn">
+<span class="" id="rzp-btn-text">Pay ₹699.00</span>
+<span class="material-symbols-outlined text-sm font-bold" id="rzp-btn-icon">arrow_forward</span>
+</button>
+</div>
+<!-- Processing / Success Feedback Alert (Hidden by default) -->
+<div class="hidden p-3 rounded-xl bg-neutral-900 border border-white/10 flex items-center gap-3" id="payment-status-box">
+<!-- Dynamic status icon & text injected by script -->
+</div>
+<!-- Trust Badges -->
+<div class="flex items-center justify-center gap-4 pt-2 text-[10px] text-white/40">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-emerald-400">lock</span> 256-Bit SSL Encrypted
+                </span>
+<span class="">•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-sky-400">verified_user</span> 100% Safe Checkout
+                </span>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.pricing-card');
+        const activateBtn = document.getElementById('activate-btn');
+        const overlay = document.getElementById('razorpay-overlay');
+        const modalSheet = document.getElementById('razorpay-modal-sheet');
+        const closeOverlayBtn = document.getElementById('close-overlay');
+        const backdropDismiss = document.getElementById('backdrop-dismiss');
+        const rzpAmount = document.getElementById('rzp-amount');
+        const rzpPlanTitle = document.getElementById('rzp-plan-title');
+        const rzpSubmitBtn = document.getElementById('rzp-submit-btn');
+        const rzpBtnText = document.getElementById('rzp-btn-text');
+        const rzpBtnIcon = document.getElementById('rzp-btn-icon');
+        const paymentStatusBox = document.getElementById('payment-status-box');
+        
+        const paywallView = document.getElementById('paywall-view');
+        const unlockedView = document.getElementById('unlocked-view');
+        const backToPaywallBtn = document.getElementById('back-to-paywall');
+
+        let currentPrice = "699";
+        let currentPlanName = "Premium Pro Annual";
+
+        // Update card styles based on selection
+        function updateCardStyles() {
+            cards.forEach(card => {
+                const radio = card.querySelector('input');
+                const planValue = card.getAttribute('data-plan');
+                const isHero = planValue === "699";
+
+                if (radio.checked) {
+                    currentPrice = planValue;
+                    currentPlanName = card.getAttribute('data-name');
+                    card.classList.add('border-[#FF3B30]');
+                    card.classList.remove('border-white/10');
+                    if (isHero) {
+                        card.style.boxShadow = "0 0 24px rgba(255, 59, 48, 0.35)";
+                    } else {
+                        card.style.boxShadow = "0 0 16px rgba(255, 59, 48, 0.2)";
+                    }
+                } else {
+                    card.classList.remove('border-[#FF3B30]');
+                    card.classList.add('border-white/10');
+                    card.style.boxShadow = "none";
+                }
+            });
+        }
+
+        // Click card to select
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const radio = card.querySelector('input');
+                radio.checked = true;
+                updateCardStyles();
+            });
+        });
+
+        // Initialize cards
+        updateCardStyles();
+
+        // Open Razorpay Bottom Sheet
+        function openRazorpay() {
+            rzpAmount.textContent = `₹${currentPrice}.00`;
+            rzpPlanTitle.textContent = currentPlanName;
+            rzpBtnText.textContent = `Pay ₹${currentPrice}.00`;
+            rzpBtnIcon.textContent = "arrow_forward";
+            rzpSubmitBtn.disabled = false;
+            paymentStatusBox.classList.add('hidden');
+            paymentStatusBox.innerHTML = '';
+
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            modalSheet.classList.remove('slide-down-modal');
+            modalSheet.classList.add('slide-up-modal');
+        }
+
+        // Close Razorpay Sheet
+        function closeRazorpay() {
+            modalSheet.classList.remove('slide-up-modal');
+            modalSheet.classList.add('slide-down-modal');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            }, 230);
+        }
+
+        activateBtn.addEventListener('click', openRazorpay);
+        closeOverlayBtn.addEventListener('click', closeRazorpay);
+        backdropDismiss.addEventListener('click', closeRazorpay);
+
+        // Simulated payment option select inside Razorpay
+        const paymentOptBtns = document.querySelectorAll('.payment-opt-btn');
+        paymentOptBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                paymentOptBtns.forEach(b => {
+                    b.classList.remove('border-[#FF3B30]', 'ring-1', 'ring-[#FF3B30]/40');
+                    b.classList.add('border-white/10');
+                });
+                btn.classList.remove('border-white/10');
+                btn.classList.add('border-[#FF3B30]', 'ring-1', 'ring-[#FF3B30]/40');
+            });
+        });
+
+        // Handle Pay & Transition Flow
+        rzpSubmitBtn.addEventListener('click', () => {
+            rzpSubmitBtn.disabled = true;
+            // 1. Loading state
+            rzpBtnText.textContent = "Securing transaction...";
+            rzpBtnIcon.innerHTML = `<svg class="animate-spin h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+            paymentStatusBox.classList.remove('hidden');
+            paymentStatusBox.innerHTML = `
+                <div class="w-6 h-6 rounded-full border-2 border-[#FF3B30] border-t-transparent animate-spin"></div>
+                <div class="text-left">
+                    <p class="text-xs font-semibold text-white">Communicating with bank servers...</p>
+                    <p class="text-[10px] text-white/50">Do not refresh or press back</p>
+                </div>
+            `;
+
+            // 2. Success state after 1.2s
+            setTimeout(() => {
+                rzpBtnText.textContent = "Payment Verified!";
+                rzpBtnIcon.textContent = "check_circle";
+                rzpSubmitBtn.classList.remove('bg-[#FF3B30]', 'hover:bg-[#ff4f44]');
+                rzpSubmitBtn.classList.add('bg-emerald-500', 'text-black');
+
+                paymentStatusBox.innerHTML = `
+                    <span class="material-symbols-outlined text-emerald-400 text-2xl">verified</span>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-emerald-400">Payment Successful!</p>
+                        <p class="text-[10px] text-white/70">Ref #RZP_${Math.floor(100000 + Math.random() * 900000)} • Unlocking Masterclasses</p>
+                    </div>
+                `;
+
+                // 3. Smooth forward navigation to Screen 3-B
+                setTimeout(() => {
+                    closeRazorpay();
+                    // Fade out paywall view
+                    paywallView.style.opacity = '0';
+                    setTimeout(() => {
+                        paywallView.classList.add('hidden');
+                        unlockedView.classList.remove('hidden');
+                        // Fade in unlocked view
+                        setTimeout(() => {
+                            unlockedView.style.opacity = '1';
+                        }, 20);
+                    }, 250);
+                }, 900);
+
+            }, 1200);
+        });
+
+        // Optional back button to return to paywall from unlocked screen
+        backToPaywallBtn.addEventListener('click', () => {
+            unlockedView.style.opacity = '0';
+            setTimeout(() => {
+                unlockedView.classList.add('hidden');
+                paywallView.classList.remove('hidden');
+                setTimeout(() => {
+                    paywallView.style.opacity = '1';
+                    // Reset pay button
+                    rzpSubmitBtn.classList.add('bg-[#FF3B30]', 'hover:bg-[#ff4f44]');
+                    rzpSubmitBtn.classList.remove('bg-emerald-500');
+                    rzpBtnText.textContent = `Pay ₹${currentPrice}.00`;
+                    rzpBtnIcon.textContent = "arrow_forward";
+                    rzpSubmitBtn.disabled = false;
+                }, 20);
+            }, 250);
+        });
+    });
+</script>
+</body></html>

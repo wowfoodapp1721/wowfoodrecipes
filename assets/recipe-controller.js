@@ -2933,12 +2933,17 @@
 
       .media-container,
       .step-media-container,
-      .card-photo-container {
+      .card-photo-wrap {
         border: 1.5px solid rgba(61, 242, 224, 0.45) !important;
         box-shadow: 0 0 20px rgba(61, 242, 224, 0.25), 0 8px 32px rgba(0, 0, 0, 0.7) !important;
         border-radius: 14px !important;
         overflow: hidden !important;
         background-color: #0B0F14 !important;
+      }
+      
+      .card-photo-container {
+        position: relative !important;
+        overflow: visible !important;
       }
 
       .media-cover-img,
@@ -3175,10 +3180,20 @@
 
     // 2. Resolve query parameters
     let targetQuery = rawStr;
-
     if (!isNumeric && KNOWN_THEMEALDB_IDS[cleanKey]) {
       targetQuery = KNOWN_THEMEALDB_IDS[cleanKey];
       isNumeric = true;
+    }
+
+    // 3. Check MealDBCacheEngine 7-Day Local Cache before Network Execution
+    const cacheKey = `recipe_${isNumeric ? 'id_' : 'query_'}${targetQuery.toLowerCase().trim()}`;
+    if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
+      const cached = window.MealDBCacheEngine.get(cacheKey);
+      if (cached && !cached.isExpired && cached.data) {
+        console.log(`[recipe-controller] Returning 7-day cached recipe for: ${targetQuery}`);
+        RECIPE_DB[cached.data.id || targetQuery] = cached.data;
+        return cached.data;
+      }
     }
 
     try {
@@ -3190,34 +3205,45 @@
         targetUrl = `${THEMEALDB_SEARCH_URL}${encodeURIComponent(searchTerms)}`;
       }
 
-      const response = await fetch(targetUrl);
-      if (response.ok) {
-        const data = await response.json();
-        if (data && Array.isArray(data.meals) && data.meals.length > 0) {
-          const meal = data.meals[0];
-          const normalized = transformTheMealDBPayload(meal, rawStr);
-          
-          // Cache in memory for instant subsequent lookups
-          RECIPE_DB[meal.idMeal] = normalized;
-          RECIPE_DB[rawStr] = normalized;
-          if (cleanKey) RECIPE_DB[cleanKey] = normalized;
-          if (normalized.slug) RECIPE_DB[normalized.slug] = normalized;
+      let data = null;
+      if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
+        data = await window.MealDBCacheEngine.fetchWithCache(targetUrl, cacheKey);
+      } else {
+        const response = await fetch(targetUrl);
+        if (response.ok) data = await response.json();
+      }
 
-          // Cache in localStorage & sessionStorage for multi-page session persistence
-          try {
-            localStorage.setItem('wow_active_recipe_id', meal.idMeal);
-            localStorage.setItem('wow_active_recipe', JSON.stringify(normalized));
-            localStorage.setItem(`wow_recipe_cache_${meal.idMeal}`, JSON.stringify(normalized));
-          } catch (e) {}
+      if (data && Array.isArray(data.meals) && data.meals.length > 0) {
+        const meal = data.meals[0];
+        const normalized = transformTheMealDBPayload(meal, rawStr);
+        
+        // Cache in memory for instant subsequent lookups
+        RECIPE_DB[meal.idMeal] = normalized;
+        RECIPE_DB[rawStr] = normalized;
+        if (cleanKey) RECIPE_DB[cleanKey] = normalized;
+        if (normalized.slug) RECIPE_DB[normalized.slug] = normalized;
 
-          return normalized;
+        if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
+          window.MealDBCacheEngine.set(cacheKey, normalized);
+          window.MealDBCacheEngine.set(`recipe_id_${meal.idMeal}`, normalized);
         }
+
+        return normalized;
       }
     } catch (fetchErr) {
       console.warn('[recipe-controller] TheMealDB live fetch notice (falling back to local cache):', fetchErr);
     }
 
-    // 3. Fallback to local DB resolution
+    // 4. Stale cache fallback check on error
+    if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
+      const staleCached = window.MealDBCacheEngine.get(cacheKey);
+      if (staleCached && staleCached.data) {
+        console.log(`[recipe-controller] Stale cache fallback for: ${targetQuery}`);
+        return staleCached.data;
+      }
+    }
+
+    // 5. Fallback to local DB resolution
     return resolveRecipe(rawStr);
   }
 

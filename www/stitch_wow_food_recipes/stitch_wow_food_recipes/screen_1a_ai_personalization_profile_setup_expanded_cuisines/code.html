@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head></head><body class="bg-black text-white min-h-screen select-none"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Screen 1A - AI Personalization Profile Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#FF6D00',
+              amber: '#FF9900',
+              red: '#FF3B30',
+              darkSurface: '#121212',
+              cardBg: '#18181A',
+              border: '#242428',
+              muted: '#8E8E93',
+            }
+          },
+          fontFamily: {
+            serif: ['"EB Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Hide scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Fast Delivery Pulse Animation */
+    @keyframes deliveryPulse {
+      0%, 100% {
+        border-color: rgba(255, 59, 48, 0.25);
+        box-shadow: 0 4px 20px rgba(255, 59, 48, 0.08);
+      }
+      50% {
+        border-color: rgba(255, 59, 48, 0.85);
+        box-shadow: 0 0 16px rgba(255, 59, 48, 0.4), inset 0 0 8px rgba(255, 59, 48, 0.15);
+      }
+    }
+
+    .delivery-pulse {
+      animation: deliveryPulse 2s infinite ease-in-out;
+    }
+
+    /* Animated Grocery Item Card Transition */
+    .grocery-card {
+      transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 300ms ease,
+                  padding-top 350ms ease,
+                  padding-bottom 350ms ease,
+                  margin-bottom 350ms ease,
+                  transform 300ms ease,
+                  border-color 200ms ease;
+      max-height: 120px;
+      overflow: hidden;
+    }
+
+    .grocery-card.collapsing {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      margin-bottom: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      transform: scale(0.96) !important;
+      pointer-events: none;
+    }
+
+    /* Horizontal Strikethrough Animation */
+    .strikethrough-line {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      height: 2px;
+      background-color: #FF3B30;
+      width: 0%;
+      transform: translateY(-50%);
+      transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      border-radius: 9999px;
+      box-shadow: 0 0 6px rgba(255, 59, 48, 0.5);
+    }
+
+    .struck .strikethrough-line {
+      width: 100%;
+    }
+
+    .struck .text-content {
+      opacity: 0.4;
+      transition: opacity 300ms ease;
+    }
+
+    /* Checkbox icon fill transition */
+    .item-checkbox {
+      transition: all 250ms ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .delivery-pulse {
+        animation: none;
+      }
+      .grocery-card, .strikethrough-line, .item-checkbox {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+<!-- Mobile Portrait Container (9:16 approx preview / native mobile standard) -->
+<div class="w-full min-h-screen bg-black flex flex-col relative pb-28 border-neutral-900/50 overflow-hidden"><!-- Top Status Bar (9:41 White Standard) -->
+<div class="sticky top-0 left-0 right-0 z-40 px-7 pt-3 pb-2 flex items-center justify-between text-xs text-white font-medium select-none pointer-events-none bg-black/80 backdrop-blur-md">
+<span class="font-semibold tracking-tight text-sm">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<!-- Navigation Header Bar -->
+<header class="px-5 pt-2 pb-1 flex items-center justify-between z-30">
+<button aria-label="Go back" class="w-10 h-10 rounded-full bg-neutral-900/80 border border-white/10 flex items-center justify-center text-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<button class="text-xs font-semibold text-neutral-400 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/10 transition tracking-wide">
+    Skip
+  </button>
+</header>
+<!-- Scrollable Onboarding Content Area -->
+<main class="flex-1 overflow-y-auto px-5 pt-3 pb-36 no-scrollbar">
+<!-- Title & Subtitle Section -->
+<div class="mb-6">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF3B30]/15 border border-[#FF3B30]/30 text-[#FF3B30] text-[10px] font-bold tracking-wider uppercase mb-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF3B30]"></span> STEP 1 OF 3 • AI ONBOARDING
+    </div>
+<h1 class="text-3xl font-serif text-white font-bold tracking-tight">Tailor Your Taste</h1>
+<p class="text-sm text-neutral-400 mt-1.5 font-medium leading-relaxed">
+      Select your preferences to customize your AI Pantry Scanner matches.
+    </p>
+</div>
+<!-- Category 1: Dietary Goals -->
+<section class="mb-7">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-[11px] font-bold text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF3B30]"></span> Dietary Goals
+      </h2>
+<span class="text-[11px] text-neutral-500">Select all that apply</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Card A: Keto (Selected) -->
+<div class="relative bg-[#1c1c1f] rounded-2xl p-4 border-[1.5px] border-[#FF3B30] shadow-[0_0_12px_rgba(255,59,48,0.25)] flex flex-col justify-between cursor-pointer transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-[#FF3B30] text-[22px]">local_fire_department</span>
+<span class="w-5 h-5 rounded-full bg-[#FF3B30] text-white flex items-center justify-center text-[13px] font-bold material-symbols-outlined shadow-[0_0_6px_#FF3B30]">check</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-white tracking-tight">Keto</h3>
+<p class="text-[11px] text-neutral-400 mt-0.5">Low carb, healthy fats</p>
+</div>
+</div>
+<!-- Card B: Vegan (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-4 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-neutral-400 text-[22px]">eco</span>
+<span class="w-5 h-5 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-neutral-300 tracking-tight">Vegan</h3>
+<p class="text-[11px] text-neutral-500 mt-0.5">100% plant-based</p>
+</div>
+</div>
+<!-- Card C: High Protein (Selected) -->
+<div class="relative bg-[#1c1c1f] rounded-2xl p-4 border-[1.5px] border-[#FF3B30] shadow-[0_0_12px_rgba(255,59,48,0.25)] flex flex-col justify-between cursor-pointer transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-[#FF3B30] text-[22px]">fitness_center</span>
+<span class="w-5 h-5 rounded-full bg-[#FF3B30] text-white flex items-center justify-center text-[13px] font-bold material-symbols-outlined shadow-[0_0_6px_#FF3B30]">check</span>
+</div>
+<div>
+<h3 class="text-sm font-bold text-white tracking-tight">High Protein</h3>
+<p class="text-[11px] text-neutral-400 mt-0.5">Lean muscle fuel</p>
+</div>
+</div>
+<!-- Card D: Gluten-Free (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-4 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-neutral-400 text-[22px]">grain</span>
+<span class="w-5 h-5 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h3 class="text-sm font-semibold text-neutral-300 tracking-tight">Gluten-Free</h3>
+<p class="text-[11px] text-neutral-500 mt-0.5">Zero wheat &amp; gluten</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Category 2: Allergens -->
+<section class="mb-7">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-[11px] font-bold text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF3B30]"></span> Allergens
+      </h2>
+<span class="text-[11px] text-neutral-500">Tap to exclude</span>
+</div>
+<div class="flex gap-2.5 overflow-x-auto no-scrollbar pb-1 -mx-5 px-5">
+<!-- Chip A: Nuts (Unselected) -->
+<div class="flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-medium text-neutral-300 cursor-pointer hover:border-neutral-700 transition">
+<span class="">🥜</span>
+<span class="">Nuts</span>
+</div>
+<!-- Chip B: Dairy (Selected) -->
+<div class="flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-[#FF3B30]/15 border-[1.5px] border-[#FF3B30] text-xs font-bold text-white shadow-[0_0_10px_rgba(255,59,48,0.25)] cursor-pointer transition">
+<span class="">🥛</span>
+<span class="">Dairy</span>
+<span class="w-4 h-4 rounded-full bg-[#FF3B30] text-white flex items-center justify-center text-[10px] material-symbols-outlined">check</span>
+</div>
+<!-- Chip C: Gluten (Unselected) -->
+<div class="flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-medium text-neutral-300 cursor-pointer hover:border-neutral-700 transition">
+<span class="">🌾</span>
+<span class="">Gluten</span>
+</div>
+<!-- Chip D: Seafood (Unselected) -->
+<div class="flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-medium text-neutral-300 cursor-pointer hover:border-neutral-700 transition">
+<span class="">🍤</span>
+<span class="">Seafood</span>
+</div>
+</div>
+</section>
+<!-- Category 3: Favorite Cuisines -->
+<section class="mb-4">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-[11px] font-bold text-neutral-400 uppercase tracking-widest flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF3B30]"></span> Favorite Cuisines
+      </h2>
+<span class="text-[11px] text-neutral-500">Inspiration</span>
+</div>
+<div class="grid grid-cols-2 gap-3 pb-4">
+<!-- 1. Mexican (Selected) -->
+<div class="relative bg-[#1c1c1f] rounded-2xl p-3.5 border-[1.5px] border-[#FF3B30] shadow-[0_0_12px_rgba(255,59,48,0.25)] flex flex-col justify-between cursor-pointer transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇲🇽</span>
+<span class="w-4 h-4 rounded-full bg-[#FF3B30] text-white flex items-center justify-center text-[11px] material-symbols-outlined shadow-[0_0_6px_#FF3B30]">check</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-white">Mexican</h4>
+<p class="text-[10px] text-neutral-400 mt-0.5">Bold &amp; zesty</p>
+</div>
+</div>
+<!-- 2. Italian (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇮🇹</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">Italian</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Herbs &amp; pasta</p>
+</div>
+</div>
+<!-- 3. Japanese (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇯🇵</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">Japanese</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Clean &amp; seasonal</p>
+</div>
+</div>
+<!-- 4. Indian (Selected) -->
+<div class="relative bg-[#1c1c1f] rounded-2xl p-3.5 border-[1.5px] border-[#FF3B30] shadow-[0_0_12px_rgba(255,59,48,0.25)] flex flex-col justify-between cursor-pointer transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇮🇳</span>
+<span class="w-4 h-4 rounded-full bg-[#FF3B30] text-white flex items-center justify-center text-[11px] material-symbols-outlined shadow-[0_0_6px_#FF3B30]">check</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-white">Indian</h4>
+<p class="text-[10px] text-neutral-400 mt-0.5">Aromatic &amp; spiced</p>
+</div>
+</div>
+<!-- 5. Spanish (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇪🇸</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">Spanish</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Rich &amp; savory</p>
+</div>
+</div>
+<!-- 6. Korean (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇰🇷</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">Korean</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Umami &amp; fire</p>
+</div>
+</div>
+<!-- 7. Thai (Selected) -->
+<div class="relative bg-[#1c1c1f] rounded-2xl p-3.5 border-[1.5px] border-[#FF3B30] shadow-[0_0_12px_rgba(255,59,48,0.25)] flex flex-col justify-between cursor-pointer transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇹🇭</span>
+<span class="w-4 h-4 rounded-full bg-[#FF3B30] text-white flex items-center justify-center text-[11px] material-symbols-outlined shadow-[0_0_6px_#FF3B30]">check</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-white">Thai</h4>
+<p class="text-[10px] text-neutral-400 mt-0.5">Sweet &amp; sour</p>
+</div>
+</div>
+<!-- 8. French (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇫🇷</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">French</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Butter &amp; classical</p>
+</div>
+</div>
+<!-- 9. Chinese (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇨🇳</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">Chinese</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Wok &amp; stir-fry</p>
+</div>
+</div>
+<!-- 10. Turkish (Unselected) -->
+<div class="relative bg-neutral-900/90 rounded-2xl p-3.5 border border-neutral-800 flex flex-col justify-between cursor-pointer hover:border-neutral-700 transition active:scale-[0.98]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-2xl">🇹🇷</span>
+<span class="w-4 h-4 rounded-full border border-neutral-700 flex items-center justify-center"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-neutral-300">Turkish</h4>
+<p class="text-[10px] text-neutral-500 mt-0.5">Herbal &amp; grilled</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Zone (Sticky CTA with Gradient Overlay & Home Indicator) -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black via-black/95 to-transparent pt-6 pb-4 px-5">
+<button class="w-full py-4 rounded-2xl bg-[#FF3B30] hover:bg-[#e02424] text-white font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(255,59,48,0.4)] flex items-center justify-center gap-2 active:scale-[0.98] transition-all"><span class="">Save &amp; Explore Cuisines</span><svg class="w-5 h-5 text-white inline-block" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg></button>
+<!-- Home Indicator Bar -->
+<div class="w-32 h-1 bg-white/30 rounded-full mx-auto mt-4"></div>
+</div></div>
+<!-- Interactive Logic for Micro-Interaction Loop -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let pantryCount = 4;
+  let remainingCount = 7;
+  let isPantryOpen = false;
+
+  const remainingLabel = document.getElementById('remaining-count-label');
+  const deliveryText = document.getElementById('delivery-items-text');
+  const pantryCountEl = document.getElementById('pantry-count');
+  const pantryAccordionBtn = document.getElementById('pantry-accordion-btn');
+  const pantryDrawer = document.getElementById('pantry-drawer');
+  const pantryChevron = document.getElementById('pantry-chevron');
+  const dynamicPantryContainer = document.getElementById('dynamic-pantry-container');
+  const resetBtn = document.getElementById('reset-list-btn');
+
+  // SVG Checkmark icon string
+  const greenCheckmarkSvg = `
+    <svg class="w-3.5 h-3.5 text-black stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+    </svg>
+  `;
+
+  function updateCounts() {
+    remainingLabel.textContent = `${remainingCount} items remaining across 3 planned recipes`;
+    pantryCountEl.textContent = pantryCount;
+    deliveryText.textContent = remainingCount > 0 
+      ? `Order ${remainingCount} missing ingredients in 10 mins` 
+      : `All planned ingredients gathered!`;
+
+    // Category subtitle counts
+    ['meat', 'pantry', 'produce'].forEach(cat => {
+      const catEl = document.getElementById(`cat-${cat}`);
+      if (catEl) {
+        const count = catEl.querySelectorAll('.grocery-card:not(.collapsing)').length;
+        const countBadge = document.getElementById(`cat-${cat}-count`);
+        if (countBadge) {
+          countBadge.textContent = `(${count} item${count === 1 ? '' : 's'})`;
+        }
+      }
+    });
+
+    if (isPantryOpen) {
+      pantryDrawer.style.maxHeight = pantryDrawer.scrollHeight + 300 + "px";
+    }
+  }
+
+  function togglePantry(forceOpen) {
+    if (typeof forceOpen === 'boolean') {
+      isPantryOpen = forceOpen;
+    } else {
+      isPantryOpen = !isPantryOpen;
+    }
+
+    if (isPantryOpen) {
+      pantryDrawer.style.maxHeight = (pantryDrawer.scrollHeight + 300) + 'px';
+      pantryDrawer.style.opacity = '1';
+      pantryChevron.style.transform = 'rotate(180deg)';
+    } else {
+      pantryDrawer.style.maxHeight = '0px';
+      pantryDrawer.style.opacity = '0';
+      pantryChevron.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  pantryAccordionBtn.addEventListener('click', () => togglePantry());
+
+  // Attach click handler to cards
+  function attachCardEvents(card) {
+    card.addEventListener('click', function(e) {
+      if (card.dataset.inProgress === 'true') return;
+      card.dataset.inProgress = 'true';
+
+      const checkbox = card.querySelector('.item-checkbox');
+      const textWrap = card.querySelector('.text-content');
+
+      // 1. Fill checkbox with emerald green checkmark
+      checkbox.classList.remove('border-[#FF3B30]', 'bg-transparent');
+      checkbox.classList.add('bg-[#34C759]', 'border-[#34C759]', 'shadow-[0_0_8px_rgba(52,199,89,0.5)]');
+      checkbox.innerHTML = greenCheckmarkSvg;
+
+      // 2. Animate Strikethrough & drop opacity
+      card.classList.add('struck');
+
+      // 3. After 300ms, collapse vertical height & transfer
+      setTimeout(() => {
+        card.classList.add('collapsing');
+
+        setTimeout(() => {
+          // Extract data
+          const title = card.querySelector('p.text-sm').textContent;
+          const subtitle = card.querySelector('p.text-\\[11px\\]').textContent;
+          const qty = card.querySelector('span:last-child').textContent.trim();
+          const categoryId = card.dataset.category;
+          const cardId = card.dataset.id;
+
+          // Remove original card from category
+          card.remove();
+
+          // Create transferred item in pantry
+          const pantryCard = document.createElement('div');
+          pantryCard.className = 'pantry-item bg-[#121212]/90 rounded-2xl p-3 border border-neutral-800/80 flex items-center justify-between hover:border-[#34C759]/40 transition cursor-pointer active:scale-[0.99]';
+          pantryCard.dataset.originCat = categoryId;
+          pantryCard.dataset.id = cardId;
+          pantryCard.dataset.title = title;
+          pantryCard.dataset.subtitle = subtitle;
+          pantryCard.dataset.qty = qty;
+
+          pantryCard.innerHTML = `
+            <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-2">
+              <div class="w-5 h-5 rounded-md bg-[#34C759] flex items-center justify-center text-black flex-shrink-0 shadow-[0_0_6px_rgba(52,199,89,0.4)]">
+                ${greenCheckmarkSvg}
+              </div>
+              <div class="relative min-w-0 flex-1">
+                <p class="text-sm font-medium text-neutral-300 line-through decoration-[#FF3B30] decoration-2 truncate">${title}</p>
+                <p class="text-[10px] text-neutral-500 truncate">${subtitle}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <span class="text-xs text-neutral-400 bg-neutral-900/90 px-2 py-0.5 rounded-lg border border-neutral-800">${qty}</span>
+              <button title="Tap to restore item to shopping list" class="restore-btn text-xs text-neutral-400 hover:text-white px-2 py-1 rounded bg-neutral-800/60 border border-neutral-700/60 flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[14px]">undo</span>
+              </button>
+            </div>
+          `;
+
+          // Add restoring handler to uncheck item back into main list
+          pantryCard.addEventListener('click', (ev) => {
+            restoreItem(pantryCard);
+          });
+
+          dynamicPantryContainer.prepend(pantryCard);
+
+          // Update counts
+          remainingCount = Math.max(0, remainingCount - 1);
+          pantryCount += 1;
+
+          // Expand pantry accordion so user sees the transferred item
+          togglePantry(true);
+          updateCounts();
+        }, 350);
+      }, 300);
+    });
+  }
+
+  function restoreItem(pantryCard) {
+    const catId = pantryCard.dataset.originCat;
+    const cardId = pantryCard.dataset.id;
+    const title = pantryCard.dataset.title;
+    const subtitle = pantryCard.dataset.subtitle;
+    const qty = pantryCard.dataset.qty;
+
+    const parentCat = document.getElementById(catId);
+    if (!parentCat) return;
+    const itemsContainer = parentCat.querySelector('.items-container');
+
+    // Reconstruct active grocery card
+    const newCard = document.createElement('div');
+    newCard.setAttribute('data-id', cardId);
+    newCard.setAttribute('data-category', catId);
+    newCard.className = 'grocery-card bg-brand-darkSurface rounded-2xl p-3.5 border border-brand-border/70 flex items-center justify-between hover:border-[#FF3B30]/50 transition cursor-pointer active:scale-[0.99]';
+    newCard.innerHTML = `
+      <div class="flex items-center gap-3.5 flex-1 min-w-0 pr-2">
+        <button class="item-checkbox flex-shrink-0 w-5 h-5 rounded-md border-2 border-[#FF3B30] bg-transparent flex items-center justify-center transition-all duration-200 focus:outline-none"></button>
+        <div class="relative text-content min-w-0 flex-1">
+          <p class="text-sm font-semibold text-white tracking-wide truncate">${title}</p>
+          <p class="text-[11px] text-neutral-400 truncate">${subtitle}</p>
+          <div class="strikethrough-line"></div>
+        </div>
+      </div>
+      <span class="flex-shrink-0 text-xs font-medium text-neutral-400 bg-neutral-900/80 px-2.5 py-1 rounded-lg border border-neutral-800">
+        ${qty}
+      </span>
+    `;
+
+    // Remove from pantry with animation
+    pantryCard.style.opacity = '0';
+    pantryCard.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      pantryCard.remove();
+      itemsContainer.appendChild(newCard);
+      attachCardEvents(newCard);
+
+      pantryCount = Math.max(4, pantryCount - 1);
+      remainingCount += 1;
+      updateCounts();
+    }, 180);
+  }
+
+  // Bind initial grocery cards
+  document.querySelectorAll('.grocery-card').forEach(card => attachCardEvents(card));
+
+  // Reset Button
+  resetBtn.addEventListener('click', () => {
+    window.location.reload();
+  });
+
+  updateCounts();
+});
+</script>
+</body></html>

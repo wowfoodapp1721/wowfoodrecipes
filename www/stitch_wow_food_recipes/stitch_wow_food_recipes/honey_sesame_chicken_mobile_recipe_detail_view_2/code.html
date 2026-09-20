@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Premium Recipe Detail View - Honey Sesame Chicken</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {brandOrange: "#FF6B00", metallicSilver: "#8E8E93", amoled: "#000000", darkCharcoal: "#121212", glassLight: "rgba(255, 255, 255, 0.08)", glassBorder: "rgba(255, 255, 255, 0.12)", "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    /* Mobile app viewport locking */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      color: #FFFFFF;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom scrollbar hiding for native mobile app feel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .tap-effect:active {
+      transform: scale(0.96);
+      transition: transform 0.15s ease;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-white flex flex-col h-screen w-full select-none items-center bg-neutral-950">
+<!-- ========================================== -->
+<!-- UPPER FIXED HEADER LAYOUT (Top ~40% Height) -->
+<!-- Rigidly locked, non-scrollable anchor panel -->
+<!-- ========================================== -->
+<header class="w-full flex-none z-40 bg-black flex flex-col border-b border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.9)] max-w-md">
+<!-- Media Banner Area with 16px bottom-corner radius -->
+<div class="relative w-full h-56 sm:h-64 overflow-hidden rounded-b-[16px] bg-neutral-950">
+<!-- Media Cover Image -->
+<img alt="Honey Sesame Chicken" class="w-full h-full object-cover object-center transform scale-100" src="https://lh3.googleusercontent.com/aida/AEtjO1VNKtjuc3d3e7OqbsdpVpWELiJibUrHvcYWX0V37pM_4QUDw5rKKkzr7xFT_Why3GiTqQUJfQkUOhZazxNTSf7TgKagEYx4cOjMvlWxLN-I0RIbkpAkw0Z2_6acG39vHhP_7Qlwak_ejC_GSHbqRGj5XGfdfRNUqmBbbowJybEh6ShALDOmOY6ziUXnH_HNK_b6McYTmGNZo_dVxXrazfLz3YhflE1PYFsfsDaHqrrS1mY3c91TP6iRaQlE"/>
+<!-- Atmospheric Dark Gradient Vignette for text/control contrast -->
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/60 pointer-events-none"></div>
+<!-- Floating Top Navigation Bar Elements -->
+<div class="absolute top-0 inset-x-0 pt-4 px-4 flex items-center justify-between z-10">
+<!-- Back Button -->
+<button aria-label="Go back" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white tap-effect focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<!-- Brand / Category Badge -->
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-[#FF6B00]/30 shadow-[0_0_12px_rgba(255,107,0,0.2)]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF6B00] animate-pulse"></span>
+</div>
+<!-- Bookmark Quick Icon -->
+<button aria-label="More options" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white tap-effect focus:outline-none"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<!-- Floating Micro Badges directly on Media -->
+<div class="absolute bottom-3 left-4 flex items-center gap-2 z-10">
+<span class="px-2.5 py-0.5 rounded-md bg-[#FF6B00]/20 backdrop-blur-md border border-[#FF6B00]/40 text-[#FF6B00] text-[11px] font-bold tracking-wider uppercase">
+          Chef's Signature
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md border border-white/15 text-white/90 text-[11px] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-[#FF6B00]">local_fire_department</span>
+          480 kcal
+        </span>
+</div>
+</div>
+<!-- Title & Action Button Stack directly under image -->
+<div class="px-5 pt-3 pb-3.5 flex flex-col gap-2.5">
+<!-- Title: 24pt, Bold, Color #FFFFFF, Left-Aligned -->
+<h1 class="text-[32px] font-bold text-white font-serif tracking-tight leading-tight m-0 text-left">
+        Honey Sesame Chicken
+      </h1>
+<!-- Exactly 3 Functional Action Buttons Horizontally in a Flex Row -->
+<div class="flex items-center justify-around w-full py-1">
+<button class="flex items-center gap-2 text-white font-bold text-[14px] cursor-pointer hover:opacity-80 transition-all tap-effect focus:outline-none">
+<svg class="w-5 h-5 text-[#FF6B00]" fill="none" stroke="#FF6B00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+</svg>
+<span class="text-white font-bold">240.6k</span>
+</button>
+<button class="flex items-center gap-2 text-white font-bold text-[14px] cursor-pointer hover:opacity-80 transition-all tap-effect focus:outline-none">
+<svg class="w-5 h-5 text-[#FF6B00]" fill="none" stroke="#FF6B00" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<line x1="5" x2="19" y1="12" y2="12"></line>
+</svg>
+<span class="text-white font-bold">Add to</span>
+</button>
+<button class="flex items-center gap-2 text-white font-bold text-[14px] cursor-pointer hover:opacity-80 transition-all tap-effect focus:outline-none">
+<svg class="w-5 h-5 text-[#FF6B00]" fill="none" stroke="#FF6B00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="18" cy="5" r="3"></circle>
+<circle cx="6" cy="12" r="3"></circle>
+<circle cx="18" cy="19" r="3"></circle>
+<line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+<line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+</svg>
+<span class="text-white font-bold">Share</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- LOWER SCROLL VIEW LAYOUT (Bottom ~60% Height) -->
+<!-- Independent, vertically scrollable list viewport -->
+<!-- ========================================== -->
+<main class="flex-1 overflow-y-auto no-scrollbar bg-black flex flex-col relative max-w-md">
+<!-- Sticky Tab Navigation Component at absolute top edge of scrolling panel -->
+<nav class="sticky top-0 z-30 bg-black/95 backdrop-blur-md border-b border-white/[0.08] px-5 pt-1.5">
+<div class="flex items-center justify-between w-full">
+<!-- Tab 1: "Ingredients" (Active) -->
+<button class="relative pb-3 flex-1 text-center text-[15px] font-bold text-white transition-colors duration-150 focus:outline-none">
+<span class="">Ingredients</span>
+<!-- Active vibrant orange (#FF6B00) highlight line running directly beneath -->
+<span class="absolute bottom-0 inset-x-2 h-[2.5px] bg-[#FF6B00] rounded-full shadow-[0_0_10px_#FF6B00]"></span>
+</button>
+<!-- Tab 2: "Instructions" (Inactive) with muted metallic silver gray #8E8E93 -->
+<button class="relative pb-3 flex-1 text-center text-[15px] font-medium text-[#8E8E93] hover:text-white/80 transition-colors duration-150 focus:outline-none">
+<span class="">Instructions</span>
+</button>
+<!-- Tab 3: "Health Score" (Inactive) with muted metallic silver gray #8E8E93 -->
+<button class="relative pb-3 flex-1 text-center text-[15px] font-medium text-[#8E8E93] hover:text-white/80 transition-colors duration-150 focus:outline-none">
+<span class="">Health Score</span>
+</button>
+</div>
+</nav>
+<!-- Scroll Container Body -->
+<div class="px-5 py-4 flex flex-col gap-4 pb-28"><!-- 1. SUBHEADER INFOBAR -->
+<div class="flex flex-col gap-3 pt-1">
+<p class="text-white/90 text-[14px] leading-relaxed m-0 font-normal">
+    To freeze simply follow all directions except the cooking. Place in a gallon freezer bag. Be... <button class="text-white font-medium underline underline-offset-2 hover:text-[#FF6B00] transition-colors focus:outline-none">See more</button>
+</p>
+<div class="flex items-center gap-2 text-white/90 text-[13.5px] font-medium">
+<span class="material-symbols-outlined text-[17px] text-white">schedule</span>
+<span class="">Prep: 10 min Cook: 20 min</span>
+</div>
+</div>
+<!-- 2. EDIT BUTTON & CONTROLS -->
+<div class="flex flex-col gap-4 pt-1">
+<!-- Full-width pill-shaped Edit button -->
+<button class="w-full py-2.5 rounded-full border border-white/20 bg-white/5 text-white font-medium flex items-center justify-center gap-2 active:scale-[0.98] transition-transform focus:outline-none">
+<span class="material-symbols-outlined text-[18px] text-[#FF6B00]">auto_awesome</span>
+<span class="text-[14px]">Edit</span>
+</button>
+<!-- Counter control line -->
+<div class="flex items-center justify-between mt-1 mb-2">
+<!-- Servings counter cluster -->
+<div class="flex items-center gap-3">
+<button aria-label="Decrease servings" class="w-8 h-8 rounded-full bg-[#FF6B00] text-black font-bold flex items-center justify-center text-lg active:scale-90 transition-transform focus:outline-none leading-none pb-0.5">−</button>
+<span class="text-white font-bold text-[15px]">4 servings</span>
+<button aria-label="Increase servings" class="w-8 h-8 rounded-full bg-[#FF6B00] text-black font-bold flex items-center justify-center text-lg active:scale-90 transition-transform focus:outline-none leading-none pb-0.5">+</button>
+</div>
+<!-- Convert Units button -->
+<button class="px-4 py-1.5 rounded-full border border-white/20 text-white/90 text-sm font-medium bg-white/5 hover:bg-white/10 active:scale-95 transition-all focus:outline-none">
+      Convert Units
+    </button>
+</div>
+</div>
+<!-- 3. CIRCULAR INGREDIENTS LIST STACK -->
+<div class="flex flex-col gap-4 pt-2">
+<!-- Item 1: Chicken Breasts -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Chicken breast" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">4 boneless skinless chicken breasts</span>
+</div>
+<!-- Item 2: Salt -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Salt" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">salt</span>
+</div>
+<!-- Item 3: Pepper -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Pepper" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">pepper</span>
+</div>
+<!-- Item 4: Honey -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Honey" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">1 cup honey</span>
+</div>
+<!-- Item 5: Soy sauce -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Soy sauce" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">1/2 cup soy sauce</span>
+</div>
+<!-- Item 6: Diced onions -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Diced onions" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">1/4 cup diced onions</span>
+</div>
+<!-- Item 7: Sesame seeds -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Sesame seeds" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">2 tbsp toasted sesame seeds</span>
+</div>
+<!-- Item 8: Garlic -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden flex-none shadow-sm p-1.5">
+<img alt="Garlic" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1615477032219-ba18efec2448?auto=format&amp;fit=crop&amp;w=120&amp;q=80"/>
+</div>
+<span class="text-white font-bold text-[15px]">2 cloves minced garlic</span>
+</div>
+</div><!-- SHOPPING LIST BUTTON -->
+<button class="w-full py-3.5 px-6 rounded-full border border-white/20 bg-transparent flex items-center justify-center gap-2.5 my-6 active:scale-[0.98] transition-transform focus:outline-none">
+<span class="material-symbols-outlined text-[20px] text-[#FF6B00]">playlist_add</span>
+<span class="font-semibold text-base text-white">Add to Shopping List</span>
+</button>
+<!-- RATING DETAILS MODULE CONTAINER -->
+<div class="bg-[#121212] border border-white/5 rounded-2xl p-5 mb-10">
+<!-- Section Title -->
+<h3 class="text-lg font-bold text-white tracking-wide mb-4 m-0">Rating Details</h3>
+<!-- Horizontal Metrics Bar -->
+<div class="flex items-center gap-6 mb-4">
+<!-- Thumbs Up Item -->
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-none">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+</span>
+<span class="text-white font-medium text-sm">367 liked</span>
+</div>
+<!-- Thumbs Down Item -->
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center flex-none">
+<span class="material-symbols-outlined text-[16px]">thumb_down</span>
+</span>
+<span class="text-white font-medium text-sm">20 disliked</span>
+</div>
+</div>
+<!-- Feedback Pill Tags -->
+<div class="flex flex-wrap gap-2">
+<span class="bg-[#1A1A1A] border border-white/5 px-3.5 py-1.5 rounded-full text-xs font-medium text-gray-300">Delicious</span>
+<span class="bg-[#1A1A1A] border border-white/5 px-3.5 py-1.5 rounded-full text-xs font-medium text-gray-300">Go-to</span>
+<span class="bg-[#1A1A1A] border border-white/5 px-3.5 py-1.5 rounded-full text-xs font-medium text-gray-300">Easy</span>
+<span class="bg-[#1A1A1A] border border-white/5 px-3.5 py-1.5 rounded-full text-xs font-medium text-gray-300">Makes leftovers</span>
+<span class="bg-[#1A1A1A] border border-white/5 px-3.5 py-1.5 rounded-full text-xs font-medium text-gray-300">One-dish</span>
+</div>
+</div><section class="mb-8">
+<h2 class="text-lg font-bold text-white tracking-tight mb-4 px-1">You may also like</h2>
+<div class="grid grid-cols-2 gap-3 mb-8">
+<!-- Card 1: Cheesy Vegetable Soup -->
+<div class="flex flex-col">
+<div class="rounded-[20px] overflow-hidden relative aspect-[4/5] bg-[#121212] group cursor-pointer tap-effect">
+<img alt="Cheesy Vegetable Soup" class="object-cover w-full h-full transform scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9NfkpYxh1h9in6BoXPuF5UDpgjvYyjX7xNL8APphaMG9eWwExnaww52CvTijzue-4CqJ6jbh-Hq8gN8E1IUWEwzr2phYGclxfkNCN9rrLnzHJRVmCz1ydRKhpAhZnGKb-L3BYuiAxIDmx4gGnXEYiD6VW7e8WbTbycccOcsYfM7RoWu_ZnKHP1pbFlUcJ6ylxrijHXqip7fQwEuZOEfH-9XKfJ53lF4q3n0rk-KDmZg7m-p8QxSyNgw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none"></div>
+<button aria-label="Bookmark Cheesy Vegetable Soup" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 border border-white/10 active:scale-90 transition-transform focus:outline-none">
+<span class="material-symbols-outlined text-[16px]">bookmark_border</span>
+</button>
+<div class="absolute bottom-3 left-3 right-3 z-10">
+<h3 class="text-sm font-bold text-white line-clamp-2 leading-tight m-0">Cheesy Vegetable Soup</h3>
+<div class="text-[11px] text-gray-300 mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[13px] text-[#FF6B00]">schedule</span>
+<span class="">25m</span>
+</div>
+</div>
+</div>
+<div class="mt-2 flex items-center gap-1.5 px-1">
+<div class="w-4 h-4 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] border border-white/10 flex items-center justify-center text-[8px] font-bold overflow-hidden flex-none">
+          R
+        </div>
+<span class="text-[11px] text-gray-400 truncate">therecipecritic.com</span>
+</div>
+</div>
+<!-- Card 2: Ham Potato Cheddar Soup -->
+<div class="flex flex-col">
+<div class="rounded-[20px] overflow-hidden relative aspect-[4/5] bg-[#121212] group cursor-pointer tap-effect">
+<img alt="Ham Potato Cheddar Soup" class="object-cover w-full h-full transform scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDprQpaTbV934d_ucKOseAuqXp4Cw1XSGViPERJmmPnD8NwDd33XWxllK9pYxTXHep3m3QVs4PY7GZ6XSq539k2lqahvKBAGBUvIEen_Fnm2jqhejKlqMQ5O2DWyf1P4Xl8obJi2QF-uxAhX7B_F4fD18RkNu-4JsZzZxcQ6Zxyt0MvezpD4xoHuTWvG4yCUv0mLzxEST7-SlvAILoWNkpdoytIIKDs6WIrXQOQ_bNgfGW8OKPJrt783g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none"></div>
+<button aria-label="Bookmark Ham Potato Cheddar Soup" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 border border-white/10 active:scale-90 transition-transform focus:outline-none">
+<span class="material-symbols-outlined text-[16px]">bookmark_border</span>
+</button>
+<div class="absolute bottom-3 left-3 right-3 z-10">
+<h3 class="text-sm font-bold text-white line-clamp-2 leading-tight m-0">Ham Potato Cheddar Soup</h3>
+<div class="text-[11px] text-gray-300 mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[13px] text-[#FF6B00]">schedule</span>
+<span class="">4h</span>
+</div>
+</div>
+</div>
+<div class="mt-2 flex items-center gap-1.5 px-1">
+<div class="w-4 h-4 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] border border-white/10 flex items-center justify-center text-[8px] font-bold overflow-hidden flex-none">
+          R
+        </div>
+<span class="text-[11px] text-gray-400 truncate">Robin Peierl</span>
+</div>
+</div>
+<!-- Card 3: Ham and Potato Soup -->
+<div class="flex flex-col">
+<div class="rounded-[20px] overflow-hidden relative aspect-[4/5] bg-[#121212] group cursor-pointer tap-effect">
+<img alt="Ham and Potato Soup -" class="object-cover w-full h-full transform scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmWOp-bsvokMX_boNhYN3PiPUKC_S3ZNmoXgSkb8auJwosUf4W2ArxZlVZRP_KJf-cs18Q6hIcj7l8YooGetyxQaseZ2CMZ-3wNSv_Y0LGMipJyGleQbDSVkXPP5tjO-NFAvABP2PbWyUoKcLCtzmik5tRkQs7gKRAGpbvyBKJFChpR7zcCff_-Ynx9ztbqctTVVfDmJOvdPiJDEDL2ceeKfFA9ZXMl9_eiVhInRVW5FilLYKed3-6QA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none"></div>
+<button aria-label="Bookmark Ham and Potato Soup" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 border border-white/10 active:scale-90 transition-transform focus:outline-none">
+<span class="material-symbols-outlined text-[16px]">bookmark_border</span>
+</button>
+<div class="absolute bottom-3 left-3 right-3 z-10">
+<h3 class="text-sm font-bold text-white line-clamp-2 leading-tight m-0">Ham and Potato Soup -</h3>
+<div class="text-[11px] text-gray-300 mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[13px] text-[#FF6B00]">schedule</span>
+<span class="">1h 15m</span>
+</div>
+</div>
+</div>
+<div class="mt-2 flex items-center gap-1.5 px-1">
+<div class="w-4 h-4 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] border border-white/10 flex items-center justify-center text-[8px] font-bold overflow-hidden flex-none">
+          R
+        </div>
+<span class="text-[11px] text-gray-400 truncate">recipesmadewithlov...</span>
+</div>
+</div>
+<!-- Card 4: Ham and Potato Casserole -->
+<div class="flex flex-col">
+<div class="rounded-[20px] overflow-hidden relative aspect-[4/5] bg-[#121212] group cursor-pointer tap-effect">
+<img alt="Ham and Potato Casserole" class="object-cover w-full h-full transform scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBBSSsE-kv1_nOqPEmXhB9EgkvCuplV08GWgUrG5y-LqWpv3jUQRVmmB4tXl1Vh9Iumbatk505tlRa2idC6q9bOuBdHrJYisHKsN3bTEyrGhucws6nzGStbCjjRFaDbl0J2TCtVHCYXMTikUSNSxIUhTc-LLeCBsv-S5Or0i6O6FKaykS1AoZNAq_6wnrSn9b8ppXGdBirqaJxErs1XDD9cyqBhfzrkYYYBwkRWYOsT9hk2EGFR9996A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none"></div>
+<button aria-label="Bookmark Ham and Potato Casserole" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 border border-white/10 active:scale-90 transition-transform focus:outline-none">
+<span class="material-symbols-outlined text-[16px]">bookmark_border</span>
+</button>
+<div class="absolute bottom-3 left-3 right-3 z-10">
+<h3 class="text-sm font-bold text-white line-clamp-2 leading-tight m-0">Ham and Potato Casserole</h3>
+<div class="text-[11px] text-gray-300 mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[13px] text-[#FF6B00]">schedule</span>
+<span class="">45m</span>
+</div>
+</div>
+</div>
+<div class="mt-2 flex items-center gap-1.5 px-1">
+<div class="w-4 h-4 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] border border-white/10 flex items-center justify-center text-[8px] font-bold overflow-hidden flex-none">
+          I
+        </div>
+<span class="text-[11px] text-gray-400 truncate">insanelygoodrecipes....</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Cook Mode Button -->
+</div>
+</main>
+<div class="fixed bottom-0 inset-x-0 z-40 max-w-md mx-auto px-4 pb-6 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent pointer-events-auto"><button class="w-full py-4 rounded-full bg-[#FF6B00] text-black font-bold text-base flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(255,107,0,0.4)] active:scale-[0.98] transition-transform tap-effect focus:outline-none"><span class="material-symbols-outlined text-[22px]">skillet</span><span class="">Start Cooking Session</span></button></div></body></html>

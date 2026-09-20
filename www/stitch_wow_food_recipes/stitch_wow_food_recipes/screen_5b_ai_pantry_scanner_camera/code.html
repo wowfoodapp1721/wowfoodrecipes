@@ -1,0 +1,156 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Explore - FlavorCraft</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'pure-black': '#000000',
+            'charcoal-card': '#1C1C1E',
+            'charcoal-border': '#2C2C2E',
+            'brand-red': '#FF3B30',
+            'accent-green': '#34C759',
+            'muted-gray': '#8E8E93',
+            'soft-white': '#F2F2F7',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-pure-black text-soft-white font-sans antialiased min-h-screen w-full selection:bg-brand-red selection:text-white">
+<!-- Native Mobile Edge-to-Edge Container (Full viewport width, no letterbox) -->
+<div class="w-full min-h-screen flex flex-col relative pb-28">
+<!-- Native Android Status Bar -->
+<header class="w-full pt-3 px-5 flex justify-between items-center text-xs font-semibold text-white/90 select-none">
+<span class="tracking-tight text-sm font-medium">9:41</span>
+<div class="flex items-center gap-1.5 text-[14px]">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</header>
+<!-- Header Title Section -->
+<!-- Main Content Area -->
+<main class="flex-1 w-full relative flex flex-col justify-between overflow-hidden select-none">
+<!-- Full-bleed Camera Viewfinder Background Image with Dark Vignette Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Kitchen Countertop Viewfinder Feed" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5XBkL835-Yxzg4RKgSf08KNWPBKyOqi4L93S1dw9ZveyIIGPVHTYr39OoVbjdH68bjJGM3-H1QxptS7ZOZQaVvzSsLfx-Lej8dYUx_8uFukwMBxl8P1Nq_Dd69mEcSfumiBeNVFCsXhbHUCt5EzsrDdd4lUOsOCwTDiSy7Jp7oFYucH3J92Z3TxuZCgO1LozZfAtJXooXqBiGw0xgB7A0vk2a1kmOohS-w0tfYlsoA85-226jrTRDsQ">
+<div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/80"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<!-- Top Camera Utility Bar -->
+<div class="relative z-20 w-full px-5 pt-2 pb-3 flex items-center justify-between">
+<button aria-label="Close Camera" class="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<div class="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-accent-green/40 flex items-center gap-2 shadow-[0_0_12px_rgba(52,199,89,0.2)]">
+<span class="w-2 h-2 rounded-full bg-accent-green animate-pulse"></span>
+<span class="text-[11px] font-bold tracking-wider uppercase text-accent-green">AI PANTRY SCANNER</span>
+</div>
+<button aria-label="Toggle Camera Flip" class="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/90 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[20px]">flip_camera_ios</span>
+</button>
+</div>
+<!-- Camera Viewfinder Central Area with Brackets & AI Bounding Boxes -->
+<div class="relative z-10 flex-1 mx-5 my-2 flex items-center justify-center">
+<!-- Framing Area & Corner Brackets -->
+<div class="w-full h-full max-h-[460px] relative rounded-3xl border border-white/10 overflow-hidden bg-black/10 backdrop-blur-[1px]"><!-- Neon Green Corner Brackets framing countertop -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent-green rounded-tl-2xl pointer-events-none"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-accent-green rounded-tr-2xl pointer-events-none"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-accent-green rounded-bl-2xl pointer-events-none"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-accent-green rounded-br-2xl pointer-events-none"></div>
+
+<!-- Horizontal Neon Green Glowing Laser Pulse Line Overlay across Cutting Board -->
+<div class="absolute left-0 right-0 top-[52%] -translate-y-1/2 h-16 pointer-events-none flex flex-col items-center justify-center animate-pulse">
+<div class="w-full h-[2px] bg-accent-green shadow-[0_0_10px_#34C759,0_0_20px_#34C759]"></div>
+<div class="w-full h-12 bg-gradient-to-b from-accent-green/20 via-accent-green/5 to-transparent"></div>
+</div>
+
+<!-- AI Bounding Box 1: Whole Vine-Ripened Tomatoes (Upper-Middle) -->
+<div class="absolute top-[18%] left-[28%] w-[170px] h-[130px] border-2 border-accent-green rounded-xl bg-accent-green/10 pointer-events-none shadow-[0_0_10px_rgba(52,199,89,0.3)] animate-pulse">
+<div class="absolute -top-3.5 left-2 px-2 py-0.5 rounded-full bg-black/90 border border-accent-green flex items-center gap-1 text-[10px] font-bold text-accent-green whitespace-nowrap shadow-sm">
+<span class="material-symbols-outlined text-[11px] fill">check_circle</span>
+<span class="">Tomato: 98%</span>
+</div>
+</div>
+
+<!-- AI Bounding Box 2: Sliced Red Onions on Cutting Board -->
+<div class="absolute top-[44%] left-[22%] w-[160px] h-[115px] border-2 border-accent-green rounded-xl bg-accent-green/10 pointer-events-none shadow-[0_0_10px_rgba(52,199,89,0.3)] animate-pulse">
+<div class="absolute -top-3.5 left-2 px-2 py-0.5 rounded-full bg-black/90 border border-accent-green flex items-center gap-1 text-[10px] font-bold text-accent-green whitespace-nowrap shadow-sm">
+<span class="material-symbols-outlined text-[11px] fill">check_circle</span>
+<span class="">Red Onion: 95%</span>
+</div>
+</div>
+
+<!-- Center Reticle Indicator -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center pointer-events-none">
+<div class="w-1.5 h-1.5 rounded-full bg-accent-green/80"></div>
+</div></div>
+</div>
+<!-- Bottom Controls Tray (directly above persistent nav bar) -->
+<div class="relative z-20 px-5 mb-2">
+<div class="w-full bg-charcoal-card/85 backdrop-blur-md border border-charcoal-border rounded-2xl px-5 py-3.5 shadow-2xl flex items-center justify-between">
+<!-- Flash Toggle -->
+<button aria-label="Flash Mode" class="flex flex-col items-center justify-center gap-1 text-white/80 active:scale-95 transition-transform group">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-[20px] text-amber-400 fill">flash_on</span>
+</div>
+<span class="text-[10px] font-semibold text-white/70 tracking-tight">Flash</span>
+</button>
+<!-- Primary Scan Trigger Shutter Button -->
+<div class="flex flex-col items-center justify-center relative">
+<button aria-label="Scan Ingredients" class="w-16 h-16 rounded-full border-4 border-brand-red flex items-center justify-center p-1 active:scale-90 transition-transform shadow-[0_0_16px_rgba(255,59,48,0.4)]">
+<div class="w-full h-full bg-brand-red rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[26px] fill">photo_camera</span>
+</div>
+</button>
+</div>
+<!-- Add Manually Action -->
+<button aria-label="Add Manually" class="flex flex-col items-center justify-center gap-1 text-white/80 active:scale-95 transition-transform group">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-[20px] text-white">edit_note</span>
+</div>
+<span class="text-[10px] font-semibold text-white/70 tracking-tight">Manual</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Persistent Bottom Navigation Bar (5 Columns, Fixed Edge-to-Edge) -->
+<nav class="fixed bottom-0 left-0 right-0 w-full bg-pure-black/95 backdrop-blur-xl border-t border-charcoal-border/80 z-50 flex flex-col">
+<div class="grid grid-cols-5 items-center pt-2 px-1 max-w-full pb-4"><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">home</span><span class="text-[10px] font-medium tracking-tight">Home</span></button><button class="flex flex-col items-center justify-center gap-1 text-brand-red relative group"><span class="material-symbols-outlined text-[23px] fill scale-110 drop-shadow-[0_0_8px_rgba(255,59,48,0.5)]">explore</span><span class="text-[10px] font-bold tracking-tight text-white">Explore</span><span class="w-1.5 h-1.5 rounded-full bg-brand-red absolute -bottom-1 shadow-[0_0_6px_#FF3B30]"></span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">bookmark</span><span class="text-[10px] font-medium tracking-tight">Saved</span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">calendar_today</span><span class="text-[10px] font-medium tracking-tight">Planner</span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">person</span><span class="text-[10px] font-medium tracking-tight">Profile</span></button></div>
+<!-- Centered Minimalist Horizontal Android Home Navigation Indicator Pill -->
+<div class="w-full pb-3.5 pt-1 flex justify-center items-center"><div class="w-32 h-1 bg-white/30 rounded-full"></div></div>
+</nav>
+</div>
+
+
+</body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Explore - FlavorCraft</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'pure-black': '#000000',
+            'charcoal-card': '#1C1C1E',
+            'charcoal-border': '#2C2C2E',
+            'brand-red': '#FF3B30',
+            'accent-green': '#34C759',
+            'muted-gray': '#8E8E93',
+            'soft-white': '#F2F2F7',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-pure-black text-soft-white font-sans antialiased min-h-screen w-full selection:bg-brand-red selection:text-white">
+<!-- Native Mobile Edge-to-Edge Container (Full viewport width, no letterbox) -->
+<div class="w-full min-h-screen flex flex-col relative pb-28">
+<!-- Native Android Status Bar -->
+<header class="w-full pt-3 px-5 flex justify-between items-center text-xs font-semibold text-white/90 select-none">
+<span class="tracking-tight text-sm font-medium">9:41</span>
+<div class="flex items-center gap-1.5 text-[14px]">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</header>
+<!-- Header Title Section -->
+<div class="px-5 pt-4 pb-2">
+<h1 class="text-[22px] font-bold tracking-tight text-white font-sans">AI MATCH RESULTS</h1>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 px-5 flex flex-col gap-6 pt-1"><div class="w-full relative flex items-center"><div class="w-full flex items-center bg-charcoal-card border border-charcoal-border rounded-2xl px-4 py-3.5 shadow-sm focus-within:border-brand-red/60 transition-colors"><span class="material-symbols-outlined text-white/40 mr-2.5 text-[22px]">search</span><input class="bg-transparent text-sm w-full text-white placeholder-muted-gray focus:outline-none font-medium" placeholder="Search matched recipes..." readonly="" type="text"><button aria-label="Voice Search" class="ml-2 w-8 h-8 rounded-full bg-brand-red/10 flex items-center justify-center text-brand-red active:scale-90 transition-transform"><span class="material-symbols-outlined text-[20px] fill">mic</span></button></div></div><div class="flex flex-col gap-2 -mt-1"><div class="flex items-center justify-between"><span class="text-xs uppercase font-bold tracking-wider text-muted-gray">Scanned Ingredients (3)</span><span class="text-xs font-semibold text-accent-green cursor-pointer hover:underline flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">add</span> Add More</span></div><div class="flex gap-2 overflow-x-auto no-scrollbar pb-1"><div class="flex-shrink-0 bg-charcoal-card border border-white/10 rounded-full px-3 py-1.5 flex items-center gap-1.5 text-xs text-white/90 shadow-sm"><span class="text-[13px]">🍅</span><span class="font-medium">Tomato</span><button aria-label="Remove Tomato" class="text-white/40 hover:text-white flex items-center justify-center ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button></div><div class="flex-shrink-0 bg-charcoal-card border border-white/10 rounded-full px-3 py-1.5 flex items-center gap-1.5 text-xs text-white/90 shadow-sm"><span class="text-[13px]">🧅</span><span class="font-medium">Red Onion</span><button aria-label="Remove Red Onion" class="text-white/40 hover:text-white flex items-center justify-center ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button></div><div class="flex-shrink-0 bg-charcoal-card border border-white/10 rounded-full px-3 py-1.5 flex items-center gap-1.5 text-xs text-white/90 shadow-sm"><span class="text-[13px]">🧄</span><span class="font-medium">Garlic</span><button aria-label="Remove Garlic" class="text-white/40 hover:text-white flex items-center justify-center ml-0.5"><span class="material-symbols-outlined text-[14px]">close</span></button></div></div></div><div class="flex items-center border-b border-charcoal-border/80 gap-6 -mt-1"><button class="relative pb-2.5 text-sm font-bold text-white flex flex-col items-center"><span class="flex items-center gap-1.5">100% Match <span class="bg-brand-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span></span><span class="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-red rounded-full shadow-[0_0_6px_#FF3B30]"></span></button><button class="pb-2.5 text-sm font-medium text-muted-gray hover:text-white transition-colors flex items-center gap-1.5">Missing 1-2 Items</button><button class="pb-2.5 text-sm font-medium text-muted-gray hover:text-white transition-colors flex items-center gap-1.5">Under 30 Mins</button></div><div class="flex flex-col gap-5"><article class="w-full bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden shadow-xl active:scale-[0.99] transition-transform cursor-pointer"><div class="relative w-full aspect-[16/9] overflow-hidden bg-black"><img alt="Classic Roasted Tomato &amp; Garlic Soup" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZK0rSmHmFmT-JSdB1nqLU0znS-Uy6vvR4e6LtWo-qD-qMelTS0JN2Har1AtgNyi0jQyRuFyEiKVxnGnYHBcejnAT-tA92oLWFJguw_F4fv_MYR_AzydceFm5We2WOrMD75ILfqoqOnSrQFbtR3n1nHqo5M_ZUVXwN0hZVOqMYHSDnzbOcIq9YZ1zkgvMMEK4e2n7-n7gbKOxQMlh3_OXGz9hQ_6Zr1qe1FHLBjYJqAX9EPhVFhfk4vw"><div class="absolute inset-0 bg-gradient-to-t from-charcoal-card via-transparent to-black/40"></div><div class="absolute top-3 left-3 flex gap-2"><span class="px-2.5 py-0.5 rounded-full bg-accent-green/15 border border-accent-green/40 text-accent-green text-[11px] font-bold tracking-wide flex items-center gap-1 backdrop-blur-md"><span class="material-symbols-outlined text-[13px] fill">check_circle</span> Perfect Match</span><span class="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-amber-400 fill">star</span> 4.9</span></div><button aria-label="Save Recipe" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 hover:text-white active:scale-90 transition-transform"><span class="material-symbols-outlined text-[18px]">bookmark</span></button></div><div class="p-4 pt-3.5 flex flex-col gap-3"><div><h3 class="text-lg font-bold text-white tracking-tight font-serif leading-snug">Classic Roasted Tomato &amp; Garlic Soup</h3><p class="text-xs text-muted-gray line-clamp-1 mt-0.5">Velvety roasted heirloom tomatoes, caramelized garlic cloves, fresh basil &amp; cream.</p></div><div class="flex items-center justify-between border-t border-charcoal-border/70 pt-3 text-xs text-white/80"><div class="flex items-center gap-3.5"><div class="flex items-center gap-1 text-white/70"><span class="material-symbols-outlined text-[16px] text-brand-red">schedule</span><span class="">25 Mins</span></div><div class="flex items-center gap-1 text-white/70"><span class="material-symbols-outlined text-[16px] text-brand-red">local_fire_department</span><span class="">210 kcal</span></div><div class="flex items-center gap-1 text-white/70"><span class="material-symbols-outlined text-[16px] text-brand-red">group</span><span class="">Serves 2</span></div></div><button class="text-brand-red font-bold flex items-center text-xs gap-0.5 hover:underline">Cook <span class="material-symbols-outlined text-[14px]">chevron_right</span></button></div></div></article><article class="w-full bg-charcoal-card border border-charcoal-border rounded-2xl overflow-hidden shadow-xl active:scale-[0.99] transition-transform cursor-pointer"><div class="relative w-full aspect-[16/9] overflow-hidden bg-black"><img alt="Creamy Tomato Basil Pasta" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnu9mEP7lTCCEI7_2NSfS_mrgxkzi71M99ZelJzg5UOMzi5xWaA57SEeT4G9EXZh5zhoQoJXGrLYsScVLFTOK5jHPKa4lh03GNLBMJ2IYDQazUegyW8JsRlDoolj9PtDf4Nee3SHhags3y0d6ijaPbjSP4iy0UthEibNHEivBAP5T31iDCPyyK6HDYXXsM7YAs48zP4vpX2PxdjGMqjMcBBBRICYtUOCjiswOUBsKe0cHBtNTUsX-elA"><div class="absolute inset-0 bg-gradient-to-t from-charcoal-card via-transparent to-black/40"></div><div class="absolute top-3 left-3 flex gap-2"><span class="px-2.5 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-400 text-[11px] font-bold tracking-wide flex items-center gap-1 backdrop-blur-md"><span class="material-symbols-outlined text-[13px]">info</span> Missing 1 Item</span><span class="px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-amber-400 fill">star</span> 4.8</span></div><button aria-label="Save Recipe" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white/90 hover:text-white active:scale-90 transition-transform"><span class="material-symbols-outlined text-[18px]">bookmark</span></button></div><div class="p-4 pt-3.5 flex flex-col gap-3"><div><h3 class="text-lg font-bold text-white tracking-tight font-serif leading-snug">Creamy Tomato Basil Pasta</h3><div class="mt-1.5 px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/5 flex items-start gap-1.5 text-xs text-white/80"><span class="text-amber-400 text-[13px] mt-0.5">💡</span><span class="text-[11px] text-muted-gray leading-snug"><strong class="text-white/90 font-medium">Tip:</strong> Can substitute heavy cream with Greek Yogurt from your fridge.</span></div></div><div class="flex items-center justify-between border-t border-charcoal-border/70 pt-3 text-xs text-white/80"><div class="flex items-center gap-3.5"><div class="flex items-center gap-1 text-white/70"><span class="material-symbols-outlined text-[16px] text-brand-red">schedule</span><span class="">15 Mins</span></div><div class="flex items-center gap-1 text-white/70"><span class="material-symbols-outlined text-[16px] text-brand-red">local_fire_department</span><span class="">530 kcal</span></div><div class="flex items-center gap-1 text-white/70"><span class="material-symbols-outlined text-[16px] text-brand-red">group</span><span class="">Serves 4</span></div></div><button class="text-brand-red font-bold flex items-center text-xs gap-0.5 hover:underline">View Recipe <span class="material-symbols-outlined text-[14px]">chevron_right</span></button></div></div></article></div></main>
+<!-- Persistent Bottom Navigation Bar (5 Columns, Fixed Edge-to-Edge) -->
+<nav class="fixed bottom-0 left-0 right-0 w-full bg-pure-black/95 backdrop-blur-xl border-t border-charcoal-border/80 z-50 flex flex-col">
+<div class="grid grid-cols-5 items-center pt-2 px-1 max-w-full pb-4"><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">home</span><span class="text-[10px] font-medium tracking-tight">Home</span></button><button class="flex flex-col items-center justify-center gap-1 text-brand-red relative group"><span class="material-symbols-outlined text-[23px] fill scale-110 drop-shadow-[0_0_8px_rgba(255,59,48,0.5)]">explore</span><span class="text-[10px] font-bold tracking-tight text-white">Explore</span><span class="w-1.5 h-1.5 rounded-full bg-brand-red shadow-[0_0_6px_#FF3B30] mt-0.5"></span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">bookmark</span><span class="text-[10px] font-medium tracking-tight">Saved</span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">calendar_today</span><span class="text-[10px] font-medium tracking-tight">Planner</span></button><button class="flex flex-col items-center justify-center gap-1 text-muted-gray hover:text-white transition-colors group"><span class="material-symbols-outlined text-[23px] group-hover:scale-105 transition-transform">person</span><span class="text-[10px] font-medium tracking-tight">Profile</span></button></div>
+<!-- Centered Minimalist Horizontal Android Home Navigation Indicator Pill -->
+<div class="w-full pb-3.5 pt-1 flex justify-center items-center"><div class="w-32 h-1 bg-white/30 rounded-full"></div></div>
+</nav>
+</div>
+
+
+</body></html>

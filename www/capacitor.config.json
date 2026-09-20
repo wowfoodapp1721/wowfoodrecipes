@@ -1,0 +1,13 @@
+{
+  "appId": "com.wowfoodrecipes.app",
+  "appName": "Wow Food Recipes",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true
+  }
+}

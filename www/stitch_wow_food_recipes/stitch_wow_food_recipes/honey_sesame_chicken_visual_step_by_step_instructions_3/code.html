@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Premium Recipe Detail View - Honey Sesame Chicken</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {brandOrange: "#FF6B00", metallicSilver: "#8E8E93", amoled: "#000000", darkCharcoal: "#121212", glassLight: "rgba(255, 255, 255, 0.08)", glassBorder: "rgba(255, 255, 255, 0.12)", "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    /* Mobile app viewport locking */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      color: #FFFFFF;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom scrollbar hiding for native mobile app feel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .tap-effect:active {
+      transform: scale(0.96);
+      transition: transform 0.15s ease;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-white flex flex-col h-screen w-full select-none items-center bg-neutral-950">
+<!-- ========================================== -->
+<!-- UPPER FIXED HEADER LAYOUT (Top ~40% Height) -->
+<!-- Rigidly locked, non-scrollable anchor panel -->
+<!-- ========================================== -->
+<header class="w-full flex-none z-40 bg-black flex flex-col border-b border-white/[0.08] shadow-[0_8px_30px_rgba(0,0,0,0.9)] max-w-md">
+<!-- Media Banner Area with 16px bottom-corner radius -->
+<div class="relative w-full h-56 sm:h-64 overflow-hidden rounded-b-[16px] bg-neutral-950">
+<!-- Media Cover Image -->
+<img alt="Honey Sesame Chicken" class="w-full h-full object-cover object-center transform scale-100" src="https://lh3.googleusercontent.com/aida/AEtjO1XkP4N14EcY8kMNaA0KOgKLzmMoE_P543Vfhs9g0ycfMVKigdhzAfRNUn5HuOSg0tikzWsqxxHPBubiBt-0WnAlmFR4FDcft3dYJjEb1p_EsvAVfztLXK666fuaqpyrOZOfekNbl3rnCBcEqBpmdoWAi_5zQKK-Np0JO6gHZ6VXtCuTrkPTmS2WMgb7CqqsGGJqPdYDTZD9RQ0ndkgnoextSnp4Rc26LsO5JrJ2_LQyIRlrE_9_h0OFRRHA"/>
+<!-- Atmospheric Dark Gradient Vignette for text/control contrast -->
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/60 pointer-events-none"></div>
+<!-- Floating Top Navigation Bar Elements -->
+<div class="absolute top-0 inset-x-0 pt-4 px-4 flex items-center justify-between z-10">
+<!-- Back Button -->
+<button aria-label="Go back" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white tap-effect focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<!-- Brand / Category Badge -->
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-[#FF3B30]/30 shadow-[0_0_12px_rgba(255,59,48,0.2)]"><span class="w-1.5 h-1.5 rounded-full bg-[#FF3B30] animate-pulse"></span></div>
+<!-- Bookmark Quick Icon -->
+<button aria-label="More options" class="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white tap-effect focus:outline-none"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+<!-- Floating Micro Badges directly on Media -->
+<div class="absolute bottom-3 left-4 flex items-center gap-2 z-10"><span class="px-2.5 py-0.5 rounded-md bg-[#FF3B30]/20 backdrop-blur-md border border-[#FF3B30]/40 text-[#FF3B30] text-[11px] font-bold tracking-wider uppercase">Chef's Signature</span><span class="px-2.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md border border-white/15 text-white/90 text-[11px] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-[#FF3B30]">local_fire_department</span>480 kcal</span></div>
+</div>
+<!-- Title & Action Button Stack directly under image -->
+<div class="px-5 pt-3 pb-3.5 flex flex-col gap-2.5">
+<!-- Title: 24pt, Bold, Color #FFFFFF, Left-Aligned -->
+<h1 class="text-[32px] font-bold text-white font-serif tracking-tight leading-tight m-0 text-left">
+        Honey Sesame Chicken
+      </h1>
+<!-- Exactly 3 Functional Action Buttons Horizontally in a Flex Row -->
+<div class="flex items-center justify-around w-full py-1"><button class="flex items-center gap-2 text-white font-bold text-[14px] cursor-pointer hover:opacity-80 transition-all tap-effect focus:outline-none"><svg class="w-5 h-5 text-[#FF3B30]" fill="none" stroke="#FF3B30" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg><span class="text-white font-bold">240.6k</span></button><button class="flex items-center gap-2 text-white font-bold text-[14px] cursor-pointer hover:opacity-80 transition-all tap-effect focus:outline-none"><svg class="w-5 h-5 text-[#FF3B30]" fill="none" stroke="#FF3B30" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg><span class="text-white font-bold">Add to</span></button><button class="flex items-center gap-2 text-white font-bold text-[14px] cursor-pointer hover:opacity-80 transition-all tap-effect focus:outline-none"><svg class="w-5 h-5 text-[#FF3B30]" fill="none" stroke="#FF3B30" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line></svg><span class="text-white font-bold">Share</span></button></div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- LOWER SCROLL VIEW LAYOUT (Bottom ~60% Height) -->
+<!-- Independent, vertically scrollable list viewport -->
+<!-- ========================================== -->
+<main class="flex-1 overflow-y-auto no-scrollbar bg-black flex flex-col relative max-w-md">
+<!-- Sticky Tab Navigation Component at absolute top edge of scrolling panel -->
+<nav class="sticky top-0 z-30 bg-black/95 backdrop-blur-md border-b border-white/[0.08] px-5 pt-1.5"><div class="flex items-center justify-between w-full">
+<!-- Tab 1: Ingredients (Inactive) -->
+<button class="relative pb-3 flex-1 text-center text-[15px] font-medium text-[#8E8E93] hover:text-white/80 transition-colors duration-150 focus:outline-none">
+<span class="">Ingredients</span>
+</button>
+<!-- Tab 2: Instructions (Active) -->
+<button class="relative pb-3 flex-1 text-center text-[15px] font-bold text-white transition-colors duration-150 focus:outline-none"><span class="">Instructions</span><span class="absolute bottom-0 inset-x-2 h-[2.5px] bg-[#FF3B30] rounded-full shadow-[0_0_10px_#FF3B30]"></span></button>
+<!-- Tab 3: Health Score (Inactive) -->
+<button class="relative pb-3 flex-1 text-center text-[15px] font-medium text-[#8E8E93] hover:text-white/80 transition-colors duration-150 focus:outline-none">
+<span class="">Health Score</span>
+</button>
+</div></nav>
+<!-- Scroll Container Body -->
+<div class="px-5 py-4 flex flex-col gap-4 pb-28"><!-- Instructions Overview Meta Header -->
+<div class="flex items-center justify-between pt-1 pb-2 border-b border-white/10"><div class="flex items-center gap-2 text-white/90 text-[13.5px] font-medium"><span class="material-symbols-outlined text-[17px] text-[#FF3B30]">timer</span><span class="">Total Cook Time: 30 mins</span></div><span class="text-xs font-semibold uppercase tracking-wider text-[#FF3B30] bg-[#FF3B30]/20 px-2.5 py-1 rounded-full border border-[#FF3B30]/30">4 Easy Steps</span></div>
+<!-- Instruction Steps List -->
+<div class="flex flex-col gap-6 pt-2 pb-6"><div class="flex flex-col gap-3 pb-6 border-b border-white/10"><div class="flex items-center justify-between"><div class="flex items-center gap-2.5"><span class="w-7 h-7 rounded-full bg-[#FF3B30] text-white font-bold flex items-center justify-center text-sm shadow-[0_0_10px_#FF3B30]">1</span><h3 class="text-[17px] font-bold text-white tracking-wide m-0">Prep &amp; Coat the Chicken</h3></div><span class="text-xs text-gray-400 font-medium">(10 mins)</span></div><p class="text-white/90 text-[14px] leading-relaxed m-0 font-normal" style="line-height: 1.45; letter-spacing: 0.015em;">Cut 4 boneless skinless chicken breasts into 1-inch bite-sized cubes. Season generously with salt and pepper, then toss the chicken cubes thoroughly in a bowl with cornstarch until every piece is lightly and evenly coated.</p><div class="relative w-full rounded-xl overflow-hidden aspect-video border border-white/10 mt-1 shadow-sm"><img alt="Prep and Coat Chicken" class="w-full h-full object-cover object-center transform scale-100" src="https://lh3.googleusercontent.com/aida/AEtjO1VlxXpJdGt04xifcK5GV2gnWaweAZIRtZCELNsk4bbEGTorVmPhnArgK6TPnBZHuRxSRxjRHBylDM40JCP-ebxm5tF-zYggVaKa1mG8ov9j_alDnIAixL9OVzK7sCyxYBHmjW2yWGGHDgVs4jpGaWaPs5JP1XLmONsw4PJ9HY2L-R7cuCwkLsr73esqD8fEnWeHxol6MytIYmN_xav-X94NmPXYcjDpJZesf_zcgJ2TycosmRvbtGs38_Wt"/><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div><div class="absolute bottom-2.5 left-3 inline-flex items-center px-3 py-1 bg-red-600/90 text-white text-xs font-medium rounded-full shadow-sm"><svg class="w-3.5 h-3.5 text-white mr-1.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg><span class="">Preparation</span></div></div></div><div class="flex flex-col gap-3 pb-6 border-b border-white/10"><div class="flex items-center justify-between"><div class="flex items-center gap-2.5"><span class="w-7 h-7 rounded-full bg-[#FF3B30] text-white font-bold flex items-center justify-center text-sm shadow-[0_0_10px_#FF3B30]">2</span><h3 class="text-[17px] font-bold text-white tracking-wide m-0">Sear the Chicken</h3></div><span class="text-xs text-gray-400 font-medium">(10 mins)</span></div><p class="text-white/90 text-[14px] leading-relaxed m-0 font-normal">Heat 2 tablespoons of vegetable oil in a large skillet or wok over medium-high heat. Add the coated chicken pieces in a single layer and fry for 8 to 10 minutes, turning occasionally, until the chicken crust turns crisp and beautifully golden brown.</p><div class="relative w-full rounded-xl overflow-hidden aspect-video border border-white/10 mt-1 shadow-sm"><img alt="Sear the Chicken" class="w-full h-full object-cover object-center transform scale-100" src="https://lh3.googleusercontent.com/aida/AEtjO1WRXQAVPxNQVFjKLYB6Ur-0W3LKiOv9h1AM5Wu8VXB3VcxorwFmn6Jzsb_auHrGrch3qcnXNeB7XDSG-M1-9fqZwfkrXFf4P365EkMfs96UaGOUvYMwZmtEN65yPzgOaPnd_tNSWXh59n3ALcWfYcFr8FqKwn-3ve9pjbjIN92LZnFINDIhYT2l6tNndEXc1SP5EqsKedwlge7tsMnKcuMcIvngJI3DsNiIw-uB5Eyuya2sg4TBu0m-s3Dw"/><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div><div class="absolute bottom-2.5 left-3 flex items-center gap-1.5 text-xs text-white/90 font-medium backdrop-blur-md bg-black/60 px-2.5 py-1 rounded-full border border-white/10"><span class="material-symbols-outlined text-[14px] text-[#FF3B30]">skillet</span><span class="">Medium-High Heat</span></div></div></div><div class="flex flex-col gap-3 pb-6 border-b border-white/10"><div class="flex items-center justify-between"><div class="flex items-center gap-2.5"><span class="w-7 h-7 rounded-full bg-[#FF3B30] text-white font-bold flex items-center justify-center text-sm shadow-[0_0_10px_#FF3B30]">3</span><h3 class="text-[17px] font-bold text-white tracking-wide m-0">Whisk &amp; Simmer Sesame Sauce</h3></div><span class="text-xs text-gray-400 font-medium">(3 mins)</span></div><p class="text-white/90 text-[14px] leading-relaxed m-0 font-normal">In a separate small bowl, whisk together 1/3 cup honey, 1/4 cup soy sauce, 2 tablespoons ketchup, and 1 tablespoon sesame oil. Pour this sweet and savory sauce mixture directly into the skillet over the hot chicken.</p><div class="relative w-full rounded-xl overflow-hidden aspect-video border border-white/10 mt-1 shadow-sm"><img alt="Whisk &amp; Simmer Sesame Sauce" class="w-full h-full object-cover object-center transform scale-100" src="https://lh3.googleusercontent.com/aida/AEtjO1VubhhJQQZk3D3vWs2a95U5iGYxxORZNE4n-spVNpxKdMNH07bQX3eV4Gf1VvLIypt5M60lN7OIk5YXDlUZy2JYYULR5e_pSlklZ6w7PxCNnM2vXGBdV2DJSl1KvXHey6Dy1IFVO1bj3sPJxfeZc2yDQyZIrE6UfWfzy_xV5fNrLjKziAWV2azNMxVPjt8aB9-flKyFz98U85M8hocG-buPHy3WFB21QFiL8D3FVFt2RkAs3X_3aEF4cOCV"/><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div><div class="absolute bottom-2.5 left-3 flex items-center gap-1.5 text-xs text-white/90 font-medium backdrop-blur-md bg-black/60 px-2.5 py-1 rounded-full border border-white/10"><span class="material-symbols-outlined text-[14px] text-[#FF3B30]">soup_kitchen</span><span class="">Simmer &amp; Glaze</span></div></div></div><div class="flex flex-col gap-3 pb-2"><div class="flex items-center justify-between"><div class="flex items-center gap-2.5"><span class="w-7 h-7 rounded-full bg-[#FF3B30] text-white font-bold flex items-center justify-center text-sm shadow-[0_0_10px_#FF3B30]">4</span><h3 class="text-[17px] font-bold text-white tracking-wide m-0">Toss &amp; Garnish</h3></div><span class="text-xs text-gray-400 font-medium">(3 mins)</span></div><p class="text-white/90 text-[14px] leading-relaxed m-0 font-normal">Toss everything continuously for 2 to 3 minutes over the heat until the glaze thickens perfectly and completely coats the chicken cubes. Garnish with a generous sprinkle of toasted sesame seeds and chopped green scallions. Serve hot and enjoy!</p><div class="relative w-full rounded-xl overflow-hidden aspect-video border border-white/10 mt-1 shadow-sm"><img alt="Toss, Garnish &amp; Serve" class="w-full h-full object-cover object-center transform scale-100" src="https://lh3.googleusercontent.com/aida/AEtjO1VCOi3NOyZnEh2O1K6hoapGZYDRhRuhTUWBRu5QVwwepkc1krG9SjPNyiCnZTNH6ihLcRxsvboFvDNUCcbm1svIVJxaqH2zQcPZ_xHgvDuNwrPUbUKneuV8qk9F1n6fiU-jn4qaMBgNZmznFixSX9m2HVGhkOTXvaW2ndmGKOyokV2uTcMdqldijkpvPxHrLWAkdgtKq4kcWkkMGcFzqNWHqaisgkNQdBhUc8VeYqnlmPziWfURJrf9xcg"/><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div><div class="absolute bottom-2.5 left-3 flex items-center gap-1.5 text-xs text-white/90 font-medium backdrop-blur-md bg-black/60 px-2.5 py-1 rounded-full border border-white/10"><span class="material-symbols-outlined text-[14px] text-[#FF3B30]">dinner_dining</span><span class="">Ready to Serve</span></div></div></div></div>
+<!-- Pro Chef Tip Box -->
+<div class="bg-[#121212] border border-[#FF3B30]/30 rounded-2xl p-4 flex items-start gap-3 shadow-[0_0_12px_rgba(255,59,48,0.1)] mb-4"><span class="material-symbols-outlined text-[#FF3B30] text-[22px] flex-none mt-0.5">lightbulb</span><div class="flex flex-col gap-1"><span class="text-white font-bold text-sm">Chef's Pro Tip</span><span class="text-gray-300 text-xs leading-relaxed">Do not overcrowd the skillet during Step 2. Frying in batches ensures maximum crispiness for that signature restaurant texture.</span></div></div></div>
+</main>
+<div class="fixed bottom-0 inset-x-0 z-40 max-w-md mx-auto px-4 pb-6 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent pointer-events-auto"><button class="w-full py-4 rounded-full bg-[#FF3B30] text-black font-bold text-base flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(255,59,48,0.4)] active:scale-[0.98] transition-transform tap-effect focus:outline-none"><span class="material-symbols-outlined text-[22px] text-black">skillet</span><span class="text-black font-bold">Start Cooking Session</span></button></div>
+</body></html>

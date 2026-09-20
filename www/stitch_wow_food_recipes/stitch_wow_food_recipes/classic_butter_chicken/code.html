@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Classic Butter Chicken Recipe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#867468",
+                    "secondary": "#436370",
+                    "on-secondary-fixed": "#001f29",
+                    "background": "#f9f9f9",
+                    "secondary-fixed": "#c6e8f8",
+                    "surface-container-low": "#f3f3f3",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#496977",
+                    "on-surface-variant": "#534439",
+                    "primary-fixed-dim": "#ffb780",
+                    "surface-container": "#eeeeee",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-high": "#e8e8e8",
+                    "tertiary-fixed": "#ffdad8",
+                    "surface-tint": "#8e4e14",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "surface-dim": "#dadada",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#a7373b",
+                    "secondary-container": "#c6e8f8",
+                    "on-tertiary-container": "#861f25",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#f4a261",
+                    "tertiary-container": "#ff9896",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#d8c2b5",
+                    "secondary-fixed-dim": "#abcbdb",
+                    "on-tertiary-fixed": "#410007",
+                    "surface-container-highest": "#e2e2e2",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "primary-fixed": "#ffdcc4",
+                    "on-primary-container": "#6f3800",
+                    "surface-variant": "#e2e2e2",
+                    "on-secondary-fixed-variant": "#2b4b58",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "on-background": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#6f3800",
+                    "inverse-primary": "#ffb780",
+                    "inverse-surface": "#2f3131",
+                    "on-tertiary-fixed-variant": "#861f25",
+                    "primary": "#8e4e14",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#2f1400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "48px",
+                    "xs": "8px",
+                    "edge-margin": "20px",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "base": "4px",
+                    "sm": "16px",
+                    "lg": "32px"
+            },
+            "fontFamily": {
+                    "headline-xl": [
+                            "Newsreader"
+                    ],
+                    "headline-md": [
+                            "Newsreader"
+                    ],
+                    "label-md": [
+                            "Work Sans"
+                    ],
+                    "body-md": [
+                            "Work Sans"
+                    ],
+                    "body-lg": [
+                            "Work Sans"
+                    ],
+                    "label-sm": [
+                            "Work Sans"
+                    ],
+                    "headline-lg-mobile": [
+                            "Newsreader"
+                    ],
+                    "headline-lg": [
+                            "Newsreader"
+                    ]
+            },
+            "fontSize": {
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "34px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .check-item input[type="checkbox"]:checked + div {
+            text-decoration: line-through;
+            color: #867468; /* text-outline */
+        }
+        
+        .check-item input[type="checkbox"]:checked ~ .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .check-icon {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm transition-transform duration-200" id="top-app-bar">
+<div class="flex items-center justify-between px-edge-margin h-16 w-full">
+<button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed-dim">Annapurna</h1>
+<button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+</button>
+</div>
+</header>
+<!-- Hero Image Section -->
+<section class="relative w-full h-[530px] md:h-[618px] rounded-b-[32px] overflow-hidden shadow-[0px_8px_32px_rgba(38,70,83,0.12)]">
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/60 via-transparent to-transparent z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A highly detailed, professional food photograph of Classic Butter Chicken (Murgh Makhani) served in an artisanal copper bowl. The creamy, rich orange-red sauce glistens under warm, directional natural light, highlighting tender pieces of tandoori chicken. Garnished with a swirl of fresh cream and chopped cilantro. Set against a soft, light-mode background with warm saffron and forest green undertones, conveying a modern heritage aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOg8zzvs31JJW2v9eh-FufmgYuawAwjn5IrC804yJfY7qXPk3jRMKeZutIkuOVTdqfFp0K0teXSiM0vrHmyPYPAoQ2Gjt7fKKWWbThqNfhzlD_-IKMumRdE38wSXJstt570pObgfYqIXnaLBvfeju3RiKny7qHw14UHvBzogu2yQlIqe2KrVUfsdYGo-gKaR3PFG3vfRVR2zQVfCkxDDQVaFOSKUDF5So5CTRsOoMv58ZIFqXEb3wSzQ"/>
+<div class="absolute bottom-0 left-0 w-full p-edge-margin z-20 md:px-xl lg:px-[10%]">
+<h2 class="font-headline-xl text-headline-xl text-on-primary mb-xs drop-shadow-md">Classic Butter Chicken</h2>
+<p class="font-body-lg text-body-lg text-on-primary/90 mb-sm max-w-2xl drop-shadow">A rich, creamy, and deeply flavorful traditional Indian curry featuring tender chicken in a spiced tomato gravy.</p>
+<div class="flex flex-wrap gap-sm">
+<div class="glass-panel px-sm py-2 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'wght' 300;">schedule</span>
+<span class="font-label-md text-label-md text-on-surface">45 mins</span>
+</div>
+<div class="glass-panel px-sm py-2 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'wght' 300;">restaurant</span>
+<span class="font-label-md text-label-md text-on-surface">Serves 4</span>
+</div>
+<div class="glass-panel px-sm py-2 rounded-full flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'wght' 300;">signal_cellular_alt</span>
+<span class="font-label-md text-label-md text-on-surface">Medium</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Canvas -->
+<main class="max-w-4xl mx-auto px-edge-margin pt-lg md:px-xl">
+<!-- Tab Navigation (Ingredients / Instructions) -->
+<div class="flex border-b border-outline-variant mb-lg sticky top-[72px] bg-background/95 backdrop-blur z-30 pt-xs">
+<button class="flex-1 pb-sm font-label-md text-label-md text-primary border-b-4 border-primary transition-colors relative" id="tab-ingredients" onclick="switchTab('ingredients')">
+                Ingredients
+            </button>
+<button class="flex-1 pb-sm font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors border-b-4 border-transparent" id="tab-instructions" onclick="switchTab('instructions')">
+                Instructions
+            </button>
+</div>
+<!-- Ingredients Section -->
+<section class="space-y-lg animate-fade-in" id="section-ingredients">
+<!-- Bento Box: Marinade -->
+<div class="bg-surface rounded-xl p-md shadow-[0px_4px_20px_rgba(38,70,83,0.06)] border border-outline-variant/30">
+<h3 class="font-headline-md text-headline-md text-primary mb-sm flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">blender</span>
+                    Chicken Marinade
+                </h3>
+<div class="space-y-3">
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">600g</span> Boneless, skinless chicken thighs (cut into bite-sized pieces)
+                        </div>
+</label>
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">1/2 cup</span> Plain yogurt (full fat)
+                        </div>
+</label>
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">1.5 tbsp</span> Minced garlic
+                        </div>
+</label>
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">1 tbsp</span> Minced ginger
+                        </div>
+</label>
+</div>
+</div>
+<!-- Bento Box: Curry Sauce -->
+<div class="bg-surface rounded-xl p-md shadow-[0px_4px_20px_rgba(38,70,83,0.06)] border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-bl-full -z-0"></div>
+<h3 class="font-headline-md text-headline-md text-primary mb-sm flex items-center gap-2 relative z-10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">soup_kitchen</span>
+                    Makhani Sauce
+                </h3>
+<div class="space-y-3 relative z-10">
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">2 tbsp</span> Ghee or butter
+                        </div>
+</label>
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">1</span> Large onion, finely chopped
+                        </div>
+</label>
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">400g</span> Tomato puree (passata)
+                        </div>
+</label>
+<label class="check-item flex items-start gap-sm cursor-pointer group p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<div class="relative flex items-center justify-center mt-1">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary-container bg-transparent transition-all" type="checkbox"/>
+</div>
+<div class="flex-1 font-body-md text-body-md text-on-surface transition-colors">
+<span class="font-semibold">1/2 cup</span> Heavy whipping cream
+                        </div>
+</label>
+</div>
+</div>
+</section>
+<!-- Instructions Section (Hidden by default) -->
+<section class="hidden space-y-md" id="section-instructions">
+<div class="flex gap-md bg-surface p-md rounded-xl shadow-[0px_4px_20px_rgba(38,70,83,0.06)]">
+<div class="font-headline-xl text-headline-xl text-secondary opacity-50 shrink-0 mt-1">1</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">Marinate Chicken</h4>
+<p class="font-body-md text-body-md text-on-surface">In a bowl, combine chicken with all of the ingredients for the chicken marinade; let marinate for 30 minutes to an hour (or overnight if time allows).</p>
+</div>
+</div>
+<div class="flex gap-md bg-surface p-md rounded-xl shadow-[0px_4px_20px_rgba(38,70,83,0.06)]">
+<div class="font-headline-xl text-headline-xl text-secondary opacity-50 shrink-0 mt-1">2</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">Sear the Meat</h4>
+<p class="font-body-md text-body-md text-on-surface">Heat oil in a large skillet or pot over medium-high heat. When sizzling, add chicken pieces in batches, making sure not to crowd the pan. Fry until browned for only 3 minutes on each side. Set aside and keep warm. (You will finish cooking the chicken in the sauce).</p>
+</div>
+</div>
+<div class="flex gap-md bg-surface p-md rounded-xl shadow-[0px_4px_20px_rgba(38,70,83,0.06)]">
+<div class="font-headline-xl text-headline-xl text-secondary opacity-50 shrink-0 mt-1">3</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">Build the Sauce</h4>
+<p class="font-body-md text-body-md text-on-surface">Heat butter or ghee in the same pan. Fry the onions until they start to sweat (about 6 minutes) while scraping up any browned bits stuck on the bottom of the pan.</p>
+</div>
+</div>
+</section>
+<!-- Action Area -->
+<div class="mt-xl flex flex-col sm:flex-row gap-sm justify-center pb-xl">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-4 px-8 rounded-full shadow-[0px_8px_16px_rgba(244,162,97,0.2)] hover:bg-surface-tint active:scale-95 transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+<span class="material-symbols-outlined" data-weight="fill">play_arrow</span>
+                Start Cooking Mode
+            </button>
+<button class="border-2 border-secondary text-secondary font-label-md text-label-md py-4 px-8 rounded-full hover:bg-surface-container-low active:scale-95 transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+<span class="material-symbols-outlined">favorite_border</span>
+                Save Recipe
+            </button>
+</div>
+</main>
+<!-- Contextual FAB (Cooking Mode) -->
+<button class="fixed bottom-24 right-edge-margin w-14 h-14 bg-primary text-on-primary rounded-xl shadow-[0px_8px_16px_rgba(244,162,97,0.2)] flex items-center justify-center hover:bg-surface-tint transition-colors active:scale-90 z-40 md:hidden">
+<span class="material-symbols-outlined" data-weight="fill">play_arrow</span>
+</button>
+<script>
+        function switchTab(tabId) {
+            const ingBtn = document.getElementById('tab-ingredients');
+            const instBtn = document.getElementById('tab-instructions');
+            const ingSec = document.getElementById('section-ingredients');
+            const instSec = document.getElementById('section-instructions');
+
+            if (tabId === 'ingredients') {
+                ingBtn.classList.add('text-primary', 'border-primary');
+                ingBtn.classList.remove('text-on-surface-variant', 'border-transparent');
+                
+                instBtn.classList.remove('text-primary', 'border-primary');
+                instBtn.classList.add('text-on-surface-variant', 'border-transparent');
+
+                ingSec.classList.remove('hidden');
+                instSec.classList.add('hidden');
+            } else {
+                instBtn.classList.add('text-primary', 'border-primary');
+                instBtn.classList.remove('text-on-surface-variant', 'border-transparent');
+                
+                ingBtn.classList.remove('text-primary', 'border-primary');
+                ingBtn.classList.add('text-on-surface-variant', 'border-transparent');
+
+                instSec.classList.remove('hidden');
+                ingSec.classList.add('hidden');
+            }
+        }
+        
+        // Hide TopAppBar on scroll down, show on scroll up for better reading experience
+        let lastScrollTop = 0;
+        const topBar = document.getElementById('top-app-bar');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scroll down
+                topBar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scroll up
+                topBar.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body></html>

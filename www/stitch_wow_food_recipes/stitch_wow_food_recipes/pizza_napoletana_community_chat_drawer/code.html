@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pizza Napoletana - Live Community Chat Drawer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>tailwind.config = {theme: {extend: {colors: {brand: {gold: "#FF9900", accent: "#FF6D00", surface: "#0B0B0B", card: "#141414", mint: "#00E676", border: "rgba(255, 255, 255, 0.08)"}, "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000;
+      color: #EDEDED;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 3px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 153, 0, 0.25);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="relative flex flex-col h-screen w-full select-none justify-end">
+<!-- Underlying Dimmed Recipe Screen Context (Simulated Background) -->
+<div class="absolute inset-0 z-0 opacity-25 pointer-events-none filter blur-[2px] overflow-hidden">
+<!-- Top Bar preview -->
+<div class="flex items-center justify-between p-4 bg-black/60 border-b border-white/10">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-zinc-400 text-lg">arrow_back</span>
+<span class="text-xs text-zinc-400 font-serif">Pizza Napoletana</span>
+</div>
+<span class="material-symbols-outlined text-zinc-400 text-lg">favorite</span>
+</div>
+<!-- Pizza Hero Image preview -->
+<div class="w-full h-64 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1XFXCgV6w0PmjPQmVaGNC0ed1aNgLUz41Wn1qIP5oygakW4mlkBrbnpHIA3wzzL9pCXTgsOB6qRjNdD_g5pYmblmpfEyrY56USg5BPZDNXRmBJ_bF_bMiaHUcV66BjD1dsk3QxDTfAmdfaVG4_LyNVfjLdD7P8U-BQQlTNLgNQ98BuGb1CCdEWdrsqKrA6PUcRHH_6w6Iv1TWljyqAQppZJj8mUDh4j4NA2jokkyArEkyRQDg3YUtd-K3N6');"></div>
+<div class="p-4 space-y-4">
+<div class="h-6 w-48 bg-zinc-800 rounded"></div>
+<div class="h-16 w-full bg-zinc-900 rounded-xl"></div>
+<div class="h-32 w-full bg-zinc-900 rounded-xl"></div>
+</div>
+</div>
+<!-- Deep Dim Backdrop Overlay -->
+<div class="absolute inset-0 bg-black/70 backdrop-blur-[3px] z-10 transition-opacity"></div>
+<!-- Expanded Community Chat Drawer (85% Height Bottom-Sheet) -->
+<div class="relative z-20 w-full h-[870px] bg-[#0B0B0B]/95 backdrop-blur-[20px] rounded-t-[32px] border-t border-white/10 shadow-[0_-12px_40px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden">
+<!-- Ambient Gold Glow Radial -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-24 bg-[#FF9900]/15 blur-3xl pointer-events-none rounded-full"></div>
+<!-- Top Drag Handle & Header Section -->
+<div class="relative pt-3 pb-3 px-5 border-b border-white/5 shrink-0">
+<!-- Minimalist Horizontal Gold Drag Handle -->
+<div class="w-12 h-1.5 bg-gradient-to-r from-[#FF9900]/40 via-[#FF9900] to-[#FF9900]/40 rounded-full mx-auto shadow-[0_0_8px_rgba(255,153,0,0.5)] cursor-pointer active:scale-95 transition-transform"></div>
+<!-- Drawer Header Bar -->
+<div class="flex items-center justify-between mt-3">
+<div class="flex flex-col">
+<div class="flex items-center space-x-2">
+<h1 class="text-lg font-serif font-semibold text-white tracking-wide">Pizza Napoletana Live Room</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#00E676]/10 text-[#00E676] border border-[#00E676]/20 shadow-[0_0_8px_rgba(0,230,118,0.25)]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse mr-1.5"></span>
+              340 Chefs Online
+            </span>
+</div>
+<p class="text-[11px] text-zinc-400 mt-0.5 font-light">Real-time troubleshooting, heat mastery &amp; dough tips</p>
+</div>
+<!-- Close / Minimize Drawer Action -->
+<button class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+<!-- Quick Topic Tags / Filter Strip -->
+<div class="flex items-center space-x-2 mt-3 overflow-x-auto no-scrollbar pb-1 text-[11px]">
+<span class="px-2.5 py-1 rounded-lg bg-[#FF9900]/15 text-[#FF9900] border border-[#FF9900]/30 font-medium whitespace-nowrap flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">local_fire_department</span> Fermentation &amp; Oven Heat
+        </span>
+<span class="px-2.5 py-1 rounded-lg bg-white/5 text-zinc-400 border border-white/5 hover:border-white/15 transition-colors whitespace-nowrap">
+          Substitutions
+        </span>
+<span class="px-2.5 py-1 rounded-lg bg-white/5 text-zinc-400 border border-white/5 hover:border-white/15 transition-colors whitespace-nowrap">
+          Hydration %
+        </span>
+<span class="px-2.5 py-1 rounded-lg bg-white/5 text-zinc-400 border border-white/5 hover:border-white/15 transition-colors whitespace-nowrap">
+          Sauce Ratio
+        </span>
+</div>
+</div>
+<!-- Continuous Vertical Scrolling Feed -->
+<div class="flex-1 overflow-y-auto px-4 py-4 space-y-4 custom-scrollbar">
+<!-- Timestamp Divider -->
+<div class="flex items-center justify-center">
+<span class="text-[10px] uppercase tracking-wider text-zinc-500 bg-white/5 px-2.5 py-0.5 rounded-full border border-white/5">Today • Woodfired Session #402</span>
+</div>
+<!-- Message 1: @CrustMaster -->
+<div class="flex items-start space-x-3 group">
+<!-- Avatar with Gold Border Badge -->
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-800 to-amber-500 p-[2px] shadow-[0_0_10px_rgba(255,153,0,0.35)]">
+<div class="w-full h-full rounded-full bg-[#1A1A1A] flex items-center justify-center text-xs font-bold text-amber-300">
+              CM
+            </div>
+</div>
+<!-- Master Badge -->
+<span class="absolute -bottom-1.5 -right-1 bg-gradient-to-r from-[#FF9900] to-[#FF6D00] text-black text-[8px] font-black uppercase px-1 rounded tracking-tighter shadow-sm border border-black">
+            Master
+          </span>
+</div>
+<!-- Chat Bubble -->
+<div class="flex-1 bg-[#141414] border border-white/10 rounded-2xl rounded-tl-sm p-3 shadow-md">
+<div class="flex items-baseline justify-between mb-1">
+<div class="flex items-center space-x-1.5">
+<span class="text-xs font-semibold text-white">@CrustMaster</span>
+<span class="text-[10px] text-[#FF9900] font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[11px]">verified</span> Pizzaiolo
+              </span>
+</div>
+<span class="text-[10px] text-zinc-500">2m ago</span>
+</div>
+<p class="text-[13px] text-zinc-200 leading-relaxed font-normal">
+            PSA: Make sure your oven preheats for at least 45 minutes to hit that absolute perfect puff on the cornicione! 🔥
+          </p>
+<!-- Message Reaction -->
+<div class="flex items-center space-x-3 mt-2 pt-2 border-t border-white/5 text-[11px] text-zinc-400">
+<button class="flex items-center space-x-1 hover:text-[#FF9900] transition-colors">
+<span>🍕</span>
+<span class="font-medium">24</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-[#00E676] transition-colors">
+<span>🔥</span>
+<span class="font-medium">18</span>
+</button>
+<button class="ml-auto text-[10px] hover:text-white text-zinc-500 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">reply</span> Reply
+            </button>
+</div>
+</div>
+</div>
+<!-- Message 2: @DelhiFoodie92 -->
+<div class="flex items-start space-x-3 group">
+<!-- Avatar -->
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-700 to-teal-900 p-[1.5px]">
+<div class="w-full h-full rounded-full bg-[#161616] flex items-center justify-center text-xs font-semibold text-emerald-400">
+              DF
+            </div>
+</div>
+</div>
+<!-- Chat Bubble -->
+<div class="flex-1 bg-[#141414] border border-white/10 rounded-2xl rounded-tl-sm p-3 shadow-md">
+<div class="flex items-baseline justify-between mb-1">
+<div class="flex items-center space-x-1.5">
+<span class="text-xs font-semibold text-white">@DelhiFoodie92</span>
+<span class="text-[9px] bg-white/5 text-zinc-400 px-1.5 py-0.2 rounded border border-white/5">Verified Home Chef</span>
+</div>
+<span class="text-[10px] text-zinc-500">5m ago</span>
+</div>
+<p class="text-[13px] text-zinc-200 leading-relaxed font-normal">
+            Subbed the San Marzano for organic plum tomatoes since my local store ran out, still tastes incredibly sweet and robust!
+          </p>
+<!-- Helpful tag / reactions -->
+<div class="flex items-center space-x-3 mt-2 pt-2 border-t border-white/5 text-[11px] text-zinc-400">
+<button class="flex items-center space-x-1 hover:text-[#FF9900] transition-colors">
+<span>🍅</span>
+<span class="font-medium">9</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-amber-400 transition-colors">
+<span>❤️</span>
+<span class="font-medium">12</span>
+</button>
+<button class="ml-auto text-[10px] hover:text-white text-zinc-500 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">reply</span> Reply
+            </button>
+</div>
+</div>
+</div>
+<!-- Message 3: @BakingQueen (with photo chip attachment) -->
+<div class="flex items-start space-x-3 group">
+<!-- Avatar -->
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-600 to-rose-900 p-[1.5px]">
+<div class="w-full h-full rounded-full bg-[#181818] flex items-center justify-center text-xs font-bold text-pink-300">
+              BQ
+            </div>
+</div>
+</div>
+<!-- Chat Bubble -->
+<div class="flex-1 bg-[#141414] border border-white/10 rounded-2xl rounded-tl-sm p-3 shadow-md">
+<div class="flex items-baseline justify-between mb-1">
+<div class="flex items-center space-x-1.5">
+<span class="text-xs font-semibold text-white">@BakingQueen</span>
+<span class="text-[9px] bg-[#FF9900]/10 text-[#FF9900] px-1.5 py-0.2 rounded border border-[#FF9900]/20 font-medium">Bake Specialist</span>
+</div>
+<span class="text-[10px] text-zinc-500">8m ago</span>
+</div>
+<p class="text-[13px] text-zinc-200 leading-relaxed font-normal mb-2.5">
+            Leopard spotting turned out gorgeous using the 450°C woodfired timer tip. Highly recommend!
+          </p>
+<!-- Attached Photo Thumbnail Chip -->
+<div class="relative rounded-xl overflow-hidden border border-amber-500/30 bg-black/40 group/photo cursor-pointer shadow-lg max-w-[220px]">
+<img alt="Leopard spotted pizza crust edge" class="w-full h-28 object-cover group-hover/photo:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1XFXCgV6w0PmjPQmVaGNC0ed1aNgLUz41Wn1qIP5oygakW4mlkBrbnpHIA3wzzL9pCXTgsOB6qRjNdD_g5pYmblmpfEyrY56USg5BPZDNXRmBJ_bF_bMiaHUcV66BjD1dsk3QxDTfAmdfaVG4_LyNVfjLdD7P8U-BQQlTNLgNQ98BuGb1CCdEWdrsqKrA6PUcRHH_6w6Iv1TWljyqAQppZJj8mUDh4j4NA2jokkyArEkyRQDg3YUtd-K3N6"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-1.5 left-2 flex items-center space-x-1 text-[10px] text-white font-medium">
+<span class="material-symbols-outlined text-[12px] text-[#00E676]">check_circle</span>
+<span>450°C • 90s Flash Bake</span>
+</div>
+<div class="absolute top-1.5 right-1.5 bg-black/60 backdrop-blur-md rounded-full px-1.5 py-0.5 text-[9px] text-zinc-300 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]">photo_camera</span> 1 Photo
+            </div>
+</div>
+<!-- Reactions -->
+<div class="flex items-center space-x-3 mt-2.5 pt-2 border-t border-white/5 text-[11px] text-zinc-400">
+<button class="flex items-center space-x-1 hover:text-[#FF9900] transition-colors">
+<span>👏</span>
+<span class="font-medium">38</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-[#00E676] transition-colors">
+<span>🤤</span>
+<span class="font-medium">19</span>
+</button>
+<button class="ml-auto text-[10px] hover:text-white text-zinc-500 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">reply</span> Reply
+            </button>
+</div>
+</div>
+</div>
+<!-- Live Typing Indicator -->
+<div class="flex items-center space-x-2 pl-12 pt-1 text-[11px] text-zinc-500">
+<span class="flex space-x-1">
+<span class="w-1.5 h-1.5 bg-[#00E676] rounded-full animate-bounce"></span>
+<span class="w-1.5 h-1.5 bg-[#00E676] rounded-full animate-bounce [animation-delay:0.2s]"></span>
+<span class="w-1.5 h-1.5 bg-[#00E676] rounded-full animate-bounce [animation-delay:0.4s]"></span>
+</span>
+<span>Chef Antonio Rossi is typing...</span>
+</div>
+</div>
+<!-- Absolute Bottom Sticky Footer Chat Input Box -->
+<div class="relative shrink-0 p-3.5 bg-[#0e0e0e]/95 backdrop-blur-xl border-t border-white/10 shadow-[0_-8px_25px_rgba(0,0,0,0.7)]">
+<!-- Voice / Media Attachment Quick Actions Strip -->
+<div class="flex items-center justify-between mb-2 px-1">
+<div class="flex items-center space-x-2 text-xs">
+<button class="flex items-center space-x-1 text-zinc-400 hover:text-white px-2 py-0.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-[#FF9900]">add_photo_alternate</span>
+<span class="text-[11px]">Bake Photo</span>
+</button>
+<button class="flex items-center space-x-1 text-zinc-400 hover:text-white px-2 py-0.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-[#00E676]">timer</span>
+<span class="text-[11px]">Attach Timer</span>
+</button>
+</div>
+<span class="text-[10px] text-zinc-500">Annapurna AI Guard Active</span>
+</div>
+<!-- Main Input Bar Container -->
+<div class="flex items-center space-x-2 bg-[#171717] border border-white/15 focus-within:border-[#FF9900]/80 rounded-2xl px-3 py-2 shadow-inner transition-colors">
+<!-- Camera Attachment Trigger -->
+<button class="text-zinc-400 hover:text-white transition-colors p-1" title="Attach media">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</button>
+<!-- Input Field -->
+<input class="flex-1 bg-transparent text-[13px] text-white placeholder-zinc-500 outline-none font-normal" placeholder="Type culinary message or attach photo..." type="text"/>
+<!-- Glowing Neon-Mint Microphone Wave Icon Button -->
+<button class="relative p-1.5 rounded-xl bg-[#00E676]/10 text-[#00E676] hover:bg-[#00E676]/20 border border-[#00E676]/30 shadow-[0_0_10px_rgba(0,230,118,0.25)] active:scale-95 transition-all flex items-center justify-center group" title="Voice message">
+<span class="material-symbols-outlined text-[19px]">mic</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#00E676] animate-ping"></span>
+</button>
+<!-- Sharp Orange Send Arrow Trigger -->
+<button class="p-2 rounded-xl bg-gradient-to-tr from-[#FF9900] to-[#FF6D00] text-black font-bold hover:brightness-110 active:scale-95 transition-transform shadow-[0_0_12px_rgba(255,153,0,0.4)] flex items-center justify-center" title="Send message">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+<!-- Bottom Home Indicator Bar -->
+<div class="w-32 h-1 bg-white/20 rounded-full mx-auto mt-3"></div>
+</div>
+</div>
+</body></html>

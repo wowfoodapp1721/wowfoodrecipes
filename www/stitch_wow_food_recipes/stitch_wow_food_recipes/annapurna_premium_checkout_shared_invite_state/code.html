@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annapurna Premium Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-tint": "#ffb86f", "on-surface": "#e2e2e2", "surface-container-lowest": "#0e0e0e", "secondary-fixed-dim": "#00e55b", "on-surface-variant": "#dbc2ad", "on-error": "#690005", "surface-container-highest": "#353535", "on-primary-container": "#653a00", error: "#ffb4ab", "primary-fixed-dim": "#ffb86f", "surface-variant": "#353535", "on-tertiary-fixed": "#410002", "surface-dim": "#131313", "on-background": "#e2e2e2", "on-secondary-container": "#007128", background: "#131313", "on-secondary-fixed": "#002107", "on-primary-fixed-variant": "#693c00", "surface-bright": "#393939", "tertiary-fixed-dim": "#ffb4ac", "secondary-container": "#00fe66", secondary: "#ebffe6", "on-primary": "#4a2800", "tertiary-container": "#ff9389", "outline-variant": "#554434", outline: "#a38d7a", "on-tertiary-container": "#8d000c", "inverse-primary": "#8a5100", surface: "#131313", "on-secondary": "#003911", primary: "#ffc082", "surface-container": "#1f1f1f", "on-error-container": "#ffdad6", "inverse-surface": "#e2e2e2", "secondary-fixed": "#6bff83", "inverse-on-surface": "#303030", tertiary: "#ffbcb5", "on-primary-fixed": "#2c1600", "tertiary-fixed": "#ffdad6", "on-tertiary": "#690006", "error-container": "#93000a", "on-secondary-fixed-variant": "#00531b", "primary-fixed": "#ffdcbd", "surface-container-low": "#1b1b1b", "surface-container-high": "#2a2a2a", "on-tertiary-fixed-variant": "#93000d", "primary-container": "#ff9900"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"stack-md": "12px", "stack-lg": "24px", "stack-sm": "4px", base: "8px", gutter: "16px", "container-margin": "24px"}, fontFamily: {"title-md": ["Hanken Grotesk"], "headline-lg": ["EB Garamond"], "display-lg": ["EB Garamond"], "label-caps": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "body-sm": ["Hanken Grotesk"], "headline-lg-mobile": ["EB Garamond"]}, fontSize: {"title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}]}}}};</script>
+<style>
+        body { background-color: #000000; }
+        .gold-neon-border { position: relative; }
+        .gold-neon-border::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            box-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;
+        }
+        .hero-glow { box-shadow: 0 0 24px rgba(255, 215, 0, 0.15); border-color: rgba(255, 215, 0, 0.4); }
+        .gold-btn { background: linear-gradient(135deg, #FFD700, #FFA500); box-shadow: 0 4px 20px rgba(255, 165, 0, 0.4); }
+        .custom-radio:checked { accent-color: #FF9900; }
+        
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .slide-up-modal { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-surface font-body-sm relative overflow-hidden flex flex-col justify-end pb-0 md:hidden">
+<!-- Modal Background Image (Atmospheric) -->
+<div class="absolute inset-0 bg-cover bg-center opacity-20 w-full h-full" data-alt="A cinematic, low-key lighting close-up of premium culinary ingredients like saffron threads and gold leaf on black slate, creating a rich, dark mode luxury aesthetic. Subtle warm golden bokeh in the deep background, 8k resolution, highly detailed." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC74DpLMkx5JsJSHPPJnGz7bNZsLPE0t7NRC-NCfjp3-7hQkvkqni0Ncza8n3DhuyE9pNBtQjsMBkXITS2T32NzOhxpZqDxSsBOdqryNVc-XQ0jRdX30gxn_UCLo7FBRXWZSqY_kXgaMBMT0hW1ABdiFAp2AcondOywMppLXx_KwdCAG7LVgTMzjRSE8DItfKC12KxSIuU1DlbO1nXwLxLQZjWbUyOObFKfYogW5rDcUmJ6eckxBPgXjA')"></div>
+<!-- Bottom Sheet Modal -->
+<main class="slide-up-modal relative w-full bg-black/60 backdrop-blur-2xl rounded-t-3xl border border-white/10 border-b-0 pt-stack-lg pb-stack-lg px-container-margin gold-neon-border z-10 flex flex-col gap-stack-lg max-h-[795px] overflow-y-auto">
+<!-- Drag Handle -->
+<div class="w-full py-2 px-4 mb-4 rounded-lg bg-[rgba(255,59,48,0.1)] border border-[#FF3B30]/40 flex items-center gap-2 shadow-[0_0_15px_rgba(255,59,48,0.2)]"><span class="material-symbols-outlined text-[#FF3B30] text-sm">celebration</span><p class="text-white text-xs font-medium tracking-wide uppercase">Your friend has invited you to unlock this premium masterclass recipe!</p></div><div class="w-12 h-1 bg-white/20 rounded-full mx-auto -mt-stack-md mb-base"></div>
+<!-- Header -->
+<header class="text-center flex flex-col items-center gap-stack-sm">
+<span class="material-symbols-outlined text-[40px] text-[#FF3B30] drop-shadow-[0_0_12px_rgba(255,59,48,0.6)] mb-base" style="filter: drop-shadow(rgba(255, 59, 48, 0.4) 0px 0px 12px);">workspace_premium</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-white tracking-tight">Unlock Premium Masterclasses</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-[280px]">Learn authentic secret techniques from global master chefs</p>
+</header>
+<!-- Pricing Options -->
+<section class="flex flex-col gap-stack-md" id="pricing-container">
+<!-- Card 1 -->
+<label class="pricing-card relative flex items-start gap-stack-md p-stack-md rounded-xl backdrop-blur-md border cursor-pointer transition-all duration-200 border-white/10 bg-surface-container/60">
+<input class="custom-radio w-5 h-5 mt-1 border-white/20 bg-black/40 text-primary-container focus:ring-primary-container focus:ring-offset-black" name="premium_plan" type="radio" value="129"/>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-md text-title-md text-white">Monthly Pass</span>
+<span class="font-title-md text-title-md text-[#FF3B30]">₹129</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Full premium access, cancel anytime.</p>
+</div>
+</label>
+<!-- Card 2 -->
+<label class="pricing-card relative flex items-start gap-stack-md p-stack-md rounded-xl backdrop-blur-md border cursor-pointer transition-all duration-200 border-primary-container/50 bg-surface-container/80">
+<input class="custom-radio w-5 h-5 mt-1 border-white/20 bg-black/40 text-primary-container focus:ring-primary-container focus:ring-offset-black" name="premium_plan" type="radio" value="449"/>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-md text-title-md text-white">6-Month Bundle</span>
+<span class="font-title-md text-title-md text-[#FF3B30]">₹449</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Breaks down to just ₹75 / month.</p>
+</div>
+</label>
+<!-- Card 3 (HERO) -->
+<label class="pricing-card relative flex items-start gap-stack-md p-stack-md rounded-xl bg-[#121212] backdrop-blur-lg border border-[#FF3B30]/60 cursor-pointer transition-all duration-200 mt-2" style="box-shadow: rgba(255, 59, 48, 0.2) 0px 0px 24px;">
+<div class="absolute -top-3 right-4 bg-[#FF3B30] text-black font-label-caps text-label-caps px-3 py-1 rounded-full font-bold shadow-[0_0_12px_rgba(255,59,48,0.5)]">
+                    BEST VALUE — ONLY ₹58/MO!
+                </div>
+<input checked="" class="custom-radio w-5 h-5 mt-2 border-[#FF3B30] bg-black/40 text-[#FF3B30] focus:ring-[#FF3B30] focus:ring-offset-black" name="premium_plan" style="accent-color: #FF3B30;" type="radio" value="699"/>
+<div class="flex-1 pt-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-title-md text-title-md text-white font-bold">Premium Pro Annual</span>
+<span class="font-title-md text-title-md text-[#FF3B30] font-bold">₹699</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Billed annually.</p>
+</div>
+</label>
+</section>
+<!-- Action Area -->
+<div class="mt-base flex flex-col gap-stack-md">
+<button class="w-full py-4 rounded-full bg-gradient-to-r from-[#FF3B30] to-[#E02D22] font-title-md text-title-md text-black font-bold active:scale-95 transition-transform duration-200 shadow-[0_8px_24px_rgba(255,59,48,0.4)]" id="activate-btn">
+                ACTIVATE YOUR PLAN
+            </button>
+<div class="flex justify-center gap-stack-lg mt-base opacity-60">
+<a class="font-label-caps text-label-caps hover:text-white transition-colors" href="#">Restore Purchases</a>
+<a class="font-label-caps text-label-caps hover:text-white transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</main>
+<!-- Fake Razorpay Overlay -->
+<div class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm hidden flex-col items-center justify-end md:justify-center p-4" id="razorpay-overlay">
+<div class="w-full max-w-md bg-white text-black rounded-t-2xl md:rounded-2xl p-6 slide-up-modal">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-2">
+<span class="font-bold text-lg">Razorpay</span>
+</div>
+<button class="material-symbols-outlined text-gray-500" id="close-overlay">close</button>
+</div>
+<div class="text-center mb-8">
+<p class="text-sm text-gray-500 mb-1">Annapurna Premium</p>
+<h2 class="text-3xl font-bold" id="rzp-amount">₹699.00</h2>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">account_balance_wallet</span>
+                    Pay via UPI (GPay, PhonePe)
+                </button>
+<button class="w-full bg-gray-100 text-gray-800 rounded-lg py-3 font-semibold">
+                    Other Payment Methods
+                </button>
+</div>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.pricing-card');
+            const radios = document.querySelectorAll('input[name="premium_plan"]');
+            const activateBtn = document.getElementById('activate-btn');
+            const overlay = document.getElementById('razorpay-overlay');
+            const closeOverlayBtn = document.getElementById('close-overlay');
+            const rzpAmount = document.getElementById('rzp-amount');
+
+            // Handle card selection styling
+            function updateCardStyles() {
+                cards.forEach(card => {
+                    const radio = card.querySelector('input');
+                    if (radio.checked) {
+                        card.classList.add('border-primary-container/50', 'bg-surface-container/80');
+                        card.classList.remove('border-white/10', 'bg-surface-container/60');
+                    } else {
+                        card.classList.remove('border-primary-container/50', 'bg-surface-container/80');
+                        card.classList.add('border-white/10', 'bg-surface-container/60');
+                    }
+                });
+            }
+
+            // Click entire card to select
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const radio = card.querySelector('input');
+                    radio.checked = true;
+                    updateCardStyles();
+                });
+            });
+
+            // Initial state
+            updateCardStyles();
+
+            // Checkout flow
+            activateBtn.addEventListener('click', () => {
+                const selectedPlan = document.querySelector('input[name="premium_plan"]:checked').value;
+                rzpAmount.textContent = `₹${selectedPlan}.00`;
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            });
+
+            closeOverlayBtn.addEventListener('click', () => {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            });
+        });
+    </script>
+</body></html>

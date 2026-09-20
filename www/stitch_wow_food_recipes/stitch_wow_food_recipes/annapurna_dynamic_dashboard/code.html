@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annapurna Home Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-container": "#007128", "inverse-primary": "#8a5100", "inverse-surface": "#e2e2e2", "surface-container-lowest": "#0e0e0e", "on-primary-fixed-variant": "#693c00", "on-surface": "#e2e2e2", "surface-variant": "#353535", "surface-container-high": "#2a2a2a", "on-background": "#e2e2e2", "primary-fixed-dim": "#ffb86f", "surface-container": "#1f1f1f", "secondary-fixed-dim": "#00e55b", "on-secondary-fixed-variant": "#00531b", "on-secondary": "#003911", "primary-fixed": "#ffdcbd", primary: "#ffc082", background: "#131313", "on-surface-variant": "#dbc2ad", "inverse-on-surface": "#303030", "outline-variant": "#554434", surface: "#131313", secondary: "#ebffe6", "surface-tint": "#ffb86f", "on-secondary-fixed": "#002107", "on-primary": "#4a2800", "on-error": "#690005", "on-error-container": "#ffdad6", "primary-container": "#ff9900", "surface-container-low": "#1b1b1b", "on-primary-fixed": "#2c1600", outline: "#a38d7a", "surface-container-highest": "#353535", "on-tertiary-fixed": "#410002", "error-container": "#93000a", tertiary: "#ffbcb5", error: "#ffb4ab", "tertiary-fixed-dim": "#ffb4ac", "on-tertiary": "#690006", "secondary-fixed": "#6bff83", "surface-bright": "#393939", "on-tertiary-fixed-variant": "#93000d", "tertiary-container": "#ff9389", "on-tertiary-container": "#8d000c", "on-primary-container": "#653a00", "tertiary-fixed": "#ffdad6", "secondary-container": "#00fe66", "surface-dim": "#131313"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"stack-lg": "24px", "container-margin": "24px", base: "8px", "stack-sm": "4px", "stack-md": "12px", gutter: "16px"}, fontFamily: {"body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "headline-lg": ["EB Garamond"], "label-caps": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "headline-lg-mobile": ["EB Garamond"]}, fontSize: {"body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}]}}}};</script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e2e2e2;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(31, 31, 31, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-modal {
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .neon-glow-mango {
+            box-shadow: 0 0 12px rgba(255, 153, 0, 0.5);
+        }
+        .neon-border-mango {
+            border-color: rgba(255, 153, 0, 0.8);
+            box-shadow: inset 0 0 8px rgba(255, 153, 0, 0.3), 0 0 8px rgba(255, 153, 0, 0.3);
+        }
+        .veg-glow {
+            box-shadow: 0 0 8px rgba(0, 254, 102, 0.6);
+        }
+        .nonveg-glow {
+            box-shadow: 0 0 8px rgba(255, 180, 171, 0.6);
+        }
+        .gradient-mask {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+        }
+        /* Hide scrollbar for horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-sm pb-24">
+<!-- TopAppBar -->
+<header class="bg-black/60 backdrop-blur-lg fixed top-0 w-full border-b border-white/10 flat no shadows flex justify-between items-center px-container-margin py-base z-50 left-0">
+<div class="flex items-center gap-3">
+<div class="relative w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container neon-glow-mango">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a cheerful chef in a glowing kitchen environment. Rich culinary dark mode aesthetic with absolute black background and electric mango neon accents highlighting the face. High cinematic quality, 8k resolution, dramatic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADDYU-11ogL1Nu3tvwooEgiUItnYkOm4Z4gbKiEOiUnAk0kHdgwj_QzY1Ez56MSDHRSwv2CLIjayg_8U7qJoVCv1x8CcwaOSNZ4Bp3uKhtKl3_i2ar145_cnW326KFoEGLP28uC0ER080hTQnj56IZBmmm31iKqHN1Y_8IRR92k58__tx_90rhhP-53Rr_DpWxbservEzMcDDhfOhJzKM3hA8A9I8JrJjftJNoH8peMHDREtoj3mT_fQ"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container" data-icon="location_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Mumbai, India</span>
+</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile lowercase text-on-surface">
+<span class="text-primary-container">anna</span>purna
+                </div>
+</div>
+</div>
+<div class="relative active:scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary-container text-3xl" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-3 h-3 bg-primary-container rounded-full border-2 border-black neon-glow-mango"></span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[90px] px-container-margin md:px-0 max-w-[1280px] mx-auto md:w-11/12 lg:w-10/12 xl:w-9/12 overflow-y-auto">
+<!-- Search Section -->
+<section class="mt-stack-lg flex gap-3 items-center">
+<div class="flex-1 glass-panel rounded-full flex items-center px-4 py-3 border border-white/10 focus-within:neon-border-mango transition-all duration-300">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-on-surface w-full font-body-lg placeholder-on-surface-variant focus:ring-0 px-0" placeholder="Search recipes, ingredients..." type="text"/>
+<span class="material-symbols-outlined text-primary-container ml-2 cursor-pointer" data-icon="mic">mic</span>
+</div>
+<button class="w-12 h-12 glass-panel rounded-lg flex justify-center items-center neon-border-mango active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary-container" data-icon="tune">tune</span>
+</button>
+</section>
+<!-- Categories (Horizontal Scroll) -->
+<section class="mt-stack-lg">
+<h2 class="font-title-md text-title-md text-on-surface mb-stack-md">Categories</h2>
+<div class="flex overflow-x-auto gap-4 no-scrollbar pb-4"><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">local_pizza</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap">Pizza</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">dinner_dining</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap">Pasta</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">lunch_dining</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap">Burger</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">tapas</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Appetizers &amp; Snacks</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">bakery_dining</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Breads &amp; Flatbreads</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">soup_kitchen</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Curries &amp; Gravies</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">rice_bowl</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Rice &amp; Pulao</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">fastfood</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Street Food</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">outdoor_grill</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Tandoori &amp; Grill</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">ramen_dining</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Soups &amp; Stews</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">icecream</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap w-[72px] truncate">Desserts</span></div><div class="flex flex-col items-center gap-2 min-w-[72px] cursor-pointer group"><div class="w-16 h-16 rounded-full glass-panel flex justify-center items-center group-hover:border-primary-container group-hover:neon-glow-mango transition-all duration-300 relative overflow-hidden"><span class="material-symbols-outlined text-primary-container text-3xl group-hover:text-primary-container transition-colors">local_bar</span></div><span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-container transition-colors text-center whitespace-nowrap">Beverages</span></div></div>
+</section>
+<!-- Trending Now (Horizontal Hero) -->
+<section class="mt-stack-lg">
+<div class="flex justify-between items-end mb-stack-md">
+<h2 class="font-title-md text-title-md text-on-surface">Trending Now</h2>
+<a class="font-label-caps text-label-caps text-primary-container flex items-center gap-1 hover:underline" href="#">
+                    View All <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="flex overflow-x-auto gap-gutter no-scrollbar pb-4 snap-x">
+<!-- Trending Card 1 -->
+<div class="min-w-[280px] w-[80vw] md:w-[320px] h-[380px] rounded-xl relative overflow-hidden snap-center glass-panel border border-white/10 group">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A stunning, overhead cinematic shot of a massive, perfectly crisp Masala Dosa served on a dark slate board. Rich culinary dark mode aesthetic. The dosa is golden brown, surrounded by small steel bowls of vibrant coconut chutney and rich red sambar. Absolute black background void, lit with electric mango accents to emphasize the crisp texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1cCVr2FaVL2yUhgoBDI9AYsYwJGAstoQR8aQmTL5T_0i9IVa5_TKhOF6zN7L1N6qp1CR7LDMN9E9a8l4pPu5dESW1lqJnOSeGFQnfN8KZbyfnFh73QI5fI1oB1gYxzNQrF_LvSvbVhnwvjyjZ2faLnSi8Ad9TWmUIwMfcP114nGW2xIyJ5jShQhBq0bmsKckkKs3Cjy36rj0n1pJGN3HK6g2PHH-hYTn0n1Qlc0_lIZjYpnMg6WYG5Q')"></div>
+<div class="absolute inset-0 gradient-mask flex flex-col justify-end p-4">
+<div class="flex justify-between items-start mb-2">
+<div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-secondary-container/50 veg-glow"><span class="w-2 h-2 rounded-full bg-secondary-container drop-shadow-[0_0_4px_#00fe66]"></span><span class="font-label-caps text-[10px] text-secondary-container uppercase tracking-wider">Veg</span></div>
+<div class="bg-primary-container text-black font-label-caps text-[10px] px-2 py-1 rounded-full uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="local_fire_department">local_fire_department</span> Trending
+                            </div>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-1">Crispy Masala Dosa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 line-clamp-2">South Indian classic with spiced potato filling, served with coconut chutney &amp; sambar.</p>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 border border-white/10">
+<span class="material-symbols-outlined text-primary-container text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-sm text-white">4.9</span>
+</div>
+<div class="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 border border-white/10">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]" data-icon="schedule">schedule</span>
+<span class="font-body-sm text-white">45 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trending Card 2 (Premium) -->
+<div class="min-w-[280px] w-[80vw] md:w-[320px] h-[380px] rounded-xl relative overflow-hidden snap-center glass-panel border border-[#FFD700]/40 group" style="box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" data-alt="A dramatic, close-up cinematic shot of rich Butter Chicken (Murgh Makhani) in a traditional hammered copper bowl. Rich culinary dark mode aesthetic. The vibrant orange-red curry is garnished with a swirl of cream and fresh cilantro. Floating in an absolute black void, lit with subtle gold and electric mango neon accents to highlight the glossy texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgNxefttx5E0VGFS89m8bSdNtVL1Sehh73TbUwLVjhXajdWtgBtor0k2f0ODHdJfO4zwHGgXWMhBBesEMMEY6zRjgm_LejOlrZy_VE-JAhFqnPvI57GSBOVtlyqanZ_yGuN5igsb2kJso0PzpGt9q_EATzN73ErgNRtf7F5R3L6z8-g9snoagmfb5FlB0lc6RfyMINPf0tXZ7a6hoVhBOYxPnEkAd2uNH6L4asy3Iko9jAK7-99YkMSA')"></div>
+<div class="absolute inset-0 gradient-mask flex flex-col justify-end p-4">
+<div class="flex justify-between items-start mb-2">
+<div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-error/50 nonveg-glow"><span class="w-2 h-2 rounded-full bg-error drop-shadow-[0_0_4px_#ffb4ab]"></span><span class="font-label-caps text-[10px] text-error uppercase tracking-wider">Non-Veg</span></div>
+<div class="bg-black/80 text-[#FFD700] border border-[#FFD700]/50 font-label-caps text-[10px] px-2 py-1 rounded-full uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span> Masterclass Premium
+                            </div>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-1">Delhi Butter Chicken</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 line-clamp-2">Authentic rich and creamy tomato gravy with charcoal-smoked chicken tikka.</p>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 border border-white/10">
+<span class="material-symbols-outlined text-primary-container text-[14px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-sm text-white">5.0</span>
+</div>
+<div class="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 border border-white/10">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]" data-icon="schedule">schedule</span>
+<span class="font-body-sm text-white">60 min</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Explore Regions (Bento Grid) -->
+<section class="mt-stack-lg mb-8">
+<h2 class="font-title-md text-title-md text-on-surface mb-stack-md">Explore Regions</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[160px]"><div class="col-span-2 row-span-2 rounded-xl glass-panel relative overflow-hidden group cursor-pointer border border-white/10 hover:border-primary-container transition-colors duration-300"><div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3mbElFSf6hxxjka_WgwlN_lvkJNEoHJD0J_7YFbIKDsqugz9rUn1St6vhwaue04zeA4XIDf5ILE7AI9E39j9_EwWpXzikPAhR8-LhUqAv1U4Ccs-AJlYErh-cbTT2mLzgoN8MXayXWTMBUNkPkstDX7D9DQHwunBmMvG92pF0kVvP8cicIiIoi4sAgwFHTTE65Yn7bAMsDJE6Iebf-BfJd9xYsnmFS6XYfaR24rzSrSLajw6zhkDoJQ')"></div><div class="absolute inset-0 gradient-mask flex flex-col justify-end p-4"><div class="self-start mb-auto"><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-secondary-container/50 veg-glow w-fit"><span class="w-2 h-2 rounded-full bg-secondary-container drop-shadow-[0_0_4px_#00fe66]"></span><span class="font-label-caps text-[10px] text-secondary-container uppercase tracking-wider">Veg</span></div></div><div><h3 class="font-headline-lg text-white drop-shadow-md">Premium Shahi Paneer</h3><p class="font-body-sm text-on-surface-variant mt-1">Rich cashew gravy with aromatic spices</p></div></div></div><div class="col-span-1 row-span-2 rounded-xl glass-panel relative overflow-hidden group cursor-pointer border border-white/10 hover:border-primary-container transition-colors duration-300"><div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnHXjEANrXloegxDIyjCeHrEEH2cIeVrxXbgYeXmk45v-W4OB9L5Py6_B5OSLKBcEQbm8ShDYPnHCZ_UwbdvW6oJnD3roElomWDjIh2wNBIlvr7I4ZWyob6cfK8L9Gb4bB9unctm8liMz9s3U8DsB8OSPIxmJKDrGomIQFIIj5QeBtiKHu5Ist41soPlpo2VPw8liPx7x9UIN5BJ6uYbxYj6KNpxIbAJP3u0NX83k2kztolTBmCBSM-Q')"></div><div class="absolute inset-0 gradient-mask flex flex-col justify-end p-3"><div class="self-start mb-auto"><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-secondary-container/50 veg-glow w-fit"><span class="w-2 h-2 rounded-full bg-secondary-container drop-shadow-[0_0_4px_#00fe66]"></span><span class="font-label-caps text-[10px] text-secondary-container uppercase tracking-wider">Veg</span></div></div><div><h3 class="font-title-md text-white drop-shadow-md">Crispy Masala Dosa</h3><p class="font-body-sm text-on-surface-variant mt-1 line-clamp-2">Classic fermented crepe with potato masala filling</p></div></div></div><div class="col-span-1 row-span-1 rounded-xl glass-panel relative overflow-hidden group cursor-pointer border border-[#FFD700]/40 transition-colors duration-300" style="box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);"><div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105 blur-[2px]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAwH_LZP6X5C-t-r3rHpuFvONlOpHaUhCkOqG-0WBO77fQ8TfVF34k-ApCbhYj1uX2bcWUJCh_7HnX846cLWoBZauJWnkvU9xNBAv0kXWuef-XrHKOotW2v8yWVoyhwTVFBjWC5rEmdOS13tqv_YlIsYBmPIitg4xivJDF4ecxwTzC_9wlKeivCR3IhsTqcFQJ55rOoFld08HwPzXya1Vxq2nOXYbrsHAxOYp059TAahGQs6M5maPNX0Q')"></div><div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div><div class="absolute inset-0 flex items-center justify-center z-10"><div class="bg-black/80 text-[#FFD700] border border-[#FFD700]/50 font-label-caps text-[10px] px-3 py-2 rounded-full uppercase flex flex-col items-center gap-1"><span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span> Premium</div></div><div class="absolute inset-0 gradient-mask flex flex-col justify-end p-3"><div class="self-start mb-auto"><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-error/50 nonveg-glow w-fit"><span class="w-2 h-2 rounded-full bg-error drop-shadow-[0_0_4px_#ffb4ab]"></span><span class="font-label-caps text-[10px] text-error uppercase tracking-wider">Non-Veg</span></div></div><div><h3 class="font-title-md text-white drop-shadow-md truncate">Masterclass Mustard Fish Curry</h3><p class="font-body-sm text-on-surface-variant mt-1 truncate">Traditional Bengali Machher Jhol secret method</p></div></div></div><div class="col-span-1 row-span-1 rounded-xl glass-panel relative overflow-hidden group cursor-pointer border border-[#FFD700]/40 transition-colors duration-300" style="box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);"><div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105 blur-[2px]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANM4E9_uU3CGMm_hXPg1d5LG0Pq3FCjjBVWdC73nsHFy-Sy_viNeOg2ady8UHd0DtsDJYu3buqMhBkpC4DMI1quMYFg73iqEjCzqtSxvsJ0Dl0p2TlGacLvKo1CcFNzc0bFevCAem027t-tJ6mBWdD9BGmeUuhHcBiGn6JnaGfyrwre9TPhTslr2yBrYyKzA8oiM97VXwQhZpeuSIv28PYkJ_p2httT-dIKgndABrisKb74dwnqMe5HA')"></div><div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div><div class="absolute inset-0 flex items-center justify-center z-10"><div class="bg-black/80 text-[#FFD700] border border-[#FFD700]/50 font-label-caps text-[10px] px-3 py-2 rounded-full uppercase flex flex-col items-center gap-1"><span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span> Premium</div></div><div class="absolute inset-0 gradient-mask flex flex-col justify-end p-3"><div class="self-start mb-auto"><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-error/50 nonveg-glow w-fit"><span class="w-2 h-2 rounded-full bg-error drop-shadow-[0_0_4px_#ffb4ab]"></span><span class="font-label-caps text-[10px] text-error uppercase tracking-wider">Non-Veg</span></div></div><div><h3 class="font-title-md text-white drop-shadow-md truncate">Goan Prawn Balchão</h3><p class="font-body-sm text-on-surface-variant mt-1 truncate">Fiery, tangy premium seafood specialty</p></div></div></div><div class="col-span-1 row-span-1 rounded-xl glass-panel relative overflow-hidden group cursor-pointer border border-white/10 hover:border-primary-container transition-colors duration-300"><div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHpQFsdIcr-A38Zk2vAfop-Uh7krIL3KonUrdzgnfyLsbVWLznnQ2qlLRUXlADVUj0638JEoxqRDEgr9RTqKgrW8kpO6hIMRlGRmaJCJYFPjEZUKjqgG3qcdP-eFa7v5VG_Us6CriiIUNo6mwSqR9lFHuDzVNPTPxaI_XQKxmikboSQ40DwVRLhhbVfn4fLPJvKReKAHiaCTbbgYTwnLoA_9E2XNY8fhEwGPFC1eptA1gbL1zWztt8cA')"></div><div class="absolute inset-0 gradient-mask flex flex-col justify-end p-3"><div class="self-start mb-auto"><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-error/50 nonveg-glow w-fit"><span class="w-2 h-2 rounded-full bg-error drop-shadow-[0_0_4px_#ffb4ab]"></span><span class="font-label-caps text-[10px] text-error uppercase tracking-wider">Non-Veg</span></div></div><div><h3 class="font-title-md text-white drop-shadow-md truncate">Smoked Chicken with Bamboo Shoots</h3><p class="font-body-sm text-on-surface-variant mt-1 truncate">Authentic tribal slow-cooked aromatic recipe</p></div></div></div><div class="col-span-1 row-span-1 rounded-xl glass-panel relative overflow-hidden group cursor-pointer border border-white/10 hover:border-primary-container transition-colors duration-300"><div class="absolute inset-0 bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAyJv2xnB8Kx2S1b8M5F5G37uFoUEMZwLxB7iTT81fcKNwgwinJNzQqytCKcm9Uy2pU0SCiPbTVAi7fDkfsTKZMeJK1fxJ2pb8W0gQN_dTXZ6f3uPi3IqgZeFOt_e6Dns-CQNNgzj7jcAiTYXaLmUKX9888pgHHHt33yIQQJuDVv5-mQGeB82sp3pIGwwJ81xwMU22kIhi2Qh_4VpW1Y9NEOsMi7vC0LVo5blcOx7bpe7ydhzWzByp41A')"></div><div class="absolute inset-0 gradient-mask flex flex-col justify-end p-3"><div class="self-start mb-auto flex flex-col gap-1.5"><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-secondary-container/50 veg-glow w-fit"><span class="w-2 h-2 rounded-full bg-secondary-container drop-shadow-[0_0_4px_#00fe66]"></span><span class="font-label-caps text-[10px] text-secondary-container uppercase tracking-wider">Veg</span></div><div class="bg-black/60 backdrop-blur-md rounded-full px-3 py-1 flex items-center gap-1.5 border border-error/50 nonveg-glow w-fit"><span class="w-2 h-2 rounded-full bg-error drop-shadow-[0_0_4px_#ffb4ab]"></span><span class="font-label-caps text-[10px] text-error uppercase tracking-wider">Non-Veg</span></div></div><div><h3 class="font-title-md text-white drop-shadow-md truncate">Global Fusion</h3><p class="font-body-sm text-on-surface-variant mt-1 truncate">Modern Indo-Chinese delights</p></div></div></div></div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-black/60 backdrop-blur-lg fixed bottom-0 w-full rounded-t-xl border-t border-white/10 flat no shadows left-0 z-50 flex justify-around items-center px-4 py-3 md:hidden">
+<!-- Active Item (Home) -->
+<a class="flex flex-col items-center justify-center text-primary-container drop-shadow-[0_0_8px_rgba(255,153,0,0.6)] hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-[10px] mt-1">Home</span>
+</a>
+<!-- Inactive Items -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="search">search</span>
+<span class="font-label-caps text-[10px] mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="favorite">favorite</span>
+<span class="font-label-caps text-[10px] mt-1">Favorites</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-label-caps text-[10px] mt-1">My Kitchen</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="person">person</span>
+<span class="font-label-caps text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+<!-- Desktop Sidebar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-[90px] h-[calc(100vh-90px)] w-[240px] glass-panel border-r border-white/10 py-6 px-4 z-40">
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-primary-container/10 border border-primary-container/30 text-primary-container neon-glow-mango transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-title-md text-[16px]">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="search">search</span>
+<span class="font-title-md text-[16px]">Explore</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="favorite">favorite</span>
+<span class="font-title-md text-[16px]">Favorites</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-title-md text-[16px]">My Kitchen</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="person">person</span>
+<span class="font-title-md text-[16px]">Profile</span>
+</a>
+</div>
+<div class="mt-auto">
+<div class="p-4 rounded-xl glass-panel border border-white/10 bg-gradient-to-br from-black/80 to-surface-container/50">
+<h4 class="font-title-md text-white mb-2">Masterclass Pro</h4>
+<p class="font-body-sm text-on-surface-variant mb-4 text-[12px]">Unlock premium chef recipes and ad-free experience.</p>
+<button class="w-full py-2 bg-primary-container text-black font-label-caps rounded-lg hover:bg-primary transition-colors">Upgrade Now</button>
+</div>
+</div>
+</aside>
+<style>
+        @media (min-width: 768px) {
+            main {
+                margin-left: 240px;
+                padding-top: 120px;
+                max-width: calc(100% - 240px);
+            }
+        }
+    </style>
+</body></html>

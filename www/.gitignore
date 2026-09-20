@@ -1,0 +1,7 @@
+/.gradle
+/.vscode
+/app
+/debug_test.js
+/gradle
+/node_modules
+/package-lock.json

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Screen - 7 - Grocery Shopping List View</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>tailwind.config = {theme: {extend: {colors: {brand: {orange: "#FF6D00", amber: "#FF9900", darkSurface: "#121212", cardBg: "#18181A", border: "#242428", muted: "#8E8E93"}, "tertiary-fixed-dim": "#ffb4ac", "surface-dim": "#131313", "on-secondary": "#003911", "secondary-fixed": "#6bff83", "surface-tint": "#ffb86f", "outline-variant": "#554434", primary: "#ffc082", "surface-container-high": "#2a2a2a", "on-primary": "#4a2800", "on-error-container": "#ffdad6", "surface-container": "#1f1f1f", secondary: "#ebffe6", "tertiary-fixed": "#ffdad6", outline: "#a38d7a", "surface-variant": "#353535", "secondary-fixed-dim": "#00e55b", error: "#ffb4ab", "on-tertiary": "#690006", "on-primary-container": "#653a00", "on-secondary-fixed-variant": "#00531b", "surface-bright": "#393939", "tertiary-container": "#ff9389", "on-secondary-container": "#007128", "primary-fixed-dim": "#ffb86f", "primary-fixed": "#ffdcbd", "on-background": "#e2e2e2", "surface-container-highest": "#353535", "inverse-surface": "#e2e2e2", "on-tertiary-container": "#8d000c", "surface-container-lowest": "#0e0e0e", "surface-container-low": "#1b1b1b", "inverse-primary": "#8a5100", "on-secondary-fixed": "#002107", "on-surface-variant": "#dbc2ad", tertiary: "#ffbcb5", "on-error": "#690005", "on-tertiary-fixed": "#410002", "on-primary-fixed-variant": "#693c00", "inverse-on-surface": "#303030", "primary-container": "#ff9900", surface: "#131313", "on-surface": "#e2e2e2", "on-primary-fixed": "#2c1600", "error-container": "#93000a", "on-tertiary-fixed-variant": "#93000d", "secondary-container": "#00fe66", background: "#131313"}, fontFamily: {serif: ["\"EB Garamond\"", "serif"], sans: ["\"Plus Jakarta Sans\"", "sans-serif"], "headline-lg-mobile": ["EB Garamond"], "body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "headline-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "label-caps": ["Hanken Grotesk"]}, fontSize: {"headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}], "body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}]}, spacing: {gutter: "16px", "stack-md": "12px", "stack-sm": "4px", base: "8px", "stack-lg": "24px", "container-margin": "24px"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+<style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Hide scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-white min-h-screen">
+<!-- Mobile Portrait Container (9:16 approx preview / native mobile standard) -->
+<div class="w-full min-h-screen bg-black flex flex-col relative pb-28 border-neutral-900/50 overflow-hidden">
+<!-- Top System Status / Brand Ambient Bar -->
+<div class="pt-4 px-6 pb-2 flex items-center justify-between text-xs text-neutral-400 font-medium">
+<div class="flex items-center gap-1.5">
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-full bg-neutral-900 flex items-center justify-center text-neutral-300 hover:text-white transition">
+</button>
+</div>
+</div>
+<!-- Header Section -->
+<!-- Main Checklist Area -->
+<main class="flex-1 px-6 space-y-6">
+<!-- Category 1: Meat & Poultry -->
+<!-- Category 2: Pantry & Sauces -->
+<!-- Category 3: Produce & Aromatics -->
+<!-- Completed Items Collapsible Section -->
+<div class="pt-2">
+</div>
+<!-- Quick Action: Instant Delivery Banner -->
+<div class="bg-gradient-to-r from-neutral-900 to-[#1c140d] border border-brand-orange/30 rounded-2xl p-4 flex items-center justify-between shadow-[0_4px_20px_rgba(255,109,0,0.08)]">
+<div>
+</div>
+</div>
+</main>
+<!-- Global Mobile Navigation Bar (Fixed Bottom) -->
+<nav class="fixed bottom-0 w-full z-50 bg-[#0a0a0a]/90 backdrop-blur-xl border-t border-neutral-800/80 px-6 py-3 flex items-center justify-around">
+<!-- Home Tab -->
+<a class="flex flex-col items-center justify-center text-neutral-400 hover:text-white transition group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">home</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Home</span>
+</a>
+<!-- Planner Tab -->
+<a class="flex flex-col items-center justify-center text-neutral-400 hover:text-white transition group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">calendar_month</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Planner</span>
+</a>
+<!-- Saved Tab -->
+<a class="flex flex-col items-center justify-center text-neutral-400 hover:text-white transition group" href="#">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">bookmark</span>
+<span class="text-[10px] font-medium tracking-tight mt-0.5">Saved</span>
+</a>
+<!-- Lists Tab (Active - Orange Highlight with subtle glow) -->
+<a class="flex flex-col items-center justify-center text-brand-orange relative group" href="#">
+<span class="material-symbols-outlined fill-1 text-[24px] drop-shadow-[0_0_8px_rgba(255,109,0,0.6)]">shopping_cart</span>
+<span class="text-[10px] font-bold tracking-tight mt-0.5 text-brand-orange drop-shadow-[0_0_6px_rgba(255,109,0,0.4)]">Lists</span>
+<span class="w-1 h-1 rounded-full bg-brand-orange absolute -bottom-1"></span>
+</a>
+</nav>
+</div>
+</body></html>

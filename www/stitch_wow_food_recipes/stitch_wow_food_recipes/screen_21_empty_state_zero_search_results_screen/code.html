@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Annapurna Home Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-container": "#007128", "inverse-primary": "#8a5100", "inverse-surface": "#e2e2e2", "surface-container-lowest": "#0e0e0e", "on-primary-fixed-variant": "#693c00", "on-surface": "#e2e2e2", "surface-variant": "#353535", "surface-container-high": "#2a2a2a", "on-background": "#e2e2e2", "primary-fixed-dim": "#ffb86f", "surface-container": "#1f1f1f", "secondary-fixed-dim": "#00e55b", "on-secondary-fixed-variant": "#00531b", "on-secondary": "#003911", "primary-fixed": "#ffdcbd", primary: "#ffc082", background: "#131313", "on-surface-variant": "#dbc2ad", "inverse-on-surface": "#303030", "outline-variant": "#554434", surface: "#131313", secondary: "#ebffe6", "surface-tint": "#ffb86f", "on-secondary-fixed": "#002107", "on-primary": "#4a2800", "on-error": "#690005", "on-error-container": "#ffdad6", "primary-container": "#ff9900", "surface-container-low": "#1b1b1b", "on-primary-fixed": "#2c1600", outline: "#a38d7a", "surface-container-highest": "#353535", "on-tertiary-fixed": "#410002", "error-container": "#93000a", tertiary: "#ffbcb5", error: "#ffb4ab", "tertiary-fixed-dim": "#ffb4ac", "on-tertiary": "#690006", "secondary-fixed": "#6bff83", "surface-bright": "#393939", "on-tertiary-fixed-variant": "#93000d", "tertiary-container": "#ff9389", "on-tertiary-container": "#8d000c", "on-primary-container": "#653a00", "tertiary-fixed": "#ffdad6", "secondary-container": "#00fe66", "surface-dim": "#131313"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"stack-lg": "24px", "container-margin": "24px", base: "8px", "stack-sm": "4px", "stack-md": "12px", gutter: "16px"}, fontFamily: {"body-sm": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"], "headline-lg": ["EB Garamond"], "label-caps": ["Hanken Grotesk"], "display-lg": ["EB Garamond"], "title-md": ["Hanken Grotesk"], "headline-lg-mobile": ["EB Garamond"]}, fontSize: {"body-sm": ["14px", {lineHeight: "20px", fontWeight: "400"}], "body-lg": ["16px", {lineHeight: "24px", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "500"}], "label-caps": ["12px", {lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "700"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600"}], "title-md": ["20px", {lineHeight: "28px", fontWeight: "600"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "500"}]}}}};</script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e2e2e2;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(31, 31, 31, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-modal {
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .neon-glow-mango {
+            box-shadow: 0 0 12px rgba(255, 153, 0, 0.5);
+        }
+        .neon-border-mango {
+            border-color: rgba(255, 153, 0, 0.8);
+            box-shadow: inset 0 0 8px rgba(255, 153, 0, 0.3), 0 0 8px rgba(255, 153, 0, 0.3);
+        }
+        .veg-glow {
+            box-shadow: 0 0 8px rgba(0, 254, 102, 0.6);
+        }
+        .nonveg-glow {
+            box-shadow: 0 0 8px rgba(255, 180, 171, 0.6);
+        }
+        .gradient-mask {
+            background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0) 100%);
+        }
+        /* Hide scrollbar for horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Tactile Havoc Lift Physics & Chromatic Diffuse Shadows */
+        .havoc-card {
+            will-change: transform, box-shadow, border-color;
+            transform: translate3d(0, 0, 0) scale(1);
+            transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.45s ease;
+            position: relative;
+        }
+
+        /* Default Hover Lift */
+        .havoc-card:hover {
+            transform: translate3d(0, -12px, 0) scale(1.03);
+            z-index: 20;
+        }
+
+        /* Scroll Focal State & Hover Chromatic Shadow Glows */
+        .havoc-card.havoc-active,
+        .havoc-card:hover {
+            transform: translate3d(0, -12px, 0) scale(1.03);
+            z-index: 20;
+        }
+
+        /* Midnight Magic Solver: Translucent Violet Shadow Glow */
+        .havoc-violet.havoc-active,
+        .havoc-violet:hover {
+            box-shadow: 0 20px 35px -5px rgba(168, 85, 247, 0.45), 0 0 25px rgba(147, 51, 234, 0.3);
+            border-color: rgba(192, 132, 252, 0.7) !important;
+        }
+
+        /* The Daily Spice Dial: Translucent Crimson-Red Shadow Glow */
+        .havoc-crimson.havoc-active,
+        .havoc-crimson:hover {
+            box-shadow: 0 20px 35px -5px rgba(239, 68, 68, 0.45), 0 0 25px rgba(220, 38, 38, 0.3);
+            border-color: rgba(248, 113, 113, 0.7) !important;
+        }
+
+        /* Local Market Tracker: Translucent Emerald-Teal Shadow Glow */
+        .havoc-emerald.havoc-active,
+        .havoc-emerald:hover {
+            box-shadow: 0 20px 35px -5px rgba(16, 185, 129, 0.45), 0 0 25px rgba(20, 184, 166, 0.3);
+            border-color: rgba(52, 211, 153, 0.7) !important;
+        }
+
+        /* Trending Now & Explore Regions: Warm Mango-Amber Glow */
+        .havoc-mango.havoc-active,
+        .havoc-mango:hover {
+            box-shadow: 0 20px 42px -6px rgba(255, 153, 0, 0.5), 0 0 32px rgba(255, 153, 0, 0.35);
+            border-color: rgba(255, 184, 111, 0.85) !important;
+        }
+        
+        .havoc-gold.havoc-active,
+        .havoc-gold:hover {
+            box-shadow: 0 20px 35px -5px rgba(255, 215, 0, 0.45), 0 0 25px rgba(255, 193, 7, 0.35);
+            border-color: rgba(255, 215, 0, 0.8) !important;
+        }
+
+        /* Region Specific Bento Glows */
+        .havoc-region-coastal.havoc-active,
+        .havoc-region-coastal:hover {
+            box-shadow: 0 20px 35px -5px rgba(16, 185, 129, 0.45), 0 0 25px rgba(16, 185, 129, 0.3);
+            border-color: rgba(52, 211, 153, 0.7) !important;
+        }
+        .havoc-region-mughlai.havoc-active,
+        .havoc-region-mughlai:hover {
+            box-shadow: 0 20px 35px -5px rgba(245, 158, 11, 0.45), 0 0 25px rgba(245, 158, 11, 0.3);
+            border-color: rgba(251, 191, 36, 0.7) !important;
+        }
+        .havoc-region-heritage.havoc-active,
+        .havoc-region-heritage:hover {
+            box-shadow: 0 20px 35px -5px rgba(234, 179, 8, 0.45), 0 0 25px rgba(234, 179, 8, 0.3);
+            border-color: rgba(250, 204, 21, 0.7) !important;
+        }
+        .havoc-region-arid.havoc-active,
+        .havoc-region-arid:hover {
+            box-shadow: 0 20px 35px -5px rgba(234, 88, 12, 0.45), 0 0 25px rgba(234, 88, 12, 0.3);
+            border-color: rgba(251, 146, 60, 0.7) !important;
+        }
+        .havoc-region-exotic.havoc-active,
+        .havoc-region-exotic:hover {
+            box-shadow: 0 20px 35px -5px rgba(20, 184, 166, 0.45), 0 0 25px rgba(20, 184, 166, 0.3);
+            border-color: rgba(45, 212, 191, 0.7) !important;
+        }
+        .havoc-region-global.havoc-active,
+        .havoc-region-global:hover {
+            box-shadow: 0 20px 35px -5px rgba(139, 92, 246, 0.45), 0 0 25px rgba(139, 92, 246, 0.3);
+            border-color: rgba(167, 139, 250, 0.7) !important;
+        }
+
+        /* Fluid Nav Bar Glide Indicator */
+        #nav-glider {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s ease;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-sm pb-24 bg-black">
+<!-- TopAppBar -->
+<header class="bg-black/80 backdrop-blur-xl fixed top-0 w-full border-b border-white/10 flex flex-col justify-center px-container-margin py-2.5 z-50 left-0">
+<div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute -top-10 -left-10 w-64 h-32 rounded-full pointer-events-none opacity-70" style="background: radial-gradient(circle, rgba(255, 153, 0, 0.25) 0%, rgba(255, 153, 0, 0.08) 45%, rgba(0, 0, 0, 0) 75%); filter: blur(36px);"></div>
+<div class="absolute -top-10 -right-6 w-56 h-32 rounded-full pointer-events-none opacity-60" style="background: radial-gradient(circle, rgba(0, 229, 255, 0.16) 0%, rgba(0, 229, 255, 0.05) 50%, rgba(0, 0, 0, 0) 75%); filter: blur(36px);"></div>
+</div>
+<!-- Top Row: Far-left location & chef greeting | Far-right soundscapes & bell -->
+<div class="flex items-center justify-between w-full relative z-10">
+<!-- Far-Left: Location Pin & Greeting -->
+<div class="flex items-center gap-1.5 cursor-pointer group">
+<span class="material-symbols-outlined text-[17px] text-primary-container drop-shadow-[0_0_6px_rgba(255,153,0,0.6)]" data-icon="location_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="flex flex-col leading-tight">
+<div class="flex items-center gap-1">
+<span class="font-label-caps text-[11px] font-bold text-white tracking-wide">Mumbai, India</span>
+<span class="material-symbols-outlined text-[13px] text-on-surface-variant group-hover:text-primary-container transition-colors">expand_more</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">Namaste, Chef</span>
+</div>
+</div>
+<!-- Far-Right: Soundscapes Audio Pill & Notification Bell -->
+<div class="flex items-center gap-2 relative">
+<button class="relative w-8 h-8 rounded-full glass-panel border border-white/10 flex items-center justify-center text-on-surface-variant hover:text-primary-container hover:border-primary-container/40 hover:neon-glow-mango transition-all duration-300 active:scale-90 group cursor-pointer" id="soundscapes-toggle-btn" onclick="const el=document.getElementById('soundscapes-popover'); el.classList.toggle('hidden');" title="Kitchen Soundscapes">
+<span class="flex items-end justify-center gap-[2px] h-3 w-3.5">
+<span class="w-[2px] h-1.5 bg-current rounded-full transition-all group-hover:h-3"></span>
+<span class="w-[2px] h-3 bg-primary-container rounded-full animate-pulse"></span>
+<span class="w-[2px] h-1 bg-current rounded-full transition-all group-hover:h-2.5"></span>
+<span class="w-[2px] h-2.5 bg-primary-container rounded-full animate-pulse"></span>
+</span>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-secondary-container drop-shadow-[0_0_4px_#00fe66]"></span>
+</button>
+<!-- Soundscapes Popover -->
+<div class="hidden absolute top-11 right-0 z-50 w-72 rounded-2xl glass-modal border border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.8)] p-3.5 backdrop-blur-xl bg-surface-container-highest/90 text-on-surface" id="soundscapes-popover">
+<div class="flex items-center justify-between pb-2 border-b border-white/10 mb-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-container">graphic_eq</span>
+<span class="font-title-md text-[13px] font-bold text-white tracking-wide">Kitchen Soundscapes</span>
+</div>
+<button class="w-6 h-6 rounded-full hover:bg-white/10 flex items-center justify-center text-on-surface-variant hover:text-white transition-colors cursor-pointer" onclick="document.getElementById('soundscapes-popover').classList.add('hidden')">
+<span class="material-symbols-outlined text-[15px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-1.5 mb-2.5">
+<div class="flex items-center justify-between p-2 rounded-xl bg-primary-container/10 border border-primary-container/30 cursor-pointer group transition-all">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-6 h-6 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary-container flex-shrink-0"><span class="material-symbols-outlined text-[14px]">pause</span></div>
+<div class="min-w-0">
+<p class="font-label-caps text-[11px] text-white font-bold truncate">Rain &amp; Sizzling Claypot</p>
+<p class="text-[9px] text-secondary-container flex items-center gap-1 font-body-sm"><span class="w-1 h-1 rounded-full bg-secondary-container animate-ping inline-block"></span> Playing • 432 Hz</p>
+</div>
+</div>
+<div class="flex items-end gap-[2px] h-2.5 flex-shrink-0">
+<span class="w-[2px] h-2.5 bg-secondary-container rounded-full animate-pulse"></span>
+<span class="w-[2px] h-1.5 bg-secondary-container rounded-full"></span>
+<span class="w-[2px] h-2 bg-secondary-container rounded-full animate-pulse"></span>
+</div>
+</div>
+</div>
+<div class="pt-2 border-t border-white/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-primary-container">volume_up</span>
+<div class="flex-1 h-1 bg-white/10 rounded-full overflow-hidden relative">
+<div class="h-full bg-primary-container w-[65%] rounded-full shadow-[0_0_8px_rgba(255,153,0,0.6)]"></div>
+</div>
+<span class="text-[10px] font-label-caps text-on-surface-variant">65%</span>
+</div>
+</div>
+<!-- Notification Bell -->
+<button class="relative w-8 h-8 rounded-full flex items-center justify-center active:scale-90 transition-transform cursor-pointer hover:bg-white/5">
+<span class="material-symbols-outlined text-primary-container text-[24px]" data-icon="notifications">notifications</span>
+<span class="absolute 1.5 top-1.5 right-1.5 w-2 h-2 bg-primary-container rounded-full ring-2 ring-black neon-glow-mango"></span>
+</button>
+</div>
+</div>
+<!-- Branding Row: Centered / Prominent 'annapurna' with Abstract AI Logo (Handi Pot + Infinity Steam Loop in liquid gold) -->
+<div class="flex items-center justify-center gap-2.5 mt-1 relative z-10">
+<div class="flex items-center justify-center w-8 h-8 flex-shrink-0 relative">
+<!-- Custom Abstract AI Logo: Handi pot + liquid gold continuous infinity steam loop -->
+<svg class="w-8 h-8 drop-shadow-[0_0_10px_rgba(255,170,0,0.7)]" fill="none" viewbox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="goldLiquidGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#FFF3C4"></stop>
+<stop offset="35%" stop-color="#FFB800"></stop>
+<stop offset="75%" stop-color="#FF8800"></stop>
+<stop offset="100%" stop-color="#E56A00"></stop>
+</lineargradient>
+<filter height="140%" id="liquidGlow" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="0" flood-color="#FF9900" flood-opacity="0.9" stddeviation="1.5"></fedropshadow>
+</filter>
+</defs>
+<!-- Infinity Steam Loop (AI Flow & Cosmic Culinary Energy) -->
+<path d="M11 12.5 C7 12.5 7 6 12 6 C16 6 17.5 11 18 11 C18.5 11 20 6 24 6 C29 6 29 12.5 25 12.5 C21.5 12.5 19.5 8 18 8 C16.5 8 14.5 12.5 11 12.5 Z" filter="url(#liquidGlow)" stroke="url(#goldLiquidGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+<!-- Steam rising spark accent -->
+<circle cx="18" cy="3.5" fill="#FFEAA7" opacity="0.95" r="1.2"></circle>
+<!-- Handi Pot Rim -->
+<path d="M7 16 C7 15 29 15 29 16 L27.5 17.8 C26.5 18.5 9.5 18.5 8.5 17.8 Z" fill="url(#goldLiquidGrad)"></path>
+<!-- Handi Pot Body (Curved Traditional Indian Vessel) -->
+<path d="M8.5 17.8 C7.5 21 6.5 24 9.5 28.5 C12.5 32 23.5 32 26.5 28.5 C29.5 24 28.5 21 27.5 17.8 Z" fill="rgba(255, 153, 0, 0.08)" stroke="url(#goldLiquidGrad)" stroke-linecap="round" stroke-width="2"></path>
+<!-- Decorative Pot Center Flame / Grain Emblem -->
+<path d="M18 20.5 C16 23.5 16 26.5 18 28.5 C20 26.5 20 23.5 18 20.5 Z" fill="url(#goldLiquidGrad)" opacity="0.85"></path>
+</svg>
+</div>
+<div class="font-headline-lg-mobile text-[26px] tracking-tight lowercase text-on-surface leading-none select-none">
+<span class="text-primary-container font-semibold">anna</span><span class="text-white font-normal">purna</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[96px] px-container-margin md:px-0 max-w-[1280px] mx-auto md:w-11/12 lg:w-10/12 xl:w-9/12 overflow-y-auto flex flex-col">
+<!-- Search Section -->
+<div class="mt-stack-lg w-full max-w-sm mx-auto h-14 rounded-full bg-[#F4F4F4] p-1.5 flex items-center justify-between shadow-sm relative z-20">
+<button class="w-11 h-11 min-w-[44px] rounded-full flex items-center justify-center bg-black cursor-pointer active:scale-95 transition-transform border-none outline-none p-0" title="Cooking Modes" type="button">
+<svg class="w-5 h-5" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 11c0 4.418 3.582 8 8 8s8-3.582 8-8H4z"></path>
+<path d="M2 11h20"></path>
+<path d="M6 3l12 6"></path>
+<path d="M9 3l9 6"></path>
+<path d="M12 19v2"></path>
+<path d="M9 21h6"></path>
+</svg>
+</button>
+<input class="flex-1 mx-3 bg-transparent border-none outline-none text-zinc-900 placeholder:text-zinc-500 text-[15px] font-sans focus:ring-0 px-0" placeholder="Let's Cook something..." type="text"/>
+<button class="w-11 h-11 min-w-[44px] rounded-full flex items-center justify-center bg-[#FF4500] cursor-pointer active:scale-95 transition-transform border-none outline-none p-0" title="Search" type="button">
+<svg class="w-5 h-5" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="7"></circle>
+<line x1="16.5" x2="21" y1="16.5" y2="21"></line>
+</svg>
+</button>
+</div><section class="flex-1 flex flex-col items-center justify-center text-center px-4 py-12 min-h-[calc(100vh-250px)] relative z-10"><div class="w-20 h-20 flex items-center justify-center mb-6 opacity-30 select-none"><svg class="w-20 h-20 drop-shadow-[0_0_10px_rgba(255,170,0,0.7)]" fill="none" viewbox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><defs><lineargradient id="emptyGoldGrad" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FFF3C4"></stop><stop offset="35%" stop-color="#FFB800"></stop><stop offset="75%" stop-color="#FF8800"></stop><stop offset="100%" stop-color="#E56A00"></stop></lineargradient></defs><path d="M11 12.5 C7 12.5 7 6 12 6 C16 6 17.5 11 18 11 C18.5 11 20 6 24 6 C29 6 29 12.5 25 12.5 C21.5 12.5 19.5 8 18 8 C16.5 8 14.5 12.5 11 12.5 Z" stroke="url(#emptyGoldGrad)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path><circle cx="18" cy="3.5" fill="#FFEAA7" r="1.2"></circle><path d="M7 16 C7 15 29 15 29 16 L27.5 17.8 C26.5 18.5 9.5 18.5 8.5 17.8 Z" fill="url(#emptyGoldGrad)"></path><path d="M8.5 17.8 C7.5 21 6.5 24 9.5 28.5 C12.5 32 23.5 32 26.5 28.5 C29.5 24 28.5 21 27.5 17.8 Z" fill="rgba(255, 153, 0, 0.08)" stroke="url(#emptyGoldGrad)" stroke-linecap="round" stroke-width="2"></path><path d="M18 20.5 C16 23.5 16 26.5 18 28.5 C20 26.5 20 23.5 18 20.5 Z" fill="url(#emptyGoldGrad)"></path></svg></div><p class="text-[#FFB300] font-headline-lg-mobile text-[17px] leading-relaxed max-w-[320px] mb-8 font-medium tracking-wide drop-shadow-sm">The AI Matrix couldn't parse that flavor combination yet. Try scanning your fridge or tapping our Artisanal Pizza Hub!</p><div class="flex flex-col sm:flex-row items-center gap-3 w-full max-w-xs justify-center"><button class="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-xl glass-panel border border-[#FFB300]/40 text-[#FFB300] hover:bg-white/5 active:scale-95 transition-all cursor-pointer shadow-[0_0_8px_rgba(255,153,0,0.2)]"><span class="material-symbols-outlined text-[18px]">document_scanner</span><span class="font-label-caps text-[12px] font-bold tracking-wide">Scan Your Fridge</span></button><button class="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-xl glass-panel border border-[#FFB300]/40 text-[#FFB300] hover:bg-white/5 active:scale-95 transition-all cursor-pointer shadow-[0_0_8px_rgba(255,153,0,0.2)]"><span class="material-symbols-outlined text-[18px]">local_pizza</span><span class="font-label-caps text-[12px] font-bold tracking-wide">Artisanal Pizza Hub</span></button></div></section>
+<!-- Categories (Horizontal Scroll) -->
+<!-- Midnight Magic Solver Bento Card -->
+<!-- Trending Now (Horizontal Hero) -->
+<!-- The Daily Spice Dial Bento Card -->
+<!-- Explore Regions (Bento Grid) -->
+<!-- Local Market Tracker Bento Card -->
+</main>
+<!-- BottomNavBar with Interactive Fluid Liquid Bezier Glider Indicator Layer -->
+<nav class="bg-black/85 backdrop-blur-2xl fixed bottom-0 w-full rounded-t-2xl border-t border-white/10 left-0 z-50 px-2 py-2 md:hidden" id="mobile-nav-bar">
+<!-- Gliding Fluid Liquid Pill Wave Indicator (#FF9F0A) -->
+<div class="absolute top-2 h-[calc(100%-16px)] rounded-xl pointer-events-none z-0" id="nav-glider" style="background: linear-gradient(135deg, rgba(255, 159, 10, 0.22) 0%, rgba(255, 153, 0, 0.08) 100%); border: 1px solid rgba(255, 159, 10, 0.45); box-shadow: rgba(255, 159, 10, 0.35) 0px 0px 16px, rgba(255, 159, 10, 0.2) 0px 0px 8px inset; width: 74.875px; left: 1%; transform: translate3d(8px, 0px, 0px);">
+<!-- Glowing Accent Droplet on Top of Glider -->
+<div class="absolute -top-[1px] left-1/2 -translate-x-1/2 w-7 h-[2px] bg-[#FF9F0A] rounded-full shadow-[0_0_8px_#FF9F0A]"></div>
+</div>
+<div class="relative z-10 grid grid-cols-5 items-center w-full">
+<!-- Item 1: Home (Default Active) -->
+<button class="nav-item flex flex-col items-center justify-center py-1.5 text-primary-container drop-shadow-[0_0_8px_rgba(255,153,0,0.6)] transition-all duration-300 active:scale-90 cursor-pointer" data-index="0">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-[10px] mt-0.5 tracking-tight font-semibold">Home</span>
+</button>
+<!-- Item 2: Explore -->
+<button class="nav-item flex flex-col items-center justify-center py-1.5 text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer" data-index="1">
+<span class="material-symbols-outlined text-[24px]" data-icon="search" style='font-variation-settings: "FILL" 0;'>search</span>
+<span class="font-label-caps text-[10px] mt-0.5 tracking-tight">Explore</span>
+</button>
+<!-- Item 3: Favorites -->
+<button class="nav-item flex flex-col items-center justify-center py-1.5 text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer" data-index="2">
+<span class="material-symbols-outlined text-[24px]" data-icon="favorite" style='font-variation-settings: "FILL" 0;'>favorite</span>
+<span class="font-label-caps text-[10px] mt-0.5 tracking-tight">Favorites</span>
+</button>
+<!-- Item 4: My Kitchen -->
+<button class="nav-item flex flex-col items-center justify-center py-1.5 text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer" data-index="3">
+<span class="material-symbols-outlined text-[24px]" data-icon="restaurant_menu" style='font-variation-settings: "FILL" 0;'>restaurant_menu</span>
+<span class="font-label-caps text-[10px] mt-0.5 tracking-tight">My Kitchen</span>
+</button>
+<!-- Item 5: Profile -->
+<button class="nav-item flex flex-col items-center justify-center py-1.5 text-on-surface-variant hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer" data-index="4">
+<span class="material-symbols-outlined text-[24px]" data-icon="person" style='font-variation-settings: "FILL" 0;'>person</span>
+<span class="font-label-caps text-[10px] mt-0.5 tracking-tight">Profile</span>
+</button>
+</div>
+</nav>
+<!-- Desktop Sidebar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-[90px] h-[calc(100vh-90px)] w-[240px] glass-panel border-r border-white/10 py-6 px-4 z-40">
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-primary-container/10 border border-primary-container/30 text-primary-container neon-glow-mango transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home" data-weight="fill" style='font-variation-settings: "FILL" 1;'>home</span>
+<span class="font-title-md text-[16px]">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="search">search</span>
+<span class="font-title-md text-[16px]">Explore</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="favorite">favorite</span>
+<span class="font-title-md text-[16px]">Favorites</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="restaurant_menu">restaurant_menu</span>
+<span class="font-title-md text-[16px]">My Kitchen</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="person">person</span>
+<span class="font-title-md text-[16px]">Profile</span>
+</a>
+</div>
+<div class="mt-auto">
+<div class="p-4 rounded-xl glass-panel border border-white/10 bg-gradient-to-br from-black/80 to-surface-container/50">
+<h4 class="font-title-md text-white mb-2">Masterclass Pro</h4>
+<p class="font-body-sm text-on-surface-variant mb-4 text-[12px]">Unlock premium chef recipes and ad-free experience.</p>
+<button class="w-full py-2 bg-primary-container text-black font-label-caps rounded-lg hover:bg-primary transition-colors">Upgrade Now</button>
+</div>
+</div>
+</aside>
+<style>
+        @media (min-width: 768px) {
+            main {
+                margin-left: 240px;
+                padding-top: 120px;
+                max-width: calc(100% - 240px);
+            }
+        }
+    </style>
+<!-- Share Bottom Sheet -->
+<!-- Interactive Navigation Bar & Havoc Lift Physics Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Fluid Liquid Bezier Indicator Navigation Glide Interaction
+    const navBar = document.getElementById('mobile-nav-bar');
+    const glider = document.getElementById('nav-glider');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    function updateGliderPosition(targetBtn) {
+        if (!targetBtn || !glider || !navBar) return;
+        const navRect = navBar.getBoundingClientRect();
+        const btnRect = targetBtn.getBoundingClientRect();
+        
+        // Calculate offset and width relative to the container
+        const leftOffset = btnRect.left - navRect.left;
+        glider.style.width = `${btnRect.width}px`;
+        glider.style.transform = `translate3d(${leftOffset}px, 0, 0)`;
+
+        // Update active classes and styles
+        navItems.forEach(item => {
+            if (item === targetBtn) {
+                item.classList.remove('text-on-surface-variant');
+                item.classList.add('text-primary-container', 'drop-shadow-[0_0_8px_rgba(255,153,0,0.6)]');
+                const label = item.querySelector('span:last-child');
+                if (label) label.classList.add('font-semibold');
+                const icon = item.querySelector('span:first-child');
+                if (icon) icon.style.fontVariationSettings = '"FILL" 1';
+            } else {
+                item.classList.add('text-on-surface-variant');
+                item.classList.remove('text-primary-container', 'drop-shadow-[0_0_8px_rgba(255,153,0,0.6)]');
+                const label = item.querySelector('span:last-child');
+                if (label) label.classList.remove('font-semibold');
+                const icon = item.querySelector('span:first-child');
+                if (icon && icon.getAttribute('data-icon') !== 'home') {
+                    icon.style.fontVariationSettings = '"FILL" 0';
+                }
+            }
+        });
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            updateGliderPosition(item);
+        });
+    });
+
+    // Align glider initially with Home (index 0)
+    if (navItems.length > 0) {
+        // Small timeout to ensure DOM dimensions are ready
+        setTimeout(() => updateGliderPosition(navItems[0]), 60);
+        window.addEventListener('resize', () => {
+            const currentActive = document.querySelector('.nav-item.text-primary-container') || navItems[0];
+            updateGliderPosition(currentActive);
+        });
+    }
+
+    // 2. Havoc Focal Lift Physics
+    const cards = document.querySelectorAll('.havoc-card');
+    if (!cards.length) return;
+
+    let ticking = false;
+
+    function evaluateFocalCards() {
+        const viewportCenter = window.innerHeight * 0.48;
+        const focalThreshold = window.innerHeight * 0.28;
+
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(viewportCenter - cardCenter);
+
+            if (rect.top < window.innerHeight && rect.bottom > 0 && distance < focalThreshold) {
+                card.classList.add('havoc-active');
+            } else {
+                card.classList.remove('havoc-active');
+            }
+        });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(evaluateFocalCards);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    const horizontalScrollContainers = document.querySelectorAll('.overflow-x-auto');
+    horizontalScrollContainers.forEach(container => {
+        container.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(evaluateFocalCards);
+                ticking = true;
+            }
+        }, { passive: true });
+    });
+
+    cards.forEach(card => {
+        card.addEventListener('touchstart', () => {
+            card.classList.add('havoc-active');
+        }, { passive: true });
+        
+        card.addEventListener('touchend', () => {
+            setTimeout(evaluateFocalCards, 350);
+        }, { passive: true });
+    });
+
+    evaluateFocalCards();
+});
+</script>
+</body></html>
