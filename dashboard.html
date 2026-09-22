@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="description"
     content="wow Food Recipes — Curated Creations Dashboard. Your personal culinary command centre." />
   <title>wow | Dashboard</title>
@@ -1303,13 +1303,13 @@
 
     /* ─── BOTTOM NAVIGATION BAR ─────────────────────────────────────────── */
     #app-nav {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       width: 100%;
       height: 76px;
-      z-index: 50;
+      z-index: 9999;
       background-color: rgba(11, 15, 20, 0.96);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -1318,6 +1318,7 @@
       align-items: center;
       justify-content: space-around;
       padding: 0 4px 12px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
       box-sizing: border-box;
     }
 
