@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="wow Food Recipes — Loading" />
+  <title>wow | Loading</title>
+
+  <style>
+    /* ─── Hard Reset ──────────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ─── Desktop canvas: pitch-black frame, centres the phone shell ─────── */
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #0B0F14;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── Fullscreen Splash Stage (fills the html/body canvas) ───────────── */
+    #splash-stage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #0B0F14;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ─── Mobile Phone Shell ─────────────────────────────────────────────── */
+    /*    Constrains video to phone proportions and centres it on desktop.     */
+    .mobile-app-shell {
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      margin: 0 auto;
+      background-color: #0B0F14;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── Splash Video (fills its phone-shell parent) ─────────────────────── */
+    #splash-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background-color: #0B0F14;
+    }
+
+    /* ─── Fallback Loader (shown if video can't play) ─────────────────────── */
+    #splash-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background-color: #0B0F14;
+    }
+
+    #splash-fallback .brand-mark {
+      font-family: 'Georgia', serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+    }
+
+    #splash-fallback .brand-mark span {
+      color: #3DF2E0;
+    }
+
+    #splash-fallback .loader-ring {
+      width: 40px;
+      height: 40px;
+      border: 2.5px solid rgba(61, 242, 224, 0.15);
+      border-top-color: #3DF2E0;
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─── Fade-out transition before navigation ───────────────────────────── */
+    #splash-stage.fade-out {
+      animation: fadeOut 0.45s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to   { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── STEP 1: SPLASH VIDEO SCREEN ─────────────────────────────────────── -->
+  <div id="splash-stage">
+
+    <!-- Mobile Phone Shell: constrains content to 420px max-width phone canvas -->
+    <div class="mobile-app-shell">
+
+      <!-- Primary: MP4 Splash Video -->
+      <video
+        id="splash-video"
+        src="assets/wow_food_recipes_splash_Video_screen.mp4"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+      ></video>
+
+      <!-- Fallback: shown if video fails to load/play -->
+      <div id="splash-fallback">
+        <div class="brand-mark">w<span>o</span>w</div>
+        <div class="loader-ring"></div>
+      </div>
+
+    </div><!-- /.mobile-app-shell -->
+
+  </div><!-- /#splash-stage -->
+
+  <!-- ─── LIFECYCLE SEQUENCING ROUTER ─────────────────────────────────────── -->
+  <script>
+
+    (function () {
+      'use strict';
+
+      /* ── Targets ── */
+      var STEP_2_AUTH       = 'auth.html';
+      /* FALLBACK_DELAY_MS is ONLY used when the video physically cannot play
+         (codec error or autoplay block). It is intentionally longer than the
+         video's 25-second runtime so it never interrupts normal playback.    */
+      var FALLBACK_DELAY_MS = 32000;
+
+      var stage    = document.getElementById('splash-stage');
+      var video    = document.getElementById('splash-video');
+      var fallback = document.getElementById('splash-fallback');
+
+      /* Guard: only navigate once, even if multiple events fire */
+      var navigated = false;
+
+      /* ── Navigate to Step 2 with a smooth fade ── */
+      function proceedToAuth() {
+        if (navigated) return;
+        navigated = true;
+        stage.classList.add('fade-out');
+        setTimeout(function () {
+          window.location.href = STEP_2_AUTH;
+        }, 450); // matches fadeOut animation duration
+      }
+
+      /* ══════════════════════════════════════════════════════════════════════
+         PRIMARY TRIGGER — native video 'ended' event.
+         Fires automatically the exact moment the MP4 finishes its full
+         25-second timeline. No fixed clock. No manual timer.
+         ══════════════════════════════════════════════════════════════════════ */
+      video.addEventListener('ended', proceedToAuth);
+
+      /* ── FAILURE GUARD 1: codec / file error — video cannot load at all ── */
+      video.addEventListener('error', function () {
+        video.style.display = 'none';
+        fallback.style.display = 'flex';
+        setTimeout(proceedToAuth, FALLBACK_DELAY_MS);
+      });
+
+      /* ── FAILURE GUARD 2: browser autoplay policy blocks playback ── */
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function () {
+          video.style.display = 'none';
+          fallback.style.display = 'flex';
+          setTimeout(proceedToAuth, FALLBACK_DELAY_MS);
+        });
+      }
+
+    })();
+
+  </script>
+
+</body>
+</html>
