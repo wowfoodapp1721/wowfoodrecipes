@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description"
     content="wow Food Recipes — Smart Grocery Shopping List (SCR-07). Interactive check-off, automated pantry transfer, and 10-minute instant delivery." />
   <title>wow | Smart Grocery List</title>
@@ -382,7 +381,7 @@
     #grocery-main {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 16px 140px;
+      padding: 16px 16px 210px;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -668,17 +667,17 @@
     /* ─── STICKY 10-MIN HYPER-DELIVERY FLOATING TRAY ─────────────────────── */
     .hyper-delivery-floating-bar {
       position: absolute;
-      bottom: 0;
+      bottom: 76px;
       left: 0;
       right: 0;
       z-index: 50;
       background: rgba(11, 15, 20, 0.95);
       backdrop-filter: blur(24px);
       border-top: 1px solid var(--border-soft);
-      padding: 12px 16px 24px;
+      padding: 10px 16px 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.9);
     }
 
@@ -708,7 +707,7 @@
 
     .delivery-checkout-btn {
       width: 100%;
-      padding: 14px 18px;
+      padding: 12px 18px;
       border-radius: 18px;
       background: var(--crimson);
       color: #0B0F14;
@@ -744,6 +743,152 @@
       align-items: center;
       gap: 6px;
       font-weight: 800;
+    }
+
+    /* ─── BOTTOM NAVIGATION BAR ─────────────────────────────────────────── */
+    #app-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 76px;
+      z-index: 9999;
+      background-color: rgba(11, 15, 20, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-soft, rgba(255, 255, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 4px 12px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      box-sizing: border-box;
+    }
+
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 2px 2px;
+      flex: 1;
+      min-width: 0;
+      color: #6D6D72;
+      transition: all 0.25s ease-in-out;
+      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-tab:active {
+      transform: scale(0.95);
+    }
+
+    .nav-tab .material-symbols-outlined {
+      font-size: 22px;
+      line-height: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .nav-tab .nav-label,
+    .nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      margin-top: 3px;
+      white-space: nowrap;
+      text-align: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* Micro-Indicator Dot Glow (4px Neon Cyan circular dot) */
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #3DF2E0;
+      box-shadow: 0 0 8px #3DF2E0;
+      opacity: 0;
+      transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+      pointer-events: none;
+    }
+
+    /* Interactive Hover & Focus States (Neon Cyan Glow) */
+    .nav-tab:hover,
+    .nav-tab:focus-visible {
+      color: #3DF2E0;
+    }
+
+    .nav-tab:hover .material-symbols-outlined,
+    .nav-tab:focus-visible .material-symbols-outlined {
+      color: #3DF2E0;
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.7));
+      transform: scale(1.08);
+    }
+
+    .nav-tab:hover .nav-label,
+    .nav-tab:focus-visible .nav-label {
+      color: #3DF2E0;
+      text-shadow: 0 0 6px rgba(61, 242, 224, 0.5);
+    }
+
+    .nav-tab:hover::after,
+    .nav-tab:focus-visible::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    /* Active Selected State - Locked in Solid Neon Cyan */
+    .nav-tab.nav-tab--active,
+    .nav-tab--active {
+      color: #3DF2E0 !important;
+    }
+
+    .nav-tab.nav-tab--active .material-symbols-outlined,
+    .nav-tab--active .material-symbols-outlined {
+      color: #3DF2E0 !important;
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.7)) !important;
+    }
+
+    .nav-tab.nav-tab--active .nav-label,
+    .nav-tab--active .nav-label {
+      color: #3DF2E0 !important;
+      text-shadow: 0 0 6px rgba(61, 242, 224, 0.5) !important;
+      font-weight: 600;
+    }
+
+    .nav-tab.nav-tab--active::after,
+    .nav-tab--active::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    .nav-tab:has(.nav-active-dot)::after {
+      display: none;
+    }
+
+    .nav-active-dot {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #3DF2E0 !important;
+      box-shadow: 0 0 8px #3DF2E0 !important;
     }
   </style>
 </head>
@@ -1143,6 +1288,46 @@
         </div>
       </a>
     </div>
+
+    <!-- ─── 5. BOTTOM PERSISTENT NAVIGATION BAR ────────────────────────── -->
+    <nav id="app-nav" aria-label="Main application navigation">
+      <!-- Tab 1: Home -->
+      <a href="dashboard.html" class="nav-tab" id="nav-home" aria-label="Home Feed" data-tab="home">
+        <span class="material-symbols-outlined" aria-hidden="true">home</span>
+        <span class="nav-label">Home</span>
+      </a>
+
+      <!-- Tab 2: Explore -->
+      <a href="search-pantry.html" class="nav-tab" id="nav-explore" aria-label="Explore & Search" data-tab="explore">
+        <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+        <span class="nav-label">Explore</span>
+      </a>
+
+      <!-- Tab 3: Pantry Scan -->
+      <a href="pantry_scan.html" class="nav-tab" id="nav-scan" aria-label="Kitchen Ingredient Camera Scanner" data-tab="scan">
+        <span class="material-symbols-outlined" aria-hidden="true">photo_camera</span>
+        <span class="nav-label">Pantry Scan</span>
+      </a>
+
+      <!-- Tab 4: Collection -->
+      <a href="collection.html" class="nav-tab" id="nav-collection" aria-label="Saved Recipes Collection" data-tab="collection">
+        <span class="material-symbols-outlined" aria-hidden="true">bookmark</span>
+        <span class="nav-label">Collection</span>
+      </a>
+
+      <!-- Tab 5: Grocery — ACTIVE -->
+      <a href="grocery.html" class="nav-tab nav-tab--active" id="nav-grocery" aria-label="Smart Grocery List (Current)" aria-current="page" data-tab="grocery">
+        <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+        <span class="nav-label">Grocery</span>
+        <span class="nav-active-dot" aria-hidden="true"></span>
+      </a>
+
+      <!-- Tab 6: Pro Chef -->
+      <a href="chef-ai-showcase.html" class="nav-tab" id="nav-chef-ai" aria-label="Pro Chef AI Assistant" data-tab="chef-ai">
+        <span class="material-symbols-outlined" aria-hidden="true">smart_toy</span>
+        <span class="nav-label">Pro Chef</span>
+      </a>
+    </nav>
 
   </div><!-- /#viewport -->
 

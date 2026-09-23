@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="wow Food Recipes — Social Cooking Community Feed & Recipe Intent Matrix (SCR-09A & SCR-09B)." />
   <title>wow | Community Cooking Feed</title>
 
@@ -12,6 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Material Symbols Outlined -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Global Viewport Controller Stylesheet -->
+  <link rel="stylesheet" href="assets/viewport-controller.css" />
 
   <style>
     /* ─── CSS Reset & AMOLED Global Tokens ───────────────────────────────── */
@@ -88,14 +90,40 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* ─── STATUS BAR SUPPRESSION OVERRIDE ──────────────────────────────── */
-    .status-bar, .mock-status, #status-bar, [class*="status-bar"], [id*="status-bar"] {
-      display: none !important;
-      visibility: hidden !important;
-      height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      pointer-events: none !important;
+    /* ─── NATIVE STATUS BAR ────────────────────────────────────────────── */
+    .status-bar,
+    .mock-status-bar,
+    #global-status-bar {
+      height: 38px;
+      min-height: 38px;
+      max-height: 38px;
+      padding: 6px 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-white);
+      z-index: 50;
+      background-color: rgba(10, 10, 12, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-shrink: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-bar-icons .material-symbols-outlined,
+    .status-bar-icons .status-icon {
+      font-size: 15px;
+      line-height: 1;
     }
 
     /* ─── TOP HEADER ─────────────────────────────────────────────────────── */
@@ -104,7 +132,7 @@
       background-color: rgba(0, 0, 0, 0.92);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-soft);
-      padding: calc(env(safe-area-inset-top, 24px) + 12px) 18px 10px;
+      padding: 10px 18px 10px;
       z-index: 40;
       display: flex;
       flex-direction: column;
@@ -361,7 +389,8 @@
     }
 
     /* ─── FEED POST ARTICLE CARD (SCR-09A) ───────────────────────────────── */
-    .post-card {
+    .post-card,
+    .feed-card {
       background-color: var(--surface-card);
       border: 1px solid var(--border-soft);
       border-radius: 24px;
@@ -369,7 +398,11 @@
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      height: auto;
+      min-height: fit-content;
+      padding-bottom: 16px;
+      box-sizing: border-box;
       transition: all 0.2s ease;
       animation: fadeInCard 0.35s ease-out;
     }
@@ -513,10 +546,13 @@
 
     /* Post Action Controls (Like, Comment, Share, Bookmark) */
     .post-actions-row {
-      padding: 0 16px;
+      padding: 4px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-shrink: 0;
+      min-height: 36px;
+      box-sizing: border-box;
     }
 
     .post-actions-left {
@@ -573,10 +609,11 @@
 
     /* Post Caption & Comments */
     .post-caption-box {
-      padding: 0 16px 14px;
+      padding: 0 16px 2px;
       font-size: 12.5px;
       line-height: 1.45;
       color: var(--text-main);
+      box-sizing: border-box;
     }
 
     .caption-author {
@@ -1051,6 +1088,235 @@
       color: var(--text-white);
     }
 
+    /* ─── PUBLISH SUCCESS GLASSMORPHIC BOTTOM DRAWER ─────────────────────── */
+    #publish-success-drawer {
+      position: absolute;
+      inset: 0;
+      z-index: 75;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #publish-success-drawer.drawer--open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .publish-success-card {
+      background: linear-gradient(180deg, rgba(20, 22, 28, 0.98) 0%, rgba(10, 10, 14, 0.98) 100%);
+      border-top: 2px solid var(--cyan);
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px 28px 0 0;
+      padding: 14px 20px 32px;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(61, 242, 224, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #publish-success-drawer.drawer--open .publish-success-card {
+      transform: translateY(0);
+    }
+
+    .success-header-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      padding-top: 4px;
+    }
+
+    .success-badge-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(61, 242, 224, 0.12);
+      border: 1.5px solid var(--cyan);
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(61, 242, 224, 0.35);
+      animation: successPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes successPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .success-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 280px;
+    }
+
+    .success-social-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin: 4px 0 2px;
+      justify-items: center;
+      width: 100%;
+    }
+
+    .social-icon-action-btn {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 0;
+      width: 100%;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .social-icon-action-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .social-icon-action-btn:active {
+      transform: scale(0.92);
+    }
+
+    .social-icon-bubble {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .social-icon-bubble.instagram {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      box-shadow: 0 4px 14px rgba(253, 29, 29, 0.35);
+    }
+
+    .social-icon-bubble.whatsapp {
+      background: #25D366;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    }
+
+    .social-icon-bubble.facebook {
+      background: #1877F2;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35);
+    }
+
+    .social-icon-bubble.pinterest {
+      background: #E60023;
+      box-shadow: 0 4px 14px rgba(230, 0, 35, 0.35);
+    }
+
+    .social-icon-bubble.tiktok {
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 14px rgba(0, 242, 254, 0.25), 0 0 8px rgba(254, 9, 121, 0.25);
+    }
+
+    .social-icon-label {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      text-align: center;
+      line-height: 1.15;
+      max-width: 62px;
+      word-wrap: break-word;
+      white-space: normal;
+    }
+
+    .success-copylink-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 11px 15px;
+      border-radius: 16px;
+      background: var(--surface-chip);
+      border: 1px solid var(--border-soft);
+      color: var(--text-white);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .success-copylink-btn:hover {
+      background: rgba(61, 242, 224, 0.1);
+      border-color: var(--cyan);
+      box-shadow: 0 0 14px rgba(61, 242, 224, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .success-copylink-btn:active {
+      transform: scale(0.98);
+    }
+
+    .success-copylink-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .success-copylink-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(61, 242, 224, 0.15);
+      border: 1px solid rgba(61, 242, 224, 0.4);
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-close-btn {
+      width: 100%;
+      height: 42px;
+      border-radius: 21px;
+      background: var(--cyan);
+      color: #0A0A0C;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 16px var(--crimson-glow);
+      transition: all 0.2s;
+      margin-top: 2px;
+    }
+
+    .success-close-btn:hover {
+      background: var(--crimson-hover);
+      box-shadow: 0 0 22px rgba(61, 242, 224, 0.6);
+    }
+
     /* ─── TOAST NOTIFICATION ────────────────────────────────────────────── */
     .toast-pill {
       position: absolute;
@@ -1231,6 +1497,16 @@
 
   <div id="viewport" role="main" aria-label="Social Cooking Feed">
 
+    <!-- ─── 1. SYSTEM STATUS BAR ──────────────────────────────────────────── -->
+    <div class="status-bar" id="global-status-bar" aria-hidden="true">
+      <span class="status-bar-time" id="status-bar-clock">9:41</span>
+      <div class="status-bar-icons">
+        <span class="material-symbols-outlined status-icon">signal_cellular_4_bar</span>
+        <span class="material-symbols-outlined status-icon">wifi</span>
+        <span class="material-symbols-outlined status-icon status-icon--battery">battery_full</span>
+      </div>
+    </div>
+
 
     <!-- ─── 2. TOAST NOTIFICATION ────────────────────────────────────────── -->
     <div class="toast-pill" id="global-toast">
@@ -1324,9 +1600,9 @@
       </div>
 
       <!-- ══════════════════════════════════════════════════════════════════
-           POST 1: CHEF SARAH — HONEY SESAME CHICKEN (SCR-09A)
+           TRENDING POST 1: CHEF SARAH — HONEY SESAME CHICKEN (SCR-09A)
       ══════════════════════════════════════════════════════════════════════ -->
-      <article class="post-card" data-post-id="post-sarah-01" data-category="trending following">
+      <article class="post-card" data-post-id="post-sarah-01" data-category="trending">
         <div class="post-header-row">
           <div class="author-info-left">
             <div class="author-avatar-wrap">
@@ -1340,7 +1616,7 @@
               <span class="post-time-meta">2h ago • Michelin Contender</span>
             </div>
           </div>
-          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;">
+          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" aria-label="More options">
             <span class="material-symbols-outlined">more_horiz</span>
           </button>
         </div>
@@ -1394,7 +1670,7 @@
       </article>
 
       <!-- ══════════════════════════════════════════════════════════════════
-           POST 2: CHEF MARCO ROSSI — ROMAN SPAGHETTI CARBONARA
+           TRENDING POST 2: CHEF MARCO ROSSI — ROMAN SPAGHETTI CARBONARA
       ══════════════════════════════════════════════════════════════════════ -->
       <article class="post-card" data-post-id="post-marco-02" data-category="trending">
         <div class="post-header-row">
@@ -1410,7 +1686,7 @@
               <span class="post-time-meta">4h ago • Rome, Italy</span>
             </div>
           </div>
-          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;">
+          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" aria-label="More options">
             <span class="material-symbols-outlined">more_horiz</span>
           </button>
         </div>
@@ -1426,7 +1702,7 @@
         <div class="post-media-frame">
           <img src="assets/carbonara.png" alt="Roman Spaghetti Carbonara" class="post-photo" onerror="this.src='https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800'" />
           
-          <a href="recipe-detail.html?recipe=carbonara&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent">
+          <a href="recipe-detail.html?recipe=carbonara&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent" aria-label="Try Spaghetti Carbonara Recipe">
             <span class="material-symbols-outlined">restaurant</span>
             <span>Try This Recipe</span>
             <span class="material-symbols-outlined">chevron_right</span>
@@ -1435,19 +1711,19 @@
 
         <div class="post-actions-row">
           <div class="post-actions-left">
-            <button class="action-icon-btn like-btn" type="button">
+            <button class="action-icon-btn like-btn" type="button" aria-label="Like post">
               <span class="material-symbols-outlined text-[22px]">favorite</span>
               <span class="like-count">2.8k</span>
             </button>
-            <button class="action-icon-btn comment-btn" type="button">
+            <button class="action-icon-btn comment-btn" type="button" aria-label="View comments">
               <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
               <span class="comment-count">142</span>
             </button>
-            <button class="action-icon-btn share-btn" type="button">
+            <button class="action-icon-btn share-btn" type="button" aria-label="Share post">
               <span class="material-symbols-outlined text-[22px]">send</span>
             </button>
           </div>
-          <button class="action-icon-btn bookmark-btn" type="button">
+          <button class="action-icon-btn bookmark-btn" type="button" aria-label="Bookmark post">
             <span class="material-symbols-outlined text-[22px]">bookmark</span>
           </button>
         </div>
@@ -1463,78 +1739,9 @@
       </article>
 
       <!-- ══════════════════════════════════════════════════════════════════
-           POST 3: CHEF ELENA VEGA — SPANISH SEAFOOD PAELLA
+           TRENDING POST 3: CHEF PRIYA SHARMA — ROYAL CHICKEN BIRYANI
       ══════════════════════════════════════════════════════════════════════ -->
-      <article class="post-card" data-post-id="post-elena-03" data-category="following">
-        <div class="post-header-row">
-          <div class="author-info-left">
-            <div class="author-avatar-wrap">
-              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=150" alt="Chef Elena" class="author-avatar-img" />
-            </div>
-            <div>
-              <div class="author-name-row">
-                <span class="author-name">Elena Vega</span>
-                <span class="material-symbols-outlined verified-icon">verified</span>
-              </div>
-              <span class="post-time-meta">6h ago • Valencia, Spain</span>
-            </div>
-          </div>
-          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;">
-            <span class="material-symbols-outlined">more_horiz</span>
-          </button>
-        </div>
-
-        <div class="post-recipe-badge-wrap">
-          <span class="recipe-made-pill">
-            <span>🥘</span>
-            <span>Made: Spanish Seafood Paella</span>
-          </span>
-        </div>
-
-        <!-- Post Media Frame & Intent Link -->
-        <div class="post-media-frame">
-          <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=800" alt="Spanish Seafood Paella" class="post-photo" />
-          
-          <a href="recipe-detail.html?recipe=paella&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent">
-            <span class="material-symbols-outlined">restaurant</span>
-            <span>Try This Recipe</span>
-            <span class="material-symbols-outlined">chevron_right</span>
-          </a>
-        </div>
-
-        <div class="post-actions-row">
-          <div class="post-actions-left">
-            <button class="action-icon-btn like-btn" type="button">
-              <span class="material-symbols-outlined text-[22px]">favorite</span>
-              <span class="like-count">1.9k</span>
-            </button>
-            <button class="action-icon-btn comment-btn" type="button">
-              <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
-              <span class="comment-count">64</span>
-            </button>
-            <button class="action-icon-btn share-btn" type="button">
-              <span class="material-symbols-outlined text-[22px]">send</span>
-            </button>
-          </div>
-          <button class="action-icon-btn bookmark-btn" type="button">
-            <span class="material-symbols-outlined text-[22px]">bookmark</span>
-          </button>
-        </div>
-
-        <div class="post-caption-box">
-          <p>
-            <span class="caption-author">Elena Vega</span>
-            That golden socarrat crust at the bottom of the pan is the holy grail. The Spanish saffron infusion gave the bomba rice unmatched depth! 🇪🇸🦐
-          </p>
-          <div class="post-tags">#Socarrat #SeafoodPaella #BombaRice</div>
-          <button class="view-comments-link" type="button" data-post-target="post-elena-03">View all 64 comments</button>
-        </div>
-      </article>
-
-      <!-- ══════════════════════════════════════════════════════════════════
-           POST 4: CHEF PRIYA SHARMA — ROYAL CHICKEN BIRYANI
-      ══════════════════════════════════════════════════════════════════════ -->
-      <article class="post-card" data-post-id="post-priya-04" data-category="trending following">
+      <article class="post-card" data-post-id="post-priya-04" data-category="trending">
         <div class="post-header-row">
           <div class="author-info-left">
             <div class="author-avatar-wrap">
@@ -1548,7 +1755,7 @@
               <span class="post-time-meta">8h ago • Hyderabad Classic</span>
             </div>
           </div>
-          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;">
+          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" aria-label="More options">
             <span class="material-symbols-outlined">more_horiz</span>
           </button>
         </div>
@@ -1564,7 +1771,7 @@
         <div class="post-media-frame">
           <img src="assets/biryani.png" alt="Royal Chicken Biryani" class="post-photo" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800'" />
           
-          <a href="recipe-detail.html?recipe=biryani&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent">
+          <a href="recipe-detail.html?recipe=biryani&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent" aria-label="Try Royal Chicken Biryani Recipe">
             <span class="material-symbols-outlined">restaurant</span>
             <span>Try This Recipe</span>
             <span class="material-symbols-outlined">chevron_right</span>
@@ -1573,19 +1780,19 @@
 
         <div class="post-actions-row">
           <div class="post-actions-left">
-            <button class="action-icon-btn like-btn" type="button">
+            <button class="action-icon-btn like-btn" type="button" aria-label="Like post">
               <span class="material-symbols-outlined text-[22px]">favorite</span>
               <span class="like-count">3.4k</span>
             </button>
-            <button class="action-icon-btn comment-btn" type="button">
+            <button class="action-icon-btn comment-btn" type="button" aria-label="View comments">
               <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
               <span class="comment-count">198</span>
             </button>
-            <button class="action-icon-btn share-btn" type="button">
+            <button class="action-icon-btn share-btn" type="button" aria-label="Share post">
               <span class="material-symbols-outlined text-[22px]">send</span>
             </button>
           </div>
-          <button class="action-icon-btn bookmark-btn" type="button">
+          <button class="action-icon-btn bookmark-btn" type="button" aria-label="Bookmark post">
             <span class="material-symbols-outlined text-[22px]">bookmark</span>
           </button>
         </div>
@@ -1597,6 +1804,214 @@
           </p>
           <div class="post-tags">#DumBiryani #Hyderabadi #SaffronGhee</div>
           <button class="view-comments-link" type="button" data-post-target="post-priya-04">View all 198 comments</button>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           FOLLOWING CARD 1: CHEF SARAH CHEN (NEW RECIPE RELEASE)
+      ══════════════════════════════════════════════════════════════════════ -->
+      <article class="post-card" data-post-id="post-sarah-following" data-category="following" style="display: none;">
+        <div class="post-header-row">
+          <div class="author-info-left">
+            <div class="author-avatar-wrap">
+              <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150" alt="Chef Sarah Chen" class="author-avatar-img" />
+            </div>
+            <div>
+              <div class="author-name-row">
+                <span class="author-name">Chef Sarah Chen</span>
+                <span class="material-symbols-outlined verified-icon">verified</span>
+              </div>
+              <span class="post-time-meta">2h ago • Michelin Contender</span>
+            </div>
+          </div>
+          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" aria-label="More options">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+        </div>
+
+        <div class="post-recipe-badge-wrap">
+          <span class="recipe-made-pill">
+            <span>🍳</span>
+            <span>Made: Honey Sesame Chicken</span>
+          </span>
+        </div>
+
+        <!-- Post Media Frame & SCR-09A ➔ SCR-03A Intent Trigger -->
+        <div class="post-media-frame">
+          <img src="assets/sesame-chicken.png" alt="Honey Sesame Chicken Plate" class="post-photo" onerror="this.src='https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800'" />
+          
+          <!-- STATE MACHINE INTENT BUTTON (SCR-09A ➔ SCR-03A) -->
+          <a href="recipe-detail.html?recipe=sesame-chicken&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent" aria-label="Try Honey Sesame Chicken Recipe">
+            <span class="material-symbols-outlined">restaurant</span>
+            <span>Try This Recipe</span>
+            <span class="material-symbols-outlined">chevron_right</span>
+          </a>
+        </div>
+
+        <div class="post-actions-row">
+          <div class="post-actions-left">
+            <button class="action-icon-btn like-btn" type="button" aria-label="Like post">
+              <span class="material-symbols-outlined text-[22px]">favorite</span>
+              <span class="like-count">142</span>
+            </button>
+            <button class="action-icon-btn comment-btn" type="button" aria-label="View comments">
+              <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+              <span class="comment-count">18</span>
+            </button>
+            <button class="action-icon-btn share-btn" type="button" aria-label="Share post">
+              <span class="material-symbols-outlined text-[22px]">send</span>
+            </button>
+          </div>
+          <button class="action-icon-btn bookmark-btn" type="button" aria-label="Bookmark post">
+            <span class="material-symbols-outlined text-[22px]">bookmark</span>
+          </button>
+        </div>
+
+        <div class="post-caption-box">
+          <p>
+            <span class="caption-author">Sarah Chen</span>
+            Fresh off the line! My signature Honey Sesame Chicken recipe is officially live. Balanced sweetness with a perfect crispy crunch. Let me know if you try it! 🍯🔥
+          </p>
+          <div class="post-tags">#SesameChicken #ChefSarah #WowRecipes</div>
+          <button class="view-comments-link" type="button" data-post-target="post-sarah-following">View all 18 comments</button>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           FOLLOWING CARD 2: ELENA VEGA (REAL-TIME CREATOR ACTIVITY)
+      ══════════════════════════════════════════════════════════════════════ -->
+      <article class="post-card" data-post-id="post-elena-following" data-category="following" style="display: none;">
+        <div class="post-header-row">
+          <div class="author-info-left">
+            <div class="author-avatar-wrap">
+              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=150" alt="Elena Vega" class="author-avatar-img" />
+            </div>
+            <div>
+              <div class="author-name-row">
+                <span class="author-name">Elena Vega</span>
+                <span class="material-symbols-outlined verified-icon">verified</span>
+              </div>
+              <span class="post-time-meta">6h ago • Valencia, Spain</span>
+            </div>
+          </div>
+          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" aria-label="More options">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+        </div>
+
+        <div class="post-recipe-badge-wrap">
+          <span class="recipe-made-pill">
+            <span>🥘</span>
+            <span>Made: Spanish Seafood Paella</span>
+          </span>
+        </div>
+
+        <!-- Post Media Frame & Intent Link -->
+        <div class="post-media-frame">
+          <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=800" alt="Spanish Seafood Paella" class="post-photo" onerror="this.src='https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=800'" />
+          
+          <a href="recipe-detail.html?recipe=paella&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent" aria-label="Try Spanish Seafood Paella Recipe">
+            <span class="material-symbols-outlined">restaurant</span>
+            <span>Try This Recipe</span>
+            <span class="material-symbols-outlined">chevron_right</span>
+          </a>
+        </div>
+
+        <div class="post-actions-row">
+          <div class="post-actions-left">
+            <button class="action-icon-btn like-btn" type="button" aria-label="Like post">
+              <span class="material-symbols-outlined text-[22px]">favorite</span>
+              <span class="like-count">98</span>
+            </button>
+            <button class="action-icon-btn comment-btn" type="button" aria-label="View comments">
+              <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+              <span class="comment-count">7</span>
+            </button>
+            <button class="action-icon-btn share-btn" type="button" aria-label="Share post">
+              <span class="material-symbols-outlined text-[22px]">send</span>
+            </button>
+          </div>
+          <button class="action-icon-btn bookmark-btn" type="button" aria-label="Bookmark post">
+            <span class="material-symbols-outlined text-[22px]">bookmark</span>
+          </button>
+        </div>
+
+        <div class="post-caption-box">
+          <p>
+            <span class="caption-author">Elena Vega</span>
+            Sunday family traditions! Just mastered this Spanish Seafood Paella with step-by-step masterclass mode! Earned +150 Culinary XP. Rich saffron aroma, perfectly caramelized socarrat. 🥘✨
+          </p>
+          <div class="post-tags">#PaellaLife #CulinaryXP #FamilyTradition</div>
+          <button class="view-comments-link" type="button" data-post-target="post-elena-following">View all 7 comments</button>
+        </div>
+      </article>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           FOLLOWING CARD 3: PRIYA SHARMA (SOCIAL COOKING PROOF)
+      ══════════════════════════════════════════════════════════════════════ -->
+      <article class="post-card" data-post-id="post-priya-following" data-category="following" style="display: none;">
+        <div class="post-header-row">
+          <div class="author-info-left">
+            <div class="author-avatar-wrap">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Priya Sharma" class="author-avatar-img" />
+            </div>
+            <div>
+              <div class="author-name-row">
+                <span class="author-name">Priya Sharma</span>
+                <span class="material-symbols-outlined verified-icon">verified</span>
+              </div>
+              <span class="post-time-meta">8h ago • Hyderabad Classic</span>
+            </div>
+          </div>
+          <button class="more-opts-btn" style="background:none; border:none; color:var(--text-dim); cursor:pointer;" aria-label="More options">
+            <span class="material-symbols-outlined">more_horiz</span>
+          </button>
+        </div>
+
+        <div class="post-recipe-badge-wrap">
+          <span class="recipe-made-pill">
+            <span>🍗</span>
+            <span>Made: Royal Chicken Biryani</span>
+          </span>
+        </div>
+
+        <!-- Post Media Frame & Intent Link -->
+        <div class="post-media-frame">
+          <img src="assets/biryani.png" alt="Royal Chicken Biryani" class="post-photo" onerror="this.src='https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800'" />
+          
+          <a href="recipe-detail.html?recipe=biryani&origin=SCR_09A_SOCIAL_FEED" class="try-recipe-intent-btn" data-action="launch-recipe-intent" aria-label="Try Royal Chicken Biryani Recipe">
+            <span class="material-symbols-outlined">restaurant</span>
+            <span>Try This Recipe</span>
+            <span class="material-symbols-outlined">chevron_right</span>
+          </a>
+        </div>
+
+        <div class="post-actions-row">
+          <div class="post-actions-left">
+            <button class="action-icon-btn like-btn" type="button" aria-label="Like post">
+              <span class="material-symbols-outlined text-[22px]">favorite</span>
+              <span class="like-count">210</span>
+            </button>
+            <button class="action-icon-btn comment-btn" type="button" aria-label="View comments">
+              <span class="material-symbols-outlined text-[22px]">chat_bubble</span>
+              <span class="comment-count">34</span>
+            </button>
+            <button class="action-icon-btn share-btn" type="button" aria-label="Share post">
+              <span class="material-symbols-outlined text-[22px]">send</span>
+            </button>
+          </div>
+          <button class="action-icon-btn bookmark-btn" type="button" aria-label="Bookmark post">
+            <span class="material-symbols-outlined text-[22px]">bookmark</span>
+          </button>
+        </div>
+
+        <div class="post-caption-box">
+          <p>
+            <span class="caption-author">Priya Sharma</span>
+            Nothing beats the aroma of slow-cooked dum biryani. Tried the Pro Chef integration method tonight and it came out spectacularly fluffy! 🍗🍚
+          </p>
+          <div class="post-tags">#BiryaniLovers #ProChef #WowFood</div>
+          <button class="view-comments-link" type="button" data-post-target="post-priya-following">View all 34 comments</button>
         </div>
       </article>
 
@@ -1762,6 +2177,77 @@
             <button class="enhance-tag-chip" type="button" data-tag="#SpicyHeat🔥"><span style="color:var(--crimson);">+</span> Heat Rating 🔥</button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- ─── 7B. PUBLISH SUCCESS GLASSMORPHIC BOTTOM DRAWER ────────────────── -->
+    <div id="publish-success-drawer" aria-hidden="true">
+      <div class="publish-success-card">
+        <div class="drawer-handle" id="success-handle"></div>
+
+        <div class="success-header-wrap">
+          <div class="success-badge-icon">
+            <span class="material-symbols-outlined text-[28px]">check_circle</span>
+          </div>
+          <h3 class="success-title">Published to Wow Feed! 🎉</h3>
+          <p class="success-subtitle">Your culinary creation is now live in the community stream with masterclass tags.</p>
+        </div>
+
+        <!-- 5 Social Network Icon Action Row -->
+        <div class="success-social-grid">
+          <!-- 1. Instagram Stories -->
+          <button class="social-icon-action-btn" id="btn-share-instagram" type="button" aria-label="Share to Instagram Stories">
+            <div class="social-icon-bubble instagram">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </div>
+            <span class="social-icon-label">Instagram Stories</span>
+          </button>
+
+          <!-- 2. WhatsApp -->
+          <button class="social-icon-action-btn" id="btn-share-whatsapp" type="button" aria-label="Share to WhatsApp">
+            <div class="social-icon-bubble whatsapp">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.83.5 3.55 1.37 5.03L2 22l5.13-1.35c1.44.79 3.09 1.25 4.91 1.25 5.52 0 10-4.48 10-10s-4.48-10-10-10zm5.82 14.28c-.24.68-1.2 1.28-1.84 1.36-.5.06-1.12.09-3.27-.81-2.58-1.07-4.22-3.69-4.35-3.86-.13-.18-1.04-1.39-1.04-2.65s.66-1.88.89-2.14c.24-.26.52-.32.69-.32.17 0 .35 0 .5.01.16.01.38-.06.59.45.23.55.77 1.88.84 2.02.07.14.11.3.02.48-.09.18-.14.29-.28.45-.14.17-.3.37-.43.5-.14.14-.29.3-.12.59.16.29.73 1.2 1.57 1.95 1.08.96 1.99 1.26 2.27 1.4.29.14.45.12.62-.07.17-.19.72-.84.92-1.13.19-.29.39-.24.66-.14.27.1.1.72 2.02.84 2.16.12.14.12.24.08.38z"/></svg>
+            </div>
+            <span class="social-icon-label">WhatsApp</span>
+          </button>
+
+          <!-- 3. Facebook -->
+          <button class="social-icon-action-btn" id="btn-share-facebook" type="button" aria-label="Share to Facebook">
+            <div class="social-icon-bubble facebook">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <span class="social-icon-label">Facebook</span>
+          </button>
+
+          <!-- 4. Pinterest -->
+          <button class="social-icon-action-btn" id="btn-share-pinterest" type="button" aria-label="Share to Pinterest">
+            <div class="social-icon-bubble pinterest">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.332 1.365-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+            </div>
+            <span class="social-icon-label">Pinterest</span>
+          </button>
+
+          <!-- 5. TikTok -->
+          <button class="social-icon-action-btn" id="btn-share-tiktok" type="button" aria-label="Share to TikTok">
+            <div class="social-icon-bubble tiktok">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.3 0 .58.05.85.12V9.43a6.37 6.37 0 0 0-.85-.06 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.05a8.28 8.28 0 0 0 3.76.9V6.69z"/></svg>
+            </div>
+            <span class="social-icon-label">TikTok</span>
+          </button>
+        </div>
+
+        <!-- Copy Recipe Link Utility Option -->
+        <button class="success-copylink-btn" id="btn-share-copylink" type="button" aria-label="Copy Recipe Link">
+          <div class="success-copylink-left">
+            <div class="success-copylink-icon">
+              <span class="material-symbols-outlined text-[18px]">link</span>
+            </div>
+            <span>Copy Recipe Link</span>
+          </div>
+          <span class="material-symbols-outlined text-[16px] text-muted">content_copy</span>
+        </button>
+
+        <button class="success-close-btn" id="btn-done-success" type="button">Done</button>
       </div>
     </div>
 
@@ -2392,8 +2878,396 @@
         // Scroll feed to top
         feedMain.scrollTo({ top: 0, behavior: 'smooth' });
 
-        showToast('🎉 Your culinary creation has been shared with the community!', 'celebration');
+        lastPublishedPost = {
+          recipeId: selectedRecipeKey,
+          recipeName: selectedRecipeName,
+          photo: selectedPhotoSrc
+        };
+
+        // Trigger Glassmorphic Publish Success Drawer
+        openPublishSuccessDrawer();
       });
+
+      // ─── Publish Success Drawer & Cross-Sharing Engine ──────────────────────
+      var lastPublishedPost = {
+        recipeId: 'sesame-chicken',
+        recipeName: 'Honey Sesame Chicken',
+        photo: 'assets/sesame-chicken.png'
+      };
+
+      var publishSuccessDrawer = document.getElementById('publish-success-drawer');
+      var btnDoneSuccess = document.getElementById('btn-done-success');
+      var btnShareInstagram = document.getElementById('btn-share-instagram');
+      var btnShareWhatsapp = document.getElementById('btn-share-whatsapp');
+      var btnShareFacebook = document.getElementById('btn-share-facebook');
+      var btnSharePinterest = document.getElementById('btn-share-pinterest');
+      var btnShareTiktok = document.getElementById('btn-share-tiktok');
+      var btnShareCopyLink = document.getElementById('btn-share-copylink');
+
+      // ─── Off-Screen HTML5 Canvas Brand Watermark Pipeline ──────────────────
+      function createWatermarkedRecipeImage(dishImageSrc, brandLogoSrc) {
+        return new Promise(function (resolve) {
+          var logoPath = brandLogoSrc || 'assets/wow-logo.png';
+          var targetDish = dishImageSrc || lastPublishedPost.photo || 'assets/sesame-chicken.png';
+
+          var dishImg = new Image();
+          if (targetDish.startsWith('http://') || targetDish.startsWith('https://')) {
+            dishImg.crossOrigin = 'anonymous';
+          }
+
+          dishImg.onload = function () {
+            var logoImg = new Image();
+            if (logoPath.startsWith('http://') || logoPath.startsWith('https://')) {
+              logoImg.crossOrigin = 'anonymous';
+            }
+
+            function processCanvas(hasLogo) {
+              try {
+                var canvas = document.createElement('canvas');
+                var w = dishImg.naturalWidth || dishImg.width || 1080;
+                var h = dishImg.naturalHeight || dishImg.height || 1080;
+                canvas.width = w;
+                canvas.height = h;
+
+                var ctx = canvas.getContext('2d');
+                if (!ctx) {
+                  resolve({ dataUrl: targetDish, blob: null, file: null });
+                  return;
+                }
+
+                // 1. Render Base Recipe Cook Photo
+                ctx.drawImage(dishImg, 0, 0, w, h);
+
+                // 2. Compute Responsive Placement for Brand Watermark Badge (Top-Right)
+                var margin = Math.round(w * 0.04); // 4% inset margin
+
+                if (hasLogo && logoImg.naturalWidth > 0) {
+                  var logoAspect = logoImg.naturalWidth / logoImg.naturalHeight;
+                  var logoH = Math.max(34, Math.round(h * 0.065));
+                  var logoW = Math.round(logoH * logoAspect);
+
+                  var padX = Math.round(logoH * 0.28);
+                  var padY = Math.round(logoH * 0.20);
+                  var badgeW = logoW + (padX * 2);
+                  var badgeH = logoH + (padY * 2);
+                  var badgeX = w - margin - badgeW;
+                  var badgeY = margin;
+                  var radius = Math.round(badgeH * 0.28);
+
+                  // Draw Glassmorphic AMOLED Frosted Pill Backdrop for high-contrast visibility
+                  ctx.save();
+                  ctx.fillStyle = 'rgba(10, 10, 14, 0.78)';
+                  ctx.strokeStyle = 'rgba(61, 242, 224, 0.4)';
+                  ctx.lineWidth = Math.max(1.5, Math.round(w * 0.002));
+                  ctx.shadowColor = 'rgba(0, 0, 0, 0.65)';
+                  ctx.shadowBlur = Math.round(w * 0.025);
+                  ctx.shadowOffsetX = 0;
+                  ctx.shadowOffsetY = Math.round(w * 0.006);
+
+                  ctx.beginPath();
+                  ctx.moveTo(badgeX + radius, badgeY);
+                  ctx.lineTo(badgeX + badgeW - radius, badgeY);
+                  ctx.quadraticCurveTo(badgeX + badgeW, badgeY, badgeX + badgeW, badgeY + radius);
+                  ctx.lineTo(badgeX + badgeW, badgeY + badgeH - radius);
+                  ctx.quadraticCurveTo(badgeX + badgeW, badgeY + badgeH, badgeX + badgeW - radius, badgeY + badgeH);
+                  ctx.lineTo(badgeX + radius, badgeY + badgeH);
+                  ctx.quadraticCurveTo(badgeX, badgeY + badgeH, badgeX, badgeY + badgeH - radius);
+                  ctx.lineTo(badgeX, badgeY + radius);
+                  ctx.quadraticCurveTo(badgeX, badgeY, badgeX + radius, badgeY);
+                  ctx.closePath();
+                  ctx.fill();
+                  ctx.stroke();
+                  ctx.restore();
+
+                  // Draw Official Brand Logo inside Badge
+                  ctx.save();
+                  ctx.drawImage(logoImg, badgeX + padX, badgeY + padY, logoW, logoH);
+                  ctx.restore();
+                } else {
+                  // Fallback: Elegant Typography Brand Watermark
+                  var brandText = 'WOW FOOD RECIPES';
+                  var fontSize = Math.max(18, Math.round(w * 0.035));
+                  ctx.save();
+                  ctx.font = '800 ' + fontSize + 'px -apple-system, sans-serif';
+                  var textMetrics = ctx.measureText(brandText);
+                  var tW = textMetrics.width;
+                  var bW = tW + Math.round(fontSize * 1.5);
+                  var bH = fontSize + Math.round(fontSize * 1.2);
+                  var bX = w - margin - bW;
+                  var bY = margin;
+
+                  ctx.fillStyle = 'rgba(10, 10, 14, 0.82)';
+                  ctx.strokeStyle = 'rgba(61, 242, 224, 0.6)';
+                  ctx.lineWidth = 2;
+                  ctx.beginPath();
+                  ctx.roundRect ? ctx.roundRect(bX, bY, bW, bH, 10) : ctx.rect(bX, bY, bW, bH);
+                  ctx.fill();
+                  ctx.stroke();
+
+                  ctx.fillStyle = '#3DF2E0';
+                  ctx.fillText(brandText, bX + Math.round(fontSize * 0.75), bY + fontSize + Math.round(fontSize * 0.3));
+                  ctx.restore();
+                }
+
+                // 3. Export high-quality PNG Data URL & File
+                var dataUrl = canvas.toDataURL('image/png', 0.95);
+                if (canvas.toBlob) {
+                  canvas.toBlob(function (blob) {
+                    var file = blob ? new File([blob], 'wow-culinary-creation.png', { type: 'image/png' }) : null;
+                    resolve({ dataUrl: dataUrl, blob: blob, file: file });
+                  }, 'image/png', 0.95);
+                } else {
+                  resolve({ dataUrl: dataUrl, blob: null, file: null });
+                }
+              } catch (canvasErr) {
+                console.warn('Canvas export tainted or unsupported, using raw asset:', canvasErr);
+                resolve({ dataUrl: targetDish, blob: null, file: null });
+              }
+            }
+
+            logoImg.onload = function () {
+              processCanvas(true);
+            };
+            logoImg.onerror = function () {
+              // Try fallback logo asset
+              var altLogo = new Image();
+              altLogo.onload = function () {
+                logoImg = altLogo;
+                processCanvas(true);
+              };
+              altLogo.onerror = function () {
+                processCanvas(false);
+              };
+              altLogo.src = 'assets/wow.png';
+            };
+            logoImg.src = logoPath;
+          };
+
+          dishImg.onerror = function () {
+            console.warn('Dish image failed to load for watermarking:', targetDish);
+            resolve({ dataUrl: targetDish, blob: null, file: null });
+          };
+
+          dishImg.src = targetDish;
+        });
+      }
+
+      function getShareDetails() {
+        var baseHref = window.location.href.split('?')[0];
+        var recipeUrl = baseHref.replace(/social-feed\.html$/, '') + 'recipe-detail.html?recipe=' + encodeURIComponent(lastPublishedPost.recipeId || 'sesame-chicken');
+        var text = 'Check out what I just cooked on Wow Food Recipes!';
+        var imgPath = lastPublishedPost.photo || 'assets/sesame-chicken.png';
+        var fullImgUrl = imgPath.startsWith('http') ? imgPath : (window.location.origin + '/' + imgPath.replace(/^\//, ''));
+        return {
+          title: 'Wow Food Recipes • ' + (lastPublishedPost.recipeName || 'Gourmet Recipe'),
+          text: text,
+          url: recipeUrl,
+          image: fullImgUrl,
+          rawImage: imgPath
+        };
+      }
+
+      async function invokeNativeOrWebShare(customText, customUrl, customImageSrc) {
+        var details = getShareDetails();
+        var targetImage = customImageSrc || details.rawImage || details.image;
+
+        // Programmatically generate watermarked image with official 'wow' brand overlay
+        var watermarked = await createWatermarkedRecipeImage(targetImage, 'assets/wow-logo.png');
+        var exportedDataUrl = watermarked.dataUrl || details.image;
+
+        var sharePayload = {
+          title: details.title,
+          text: customText || details.text,
+          url: customUrl || details.url
+        };
+
+        // 1. Capacitor Share Plugin Check (pass watermarked image data URL/file)
+        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share) {
+          try {
+            var capShareOptions = {
+              title: sharePayload.title,
+              text: sharePayload.text,
+              url: sharePayload.url,
+              dialogTitle: 'Share your culinary creation'
+            };
+            if (exportedDataUrl) {
+              capShareOptions.files = [exportedDataUrl];
+            }
+            await window.Capacitor.Plugins.Share.share(capShareOptions);
+            return true;
+          } catch (err) {
+            console.log('Capacitor Share dismissed or unsupported:', err);
+          }
+        }
+
+        // 2. Web Share API Check (pass watermarked File object if supported)
+        if (navigator.share) {
+          try {
+            if (watermarked.file && navigator.canShare && navigator.canShare({ files: [watermarked.file] })) {
+              await navigator.share({
+                title: sharePayload.title,
+                text: sharePayload.text,
+                url: sharePayload.url,
+                files: [watermarked.file]
+              });
+              return true;
+            } else {
+              await navigator.share(sharePayload);
+              return true;
+            }
+          } catch (err) {
+            console.log('Web Share dismissed or failed:', err);
+          }
+        }
+
+        return false;
+      }
+
+      function copyTextToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text).catch(function () {
+            fallbackCopy(text);
+          });
+        }
+        fallbackCopy(text);
+      }
+
+      function fallbackCopy(text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+        } catch (e) {}
+        document.body.removeChild(textarea);
+      }
+
+      function openPublishSuccessDrawer() {
+        if (!publishSuccessDrawer) return;
+        publishSuccessDrawer.classList.add('drawer--open');
+        publishSuccessDrawer.setAttribute('aria-hidden', 'false');
+      }
+
+      function closePublishSuccessDrawer() {
+        if (!publishSuccessDrawer) return;
+        publishSuccessDrawer.classList.remove('drawer--open');
+        publishSuccessDrawer.setAttribute('aria-hidden', 'true');
+      }
+
+      window.createWatermarkedRecipeImage = createWatermarkedRecipeImage;
+      window.openPublishSuccessDrawer = openPublishSuccessDrawer;
+      window.closePublishSuccessDrawer = closePublishSuccessDrawer;
+      window.invokeNativeOrWebShare = invokeNativeOrWebShare;
+
+      if (btnDoneSuccess) {
+        btnDoneSuccess.addEventListener('click', closePublishSuccessDrawer);
+      }
+
+      if (publishSuccessDrawer) {
+        publishSuccessDrawer.addEventListener('click', function (e) {
+          if (e.target === publishSuccessDrawer) {
+            closePublishSuccessDrawer();
+          }
+        });
+      }
+
+      if (btnShareInstagram) {
+        btnShareInstagram.addEventListener('click', async function () {
+          var details = getShareDetails();
+          var shared = await invokeNativeOrWebShare(details.text, details.url, details.rawImage);
+          if (!shared) {
+            try {
+              window.open('instagram-stories://share', '_blank');
+            } catch (e) {
+              window.open('https://instagram.com', '_blank');
+            }
+          }
+          showToast('Opening Instagram Stories... 📸', 'photo_camera');
+          setTimeout(closePublishSuccessDrawer, 1200);
+        });
+      }
+
+      if (btnShareWhatsapp) {
+        btnShareWhatsapp.addEventListener('click', async function () {
+          var details = getShareDetails();
+          var shared = false;
+          if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share) {
+            shared = await invokeNativeOrWebShare(details.text, details.url, details.rawImage);
+          }
+          if (!shared) {
+            var message = encodeURIComponent(details.text + '\n' + details.url + '\nDish Image: ' + details.rawImage);
+            var whatsappUrl = 'whatsapp://send?text=' + message;
+            var webFallback = 'https://api.whatsapp.com/send?text=' + message;
+            try {
+              window.location.href = whatsappUrl;
+            } catch (e) {
+              window.open(webFallback, '_blank');
+            }
+          }
+          showToast('Opening WhatsApp... 💬', 'chat');
+          setTimeout(closePublishSuccessDrawer, 1200);
+        });
+      }
+
+      if (btnShareFacebook) {
+        btnShareFacebook.addEventListener('click', async function () {
+          var details = getShareDetails();
+          var shared = false;
+          if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share) {
+            shared = await invokeNativeOrWebShare(details.text, details.url, details.rawImage);
+          }
+          if (!shared) {
+            var fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(details.url) + '&quote=' + encodeURIComponent(details.text);
+            try {
+              window.open(fbUrl, '_blank');
+            } catch (e) {}
+          }
+          showToast('Opening Facebook... 🌐', 'public');
+          setTimeout(closePublishSuccessDrawer, 1200);
+        });
+      }
+
+      if (btnSharePinterest) {
+        btnSharePinterest.addEventListener('click', async function () {
+          var details = getShareDetails();
+          var watermarked = await createWatermarkedRecipeImage(details.rawImage || details.image, 'assets/wow-logo.png');
+          var mediaParam = (watermarked.dataUrl && !watermarked.dataUrl.startsWith('data:')) ? watermarked.dataUrl : details.image;
+          var pinUrl = 'https://pinterest.com/pin/create/button/?url=' + encodeURIComponent(details.url) + '&media=' + encodeURIComponent(mediaParam) + '&description=' + encodeURIComponent(details.text);
+          try {
+            window.open(pinUrl, '_blank');
+          } catch (e) {}
+          showToast('Opening Pinterest... 📌', 'push_pin');
+          setTimeout(closePublishSuccessDrawer, 1200);
+        });
+      }
+
+      if (btnShareTiktok) {
+        btnShareTiktok.addEventListener('click', async function () {
+          var details = getShareDetails();
+          var shared = await invokeNativeOrWebShare(details.text, details.url, details.rawImage);
+          if (!shared) {
+            try {
+              window.open('snssdk1128://', '_blank');
+            } catch (e) {
+              window.open('https://www.tiktok.com', '_blank');
+            }
+          }
+          showToast('Opening TikTok... 🎵', 'music_note');
+          setTimeout(closePublishSuccessDrawer, 1200);
+        });
+      }
+
+      if (btnShareCopyLink) {
+        btnShareCopyLink.addEventListener('click', function () {
+          var details = getShareDetails();
+          copyTextToClipboard(details.url);
+          showToast('Recipe link copied to clipboard! 🔗', 'link');
+          setTimeout(closePublishSuccessDrawer, 1200);
+        });
+      }
 
       // Run initial hydration
       hydrateSocialFeedFromState();

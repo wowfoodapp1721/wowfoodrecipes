@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="wow Food Recipes — AI Dietary Matrix & Dietary Settings Hub (SCR-08)." />
+  <title>wow | Dietary Matrix</title>
+
+  <!-- Google Fonts: EB Garamond (Brand Serif) + Plus Jakarta Sans & Hanken Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <!-- Global Viewport Controller Stylesheet -->
+  <link rel="stylesheet" href="assets/viewport-controller.css" />
+
+  <style>
+    /* ─── CSS Reset & AMOLED Void Black Global Tokens ────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black:             #0B0F14;
+      --void-black:        #0B0F14;
+      --surface-base:      #0B0F14;
+      --surface-card:      #171E26;
+      --surface-charcoal:  #171E26;
+      --surface-secondary: #242D38;
+      --surface-chip:      #1A2029;
+      --surface-input:     #141A22;
+
+      --neon-cyan:         #3DF2E0;
+      --cyan:              #3DF2E0;
+      --cyan-glow:         rgba(61, 242, 224, 0.45);
+      --cyan-dim:          rgba(61, 242, 224, 0.15);
+      --cyan-border:       rgba(61, 242, 224, 0.35);
+
+      --emerald:           #00E676;
+      --emerald-bright:    #34D399;
+      --emerald-glow:      rgba(0, 230, 118, 0.4);
+      --emerald-dim:       rgba(0, 230, 118, 0.15);
+
+      --gold:              #FFD700;
+      --amber:             #FBBF24;
+      --mango:             #FF9900;
+
+      --text-white:        #FFFFFF;
+      --text-main:         #E5E5EA;
+      --text-smoke:        #8E9AA6;
+      --text-muted:        #8E9AA6;
+      --text-dim:          #636366;
+
+      --border-soft:       rgba(255, 255, 255, 0.08);
+      --border-subtle:     rgba(255, 255, 255, 0.14);
+
+      --font-serif:        'EB Garamond', Georgia, serif;
+      --font-sans:         'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      background-color: var(--void-black);
+      color: var(--text-white);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    /* ─── 393px × 852px Mobile Viewport Container ───────────────────────── */
+    #viewport {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      background-color: var(--void-black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 44px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 32px 80px rgba(0, 0, 0, 0.95);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ─── NATIVE STATUS BAR ────────────────────────────────────────────── */
+    .status-bar {
+      height: 44px;
+      padding: 12px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-white);
+      z-index: 50;
+      background: rgba(11, 15, 20, 0.95);
+      backdrop-filter: blur(12px);
+      flex-shrink: 0;
+    }
+
+    .status-bar-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-bar-icons .material-symbols-outlined {
+      font-size: 16px;
+    }
+
+    /* ─── FIXED SCREEN HEADER ──────────────────────────────────────────── */
+    .screen-header {
+      padding: 8px 18px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11, 15, 20, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+      z-index: 40;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+
+    .brand-title span {
+      color: var(--neon-cyan);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .header-actions-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-header-action {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--surface-charcoal);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-smoke);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-header-action:hover {
+      color: #FFFFFF;
+      border-color: var(--neon-cyan);
+    }
+
+    /* ─── SCROLLABLE DIETARY MATRIX CONTENT BODY ───────────────────────── */
+    .dietary-content-stream {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 14px 18px 96px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    /* Interactive Hover Lift & Glow Effects */
+    .hover-lift {
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .hover-lift.active:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(61, 242, 224, 0.3);
+    }
+
+    .hover-lift-btn {
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .hover-lift-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(61, 242, 224, 0.5);
+    }
+
+    .hover-lift-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(61, 242, 224, 0.25);
+    }
+
+    /* Floating Toast */
+    .matrix-toast {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(20, 20, 24, 0.95);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--neon-cyan);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 12px var(--cyan-glow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .matrix-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ─── BOTTOM PERSISTENT NAVIGATION BAR ─────────────────────────────── */
+    #app-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 76px;
+      z-index: 9999;
+      background-color: rgba(11, 15, 20, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-soft, rgba(255, 255, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 4px 12px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      box-sizing: border-box;
+    }
+
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 2px 2px;
+      flex: 1;
+      min-width: 0;
+      color: #6D6D72;
+      transition: all 0.25s ease-in-out;
+      position: relative;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-tab:active {
+      transform: scale(0.95);
+    }
+
+    .nav-tab .material-symbols-outlined {
+      font-size: 22px;
+      line-height: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .nav-tab .nav-label,
+    .nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      margin-top: 3px;
+      white-space: nowrap;
+      text-align: center;
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* Micro-Indicator Dot Glow */
+    .nav-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #3DF2E0;
+      box-shadow: 0 0 8px #3DF2E0;
+      opacity: 0;
+      transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+      pointer-events: none;
+    }
+
+    .nav-tab:hover,
+    .nav-tab:focus-visible {
+      color: #3DF2E0;
+    }
+
+    .nav-tab:hover .material-symbols-outlined,
+    .nav-tab:focus-visible .material-symbols-outlined {
+      color: #3DF2E0;
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.7));
+      transform: scale(1.08);
+    }
+
+    .nav-tab:hover .nav-label,
+    .nav-tab:focus-visible .nav-label {
+      color: #3DF2E0;
+      text-shadow: 0 0 6px rgba(61, 242, 224, 0.5);
+    }
+
+    .nav-tab:hover::after,
+    .nav-tab:focus-visible::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+
+    /* Active State */
+    .nav-tab.nav-tab--active,
+    .nav-tab--active {
+      color: #3DF2E0 !important;
+    }
+
+    .nav-tab.nav-tab--active .material-symbols-outlined,
+    .nav-tab--active .material-symbols-outlined {
+      color: #3DF2E0 !important;
+      filter: drop-shadow(0 0 6px rgba(61, 242, 224, 0.7)) !important;
+    }
+
+    .nav-tab.nav-tab--active .nav-label,
+    .nav-tab--active .nav-label {
+      color: #3DF2E0 !important;
+      text-shadow: 0 0 6px rgba(61, 242, 224, 0.5) !important;
+      font-weight: 600;
+    }
+
+    .nav-tab.nav-tab--active::after,
+    .nav-tab--active::after {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="viewport" role="main" aria-label="AI Dietary Matrix Filters">
+
+    <!-- ─── 1. TOP NATIVE STATUS BAR ────────────────────────────────────── -->
+    <div class="status-bar mock-status-bar" id="global-status-bar" aria-hidden="true">
+      <span class="status-bar-time" id="status-bar-clock">9:41</span>
+      <div class="status-bar-icons">
+        <span class="material-symbols-outlined">signal_cellular_4_bar</span>
+        <span class="material-symbols-outlined">wifi</span>
+        <span class="material-symbols-outlined">battery_full</span>
+      </div>
+    </div>
+
+    <!-- ─── 2. FLOATING TOAST ────────────────────────────────────────────── -->
+    <div class="matrix-toast" id="global-toast">
+      <span class="material-symbols-outlined text-[16px] text-[#3DF2E0]" id="toast-icon">verified</span>
+      <span id="toast-msg">Dietary Matrix updated</span>
+    </div>
+
+    <!-- ─── 3. FIXED APP HEADER ─────────────────────────────────────────── -->
+    <header class="screen-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="profile.html" id="btn-back-to-profile" class="header-back-btn" aria-label="Back to Profile" onclick="window.location.href='profile.html'" style="display: inline-flex; align-items: center; justify-content: center; color: #3DF2E0; text-decoration: none; cursor: pointer; transition: transform 0.15s ease; border: none; background: transparent; padding: 0;">
+          <span class="material-symbols-outlined" style="font-size: 20px; color: #3DF2E0; font-weight: 600; line-height: 1;">arrow_back</span>
+        </a>
+        <a href="dashboard.html" class="brand-logo-wrap" aria-label="Home Dashboard">
+          <span class="brand-title">wow <span>dietary matrix</span></span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ─── 4. SCROLLABLE DIETARY MATRIX CONTAINER ──────────────────────── -->
+    <main class="dietary-content-stream no-scrollbar" id="dietary-matrix-main">
+
+      <!-- Profile & Credential Ribbon -->
+      <div style="
+        background: #171E26;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      ">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="position: relative; flex-shrink: 0;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, #3DF2E0, #20C5B5, #3DF2E0); box-shadow: 0 0 12px rgba(61, 242, 224, 0.35);">
+              <img id="global-current-user-avatar" alt="Chef Sarah" class="wow-global-avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; background: #171E26;" src="https://lh3.googleusercontent.com/aida/AEtjO1UKk6JtH4oRDXvVx7Eyw9ww6SDOfM4ld-GX2TDB8_3T1hbxORbXocJkAjZCjfEZbvJZo1_OvToE1oUDz4CHCux23YZ-Ydb7wDocetX1ppJLZVVyZt2Hm_JApySxgUhM-pVtsiQLhDXIY4WwgWAqWrhdISLZmZJw37h2Fr-pF6l63muOuK8ESMk-yriJwabUEwmmtyUjvBpuv1Q5OUnjBIXPS2ze7YDbf8fuuco2ai8nS111f3qvrQkBF-t_">
+            </div>
+            <div style="position: absolute; bottom: -1px; right: -1px; width: 12px; height: 12px; background: #3DF2E0; border-radius: 50%; border: 2px solid #0B0F14; box-shadow: 0 0 6px #3DF2E0;"></div>
+          </div>
+          <div>
+            <div style="font-family: 'EB Garamond', serif; font-size: 17px; font-weight: 600; color: #FFFFFF; line-height: 1.2;">Namaste, Chef Sarah</div>
+            <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+              <span style="display: inline-flex; align-items: center; gap: 3px; padding: 1.5px 8px; border-radius: 10px; background: rgba(61, 242, 224, 0.15); border: 1px solid rgba(61, 242, 224, 0.5); color: #FFFFFF; font-size: 10px; font-weight: 600; box-shadow: 0 0 10px rgba(61, 242, 224, 0.2);">
+                <span class="material-symbols-outlined" style="font-size: 12px; color: #3DF2E0;">verified</span>
+                <span>Premium</span>
+              </span>
+              <span style="color: #8E9AA6; font-size: 10.5px;">Executive Member</span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div style="background: #0B0F14; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 4px 8px; text-align: center;">
+            <div style="font-size: 8.5px; color: #8E9AA6; text-transform: uppercase;">Saved</div>
+            <div style="font-size: 12px; font-weight: 700; color: #3DF2E0;">24</div>
+          </div>
+          <div style="background: #0B0F14; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 4px 8px; text-align: center;">
+            <div style="font-size: 8.5px; color: #8E9AA6; text-transform: uppercase;">Match</div>
+            <div style="font-size: 12px; font-weight: 700; color: #3DF2E0;">98%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: DIETARY PREFERENCES -->
+      <section>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="material-symbols-outlined" style="color: #3DF2E0; font-size: 17px;">restaurant</span>
+            <h3 style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; text-transform: uppercase; margin: 0;">DIETARY PREFERENCES</h3>
+          </div>
+          <span id="diet-active-count-label" style="font-size: 10.5px; color: #8E9AA6; font-weight: 600;">2 Active</span>
+        </div>
+        <p style="font-size: 11px; color: #8E9AA6; margin: 0 0 10px; line-height: 1.4;">
+          Recipes across discovery and AI pantry matching will automatically prioritize your taste matrix.
+        </p>
+
+        <!-- Dietary Preference Pills Grid -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+          <!-- Vegan (Active) -->
+          <button type="button" class="diet-pill-btn active hover-lift" data-diet="vegan" style="
+            background: #171E26;
+            border: 2px solid #3DF2E0;
+            box-shadow: 0 0 12px rgba(61, 242, 224, 0.22);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+          ">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined diet-icon" style="font-size: 18px; color: #3DF2E0;">eco</span>
+              <div>
+                <span style="display: block; font-size: 12px; font-weight: 700; color: #FFFFFF;">Vegan</span>
+                <span style="display: block; font-size: 9.5px; color: #8E9AA6;">100% Plant-based</span>
+              </div>
+            </div>
+            <div class="diet-check" style="width: 18px; height: 18px; border-radius: 50%; background: #3DF2E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span class="material-symbols-outlined" style="font-size: 13px; font-weight: 800; color: #0B0F14;">check</span>
+            </div>
+          </button>
+
+          <!-- High-Protein (Active) -->
+          <button type="button" class="diet-pill-btn active hover-lift" data-diet="high-protein" style="
+            background: #171E26;
+            border: 2px solid #3DF2E0;
+            box-shadow: 0 0 12px rgba(61, 242, 224, 0.22);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+          ">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined diet-icon" style="font-size: 18px; color: #3DF2E0;">fitness_center</span>
+              <div>
+                <span style="display: block; font-size: 12px; font-weight: 700; color: #FFFFFF;">High-Protein</span>
+                <span style="display: block; font-size: 9.5px; color: #8E9AA6;">&gt;25g per serving</span>
+              </div>
+            </div>
+            <div class="diet-check" style="width: 18px; height: 18px; border-radius: 50%; background: #3DF2E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span class="material-symbols-outlined" style="font-size: 13px; font-weight: 800; color: #0B0F14;">check</span>
+            </div>
+          </button>
+
+          <!-- Keto (Inactive) -->
+          <button type="button" class="diet-pill-btn hover-lift" data-diet="keto" style="
+            background: #171E26;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+          ">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined diet-icon" style="font-size: 18px; color: #8E9AA6;">egg_alt</span>
+              <div>
+                <span style="display: block; font-size: 12px; font-weight: 600; color: #FFFFFF;">Keto</span>
+                <span style="display: block; font-size: 9.5px; color: #8E9AA6;">Under 15g carbs</span>
+              </div>
+            </div>
+            <div class="diet-check" style="width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(142, 154, 166, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"></div>
+          </button>
+
+          <!-- Low-Carb (Inactive) -->
+          <button type="button" class="diet-pill-btn hover-lift" data-diet="low-carb" style="
+            background: #171E26;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+          ">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined diet-icon" style="font-size: 18px; color: #8E9AA6;">grain</span>
+              <div>
+                <span style="display: block; font-size: 12px; font-weight: 600; color: #FFFFFF;">Low-Carb</span>
+                <span style="display: block; font-size: 9.5px; color: #8E9AA6;">Gluten-free grains</span>
+              </div>
+            </div>
+            <div class="diet-check" style="width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(142, 154, 166, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"></div>
+          </button>
+
+          <!-- Gluten-Free (Inactive) -->
+          <button type="button" class="diet-pill-btn hover-lift" data-diet="gluten-free" style="
+            background: #171E26;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+          ">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined diet-icon" style="font-size: 18px; color: #8E9AA6;">do_not_disturb_on</span>
+              <div>
+                <span style="display: block; font-size: 12px; font-weight: 600; color: #FFFFFF;">Gluten-Free</span>
+                <span style="display: block; font-size: 9.5px; color: #8E9AA6;">Celiac compliant</span>
+              </div>
+            </div>
+            <div class="diet-check" style="width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(142, 154, 166, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"></div>
+          </button>
+
+          <!-- Sattvic / Jain (Inactive) -->
+          <button type="button" class="diet-pill-btn hover-lift" data-diet="sattvic" style="
+            background: #171E26;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-align: left;
+          ">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined diet-icon" style="font-size: 18px; color: #8E9AA6;">spa</span>
+              <div>
+                <span style="display: block; font-size: 12px; font-weight: 600; color: #FFFFFF;">Sattvic / Jain</span>
+                <span style="display: block; font-size: 9.5px; color: #8E9AA6;">No onion, no garlic</span>
+              </div>
+            </div>
+            <div class="diet-check" style="width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(142, 154, 166, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"></div>
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 2: MASTERED DISHES -->
+      <section style="
+        background: #171E26;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 12px 14px;
+      ">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="material-symbols-outlined" style="color: #3DF2E0; font-size: 17px;">military_tech</span>
+            <h3 style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; text-transform: uppercase; margin: 0;">MASTERED DISHES</h3>
+          </div>
+          <span style="padding: 2px 8px; border-radius: 12px; background: rgba(61, 242, 224, 0.1); border: 1px solid rgba(61, 242, 224, 0.3); color: #FFFFFF; font-size: 9.5px; font-weight: 700;">2/4 UNLOCKED</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+          <div class="hover-lift" style="background: rgba(11, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 10px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #171E26; border: 1.5px solid rgba(61, 242, 224, 0.8); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; box-shadow: 0 0 16px rgba(61, 242, 224, 0.35);">
+              <span class="material-symbols-outlined" style="font-size: 22px; color: #3DF2E0;">local_fire_department</span>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600; color: #FFFFFF; line-height: 1.2;">Honey Sesame Chicken</span>
+            <span style="font-size: 9.5px; color: #3DF2E0; margin-top: 2px; font-weight: 600;">Mastered • Level 5</span>
+          </div>
+
+          <div class="hover-lift" style="background: rgba(11, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 10px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #171E26; border: 1.5px solid rgba(61, 242, 224, 0.8); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; box-shadow: 0 0 16px rgba(61, 242, 224, 0.35);">
+              <span class="material-symbols-outlined" style="font-size: 22px; color: #3DF2E0;">workspace_premium</span>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600; color: #FFFFFF; line-height: 1.2;">Carbonara Champion</span>
+            <span style="font-size: 9.5px; color: #3DF2E0; margin-top: 2px; font-weight: 600;">Mastered • Level 5</span>
+          </div>
+
+          <div class="hover-lift" style="background: rgba(11, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 10px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; opacity: 0.45; cursor: pointer;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #171E26; border: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #8E9AA6;">lock</span>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600; color: #FFFFFF; line-height: 1.2;">Woodfired Pizza</span>
+            <span style="font-size: 9.5px; color: #8E9AA6; margin-top: 2px;">Locked • Cook 3x</span>
+          </div>
+
+          <div class="hover-lift" style="background: rgba(11, 15, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 10px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; opacity: 0.45; cursor: pointer;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #171E26; border: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
+              <span class="material-symbols-outlined" style="font-size: 20px; color: #8E9AA6;">lock</span>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 600; color: #FFFFFF; line-height: 1.2;">Tikka Masala</span>
+            <span style="font-size: 9.5px; color: #8E9AA6; margin-top: 2px;">Locked • Cook 3x</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: ALLERGIES -->
+      <section>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span class="material-symbols-outlined" style="color: #3DF2E0; font-size: 17px;">warning</span>
+            <h3 style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; text-transform: uppercase; margin: 0;">ALLERGIES</h3>
+          </div>
+          <span style="font-size: 10.5px; color: #3DF2E0; font-weight: 600;">Instant Exclusion</span>
+        </div>
+        <p style="font-size: 11px; color: #8E9AA6; margin: 0 0 10px; line-height: 1.4;">
+          Selected allergens are strictly filtered out from recipes, pantry scans, and substitution guides.
+        </p>
+
+        <div style="
+          background: #171E26;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        ">
+          <!-- Nuts Toggle (Active) -->
+          <div style="padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(61, 242, 224, 0.12); border: 1px solid rgba(61, 242, 224, 0.3); display: flex; align-items: center; justify-content: center; color: #3DF2E0;">
+                <span class="material-symbols-outlined" style="font-size: 17px;">nutrition</span>
+              </div>
+              <div>
+                <div style="font-size: 12.5px; font-weight: 700; color: #FFFFFF;">Nuts</div>
+                <div style="font-size: 10px; color: #8E9AA6;">Tree nuts, peanuts, cashews &amp; almonds</div>
+              </div>
+            </div>
+            <button class="allergy-toggle-btn active" id="toggle-allergy-nuts" type="button" role="switch" aria-checked="true" style="
+              width: 44px;
+              height: 24px;
+              border-radius: 12px;
+              background: #3DF2E0;
+              box-shadow: 0 0 10px rgba(61, 242, 224, 0.4);
+              border: none;
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              cursor: pointer;
+              transition: all 0.25s ease;
+            ">
+              <div class="toggle-knob" style="width: 20px; height: 20px; border-radius: 50%; background: #0B0F14; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="font-size: 12px; font-weight: 800; color: #3DF2E0;">check</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Dairy Toggle (Active) -->
+          <div style="padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(61, 242, 224, 0.12); border: 1px solid rgba(61, 242, 224, 0.3); display: flex; align-items: center; justify-content: center; color: #3DF2E0;">
+                <span class="material-symbols-outlined" style="font-size: 17px;">water_bottle</span>
+              </div>
+              <div>
+                <div style="font-size: 12.5px; font-weight: 700; color: #FFFFFF;">Dairy</div>
+                <div style="font-size: 10px; color: #8E9AA6;">Lactose, butter, milk solids &amp; paneer</div>
+              </div>
+            </div>
+            <button class="allergy-toggle-btn active" id="toggle-allergy-dairy" type="button" role="switch" aria-checked="true" style="
+              width: 44px;
+              height: 24px;
+              border-radius: 12px;
+              background: #3DF2E0;
+              box-shadow: 0 0 10px rgba(61, 242, 224, 0.4);
+              border: none;
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              cursor: pointer;
+              transition: all 0.25s ease;
+            ">
+              <div class="toggle-knob" style="width: 20px; height: 20px; border-radius: 50%; background: #0B0F14; display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined" style="font-size: 12px; font-weight: 800; color: #3DF2E0;">check</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Shellfish Toggle (Inactive) -->
+          <div style="padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: #8E9AA6;">
+                <span class="material-symbols-outlined" style="font-size: 17px;">set_meal</span>
+              </div>
+              <div>
+                <div style="font-size: 12.5px; font-weight: 600; color: #FFFFFF;">Shellfish &amp; Crustaceans</div>
+                <div style="font-size: 10px; color: #8E9AA6;">Shrimp, prawns, crab &amp; oyster sauces</div>
+              </div>
+            </div>
+            <button class="allergy-toggle-btn off" id="toggle-allergy-shellfish" type="button" role="switch" aria-checked="false" style="
+              width: 44px;
+              height: 24px;
+              border-radius: 12px;
+              background: #0B0F14;
+              border: 1px solid rgba(142, 154, 166, 0.3);
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              cursor: pointer;
+              transition: all 0.25s ease;
+            ">
+              <div class="toggle-knob" style="width: 18px; height: 18px; border-radius: 50%; background: #8E9AA6;"></div>
+            </button>
+          </div>
+
+          <!-- Soy Toggle (Inactive) -->
+          <div style="padding: 10px 12px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: #8E9AA6;">
+                <span class="material-symbols-outlined" style="font-size: 17px;">spa</span>
+              </div>
+              <div>
+                <div style="font-size: 12.5px; font-weight: 600; color: #FFFFFF;">Soy Products</div>
+                <div style="font-size: 10px; color: #8E9AA6;">Soy sauce, tofu, edamame &amp; miso</div>
+              </div>
+            </div>
+            <button class="allergy-toggle-btn off" id="toggle-allergy-soy" type="button" role="switch" aria-checked="false" style="
+              width: 44px;
+              height: 24px;
+              border-radius: 12px;
+              background: #0B0F14;
+              border: 1px solid rgba(142, 154, 166, 0.3);
+              padding: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              cursor: pointer;
+              transition: all 0.25s ease;
+            ">
+              <div class="toggle-knob" style="width: 18px; height: 18px; border-radius: 50%; background: #8E9AA6;"></div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: AI CULINARY ENGINE -->
+      <section style="
+        background: #171E26;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      ">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span class="material-symbols-outlined" style="color: #3DF2E0; font-size: 18px;">psychology</span>
+          <h3 style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: #FFFFFF; text-transform: uppercase; margin: 0;">AI CULINARY ENGINE</h3>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12.5px; font-weight: 600; color: #FFFFFF;">Nocturnal Spice Dial</div>
+            <div style="font-size: 10px; color: #8E9AA6;">Match chili heat to time of day</div>
+          </div>
+          <span style="padding: 3px 10px; border-radius: 8px; background: rgba(61, 242, 224, 0.15); color: #3DF2E0; border: 1px solid rgba(61, 242, 224, 0.4); font-size: 11px; font-weight: 700; box-shadow: 0 0 10px rgba(61, 242, 224, 0.2);">Fiery 🔥</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+          <div>
+            <div style="font-size: 12.5px; font-weight: 600; color: #FFFFFF;">Smart Grocery Auto-Export</div>
+            <div style="font-size: 10px; color: #8E9AA6;">Sync missing items to Blinkit &amp; Zepto</div>
+          </div>
+          <span class="material-symbols-outlined" style="color: #3DF2E0; font-size: 20px;">check_circle</span>
+        </div>
+      </section>
+
+      <!-- Save & Apply Changes Button -->
+      <button class="hover-lift-btn" id="btn-save-dietary-matrix" type="button" style="
+        width: 100%;
+        height: 48px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #3DF2E0, #20C5B5);
+        color: #0B0F14;
+        font-size: 13.5px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(61, 242, 224, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 4px;
+      ">
+        <span class="material-symbols-outlined" style="font-size: 19px; font-weight: 800;">check</span>
+        <span>Save Dietary Blueprint</span>
+      </button>
+
+      <!-- App Version Signature -->
+      <div style="text-align: center; padding-top: 4px; padding-bottom: 8px;">
+        <p style="font-size: 10px; color: #8E9AA6; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; font-weight: 600;">WOW PREMIUM LUXURY GASTRONOMY - V2.4.1</p>
+      </div>
+
+    </main>
+
+    <!-- ─── 5. BOTTOM PERSISTENT NAVIGATION ──────────────────────────────── -->
+    <nav id="app-nav" aria-label="Main application navigation">
+      <!-- Tab 1: Home -->
+      <a href="dashboard.html" class="nav-tab" id="nav-home" aria-label="Home Feed" data-tab="home">
+        <span class="material-symbols-outlined" aria-hidden="true">home</span>
+        <span class="nav-label">Home</span>
+      </a>
+
+      <!-- Tab 2: Explore -->
+      <a href="search-pantry.html" class="nav-tab" id="nav-explore" aria-label="Explore & Search" data-tab="explore">
+        <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+        <span class="nav-label">Explore</span>
+      </a>
+
+      <!-- Tab 3: Pantry Scan -->
+      <a href="pantry_scan.html" class="nav-tab" id="nav-scan" aria-label="Kitchen Ingredient Camera Scanner" data-tab="scan">
+        <span class="material-symbols-outlined" aria-hidden="true">photo_camera</span>
+        <span class="nav-label">Pantry Scan</span>
+      </a>
+
+      <!-- Tab 4: Collection -->
+      <a href="collection.html" class="nav-tab" id="nav-collection" aria-label="Saved Recipes Collection" data-tab="collection">
+        <span class="material-symbols-outlined" aria-hidden="true">bookmark</span>
+        <span class="nav-label">Collection</span>
+      </a>
+
+      <!-- Tab 5: Grocery -->
+      <a href="grocery.html" class="nav-tab" id="nav-grocery" aria-label="Smart Grocery List" data-tab="grocery">
+        <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+        <span class="nav-label">Grocery</span>
+      </a>
+
+      <!-- Tab 6: Pro Chef -->
+      <a href="profile.html" class="nav-tab nav-tab--active" id="nav-profile" aria-label="User Profile & Dietary Matrix" data-tab="profile">
+        <span class="material-symbols-outlined" aria-hidden="true">person</span>
+        <span class="nav-label">Profile</span>
+      </a>
+    </nav>
+
+  </div><!-- /#viewport -->
+
+  <!-- Global App State Engine -->
+  <script src="app.js"></script>
+
+  <!-- ─── Dietary Matrix Screen Controller Logic ──────────────────────────── -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Toast notification helper
+      var toastEl = document.getElementById('global-toast');
+      var toastMsg = document.getElementById('toast-msg');
+      var toastIcon = document.getElementById('toast-icon');
+      var toastTimer = null;
+
+      function showToast(message, icon) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMsg.textContent = message;
+        if (icon && toastIcon) toastIcon.textContent = icon;
+        toastEl.classList.add('show');
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('show');
+        }, 2500);
+      }
+
+      // Sync Avatar
+      function syncGlobalAvatar() {
+        try {
+          var pic = localStorage.getItem('wow_user_profile_pic');
+          if (pic) {
+            var avatars = document.querySelectorAll('.wow-global-avatar, #global-current-user-avatar');
+            avatars.forEach(function (img) {
+              if (img && img.tagName === 'IMG') img.src = pic;
+            });
+          }
+        } catch (e) {}
+      }
+      syncGlobalAvatar();
+      window.addEventListener('storage', function (e) {
+        if (e.key === 'wow_user_profile_pic') syncGlobalAvatar();
+      });
+
+      // Update Active Dietary Count Indicator
+      var dietButtons = document.querySelectorAll('.diet-pill-btn');
+      var countLabel = document.getElementById('diet-active-count-label');
+
+      function updateActiveCount() {
+        var activeCount = 0;
+        dietButtons.forEach(function (btn) {
+          if (btn.classList.contains('active')) activeCount++;
+        });
+        if (countLabel) {
+          countLabel.textContent = activeCount + ' Active';
+        }
+      }
+
+      // Dietary Preference Button Interaction
+      dietButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var isCurrentlyActive = btn.classList.contains('active');
+          var icon = btn.querySelector('.diet-icon');
+          var check = btn.querySelector('.diet-check');
+
+          if (isCurrentlyActive) {
+            // Deactivate
+            btn.classList.remove('active');
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+            btn.style.boxShadow = 'none';
+            if (icon) icon.style.color = '#8E9AA6';
+            if (check) {
+              check.style.background = 'transparent';
+              check.style.border = '1px solid rgba(142, 154, 166, 0.4)';
+              check.innerHTML = '';
+            }
+          } else {
+            // Activate
+            btn.classList.add('active');
+            btn.style.borderColor = '#3DF2E0';
+            btn.style.boxShadow = '0 0 12px rgba(61, 242, 224, 0.22)';
+            if (icon) icon.style.color = '#3DF2E0';
+            if (check) {
+              check.style.background = '#3DF2E0';
+              check.style.border = 'none';
+              check.innerHTML = '<span class="material-symbols-outlined" style="font-size: 13px; font-weight: 800; color: #0B0F14;">check</span>';
+            }
+          }
+
+          updateActiveCount();
+        });
+      });
+
+      // Allergy Toggle Switches Interaction
+      var allergyToggles = document.querySelectorAll('.allergy-toggle-btn');
+      allergyToggles.forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          var isChecked = toggle.getAttribute('aria-checked') === 'true';
+          var knob = toggle.querySelector('.toggle-knob');
+
+          if (isChecked) {
+            // Switch OFF
+            toggle.setAttribute('aria-checked', 'false');
+            toggle.classList.remove('active');
+            toggle.classList.add('off');
+            toggle.style.background = '#0B0F14';
+            toggle.style.borderColor = 'rgba(142, 154, 166, 0.3)';
+            toggle.style.boxShadow = 'none';
+            toggle.style.justifyContent = 'flex-start';
+            if (knob) {
+              knob.style.background = '#8E9AA6';
+              knob.innerHTML = '';
+            }
+          } else {
+            // Switch ON
+            toggle.setAttribute('aria-checked', 'true');
+            toggle.classList.remove('off');
+            toggle.classList.add('active');
+            toggle.style.background = '#3DF2E0';
+            toggle.style.borderColor = '#3DF2E0';
+            toggle.style.boxShadow = '0 0 10px rgba(61, 242, 224, 0.4)';
+            toggle.style.justifyContent = 'flex-end';
+            if (knob) {
+              knob.style.background = '#0B0F14';
+              knob.innerHTML = '<span class="material-symbols-outlined" style="font-size: 12px; font-weight: 800; color: #3DF2E0;">check</span>';
+            }
+          }
+        });
+      });
+
+      // Save Dietary Blueprint
+      var btnSave = document.getElementById('btn-save-dietary-matrix');
+      if (btnSave) {
+        btnSave.addEventListener('click', function () {
+          var activeDiets = [];
+          document.querySelectorAll('.diet-pill-btn.active').forEach(function (el) {
+            activeDiets.push(el.getAttribute('data-diet'));
+          });
+
+          try {
+            localStorage.setItem('wow_dietary_preferences', JSON.stringify(activeDiets));
+          } catch (e) {}
+
+          showToast('Dietary Blueprint saved & synchronized! ✨', 'verified');
+        });
+      }
+
+    }());
+  </script>
+
+  <!-- Global Viewport Controller Module -->
+  <script src="assets/viewport-controller.js"></script>
+
+</body>
+</html>

@@ -18,13 +18,13 @@ const assert = require('assert');
   const cookUrl = 'file://' + path.resolve(__dirname, 'immersive-cooking.html').replace(/\\/g, '/') + '?recipe=sesame-chicken';
   
   // Set premium user flag in localStorage before loading
-  await page.goto(cookUrl);
+  await page.goto(cookUrl, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => {
     localStorage.setItem('wow_is_premium', 'true');
     localStorage.setItem('wow_premium_user', 'true');
     if (window.WowAppState) window.WowAppState.setVIPStatus(true);
   });
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(400);
 
   // Advance steps to final step (Step 4)
@@ -60,7 +60,7 @@ const assert = require('assert');
   assert(modalDishName.toLowerCase().includes('sesame chicken'), 'Modal should display active recipe name');
 
   // Take screenshot of milestone prompt modal
-  await page.screenshot({ path: 'verify_milestone_modal_prompt.png' });
+  await page.screenshot({ path: 'verify_milestone_modal_prompt.png', timeout: 5000 }).catch(() => {});
   console.log('  - Screenshot saved: verify_milestone_modal_prompt.png');
 
   // Confirm publication: Click "Publish to Feed 🚀"
@@ -84,7 +84,7 @@ const assert = require('assert');
   // ─────────────────────────────────────────────────────────────────────────────
   console.log('\n--- TEST 2: Social Feed Timeline Hydration ---');
   const feedUrl = 'file://' + path.resolve(__dirname, 'social-feed.html').replace(/\\/g, '/');
-  await page.goto(feedUrl);
+  await page.goto(feedUrl, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(500);
 
   // Verify top post in feed is the published cooking milestone
@@ -133,7 +133,7 @@ const assert = require('assert');
   await page.waitForTimeout(150);
 
   // Take screenshot of open drawer with data filled
-  await page.screenshot({ path: 'verify_share_cook_drawer_active.png' });
+  await page.screenshot({ path: 'verify_share_cook_drawer_active.png', timeout: 5000 }).catch(() => {});
   console.log('  - Screenshot saved: verify_share_cook_drawer_active.png');
 
   // Click "Publish" button
@@ -157,6 +157,13 @@ const assert = require('assert');
   console.log('  - Top Feed Caption:', newTopCaption.trim());
   assert(newTopRecipePill.includes('Carbonara'), 'Top feed card should be Spaghetti Carbonara');
   assert(newTopCaption.includes('Emulsified authentic guanciale'), 'Top feed caption should match custom input');
+
+  // Dismiss publish success drawer if open
+  const successDrawer = page.locator('#publish-success-drawer');
+  if (await successDrawer.isVisible()) {
+    await page.click('#btn-done-success');
+    await page.waitForTimeout(300);
+  }
 
   // Test interactive buttons on newly created card: Like & Bookmark
   console.log('3.3 Testing Like and Bookmark interactions on new card...');
@@ -192,7 +199,7 @@ const assert = require('assert');
   // TEST 4: RELOAD & PERSISTENCE TEST
   // ─────────────────────────────────────────────────────────────────────────────
   console.log('\n--- TEST 4: Reload & Persistence Test ---');
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(500);
 
   const reloadedTopPill = await page.locator('#feed-main .post-card').first().locator('.recipe-made-pill').textContent();
@@ -200,7 +207,7 @@ const assert = require('assert');
   assert(reloadedTopPill.includes('Carbonara'), 'Top card should persist after reload');
 
   // Take final screenshots
-  await page.screenshot({ path: 'verify_social_feed_pipeline_full.png', fullPage: false });
+  await page.screenshot({ path: 'verify_social_feed_pipeline_full.png', fullPage: false, timeout: 5000 }).catch(() => {});
   console.log('  - Screenshot saved: verify_social_feed_pipeline_full.png');
 
   console.log('\n======================================================');
