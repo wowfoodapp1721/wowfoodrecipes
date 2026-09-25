@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://googleapis.com; font-src 'self' https://gstatic.com; img-src 'self' data: blob: https://wowfoodrecipes.com https://themealdb.com; connect-src 'self' https://wowfoodrecipes.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="wow Food Recipes — Loading" />
   <title>wow | Loading</title>
@@ -151,10 +152,7 @@
 
       /* ── Targets ── */
       var STEP_2_AUTH       = 'auth.html';
-      /* FALLBACK_DELAY_MS is ONLY used when the video physically cannot play
-         (codec error or autoplay block). It is intentionally longer than the
-         video's 25-second runtime so it never interrupts normal playback.    */
-      var FALLBACK_DELAY_MS = 32000;
+      var SPLASH_TIMEOUT_MS = 3500; // 3-4 second cinematic preview & fallback timer
 
       var stage    = document.getElementById('splash-stage');
       var video    = document.getElementById('splash-video');
@@ -167,35 +165,41 @@
       function proceedToAuth() {
         if (navigated) return;
         navigated = true;
-        stage.classList.add('fade-out');
+        if (stage) {
+          stage.classList.add('fade-out');
+        }
         setTimeout(function () {
-          window.location.href = STEP_2_AUTH;
+          window.location.href = "auth.html";
         }, 450); // matches fadeOut animation duration
       }
 
       /* ══════════════════════════════════════════════════════════════════════
          PRIMARY TRIGGER — native video 'ended' event.
-         Fires automatically the exact moment the MP4 finishes its full
-         25-second timeline. No fixed clock. No manual timer.
+         Fires automatically the exact moment the video intro finishes.
          ══════════════════════════════════════════════════════════════════════ */
-      video.addEventListener('ended', proceedToAuth);
+      if (video) {
+        video.addEventListener('ended', proceedToAuth);
 
-      /* ── FAILURE GUARD 1: codec / file error — video cannot load at all ── */
-      video.addEventListener('error', function () {
-        video.style.display = 'none';
-        fallback.style.display = 'flex';
-        setTimeout(proceedToAuth, FALLBACK_DELAY_MS);
-      });
-
-      /* ── FAILURE GUARD 2: browser autoplay policy blocks playback ── */
-      var playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(function () {
+        /* ── FAILURE GUARD 1: codec / file error — video cannot load at all ── */
+        video.addEventListener('error', function () {
           video.style.display = 'none';
-          fallback.style.display = 'flex';
-          setTimeout(proceedToAuth, FALLBACK_DELAY_MS);
+          if (fallback) fallback.style.display = 'flex';
+          setTimeout(proceedToAuth, SPLASH_TIMEOUT_MS);
         });
+
+        /* ── FAILURE GUARD 2: browser autoplay policy blocks playback ── */
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function () {
+            video.style.display = 'none';
+            if (fallback) fallback.style.display = 'flex';
+            setTimeout(proceedToAuth, SPLASH_TIMEOUT_MS);
+          });
+        }
       }
+
+      /* ── Direct 3-4 second cinematic transition timer ── */
+      setTimeout(proceedToAuth, SPLASH_TIMEOUT_MS);
 
     })();
 

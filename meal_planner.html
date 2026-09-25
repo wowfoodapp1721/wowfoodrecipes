@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://googleapis.com; font-src 'self' https://gstatic.com; img-src 'self' data: blob: https://wowfoodrecipes.com https://themealdb.com; connect-src 'self' https://wowfoodrecipes.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="wow Food Recipes — Smart 7-Day Meal Planner & Nutrition Schedule Core (SCR-06)." />
   <title>wow | Smart Meal Planner</title>
@@ -140,6 +141,14 @@
       flex-shrink: 0;
       position: sticky;
       top: 44px;
+    }
+
+    .header-back-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .header-back-btn:active {
+      transform: scale(0.92);
     }
 
     .brand-logo-wrap {
@@ -1127,9 +1136,14 @@
 
     <!-- ─── 3. FIXED APP HEADER ─────────────────────────────────────────── -->
     <header class="planner-header">
-      <a href="dashboard.html" class="brand-logo-wrap" aria-label="Home Dashboard">
-        <span class="brand-title">wow <span>meal planner</span></span>
-      </a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="profile.html" id="btn-back-to-profile" class="header-back-btn" aria-label="Back to Profile" onclick="window.location.href='profile.html'" style="display: inline-flex; align-items: center; justify-content: center; color: #3DF2E0; text-decoration: none; cursor: pointer; transition: transform 0.15s ease; border: none; background: transparent; padding: 0;">
+          <span class="material-symbols-outlined" style="font-size: 20px; color: #3DF2E0; font-weight: 600; line-height: 1;">arrow_back</span>
+        </a>
+        <a href="dashboard.html" class="brand-logo-wrap" aria-label="Home Dashboard">
+          <span class="brand-title">wow <span>meal planner</span></span>
+        </a>
+      </div>
 
       <div class="header-actions-wrap">
         <a href="iot-settings.html" class="avatar-btn" aria-label="Profile & Dietary Settings">
@@ -1759,6 +1773,15 @@
       document.getElementById('btn-toggle-macros').addEventListener('click', function () {
         showToast('Macro Goals: 30% Protein, 45% Carbs, 25% Fats', 'query_stats');
       });
+
+      // Back to Profile Navigation
+      var btnBackToProfile = document.getElementById('btn-back-to-profile');
+      if (btnBackToProfile) {
+        btnBackToProfile.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.location.href = 'profile.html';
+        });
+      }
 
       // Dismiss Prep Reminder
       document.getElementById('btn-dismiss-reminder').addEventListener('click', function () {

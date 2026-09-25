@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plyr.io https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://googleapis.com https://cdn.plyr.io; font-src 'self' https://gstatic.com; img-src 'self' data: blob: https://wowfoodrecipes.com https://themealdb.com https://i.ytimg.com https://*.ytimg.com https://lh3.googleusercontent.com https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://wowfoodrecipes.com https://*.youtube.com https://*.google.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description"
     content="wow Food Recipes — Honey Sesame Chicken Recipe Detail. Complete ingredients, instructions, and WOW MATRIX 7.2 health score." />
@@ -19,8 +20,15 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     rel="stylesheet" />
 
+  <!-- Plyr Video Streaming Stylesheet -->
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
   <!-- wow Chef AI Stylesheet -->
   <link rel="stylesheet" href="assets/chef-ai.css" />
+
+  <!-- Plyr Video Player JS & Global Wrapper -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+  <script src="assets/plyr-wrapper.js"></script>
 
   <!-- Central Dynamic Recipe Router -->
   <script src="recipe-controller.js"></script>
@@ -63,6 +71,13 @@
       --border-soft: rgba(255, 255, 255, 0.08);
       --border-subtle: rgba(255, 255, 255, 0.12);
       --border-focus: rgba(255, 255, 255, 0.25);
+
+      /* Plyr Video Streaming Global Theme Specs */
+      --plyr-color-main: #3DF2E0;
+      --plyr-video-background: #0B0F14;
+      --plyr-control-bg-hover: #171E26;
+      --plyr-video-control-color: #FFFFFF;
+      --plyr-video-control-color-hover: #3DF2E0;
 
       /* Typography */
       --font-serif: 'EB Garamond', Georgia, serif;
@@ -179,6 +194,17 @@
       /* Strict 12px border-radius profile */
       background-color: #0A0A0A;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Plyr geometry & containment overrides matching exact container bounds */
+    .media-container .plyr,
+    .media-container .plyr__video-wrapper,
+    .media-container .plyr__poster,
+    .media-container iframe,
+    .media-container video,
+    .media-container .plyr-stream-layer {
+      border-radius: inherit !important;
+      overflow: hidden;
     }
 
     .media-cover-img {
@@ -1785,7 +1811,7 @@
 
       <!-- Polished Media Container (Strict 12px Border Radius Profile) -->
       <div class="media-container-wrapper">
-        <div class="media-container">
+        <div class="media-container" data-plyr-provider="youtube" data-plyr-embed-id="3AAdKl1UYZs">
           <!-- Food Graphic Image Scaling Smoothly to Fit Bounds -->
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhkRAP1-x1EDloTwbMiM44umpD39zC1S9hERLua9S7eGNpSB1vptxWAy7HDcum8hpfrLKq6USwRJ5Lhqd6KFEgRTsDCddmb177ffamRaMiWWgHrnnHdGlAKkwQrrKvlgEswZhu7fyS0wHApLxFx5_52Xw-9ccDda7rqjKqypv6SDCp7V1RBgPoFCHCyV285XwR8L6Cd1v0wl1aRvnv6PMlP7u7Id0oYJFGPLyaUUIQwr76XTk_dpStCX7I2LnqYJlb2nU"

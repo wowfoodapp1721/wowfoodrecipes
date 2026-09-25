@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://googleapis.com; font-src 'self' https://gstatic.com; img-src 'self' data: blob: https://wowfoodrecipes.com https://themealdb.com; connect-src 'self' https://wowfoodrecipes.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description"
     content="wow Food Recipes — Curated Creations Dashboard. Your personal culinary command centre." />
@@ -1852,8 +1853,8 @@
 
       <!-- Row 1: Centered Prominent "wow" Brand Logo Image Asset -->
       <div class="header-row-1" aria-label="wow Food Recipes Branding">
-        <a href="meal_planner.html" class="brand-logo-link" id="brand-header-planner-link" aria-label="wow planner"
-          title="wow planner">
+        <a href="dashboard.html" class="brand-logo-link" id="brand-header-logo-link" aria-label="wow Food Recipes"
+          title="wow Food Recipes">
           <img src="assets/images/wow.png" onerror="this.onerror=null; this.src='assets/wow.png';"
             alt="wow Food Recipes" class="brand-logo-img" draggable="false" />
         </a>
@@ -1870,8 +1871,8 @@
         <!-- Right side: Profile Badge & Notification Bell Action Controls -->
         <div class="header-actions">
           <!-- a) Circular Interactive Profile Button ("CS" on dark circular gray backdrop -> Screen 12A) -->
-          <a href="iot-settings.html" id="profile-avatar-btn" class="avatar avatar-btn" role="button"
-            aria-label="Screen 12A - User Profile & Settings" title="Screen 12A - User Profile & Settings">
+          <a href="profile.html" id="profile-avatar-btn" class="avatar avatar-btn" role="button"
+            aria-label="User Profile & Settings" title="User Profile & Settings">
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Chef Sarah"
               class="wow-global-avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" />
             <span class="avatar-fallback avatar-initials" style="display: none;">CS</span>
@@ -3707,7 +3708,7 @@
       if (profileAvatarBtn) {
         profileAvatarBtn.addEventListener('click', function (e) {
           e.preventDefault();
-          window.location.href = 'iot-settings.html';
+          window.location.href = 'profile.html';
         });
       }
 
@@ -8902,7 +8903,7 @@
         }
 
         try {
-          const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
+          const url = `https://wowfoodrecipes.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
           const cacheKey = `search_${item.searchTerm.toLowerCase().trim()}`;
           let data = null;
           if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
@@ -9187,7 +9188,7 @@
         }
 
         try {
-          const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
+          const url = `https://wowfoodrecipes.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
           const cacheKey = `search_${item.searchTerm.toLowerCase().trim()}`;
           let data = null;
           if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
@@ -9673,7 +9674,7 @@
         }
 
         try {
-          const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
+          const url = `https://wowfoodrecipes.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
           const cacheKey = `search_${item.searchTerm.toLowerCase().trim()}`;
           let data = null;
           if (typeof window !== 'undefined' && window.MealDBCacheEngine) {
@@ -10035,7 +10036,7 @@
         }
 
         try {
-          const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
+          const url = `https://wowfoodrecipes.com/api/json/v1/1/search.php?s=${encodeURIComponent(item.searchTerm)}`;
           const cacheKey = `search_${item.searchTerm.toLowerCase().trim()}`;
           let data = null;
           if (typeof window !== 'undefined' && window.MealDBCacheEngine) {

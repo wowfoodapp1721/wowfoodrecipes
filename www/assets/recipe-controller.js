@@ -2817,9 +2817,9 @@
   // ═══════════════════════════════════════════════════════════════════════════
   // 2. THEMEALDB LIVE API DATA PIPELINE & 7-STAR VISUAL ASSET ENGINE
   // ═══════════════════════════════════════════════════════════════════════════
-  const THEMEALDB_LOOKUP_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-  const THEMEALDB_SEARCH_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const THEMEALDB_ING_IMG_URL = 'https://www.themealdb.com/images/ingredients/';
+  const THEMEALDB_LOOKUP_URL = 'https://wowfoodrecipes.com/api/json/v1/1/lookup.php?i=';
+  const THEMEALDB_SEARCH_URL = 'https://wowfoodrecipes.com/api/json/v1/1/search.php?s=';
+  const THEMEALDB_ING_IMG_URL = 'https://wowfoodrecipes.com/images/ingredients/';
 
   // High-Resolution Local FHD Fallback Asset Map
   const LOCAL_FHD_ASSETS = {

@@ -79,7 +79,7 @@ async function runVisualSearchVerification() {
       const gridContainer = document.getElementById('search-results-grid');
       const gridStyle = gridContainer ? window.getComputedStyle(gridContainer) : null;
       const cards = document.querySelectorAll('#search-results-grid .search-grid-card');
-      
+
       let firstCardMetrics = null;
       if (cards.length > 0) {
         const first = cards[0];
@@ -149,7 +149,7 @@ async function runVisualSearchVerification() {
         const title = document.querySelector('.recipe-main-title')?.textContent.trim();
         const coverImg = document.querySelector('.media-cover-img');
         const ingredients = document.querySelectorAll('.ingredient-card');
-        
+
         return {
           currentUrl: window.location.href,
           title,

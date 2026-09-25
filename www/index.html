@@ -2,9 +2,12 @@
 <html class="dark" lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://googleapis.com; font-src 'self' https://gstatic.com; img-src 'self' data: blob: https://wowfoodrecipes.com https://themealdb.com; connect-src 'self' https://wowfoodrecipes.com;">
   <!-- ─── LIFECYCLE ENTRY ROUTER: Redirect to Splash Screen (Step 1) ──────── -->
   <meta http-equiv="refresh" content="0;url=splash.html" />
-  <script>window.location.replace('splash.html');</script>
+  <script>
+    window.location.href = "splash.html";
+  </script>
   <!-- ────────────────────────────────────────────────────────────────────── -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="wow Food Recipes — Screen 5 Premium Pro Auth Gate. Secure your gastronomic journey." />
@@ -354,7 +357,7 @@
       <!-- Left: "wow" Brand Logo Treatment -->
       <div class="flex items-center">
         <img
-          src="assets/brand logo.png"
+          src="./assets/brand-logo.png"
           alt="wow brand logo"
           class="h-10 sm:h-11 w-auto object-contain max-w-[140px] drop-shadow-[0_2px_14px_rgba(61,242,224,0.35)] filter brightness-110"
           loading="eager"

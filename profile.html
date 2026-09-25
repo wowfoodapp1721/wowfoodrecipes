@@ -2,6 +2,7 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://googleapis.com; font-src 'self' https://gstatic.com; img-src 'self' data: blob: https://wowfoodrecipes.com https://themealdb.com; connect-src 'self' https://wowfoodrecipes.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="wow Food Recipes — IoT Smart Robot Pairing & Support Diagnostic Core (SCR-12B ➔ SCR-03H)." />
   <title>wow | IoT Smart Robot & Support Core</title>
@@ -1785,11 +1786,11 @@
             <span class="text-neutral-400 text-xs font-bold">&gt;</span>
           </div>
 
-          <!-- ROW 6: PRIVACY POLICY (GOOGLE PLAY COMPLIANCE) -->
-          <a id="btn-privacy-policy" href="https://wowfoodrecipes.app/privacy-policy.html" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between border-t border-white/5 pt-3 transition-all duration-200 active:scale-[0.99] cursor-pointer py-1 no-underline">
+          <!-- ROW 6: MEAL PLANNER -->
+          <a id="btn-meal-planner" href="meal-planner.html" class="flex items-center justify-between border-t border-white/5 pt-3 transition-all duration-200 active:scale-[0.99] cursor-pointer py-1 no-underline">
             <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">privacy_tip</span></div>
-              <div class="flex flex-col"><span class="text-xs font-bold text-white">Privacy Policy</span><span class="text-[10px] text-neutral-400">Official Google Play Compliance Link</span></div>
+              <div class="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">calendar_month</span></div>
+              <div class="flex flex-col"><span class="text-xs font-bold text-white">Meal Planner</span><span class="text-[10px] text-neutral-400">View weekly schedule &amp; intake trackers</span></div>
             </div>
             <span class="text-neutral-400 text-xs font-bold">&gt;</span>
           </a>
@@ -3693,6 +3694,15 @@
             e.preventDefault();
             window.location.href = 'dietary-matrix.html';
           }
+        });
+      }
+
+      // Meal Planner Settings Row Navigation Link
+      var mealPlannerBtn = document.getElementById('btn-meal-planner');
+      if (mealPlannerBtn) {
+        mealPlannerBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.location.href = 'meal-planner.html';
         });
       }
 
